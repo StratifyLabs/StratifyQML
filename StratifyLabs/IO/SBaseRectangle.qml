@@ -4,6 +4,8 @@ import "SCustomize.js" as Theme
 SItem {
     id: baseRectangle;
 
+    default property alias data: contents.data;
+
     type: "base";
     blockWidth: false;
 
@@ -19,10 +21,16 @@ SItem {
     property string border_color: Theme.body_bg;
 
     Rectangle {
-        anchors.fill: parent;
+        id: contents;
+        anchors.horizontalCenter: parent.horizontalCenter;
+        anchors.verticalCenter: parent.verticalCenter;
+        implicitWidth: parent.implicitWidth;
+        implicitHeight: parent.implicitHeight;
+        width: (blockWidth == true) ? parent.width : parent.implicitWidth;
         radius: baseRectangle.radius;
         border.color: baseRectangle.border_color;
         color: baseRectangle.color;
+        clip: true;
     }
 
     onStyleChanged: {
@@ -54,7 +62,33 @@ SItem {
                 font_size = Theme.font_size_h5;
             } else if( items[i] == "h6" ){
                 font_size = Theme.font_size_h6;
+            } else if( items[i] === "left" ){
+                contents.anchors.horizontalCenter = undefined;
+                contents.anchors.right = undefined;
+                contents.anchors.left = baseRectangle.left;
+            } else if( items[i] === "right" ){
+                contents.anchors.horizontalCenter = undefined;
+                contents.anchors.left = undefined;
+                contents.anchors.right = baseRectangle.right;
+            } else if( items[i] === "center" ){
+                contents.anchors.right = undefined;
+                contents.anchors.left = undefined;
+                contents.anchors.horizontalCenter = baseRectangle.horizontalCenter;
+            } else if( items[i] === "top" ){
+                contents.anchors.verticalCenter = undefined;
+                contents.anchors.bottom = undefined;
+                contents.anchors.top = baseRectangle.top;
+            } else if( items[i] === "bottom" ){
+                contents.anchors.top = undefined;
+                contents.anchors.verticalCenter = undefined;
+                contents.anchors.bottom = baseRectangle.bottom;
+            } else if( items[i] === "middle" ){
+                contents.anchors.top = undefined;
+                contents.anchors.bottom = undefined;
+                contents.anchors.verticalCenter = baseRectangle.verticalCenter;
             }
+
+
         }
     }
 }

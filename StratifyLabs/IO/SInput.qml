@@ -1,42 +1,36 @@
 import QtQuick 2.6
 import "SCustomize.js" as Theme
+import "Fa-4.5.0.js" as Fa
 
 SBaseRectangle {
-    id: baseRectangleText;
-
+    id: baseRectangleInput;
     property alias text: input.text;
     property string placeholder: "placeholder";
     type: "input";
-
     blockWidth: true;
-
     color: Theme.input_bg;
     border_color: Theme.input_border;
     radius: Theme.input_border_radius;
 
-    height: input.height;
-    width: parent.width;
+    implicitHeight: font_size + Theme.padding_base_vertical*3;
+    //implicitWidth: parent.width;
 
     onStyleChanged: {
         var items = style.split(" ");
         for(var i=0; i < items.length; i++){
-            console.log("Update alignment " + items[i]);
             if( items[i] === "text-left" ){
-                input.horizontalAlignment = TextEdit.AlignLeft;
+                input.horizontalAlignment = Text.AlignLeft;
             } else if( items[i] === "text-right" ){
-                console.log("Align right");
-                input.horizontalAlignment = TextEdit.AlightRight;
+                input.horizontalAlignment = Text.AlignRight;
             } else if( items[i] === "text-center" ){
-                input.horizontalAlignment = TextEdit.AlignHCenter;
+                input.horizontalAlignment = Text.AlignHCenter;
             }
         }
     }
 
-
     TextEdit {
         id: input;
         color: text_color;
-        anchors.centerIn: parent;
         text: placeholder;
         width: parent.width;
         leftPadding: padding_horizontal;
@@ -48,8 +42,30 @@ SBaseRectangle {
         horizontalAlignment: TextEdit.AlignLeft;
         verticalAlignment: TextEdit.AlignVCenter;
         selectByMouse: true;
-        selectionColor: Theme.input_group_addon_bg;
-        selectedTextColor: Theme.text_muted;
+        selectionColor: Qt.lighter(text_color, 3.0);
+        selectedTextColor: text_color;
+        clip: true;
+    }
+
+    Text {
+        id: clearIcon;
+        color: Theme.gray_lighter;
+        text: Fa.Icon.times_circle;
+        font.pointSize: font_size;
+        anchors.right: parent.right;
+        font.family: fontawesome.name;
+        rightPadding: padding_horizontal;
+        font.weight: Font.Light;
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+        height: parent.height;
+        visible: input.text !== "";
+
+
+        MouseArea {
+            anchors.fill: parent;
+            onClicked: input.text = "";
+        }
     }
 
 }

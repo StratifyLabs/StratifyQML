@@ -5,6 +5,6 @@ SText {
     blockWidth: true;
     textObject.wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
     textObject.horizontalAlignment: Text.AlignLeft;
-    textObject.width: parent.width;
+    textObject.width: textObject.parent.width;
     height: textObject.contentHeight + padding_vertical*2;
 }

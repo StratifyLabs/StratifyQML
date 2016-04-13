@@ -3,11 +3,10 @@ import QtQuick 2.6
 SItem {
     id: screen;
     type: "screen";
-    width: 320;
-    height: 480;
+    anchors.fill: parent;
     property var backScreen;
     property string name: "Screen";
-    visible: false;
+    visible: true;
     z:0;
 }
 

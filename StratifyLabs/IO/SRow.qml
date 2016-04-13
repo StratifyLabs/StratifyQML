@@ -2,86 +2,40 @@ import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import "SCustomize.js" as Theme
 
-GridLayout {
+SItem {
     id: row;
+    type: "row";
+    default property alias data: contents.data;
+    skinny: width < Theme.screen_sm;
 
-    property string type: "row";
-    property bool blockWidth: true;
-    property bool displayVertical;
+    implicitWidth: parent.width;
+    implicitHeight: contents.childrenRect.height;
 
-    columns: Theme.grid_columns;
-    columnSpacing: Theme.padding_base_horizontal;
-    rowSpacing: Theme.padding_base_vertical;
+    Row {
+        property alias item: row.item;
+        spacing: Theme.padding_base_vertical;
+        id: contents;
+        anchors.fill: parent;
 
-    function updateAlignment(){
-        for(var i=0; i < children.length; i++){
-            var items = children[i].style.split(" ");
-            for(var j=0; j < items.length; j++){
-                children[i].Layout.alignment = Qt.AlignVCenter;
-                if( items[j] === "left" ){
-                    children[i].Layout.alignment |= Qt.AlignLeft;
-                } else if( items[j] === "right" ){
-                    children[i].Layout.alignment |= Qt.AlignRight;
+        onWidthChanged: {
+            for(var i = 0; i < children.length; i++){
+                var w;
+                if( children[i].span !== undefined ){
+                    if( children[i].span > 0 ){
+                        w = width * children[i].span / Theme.grid_columns;
+                        if( w > children[i].implicitWidth ){
+                            children[i].width = w;
+                        }
+                    }
                 }
-            }
-        }
-    }
 
-    function resize(w){
-        var columnWidth;
-        var span = 12;
-        var realChildren;
-
-        if( w > Theme.screen_sm ){
-            span = 1;
-            displayVertical = false;
-        } else {
-            displayVertical = true;
-            span = columns;
-        }
-
-        if( w > Theme.screen_lg ){
-            width = Theme.screen_lg;
-        } else {
-            width = w;
-        }
-
-        realChildren = 0;
-        for(var i=0; i < children.length; i++){
-            if( children[i].type !== "rowspacer" ){
-                realChildren++;
-            }
-        }
-
-        for(var i=0; i < children.length; i++){
-            var colWidth;
-            if( span > children[i].span ){
-                children[i].Layout.columnSpan = span;
-                colWidth = width;
-                if( children[i].blockWidth ){
-                    children[i].Layout.preferredWidth = colWidth;
+                if( children[i].alignment !== undefined ){
+                    console.log("Align " + children[i].alignment);
+                    children[i].Layout.alignment = children[i].alignment;
                 }
-            } else {
-                children[i].Layout.columnSpan = children[i].span;
-                colWidth = children[i].Layout.columnSpan *
-                        (width - columnSpacing * (realChildren - 1)) / columns;
-                if( children[i].blockWidth ){
-                    children[i].Layout.preferredWidth = colWidth;
-                }
-            }
-
-            if( children[i].type === "row" ){
-                resize(colWidth)
             }
         }
 
     }
-
-
-    Component.onCompleted: {
-        updateAlignment();
-    }
-
-
 }
 

@@ -7,10 +7,11 @@ SBaseRectangle {
     property string icon;
     property string text;
     property alias textObject: baseRectangleTextText;
+    property bool hideTextOnSkinny: true;
 
     //size the rectangle based on the size of the text box
-    height: baseRectangleTextText.height;
-    width: baseRectangleTextText.width;
+    implicitHeight: font_size + Theme.padding_base_vertical*3;
+    implicitWidth: baseRectangleTextText.width;
 
     onStyleChanged: {
         var items = style.split(" ");
@@ -30,20 +31,39 @@ SBaseRectangle {
         }
     }
 
-    Text {
+
+    Row {
         id: baseRectangleTextText;
-        color: text_color;
         anchors.centerIn: parent;
-        text: icon !== "" ? icon + " " + baseRectangleText.text : baseRectangleText.text;
+
         leftPadding: padding_horizontal;
         rightPadding: padding_horizontal;
         bottomPadding: padding_vertical;
         topPadding: padding_vertical;
-        font.pointSize: font_size;
-        font.family: openSansLight.name;
-        font.weight: Font.Light;
-        horizontalAlignment: Text.AlignHCenter;
-        verticalAlignment: Text.AlignVCenter;
-    }
+        spacing: Theme.padding_base_horizontal/4;
 
+        Text {
+            id: rectangleIcon;
+            color: text_color;
+            text: icon;
+            font.pointSize: font_size;
+            font.family: fontawesome.name;
+            font.weight: Font.Light;
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+            height: rectangleText.height;
+        }
+
+        Text {
+            id: rectangleText;
+            color: text_color;
+            text: baseRectangleText.text;
+            font.pointSize: font_size;
+            font.family: openSansLight.name;
+            font.weight: Font.Light;
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+            visible: (icon !== "") && (hideTextOnSkinny) ? !skinny : true;
+        }
+    }
 }
