@@ -11,31 +11,32 @@ SItem {
     implicitWidth: parent.width;
     implicitHeight: contents.childrenRect.height;
 
-    Row {
+    GridLayout {
         property alias item: row.item;
-        spacing: Theme.padding_base_vertical;
+        rowSpacing: Theme.padding_base_horizontal;
+        rows: 1;
         id: contents;
-        anchors.fill: parent;
-
+        width: parent.width;
         onWidthChanged: {
             for(var i = 0; i < children.length; i++){
                 var w;
                 if( children[i].span !== undefined ){
                     if( children[i].span > 0 ){
-                        w = width * children[i].span / Theme.grid_columns;
+                        w = (width - (children.length-1)*rowSpacing) * children[i].span / Theme.grid_columns;
                         if( w > children[i].implicitWidth ){
-                            children[i].width = w;
+                            children[i].Layout.preferredWidth = w;
+                        }
+                        if( children[i].type === "column" ){
+                            children[i].resize(w);
                         }
                     }
                 }
 
                 if( children[i].alignment !== undefined ){
-                    console.log("Align " + children[i].alignment);
                     children[i].Layout.alignment = children[i].alignment;
                 }
             }
         }
-
     }
 }
 

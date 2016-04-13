@@ -7,21 +7,23 @@ SItem {
     default property alias data: contents.data;
     type: "column";
 
-    anchors.top: parent.top;
-    anchors.horizontalCenter: parent.horizontalCenter;
     implicitWidth: parent.width;
     implicitHeight: contents.childrenRect.height;
+
+    function resize(w){
+        contents.width = w;
+    }
 
     ColumnLayout {
         property alias item: column.item;
         id: contents;
-        anchors.fill: parent;
+
+        width: parent.width;
         spacing: Theme.padding_base_vertical;
 
         onWidthChanged: {
             for(var i=0; i < children.length; i++){
-                var w = width - 2*Theme.padding_base_horizontal;
-                children[i].Layout.width = w;
+                children[i].Layout.preferredWidth = width;
             }
         }
     }

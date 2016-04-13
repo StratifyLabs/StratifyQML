@@ -80,6 +80,7 @@ SItem {
                 font.pointSize: heading_font_size;
                 font.family: openSansLight.name;
                 font.weight: Font.Light;
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             }
 
         }
@@ -113,6 +114,7 @@ SItem {
             leftPadding: Theme.padding_base_horizontal;
             rightPadding: Theme.padding_base_horizontal;
             text: "Panel Body";
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             font.pointSize: font_size;
             font.family: openSansLight.name;
             font.weight: Font.Light;

@@ -34,33 +34,33 @@ SItem {
     }
 
     onStyleChanged: {
-        var items = style.split(" ");
+        var items = parseStyle();
         for(var i = 0; i < items.length; i++){
-            if( items[i] == "lg" ){
+            if( items[i] === "lg" ){
                 font_size = Theme.font_size_large;
                 padding_vertical = Theme.padding_large_vertical;
                 padding_horizontal = Theme.padding_large_horizontal;
-            } else if( items[i] == "sm" ){
+            } else if( items[i] === "sm" ){
                 font_size = Theme.font_size_small;
                 padding_vertical = Theme.padding_small_vertical;
                 padding_horizontal = Theme.padding_small_horizontal;
-            } else if( items[i] == "xs" ){
+            } else if( items[i] === "xs" ){
                 font_size = Theme.font_size_small;
                 padding_vertical = Theme.padding_xs_vertical;
                 padding_horizontal = Theme.padding_xs_horizontal;
-            } else if( items[i] == "block" ){
+            } else if( items[i] === "block" ){
                 blockWidth = true;
-            } else if( items[i] == "h1" ){
+            } else if( items[i] === "h1" ){
                 font_size = Theme.font_size_h1;
-            } else if( items[i] == "h2" ){
+            } else if( items[i] === "h2" ){
                 font_size = Theme.font_size_h2;
-            } else if( items[i] == "h3" ){
+            } else if( items[i] === "h3" ){
                 font_size = Theme.font_size_h3;
-            } else if( items[i] == "h4" ){
+            } else if( items[i] === "h4" ){
                 font_size = Theme.font_size_h4;
-            } else if( items[i] == "h5" ){
+            } else if( items[i] === "h5" ){
                 font_size = Theme.font_size_h5;
-            } else if( items[i] == "h6" ){
+            } else if( items[i] === "h6" ){
                 font_size = Theme.font_size_h6;
             } else if( items[i] === "left" ){
                 contents.anchors.horizontalCenter = undefined;

@@ -9,15 +9,15 @@ SBaseRectangleText {
     radius: Theme.badge_border_radius;
     bg_color: Theme.badge_bg;
     text_color: Theme.badge_color;
-    border.color: Theme.badge_bg;
+    border_color: Theme.badge_bg;
 
     onStyleChanged: {
-        var items = style.split(" ");
+        var items = parseStyle();
         for(var i = 0; i < items.length; i++){
             if( items[i] === "active" ){
                 bg_color = Theme.badge_active_bg;
                 text_color = Theme.badge_active_color;
-                border.color = Theme.badge_active_bg;
+                border_color = Theme.badge_active_bg;
             }
         }
     }

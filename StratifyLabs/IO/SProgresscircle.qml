@@ -5,8 +5,8 @@ import "Fa-4.5.0.js" as Fa
 
 Item {
     id: root;
-    property var progress: 0.1;
-    property var pixelRatio: Screen.devicePixelRatio;
+    property real progress: 0.1;
+    property real pixelRatio: Screen.devicePixelRatio;
     property alias iconVisible: icon.visible;
     property alias textVisible: text.visible;
 
