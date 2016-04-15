@@ -6,6 +6,41 @@ Stratify QML is a QML UI framework inspired by Twitter Bootstrap.  The goal is t
 
 Stratify QML is released under the ASL 2.0.  If you are willing to release contributions under this license and would like to contribute, please let me know.
 
+##TODO
+
+- <del>Modal</del>
+- <del>Panel</del>
+- <del>Button</del>
+- <del>Label</del>
+- <del>Column</del>
+- <del>Row</del>
+- <del>Container</del>
+- <del>FontAwesome</del>
+- <del>Hline</del>
+- <del>Progressbar</del>
+- <del>Well</del>
+- <del>Input</del>
+- <del>Checkbox</del>
+- <del>Alert</del>
+- Popover
+- Carousel
+- Breadcrumbs
+- Jumbotron
+- List Group
+- Input Groups
+- Radio Button
+- Text Box
+- Nav Tabs
+- Nav Pills
+- Navbar
+- Tooltip
+- Images
+- Dropdown
+- Pane (scrolling)
+- List with JSONPath
+- Badge
+
+
 # Example
 
 Stratify QML aims to dispense with fine-tuning of anchors and sizes and use a Bootstrap like grid system with rows and columns.  Styling is tweaked using the "style" property similarly to how Bootstrap uses "class" ("class" is a reserved word in QML and cant' be used).
@@ -39,3 +74,5 @@ SContainer {
 ```
 
 ![Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/preview-20160416.png "Stratify QML Preview")
+
+![Modal Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/modal-20160414.png "Stratify Modal Preview")
