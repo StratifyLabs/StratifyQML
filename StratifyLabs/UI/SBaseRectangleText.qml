@@ -33,7 +33,8 @@ SBaseRectangle {
         var items = style.split(" ");
         for(var i=0; i < items.length; i++){
             if( items[i] === "text-left" ){
-                baseRectangleTextText.horizontalAlignment = Text.AlignLeft;
+                baseRectangleTextText.anchors.centerIn = undefined;
+                baseRectangleTextText.anchors.left = baseRectangleTextText.parent.left;
             } else if( items[i] === "text-right" ){
                 baseRectangleTextText.horizontalAlignment = Text.AlightRight;
             } else if( items[i] === "text-center" ){

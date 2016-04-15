@@ -14,8 +14,16 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.0
+import QtQuick 2.6
+import "SCustomize.js" as Theme
 
-Item {
+
+SText {
+    type: "textwrap";
+    blockWidth: true;
+    x:1;
+    textObject.wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+    textObject.width: parent.width-2;
+    implicitHeight: textObject.height + 3*padding_vertical;
 
 }

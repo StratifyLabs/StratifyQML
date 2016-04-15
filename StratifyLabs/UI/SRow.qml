@@ -28,11 +28,19 @@ SItem {
     implicitHeight: contents.childrenRect.height;
 
     GridLayout {
-        property alias item: row.item;
         rowSpacing: Theme.padding_base_horizontal;
         rows: 1;
         id: contents;
         width: parent.width;
+
+        function alignChildren(){
+            for(var i = 0; i < children.length; i++){
+                if( children[i].alignment !== undefined ){
+                    children[i].Layout.alignment = children[i].alignment;
+                }
+            }
+        }
+
         onWidthChanged: {
             for(var i = 0; i < children.length; i++){
                 var w;
@@ -47,12 +55,13 @@ SItem {
                         }
                     }
                 }
-
-                if( children[i].alignment !== undefined ){
-                    children[i].Layout.alignment = children[i].alignment;
-                }
             }
         }
+
+        Component.onCompleted: {
+            alignChildren();
+        }
     }
+
 }
 

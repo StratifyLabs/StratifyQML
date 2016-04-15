@@ -26,8 +26,11 @@ Item {
     property real span: 1;
     property bool hideOnSkinny: false;
     property bool skinny: parent.item !== undefined ? parent.item.skinny : false;
-
     property real alignment: Qt.AlignTop | Qt.AlignLeft;
+
+    property real padding_vertical: Theme.padding_base_vertical;
+    property real padding_horizontal: Theme.padding_base_horizontal;
+    property real font_size: Theme.font_size_base;
 
     visible: hideOnSkinny && skinny ? false : true;
 
@@ -56,6 +59,30 @@ Item {
             } else if( items[i] === "center" ){
                 alignment &= ~(Qt.AlignLeft | Qt.AlignRight);
                 alignment |= Qt.AlignHCenter;
+            } if( items[i] === "h1" ){
+                font_size = Theme.font_size_h1;
+            } else if( items[i] === "h2" ){
+                font_size = Theme.font_size_h2;
+            } else if( items[i] === "h3" ){
+                font_size = Theme.font_size_h3;
+            } else if( items[i] === "h4" ){
+                font_size = Theme.font_size_h4;
+            } else if( items[i] === "h5" ){
+                font_size = Theme.font_size_h5;
+            } else if( items[i] === "h6" ){
+                font_size = Theme.font_size_h6;
+            } else  if( items[i] === "lg" ){
+                font_size = Theme.font_size_large;
+                padding_vertical = Theme.padding_large_vertical;
+                padding_horizontal = Theme.padding_large_horizontal;
+            } else if( items[i] === "sm" ){
+                font_size = Theme.font_size_small;
+                padding_vertical = Theme.padding_small_vertical;
+                padding_horizontal = Theme.padding_small_horizontal;
+            } else if( items[i] === "xs" ){
+                font_size = Theme.font_size_small;
+                padding_vertical = Theme.padding_xs_vertical;
+                padding_horizontal = Theme.padding_xs_horizontal;
             }
         }
     }

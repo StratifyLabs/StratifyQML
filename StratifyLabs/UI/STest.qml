@@ -28,6 +28,8 @@ SContainer {
             SPanel { style: "info"; heading: "Panel"; body: "Info"; }
             SPanel { style: "warning"; heading: "Panel"; body: "Warning"; }
 
+            SHLine{}
+
             SRow {
                 SButton{ span: 6; style: "btn-default xs center middle"; text: "Extra Small"; }
                 SButton{ span: 6; style: "btn-default sm center middle"; text: "Small"; }
@@ -69,7 +71,7 @@ SContainer {
                 SButton{ span: 4; style: "btn-danger center"; text: "Danger"; }
             }
 
-            SRow { SText{ style: "left"; text: "Labels:"; span:12; } }
+            SRow { SText{ style: "center"; text: "Labels:"; span:12; } }
 
             SRow {
                 SLabel{ span: 4; style: "label-default center sm middle"; text: "Default"; }

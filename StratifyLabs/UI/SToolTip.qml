@@ -14,13 +14,10 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.0
+import QtQuick 2.6
+import "SCustomize.js" as Theme
+import "Fa-4.5.0.js" as Fa
 
-SText {
-    type: "textwrap";
-    blockWidth: true;
-    textObject.wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-    textObject.horizontalAlignment: Text.AlignLeft;
-    textObject.width: textObject.parent.width;
-    height: textObject.contentHeight + padding_vertical*2;
+SBaseRectangle {
+
 }

@@ -17,6 +17,10 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "SCustomize.js" as Theme
 
-SBaseRectangleText {
-    padding_horizontal: 0;
+SItem {
+    type: "container";
+    x: Theme.padding_base_horizontal;
+    y: Theme.padding_base_vertical;
+    width: (parent.width - Theme.padding_base_horizontal*2);
+    height: childrenRect.height + Theme.padding_base_vertical*2;
 }

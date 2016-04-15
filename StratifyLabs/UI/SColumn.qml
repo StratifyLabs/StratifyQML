@@ -21,6 +21,7 @@ import "SCustomize.js" as Theme
 SItem {
     id: column;
     default property alias data: contents.data;
+    property alias contents: contents;
     type: "column";
 
     implicitWidth: parent.width;
@@ -30,18 +31,24 @@ SItem {
         contents.width = w;
     }
 
-    ColumnLayout {
-        property alias item: column.item;
-        id: contents;
-
-        width: parent.width;
-        spacing: Theme.padding_base_vertical;
-
-        onWidthChanged: {
-            for(var i=0; i < children.length; i++){
-                children[i].Layout.preferredWidth = width;
+    function alignChildren(){
+        for(var i = 0; i < children.length; i++){
+            if( children[i].alignment !== undefined ){
+                children[i].Layout.alignment = children[i].alignment;
             }
         }
     }
+
+    ColumnLayout {
+        id: contents;
+        width: parent.width;
+        spacing: Theme.padding_base_vertical;
+
+        Component.onCompleted: {
+            alignChildren();
+        }
+    }
+
+
 }
 

@@ -25,6 +25,8 @@ SBaseRectangleText {
     text_color: Theme.btn_default_color;
     border_color: Theme.btn_default_border;
 
+    signal clicked();
+
     onStyleChanged: {
         var items = parseStyle();
         radius = Theme.btn_border_radius_base;
@@ -53,6 +55,10 @@ SBaseRectangleText {
                 bg_color = Theme.btn_warning_bg;
                 text_color = Theme.btn_warning_color;
                 border_color = Theme.btn_warning_border;
+            } else if( items[i] === "close" ){
+                bg_color = "transparent";
+                text_color = Theme.text_muted;
+                border_color = "transparent";
             } else if( items[i] === "lg" ){
                 radius = Theme.btn_border_radius_large;
             } else if( items[i] === "sm" ){
@@ -73,6 +79,8 @@ SBaseRectangleText {
         onExited: {
             bg_color = Qt.lighter(bg_color, 1.1);
         }
+
+        onClicked: button.clicked();
     }
 
 

@@ -14,11 +14,17 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.6
+import QtQuick 2.5
 import "SCustomize.js" as Theme
-
 SItem {
-    type: "container";
-    anchors.fill: parent;
-    anchors.margins: Theme.padding_base_horizontal;
+    default property alias data: contents.data;
+
+    implicitWidth: contents.width;
+    implicitHeight: contents.height;
+
+    Row {
+        id: contents;
+        spacing: padding_horizontal;
+    }
+
 }
