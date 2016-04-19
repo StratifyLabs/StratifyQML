@@ -20,6 +20,7 @@ import "SCustomize.js" as Theme
 SBaseRectangle {
     id: base;
     property alias text: text.text;
+    property alias icon: text.text;
     property alias textObject: text;
     property string text_color: Theme.text_color;
     type: "text";
@@ -40,7 +41,7 @@ SBaseRectangle {
                 text.horizontalAlignment = Text.AlignRight;
             } else if( items[i] === "fa" ){
                 text.font.family = fontawesome.name;
-                text.font.pointSize *= 1.15;
+                text.font.pointSize = font_size + padding_vertical*2;
             } else if( items[i] === "bold" ){
                 text.font.weight = Font.Bold;
             }
@@ -48,11 +49,10 @@ SBaseRectangle {
     }
 
     contents.data: [
-
         Text {
             id: text;
-            topPadding: padding_vertical;
-            bottomPadding: padding_vertical;
+            anchors.verticalCenter: parent.verticalCenter;
+            verticalAlignment: Text.AlignVCenter;
             leftPadding: padding_horizontal;
             rightPadding: padding_horizontal;
             color: text_color;
@@ -60,7 +60,21 @@ SBaseRectangle {
             font.family: openSansLight.name;
             font.weight: Font.Light;
         }
-
     ]
+
+    MouseArea {
+        anchors.fill: parent;
+        hoverEnabled: true;
+        onEntered: {
+            console.log("Entered");
+            startHover();
+        }
+        onExited: stopHover();
+    }
+
+
+
+
+
 
 }

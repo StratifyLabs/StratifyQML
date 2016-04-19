@@ -25,6 +25,8 @@ SBaseRectangle {
     property alias textObject: baseRectangleTextText;
     property bool hideTextOnSkinny: true;
 
+    property alias iconObject: rectangleIcon;
+
     //size the rectangle based on the size of the text box
     implicitHeight: font_size + Theme.padding_base_vertical*3;
     implicitWidth: baseRectangleTextText.width;
@@ -39,9 +41,6 @@ SBaseRectangle {
                 baseRectangleTextText.horizontalAlignment = Text.AlightRight;
             } else if( items[i] === "text-center" ){
                 baseRectangleTextText.horizontalAlignment = Text.AlignHCenter;
-            } else if( items[i] === "fa" ){
-                baseRectangleTextText.font.family = fontawesome.name;
-                baseRectangleTextText.font.pointSize *= 1.15;
             } else if( items[i] === "bold" ){
                 baseRectangleTextText.font.weight = Font.Bold;
             }
@@ -65,7 +64,7 @@ SBaseRectangle {
                 id: rectangleIcon;
                 color: text_color;
                 text: icon;
-                font.pointSize: font_size;
+                font.pointSize: font_size*1.15;
                 font.family: fontawesome.name;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;

@@ -25,18 +25,19 @@ SItem {
     property real pixelRatio: Screen.devicePixelRatio;
     type: "tooltip";
     visible: true;
-    z: 1;
+    z: 1000;
+
+    property var target: parent;
 
     opacity: 0.0;
 
     property bool tooltipVisible: false;
     onTooltipVisibleChanged: {
+        updateStyle();
         if( currentStyle != style ){
-            updateStyle();
-            currentStyle = style;
             canvas.requestPaint();
         }
-
+        currentStyle = style;
     }
 
     states: [
@@ -69,28 +70,20 @@ SItem {
         for(i=0; i < items.length; i++){
             if( items[i] === "left" ){
                 position = items[i];
-                anchors.verticalCenter = parent.verticalCenter;
-                anchors.horizontalCenter = undefined;
-                x = -1*width;
-                y = 0;
+                x = target.mapToItem(parent, 0, 0).x - width;
+                y = target.mapToItem(parent, 0, 0).y + target.height/2 - height/2;
             } else if( items[i] === "right" ){
                 position = items[i];
-                anchors.verticalCenter = parent.verticalCenter;
-                anchors.horizontalCenter = undefined;
-                x = parent.width;
-                y = 0;
+                x = target.mapToItem(parent, 0, 0).x + target.width;
+                y = target.mapToItem(parent, 0, 0).y + target.height/2 - height/2;
             } else if( items[i] === "top" ){
                 position = items[i];
-                anchors.verticalCenter = undefined;
-                anchors.horizontalCenter = parent.horizontalCenter;
-                x = 0;
-                y = -1*height;
+                x = target.mapToItem(parent, 0, 0).x + target.width/2 - width/2;
+                y = target.mapToItem(parent, 0, 0).y - height;
             } else if( items[i] === "bottom" ){
                 position = items[i];
-                anchors.verticalCenter = undefined;
-                anchors.horizontalCenter = parent.horizontalCenter;
-                x = 0;
-                y = parent.height;
+                x = target.mapToItem(parent, 0, 0).x + target.width/2 - width/2;
+                y = target.mapToItem(parent, 0, 0).y + target.height;
             }
         }
     }
@@ -104,6 +97,7 @@ SItem {
         height: text.height;
         radius: Theme.btn_border_radius_small;
         border.color: Theme.tooltip_bg;
+        z: parent.z;
     }
 
 
@@ -114,6 +108,7 @@ SItem {
         width: (parent.width)*pixelRatio;
         height: parent.height*pixelRatio;
         transform: Scale { xScale: 1.0/pixelRatio; yScale: 1.0/pixelRatio; }
+        z: parent.z;
 
         onPaint: {
             var ctx = getContext("2d");
@@ -146,7 +141,7 @@ SItem {
                 ctx.lineTo(0,theight/2);
             } else if( position === "right" ){
                 // draw the triangle on the left
-                ctx.moveTo(0,height/2);
+                ctx.moveTo(1,height/2);
                 ctx.lineTo(twidth, height/2-theight/2);
                 ctx.lineTo(twidth,height/2+theight/2);
             } else if( position === "top" ){
@@ -183,6 +178,7 @@ SItem {
         font.family: openSansLight.name;
         font.weight: Font.Light;
         width: implicitWidth > Theme.tooltip_max_width ? Theme.tooltip_max_width : implicitWidth;
+        z: parent.z;
     }
 
 }

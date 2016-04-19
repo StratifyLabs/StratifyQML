@@ -19,9 +19,10 @@ import QtQuick 2.6
 import "Fa-4.5.0.js" as Fa
 
 SContainer {
+    id: top;
     SRow {
         SColumn {
-            span: 6;
+            span: 4;
             SPanel { style: "default"; heading: "Panel"; body: "Default"; }
             SPanel { style: "primary"; heading: "Panel"; body: "Primary"; }
             SPanel { style: "danger"; heading: "Panel"; body: "Danger"; }
@@ -38,24 +39,24 @@ SContainer {
 
             SRow {
                 SButton{ span: 6; style: "btn-default center middle"; text: "Default";
-                    SToolTip{ text: "Default Button Middle"; style: "top"; }
+                    STooltip{ text: "Default Button Middle"; style: "top"; }
                 }
                 SButton{ span: 6; style: "btn-default lg center middle"; text: "Large";
-                    SToolTip{ text: "Default Large Button Middle"; style: "top"; }
+                    STooltip{ text: "Default Large Button Middle"; style: "top"; }
                 }
             }
 
 
             SRow {
-                SButton{ span: 6; style: "lg center middle block"; text: "Block";
-                    SToolTip{ text: "Large Center Middle Block"; style: "bottom"; }
+                SButton{ id: blockButton; span: 6; style: "lg center middle block"; text: "Block";
+                    tooltip: STooltip{ target: blockButton; parent: top; text: "Large Center Middle Block"; style: "right"; }
                 }
                 SButton{ span: 6; style: "kg center middle"; text: "Default"; }
             }
         }
 
         SColumn {
-            span: 6;
+            span: 4;
             SAlert { style: "alert-success"; text: "<b>Alert!</b> Success"; }
             SAlert { style: "alert-info"; text: "<b>Alert!</b> Info"; }
             SAlert { style: "alert-warning"; text: "<b>Alert!</b> Warning"; }
@@ -81,20 +82,58 @@ SContainer {
             SRow { SText{ style: "center"; text: "Labels:"; span:12; } }
 
             SRow {
-                SLabel{ span: 4; style: "label-default center sm middle"; text: "Default";
-                    SToolTip { text: "Label Default Center Small"; style: "top"; }
+                SLabel{ id: labelDefault; span: 4; style: "label-default center sm middle"; text: "Default";
+                    tooltip: STooltip { target: labelDefault; parent: top; text: "Default Center Small"; style: "bottom"; }
                 }
                 SLabel{ span: 4; style: "label-primary center xs middle"; text: "Primary"; }
                 SLabel{ span: 4; style: "label-info center lg middle"; text: "Info"; }
             }
 
             SRow {
-                SLabel{ span: 4; style: "label-success center"; text: "Success";
-                    SToolTip { text: "Label Success Center"; style: "top"; }
+                SLabel{ id: labelSuccess; span: 4; style: "label-success center"; text: "Success";
+                    tooltip: STooltip { target: labelSuccess.contents; parent: top; text: "Label Success Center"; style: "right"; }
                 }
-                SLabel{ span: 4; style: "label-warning center"; text: "Warning"; }
+                SLabel{ id: warningLabel; span: 4; style: "label-warning center"; text: "Warning";
+                    tooltip: STooltip { target: warningLabel.contents; parent: top; text: "Label Warning Center"; style: "left"; }
+
+                }
                 SLabel{ span: 4; style: "label-danger center"; text: "Danger"; }
             }
         }
+
+        SColumn {
+            span: 4;
+            SRow {
+                SCheckbox{ text: "Checkbox"; }
+                SCheckbox{ id: checkTool; text: "Checkbox w/ Tooltip";
+                    tooltip: STooltip { target: checkTool; parent: top; text: "Checkbox tooltip"; style: "bottom"; }
+                }
+            }
+
+            SRow {
+                SText { span: 2; text: "User"; }
+                SInput { span: 10; text: "StratifyLabs"; }
+            }
+
+            SRow {
+                SText { span: 2; text: "Pass"; }
+                SPassword { span: 10; text: ""; }
+            }
+
+            SRow {
+                SText { span: 2; text: Fa.Icon.user; style: "fa"; }
+                SInput { span: 10; text: "StratifyLabs"; }
+            }
+
+            SRow {
+                SIcon { span: 2; text: Fa.Icon.lock; }
+                SPassword { span: 10; text: "";
+                    STooltip{ text: "Password"; style: "top"; }
+                }
+            }
+
+        }
+
+
     }
 }

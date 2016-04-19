@@ -28,8 +28,10 @@ SBaseRectangle {
     border_color: Theme.input_border;
     radius: Theme.input_border_radius;
 
+    property alias inputObject: input;
+
     implicitHeight: font_size + Theme.padding_base_vertical*3;
-    //implicitWidth: parent.width;
+    width: parent.width;
 
     onStyleChanged: {
         var items = style.split(" ");
@@ -44,11 +46,11 @@ SBaseRectangle {
         }
     }
 
-    TextEdit {
+    TextInput {
         id: input;
         color: text_color;
         text: placeholder;
-        width: parent.width;
+        width: parent.width - clearIcon.width*1.25;
         leftPadding: padding_horizontal;
         rightPadding: padding_horizontal;
         bottomPadding: padding_vertical;

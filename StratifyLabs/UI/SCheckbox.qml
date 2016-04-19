@@ -18,21 +18,30 @@ import QtQuick 2.6
 import "SCustomize.js" as Theme
 import "Fa-4.5.0.js" as Fa
 
-SText {
+SBaseRectangleText {
     id: check;
     property bool checked;
-    icon: checked ? Fa.Icon.check_square_o : Fa.Icon.square_o;
+
+    iconObject.width: font_size;
+    icon: checked ? Fa.Icon.check_square_o : (Fa.Icon.square_o);
     text: "Checkbox";
     hideTextOnSkinny: false;
+
+    bg_color: Theme.body_bg;
+    text_color: Theme.text_color;
+    border_color: Theme.body_bg;
 
     signal clicked();
 
     MouseArea {
         anchors.fill: parent;
+        hoverEnabled: true;
         onClicked: {
             check.checked = !check.checked;
             check.clicked();
         }
+        onEntered: startHover();
+        onExited: stopHover();
     }
 
 }
