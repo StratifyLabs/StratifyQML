@@ -33,7 +33,7 @@ Stratify QML is released under the ASL 2.0.  If you are willing to release contr
 - Nav Tabs
 - Nav Pills
 - Navbar
-- Tooltip
+- <del>Tooltip</del>
 - Images
 - Dropdown
 - Pane (scrolling)

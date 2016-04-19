@@ -50,15 +50,18 @@ SBaseRectangle {
         }
     }
 
-    //draw another rectangle in the background
-    Rectangle {
-        id: progress;
-        anchors.left: parent.left;
-        anchors.top: parent.top;
-        height: parent.height;
-        width: parent.width * value*1.0/100.0;
-        color: Theme.progress_bar_bg;
-        radius: Theme.progress_border_radius;
-    }
+
+    contents.data: [
+        //draw another rectangle in the background
+        Rectangle {
+            id: progress;
+            anchors.left: parent.left;
+            anchors.top: parent.top;
+            height: parent.height;
+            width: parent.width * value*1.0/100.0;
+            color: Theme.progress_bar_bg;
+            radius: Theme.progress_border_radius;
+        }
+    ]
 
 }

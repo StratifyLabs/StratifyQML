@@ -49,38 +49,42 @@ SBaseRectangle {
     }
 
 
-    Row {
-        id: baseRectangleTextText;
-        anchors.centerIn: parent;
+    contents.data: [
 
-        leftPadding: padding_horizontal;
-        rightPadding: padding_horizontal;
-        bottomPadding: padding_vertical;
-        topPadding: padding_vertical;
-        spacing: Theme.padding_base_horizontal/4;
+        Row {
+            id: baseRectangleTextText;
+            anchors.centerIn: parent;
 
-        Text {
-            id: rectangleIcon;
-            color: text_color;
-            text: icon;
-            font.pointSize: font_size;
-            font.family: fontawesome.name;
-            font.weight: Font.Light;
-            horizontalAlignment: Text.AlignHCenter;
-            verticalAlignment: Text.AlignVCenter;
-            height: rectangleText.height;
+            leftPadding: padding_horizontal;
+            rightPadding: padding_horizontal;
+            bottomPadding: padding_vertical;
+            topPadding: padding_vertical;
+            spacing: Theme.padding_base_horizontal/4;
+
+            Text {
+                id: rectangleIcon;
+                color: text_color;
+                text: icon;
+                font.pointSize: font_size;
+                font.family: fontawesome.name;
+                font.weight: Font.Light;
+                horizontalAlignment: Text.AlignHCenter;
+                verticalAlignment: Text.AlignVCenter;
+                height: rectangleText.height;
+            }
+
+            Text {
+                id: rectangleText;
+                color: text_color;
+                text: baseRectangleText.text;
+                font.pointSize: font_size;
+                font.family: openSansLight.name;
+                font.weight: Font.Light;
+                horizontalAlignment: Text.AlignHCenter;
+                verticalAlignment: Text.AlignVCenter;
+                visible: (icon !== "") && (hideTextOnSkinny) ? !skinny : true;
+            }
         }
 
-        Text {
-            id: rectangleText;
-            color: text_color;
-            text: baseRectangleText.text;
-            font.pointSize: font_size;
-            font.family: openSansLight.name;
-            font.weight: Font.Light;
-            horizontalAlignment: Text.AlignHCenter;
-            verticalAlignment: Text.AlignVCenter;
-            visible: (icon !== "") && (hideTextOnSkinny) ? !skinny : true;
-        }
-    }
+    ]
 }

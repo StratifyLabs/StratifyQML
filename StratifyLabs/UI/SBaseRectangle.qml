@@ -19,10 +19,13 @@ import "SCustomize.js" as Theme
 
 SItem {
     id: baseRectangle;
-    default property alias data: contents.data;
+    //default property alias data: contents.data;
     property alias contents: contents;
     type: "base";
     blockWidth: false;
+
+    //implicitHeight: contents.height;
+    //implicitWidth: contents.width;
 
     property alias bg_color: baseRectangle.color;
     property string text_color: Theme.text_color;
@@ -76,4 +79,5 @@ SItem {
             }
         }
     }
+
 }

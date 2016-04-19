@@ -43,7 +43,7 @@ var font_family_monospace = "Monaco";
 var font_family_base = font_family_sans_serif;
 var font_size_base = 18;
 var font_size_large = Math.ceil((font_size_base * 1.25));
-var font_size_small = Math.ceil((font_size_base * 0.85));
+var font_size_small = Math.ceil((font_size_base * 0.75));
 var font_size_h1 = Math.floor((font_size_base * 2.6));
 var font_size_h2 = Math.floor((font_size_base * 2.15));
 var font_size_h3 = Math.ceil((font_size_base * 1.7));
@@ -399,3 +399,5 @@ var page_header_border_color = gray_lighter;
 var dl_horizontal_offset = component_offset_horizontal;
 var dl_horizontal_breakpoint = grid_float_breakpoint;
 var hr_border = gray_lighter;
+
+var tooltip_delay = 500;

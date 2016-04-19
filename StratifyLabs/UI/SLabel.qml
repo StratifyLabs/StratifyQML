@@ -56,7 +56,11 @@ SBaseRectangleText {
         anchors.fill: parent;
         hoverEnabled: true;
         onEntered: {
+            startHover();
+        }
 
+        onExited: {
+            stopHover();
         }
     }
 

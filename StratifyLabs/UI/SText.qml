@@ -47,19 +47,20 @@ SBaseRectangle {
         }
     }
 
-    Text {
-        id: text;
-        topPadding: padding_vertical;
-        bottomPadding: padding_vertical;
-        leftPadding: padding_horizontal;
-        rightPadding: padding_horizontal;
-        color: text_color;
-        font.pointSize: font_size;
-        font.family: openSansLight.name;
-        font.weight: Font.Light;
-        onHeightChanged: {
-            console.log("Height " + font.pointSize);
+    contents.data: [
+
+        Text {
+            id: text;
+            topPadding: padding_vertical;
+            bottomPadding: padding_vertical;
+            leftPadding: padding_horizontal;
+            rightPadding: padding_horizontal;
+            color: text_color;
+            font.pointSize: font_size;
+            font.family: openSansLight.name;
+            font.weight: Font.Light;
         }
-    }
+
+    ]
 
 }

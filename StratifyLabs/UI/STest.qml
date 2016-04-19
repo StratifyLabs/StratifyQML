@@ -28,7 +28,7 @@ SContainer {
             SPanel { style: "info"; heading: "Panel"; body: "Info"; }
             SPanel { style: "warning"; heading: "Panel"; body: "Warning"; }
 
-            SHLine{}
+            SHline{}
 
             SRow {
                 SButton{ span: 6; style: "btn-default xs center middle"; text: "Extra Small"; }
@@ -36,13 +36,19 @@ SContainer {
             }
 
             SRow {
-                SButton{ span: 6; style: "btn-default center middle"; text: "Default"; }
-                SButton{ span: 6; style: "btn-default lg center middle"; text: "Large"; }
+                SButton{ span: 6; style: "btn-default center middle"; text: "Default";
+                    SToolTip{ text: "Default Button Middle"; style: "top"; }
+                }
+                SButton{ span: 6; style: "btn-default lg center middle"; text: "Large";
+                    SToolTip{ text: "Default Large Button Middle"; style: "top"; }
+                }
             }
 
 
             SRow {
-                SButton{ span: 6; style: "lg center middle block"; text: "Block"; }
+                SButton{ span: 6; style: "lg center middle block"; text: "Block";
+                    SToolTip{ text: "Large Center Middle Block"; style: "bottom"; }
+                }
                 SButton{ span: 6; style: "kg center middle"; text: "Default"; }
             }
         }

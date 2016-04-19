@@ -69,19 +69,25 @@ SBaseRectangleText {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent;
-        hoverEnabled: true;
-        onEntered: {
-            bg_color = Qt.darker(bg_color, 1.1);
+    contents.data: [
+
+        MouseArea {
+            anchors.fill: parent;
+            hoverEnabled: true;
+            onEntered: {
+                bg_color = Qt.darker(bg_color, 1.1);
+                startHover();
+            }
+
+            onExited: {
+                bg_color = Qt.lighter(bg_color, 1.1);
+                stopHover();
+            }
+
+            onClicked: button.clicked();
         }
 
-        onExited: {
-            bg_color = Qt.lighter(bg_color, 1.1);
-        }
-
-        onClicked: button.clicked();
-    }
+    ]
 
 
 }

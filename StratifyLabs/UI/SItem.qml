@@ -25,12 +25,19 @@ Item {
     property bool blockWidth: false;
     property real span: 1;
     property bool hideOnSkinny: false;
-    property bool skinny: parent.item !== undefined ? parent.item.skinny : false;
+    property bool skinny: (parent.item !== undefined) ? parent.item.skinny : false;
     property real alignment: Qt.AlignTop | Qt.AlignLeft;
+
+    property real tooltipDelay: Theme.tooltip_delay;
+
+    property var tooltip: 0;
+
+    z: 0;
 
     property real padding_vertical: Theme.padding_base_vertical;
     property real padding_horizontal: Theme.padding_base_horizontal;
     property real font_size: Theme.font_size_base;
+
 
     visible: hideOnSkinny && skinny ? false : true;
 
@@ -86,4 +93,36 @@ Item {
             }
         }
     }
+
+    Component.onCompleted: {
+        var i;
+        for(i=0; i < children.length; i++){
+            if( children[i].type === "tooltip" ){
+                tooltip = children[i];
+            }
+        }
+    }
+
+    function startHover(){
+        hoverTimer.start();
+    }
+
+    function stopHover(){
+        hoverTimer.stop();
+        if( tooltip != null ){
+            tooltip.visible = false;
+        }
+    }
+
+    Timer {
+        id: hoverTimer;
+        interval: tooltipDelay;
+        repeat: false;
+        onTriggered: {
+            if( tooltip != null ){
+                tooltip.visible = true;
+            }
+        }
+    }
+
 }
