@@ -16,6 +16,7 @@ Copyright 2016 Tyler Gilbert
 
 
 import QtQuick 2.6
+import "Fa-4.5.0.js" as Fa
 
 SContainer {
     SRow {
@@ -66,9 +67,9 @@ SContainer {
             SRow { SText{ style: "left"; text: "Buttons:"; span:12; } }
 
             SRow {
-                SButton{ span: 4; style: "btn-default center"; text: "Default"; }
-                SButton{ span: 4; style: "btn-primary center"; text: "Primary"; }
-                SButton{ span: 4; style: "btn-info center"; text: "Info"; }
+                SButton{ span: 4; style: "btn-default center"; icon: Fa.Icon.check; text: "Default"; }
+                SButton{ span: 4; style: "btn-primary center"; icon: Fa.Icon.times; text: "Primary"; }
+                SButton{ span: 4; style: "btn-info center"; icon: Fa.Icon.lock; text: "Info"; }
             }
 
             SRow {
@@ -80,13 +81,17 @@ SContainer {
             SRow { SText{ style: "center"; text: "Labels:"; span:12; } }
 
             SRow {
-                SLabel{ span: 4; style: "label-default center sm middle"; text: "Default"; }
+                SLabel{ span: 4; style: "label-default center sm middle"; text: "Default";
+                    SToolTip { text: "Label Default Center Small"; style: "top"; }
+                }
                 SLabel{ span: 4; style: "label-primary center xs middle"; text: "Primary"; }
                 SLabel{ span: 4; style: "label-info center lg middle"; text: "Info"; }
             }
 
             SRow {
-                SLabel{ span: 4; style: "label-success center"; text: "Success"; }
+                SLabel{ span: 4; style: "label-success center"; text: "Success";
+                    SToolTip { text: "Label Success Center"; style: "top"; }
+                }
                 SLabel{ span: 4; style: "label-warning center"; text: "Warning"; }
                 SLabel{ span: 4; style: "label-danger center"; text: "Danger"; }
             }

@@ -110,7 +110,7 @@ Item {
     function stopHover(){
         hoverTimer.stop();
         if( tooltip != null ){
-            tooltip.visible = false;
+            tooltip.tooltipVisible = false;
         }
     }
 
@@ -120,7 +120,7 @@ Item {
         repeat: false;
         onTriggered: {
             if( tooltip != null ){
-                tooltip.visible = true;
+                tooltip.tooltipVisible = true;
             }
         }
     }

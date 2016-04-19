@@ -23,7 +23,7 @@ SItem {
     id: base;
     property alias text: text.text;
     property real pixelRatio: Screen.devicePixelRatio;
-    type: "tooltip";
+    type: "popover";
     visible: false;
     z: 1;
 

@@ -52,17 +52,22 @@ SBaseRectangleText {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent;
-        hoverEnabled: true;
-        onEntered: {
-            startHover();
+
+    contents.data: [
+
+        MouseArea {
+            anchors.fill: parent;
+            hoverEnabled: true;
+            onEntered: {
+                startHover();
+            }
+
+            onExited: {
+                stopHover();
+            }
         }
 
-        onExited: {
-            stopHover();
-        }
-    }
+    ]
 
 
 }
