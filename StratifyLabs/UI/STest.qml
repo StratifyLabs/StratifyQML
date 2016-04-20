@@ -126,9 +126,15 @@ SContainer {
             }
 
             SRow {
-                SIcon { span: 2; text: Fa.Icon.lock; }
-                SPassword { span: 10; text: "";
-                    STooltip{ text: "Password"; style: "top"; }
+                SIcon { id: password; span: 2; text: Fa.Icon.lock;
+                    tooltip: STooltip{ target: password.contents; parent: top; text: "Password"; style: "left"; }
+                }
+                SPassword { span: 10; text: ""; }
+            }
+
+            SRow {
+                STextBox {
+                    span: 12; height: 400;
                 }
             }
 

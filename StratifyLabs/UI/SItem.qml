@@ -30,7 +30,7 @@ Item {
 
     property real tooltipDelay: Theme.tooltip_delay;
 
-    property var tooltip: 0;
+    property var tooltip: null;
 
     z: 0;
 

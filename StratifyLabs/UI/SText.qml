@@ -72,9 +72,4 @@ SBaseRectangle {
         onExited: stopHover();
     }
 
-
-
-
-
-
 }
