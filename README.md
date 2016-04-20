@@ -21,7 +21,7 @@ Stratify QML is released under the ASL 2.0.  If you are willing to release contr
 - <del>Well</del>
 - <del>Input</del>
 - <del>Checkbox</del>
-- <del>Alert</del>
+- <del>Alert (dismissible)</del>
 - Popover
 - Carousel
 - Breadcrumbs
@@ -29,7 +29,7 @@ Stratify QML is released under the ASL 2.0.  If you are willing to release contr
 - List Group
 - Input Groups
 - Radio Button
-- Text Box
+- <del>Text Box</del>
 - Nav Tabs
 - Nav Pills
 - Navbar
