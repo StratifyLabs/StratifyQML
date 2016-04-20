@@ -28,7 +28,7 @@ Stratify QML is released under the ASL 2.0.  If you are willing to release contr
 - Jumbotron
 - List Group
 - Input Groups
-- Radio Button
+- <del>Radio Button</del>
 - <del>Text Box</del>
 - Nav Tabs
 - Nav Pills

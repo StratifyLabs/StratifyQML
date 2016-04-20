@@ -138,6 +138,13 @@ SContainer {
                 }
             }
 
+            SRow {
+                SRadioButtonControl { id: radioButtonControl; }
+                SRadioButton { control: radioButtonControl; text: "Option 1"; }
+                SRadioButton { control: radioButtonControl; text: "Option 2"; }
+                SRadioButton { control: radioButtonControl; text: "Option 3"; }
+            }
+
         }
 
 

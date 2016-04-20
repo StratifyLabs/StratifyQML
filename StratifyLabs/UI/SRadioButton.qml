@@ -22,10 +22,12 @@ SBaseRectangleText {
     id: check;
     property bool checked;
 
-    type: "checkbox";
+    type: "radiobutton";
 
-    property string checkMark: Fa.Icon.check_square_o;
-    property string uncheckMark: Fa.Icon.square_o;
+    property var control: null;
+
+    property string checkMark: Fa.Icon.circle;
+    property string uncheckMark: Fa.Icon.circle_o;
 
     iconObject.width: font_size;
     icon: checked ? checkMark : (uncheckMark);
@@ -42,7 +44,14 @@ SBaseRectangleText {
         anchors.fill: parent;
         hoverEnabled: true;
         onClicked: {
-            check.checked = !check.checked;
+            if( control !== null ){
+                if( !checked ){
+                    control.active = check;
+                    checked = true;
+                }
+            } else {
+                checked = !checked;
+            }
             check.clicked();
         }
         onEntered: startHover();

@@ -65,10 +65,7 @@ SBaseRectangle {
     MouseArea {
         anchors.fill: parent;
         hoverEnabled: true;
-        onEntered: {
-            console.log("Entered");
-            startHover();
-        }
+        onEntered: startHover();
         onExited: stopHover();
     }
 
