@@ -19,7 +19,7 @@ Item {
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
         xhr.onreadystatechange = function() {
-            if (xhr.readyState == XMLHttpRequest.DONE){
+            if (xhr.readyState === XMLHttpRequest.DONE){
                 json = xhr.responseText;
             }
         }
@@ -55,6 +55,7 @@ Item {
     }
 
     function parseJSONString(jsonString, jsonPathQuery) {
+        console.log("String is " + jsonString);
         var objectArray = JSON.parse(jsonString);
         if ( jsonPathQuery !== "" ){
             objectArray = JSONPath.jsonPath(objectArray, jsonPathQuery);

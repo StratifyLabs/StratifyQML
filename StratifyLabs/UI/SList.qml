@@ -16,6 +16,8 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import "SCustomize.js" as Theme
+import "ListText.js" as List;
+
 
 SItem {
     property alias listViewObject: listView;
@@ -23,15 +25,18 @@ SItem {
     property alias query: listModel.query;
     property alias json: listModel.json;
 
+    implicitWidth: parent.width;
+    implicitHeight: parent.height;
+
     SJsonListModel {
         id: listModel;
-        json: "";
-        query: "$.*";
+        json: List.data;
+        query: "$.data[*]";
     }
 
     ListView {
         id: listView;
-        implicitWidth: parent.width;
+        anchors.fill: parent;
         clip: true;
         spacing: padding_vertical;
         model: listModel.model;

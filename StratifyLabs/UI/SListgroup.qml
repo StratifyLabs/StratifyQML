@@ -18,24 +18,86 @@ import QtQuick 2.6
 import "SCustomize.js" as Theme
 
 SList {
+    id: base;
     type: "listgroup";
     delegate: listDelegate;
     blockWidth: true;
-    implicitHeight: listViewObject.height;
 
-    listViewObject.z: 50;
+    implicitHeight: listViewObject.count * (font_size + padding_vertical*5);
+    listViewObject.spacing: 0;
+
+    property real active;
 
     Component {
         id: listDelegate;
-        SText{ text: model.text; }
-    }
 
-    //draw the outline rectangle
-    Rectangle {
-        width: parent.width;
-        height: parent.height;
-        color: Theme.body_bg;
-        border.color: Theme.list_group_border;
+        SRoundedRectangle {
+            id: base;
+
+            /*
+            property bool active: false;
+
+            states: [
+                State { when: active;
+                    PropertyChanges {
+                        target: base;
+                        color: Theme.list_group_active_bg;
+                        borderColor: Theme.list_group_active_border;
+                    }
+                    PropertyChanges {
+                        target: text;
+                        text_color: Theme.list_group_active_color;
+                    }
+                },
+                State { when: !active;
+                    PropertyChanges {
+                        target: base;
+                        color: Theme.list_group_bg;
+                        borderColor: Theme.list_group_border;
+                    }
+                    PropertyChanges {
+                        target: text;
+                        text_color: Theme.text_color;
+                    }
+                }
+            ]
+
+            transitions: Transition {
+                ColorAnimation { property: "color"; duration: 100 }
+                ColorAnimation { property: "borderColor"; duration: 100 }
+                ColorAnimation { property: "text_color"; duration: 100 }
+            }
+            */
+
+            topRadius: index == 0 ? Theme.list_group_border_radius : 0;
+            bottomRadius: index == (listViewObject.count-1) ? Theme.list_group_border_radius : 0;
+            implicitWidth: parent.width;
+            implicitHeight: contents.height+2;
+            color: Theme.list_group_bg;
+            borderColor: Theme.list_group_border;
+            SContainer {
+                id: contents;
+                SText {
+                    id: text;
+                    text: model.text;
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent;
+                hoverEnabled: true;
+
+                onEntered: {
+                    color = Theme.list_group_hover_bg;
+                }
+
+                onExited: {
+                    color = Theme.list_group_bg;
+                }
+
+            }
+        }
+
     }
 
 }

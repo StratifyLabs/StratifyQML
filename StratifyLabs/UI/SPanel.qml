@@ -93,7 +93,7 @@ SItem {
 
     SRoundedRectangle {
         id: panelBody;
-        y: panelHeading.height-2;
+        y: panelHeading.height;
         bottomRadius: Theme.panel_border_radius;
         color: Theme.body_bg;
         borderColor: border_color;

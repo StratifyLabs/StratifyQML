@@ -21,26 +21,29 @@ import "Fa-4.5.0.js" as Fa
 
 
 Item {
+    property real pixelRatio: Screen.devicePixelRatio;
     property real radius: 0.1;
     property real topRadius: radius/2;
     property real bottomRadius: radius/2;
     property real leftRadius: radius/2;
     property real rightRadius: radius/2;
-    property real topLeftRadius: topRadius + leftRadius;
-    property real topRightRadius: topRadius + rightRadius;
-    property real bottomLeftRadius: bottomRadius + leftRadius;
-    property real bottomRightRadius: bottomRadius + rightRadius;
+    property real topLeftRadius: (topRadius + leftRadius)*pixelRatio;
+    property real topRightRadius: (topRadius + rightRadius)*pixelRatio;
+    property real bottomLeftRadius: (bottomRadius + leftRadius)*pixelRatio;
+    property real bottomRightRadius: (bottomRadius + rightRadius)*pixelRatio;
     property real borderWidth: 1;
     property string borderColor: "#000";
     property string color: "#000";
-    property real pixelRatio: Screen.devicePixelRatio;
+
+    onBorderColorChanged: canvas.requestPaint();
+    onColorChanged: canvas.requestPaint();
 
     Canvas {
         id: canvas;
         antialiasing: true;
         //double the height and scale down for retina displays
-        width: parent.width*pixelRatio;
-        height: parent.height*pixelRatio;
+        width: (parent.width)*pixelRatio;
+        height: (parent.height)*pixelRatio;
         transform: Scale { xScale: 1.0/pixelRatio; yScale: 1.0/pixelRatio; }
         onPaint: {
             var ctx = getContext("2d");
@@ -54,10 +57,10 @@ Item {
             ctx.lineJoin = "miter";
 
             ctx.beginPath();
-            ctx.arc(topLeftRadius+ctx.lineWidth, topLeftRadius+ctx.lineWidth, topLeftRadius, Math.PI, Math.PI + Math.PI/2, false);
-            ctx.arc(width-topRightRadius-ctx.lineWidth, topRightRadius+ctx.lineWidth, topRightRadius, -Math.PI/2, 0, false);
-            ctx.arc(width-bottomRightRadius-ctx.lineWidth, height-bottomRightRadius-ctx.lineWidth, bottomRightRadius, 0, Math.PI/2, false);
-            ctx.arc(bottomLeftRadius+ctx.lineWidth, height-bottomLeftRadius-ctx.lineWidth, bottomLeftRadius, Math.PI/2, Math.PI,
+            ctx.arc(topLeftRadius, topLeftRadius, topLeftRadius, Math.PI, Math.PI + Math.PI/2, false);
+            ctx.arc(width-topRightRadius, topRightRadius, topRightRadius, -Math.PI/2, 0, false);
+            ctx.arc(width-bottomRightRadius, height-bottomRightRadius, bottomRightRadius, 0, Math.PI/2, false);
+            ctx.arc(bottomLeftRadius, height-bottomLeftRadius, bottomLeftRadius, Math.PI/2, Math.PI,
              false);
             ctx.closePath();
             ctx.fill();
