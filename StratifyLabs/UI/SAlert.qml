@@ -21,6 +21,8 @@ import "Fa-4.5.0.js" as Fa
 SItem {
     id: base;
     type: "alert";
+
+    default property alias data: contents.data;
     property alias text: alertText.text;
     property real padding_vertical: Theme.padding_base_vertical;
     property real padding_horizontal: Theme.padding_base_horizontal;
@@ -82,30 +84,29 @@ SItem {
 
     Rectangle {
         id: alertRectangle;
-
         implicitWidth: parent.width;
-        implicitHeight: alertText.height;
-
+        implicitHeight: contents.height;
         color: bg_color;
         border.color: border_color;
         border.width: 1;
         radius: Theme.alert_border_radius;
 
-        Text {
-            id: alertText;
-            anchors.top: parent.top;
-            anchors.left: parent.left;
-            width: parent.width-2 - alertDismiss.width;
-            topPadding: padding_vertical;
-            bottomPadding: padding_vertical;
-            leftPadding: padding_horizontal;
-            text: "";
-            color: text_color;
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-            font.pointSize: font_size;
-            font.family: openSansLight.name;
-            font.weight: Font.Light;
-            verticalAlignment: Text.AlignVCenter;
+        SContainer {
+            id: contents;
+            Text {
+                id: alertText;
+                anchors.top: parent.top;
+                anchors.left: parent.left;
+                width: parent.width-2 - alertDismiss.width;
+                text: "";
+                color: text_color;
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+                font.pointSize: font_size;
+                font.family: openSansLight.name;
+                font.weight: Font.Light;
+                verticalAlignment: Text.AlignVCenter;
+            }
+
         }
 
         Text {

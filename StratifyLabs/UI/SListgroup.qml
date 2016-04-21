@@ -17,10 +17,25 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "SCustomize.js" as Theme
 
-SItem {
-    type: "container";
-    x: padding_horizontal;
-    y: padding_vertical;
-    width: (parent.width - padding_horizontal*2);
-    height: childrenRect.height + padding_vertical*2;
+SList {
+    type: "listgroup";
+    delegate: listDelegate;
+    blockWidth: true;
+    implicitHeight: listViewObject.height;
+
+    listViewObject.z: 50;
+
+    Component {
+        id: listDelegate;
+        SText{ text: model.text; }
+    }
+
+    //draw the outline rectangle
+    Rectangle {
+        width: parent.width;
+        height: parent.height;
+        color: Theme.body_bg;
+        border.color: Theme.list_group_border;
+    }
+
 }

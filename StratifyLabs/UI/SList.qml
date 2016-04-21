@@ -18,9 +18,23 @@ import QtQuick 2.6
 import "SCustomize.js" as Theme
 
 SItem {
-    type: "container";
-    x: padding_horizontal;
-    y: padding_vertical;
-    width: (parent.width - padding_horizontal*2);
-    height: childrenRect.height + padding_vertical*2;
+    property alias listViewObject: listView;
+    property alias delegate: listView.delegate;
+    property alias query: listModel.query;
+    property alias json: listModel.json;
+
+    SJsonListModel {
+        id: listModel;
+        json: "";
+        query: "$.*";
+    }
+
+    ListView {
+        id: listView;
+        implicitWidth: parent.width;
+        clip: true;
+        spacing: padding_vertical;
+        model: listModel.model;
+    }
+
 }

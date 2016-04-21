@@ -19,6 +19,7 @@ import "SCustomize.js" as Theme
 
 SItem {
 
+    default property alias data: contents.data;
     property string heading_bg: Theme.panel_default_heading_bg;
     property string border_color: Theme.panel_default_border;
     property real heading_font_size: Theme.font_size_base;
@@ -30,7 +31,7 @@ SItem {
 
 
     implicitWidth: parent.width;
-    implicitHeight: panelRectangle.height;
+    implicitHeight: panelHeading.height + panelBody.height;
 
     onStyleChanged: {
         var items = parseStyle();
@@ -64,80 +65,54 @@ SItem {
         }
     }
 
-    Rectangle {
-        id: panelRectangle;
-        radius: Theme.panel_border_radius;
-        border.color: border_color;
-        border.width: 1;
-        color: Theme.body_bg;
+
+    SRoundedRectangle {
+        id: panelHeading;
+        topRadius: Theme.panel_border_radius;
+        color: heading_bg;
+        borderColor: border_color;
+        borderWidth: 1;
 
         implicitWidth: parent.width;
-        implicitHeight: panelHeadingRectangle.height + panelBodyText.height;
-
-        Rectangle { //heading
-            id: panelHeadingRectangle;
-            radius: Theme.panel_border_radius;
-            implicitHeight: panelHeadingText.height;
-            anchors.top: parent.top;
-            anchors.left: parent.left;
-            width: parent.width;
-            color: heading_bg;
-            border.color: border_color;
-            border.width: 1;
-
-            Text {
-                id: panelHeadingText;
-                topPadding: Theme.padding_base_vertical;
-                bottomPadding: Theme.padding_base_vertical;
-                leftPadding: Theme.padding_base_horizontal;
-                rightPadding: Theme.padding_base_horizontal;
-                text: "Panel Heading";
-                color: heading_color;
-                font.pointSize: heading_font_size;
-                font.family: openSansLight.name;
-                font.weight: Font.Light;
-                wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-            }
-
-        }
-
-        Rectangle {
-            id: panelHeadingMask;
-            y: panelHeadingRectangle.height - Theme.panel_border_radius;
-            height: Theme.panel_border_radius;
-            width: parent.width-2;
-            anchors.horizontalCenter: parent.horizontalCenter;
-            color: Theme.body_bg;
-        }
-
-
-        Rectangle {
-            y: panelHeadingRectangle.height - Theme.panel_border_radius;
-            height: 1;
-            width: parent.width;
-            anchors.horizontalCenter: parent.horizontalCenter;
-            color: border_color;
-        }
-
+        implicitHeight: panelHeadingText.height;
 
         Text {
-            id: panelBodyText;
-            y: panelHeadingRectangle.height - Theme.panel_border_radius;
-            anchors.horizontalCenter: parent.horizontalCenter;
-            width: parent.width-2;
+            id: panelHeadingText;
             topPadding: Theme.padding_base_vertical;
             bottomPadding: Theme.padding_base_vertical;
             leftPadding: Theme.padding_base_horizontal;
             rightPadding: Theme.padding_base_horizontal;
-            text: "Panel Body";
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-            font.pointSize: font_size;
+            text: "Panel Heading";
+            color: heading_color;
+            font.pointSize: heading_font_size;
             font.family: openSansLight.name;
             font.weight: Font.Light;
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
         }
-
     }
 
+    SRoundedRectangle {
+        id: panelBody;
+        y: panelHeading.height-2;
+        bottomRadius: Theme.panel_border_radius;
+        color: Theme.body_bg;
+        borderColor: border_color;
+        borderWidth: 1;
+        width: parent.width;
+        implicitHeight: contents.height;
 
+        SContainer {
+            id: contents;
+            Text {
+                id: panelBodyText;
+                width: parent.width-2;
+                text: "";
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+                font.pointSize: font_size;
+                font.family: openSansLight.name;
+                font.weight: Font.Light;
+            }
+        }
+    }
 
 }

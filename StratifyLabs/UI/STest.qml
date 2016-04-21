@@ -17,13 +17,19 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import "Fa-4.5.0.js" as Fa
+import "SCustomize.js" as Theme
 
 SContainer {
     id: top;
     SRow {
         SColumn {
             span: 4;
-            SPanel { style: "default"; heading: "Panel"; body: "Default"; }
+            SPanel { style: "default"; heading: "Panel";
+                SRow {
+                    SButton { text: "Default"; }
+                    SButton { text: "Panel"; }
+                }
+            }
             SPanel { style: "primary"; heading: "Panel"; body: "Primary"; }
             SPanel { style: "danger"; heading: "Panel"; body: "Danger"; }
             SPanel { style: "success"; heading: "Panel"; body: "Success"; }
@@ -143,6 +149,10 @@ SContainer {
                 SRadioButton { control: radioButtonControl; text: "Option 1"; }
                 SRadioButton { control: radioButtonControl; text: "Option 2"; }
                 SRadioButton { control: radioButtonControl; text: "Option 3"; }
+            }
+
+            SRow {
+                SListgroup { json: "ListText.json"; }
             }
 
         }
