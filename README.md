@@ -39,6 +39,7 @@ Stratify QML is released under the ASL 2.0.  If you are willing to release contr
 - Pane (scrolling)
 - List with JSONPath
 - Badge
+- Table
 
 
 # Example
