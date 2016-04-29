@@ -15,6 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.5
+import QtQuick.Window 2.2
 import "SCustomize.js" as Theme
 
 Item {
@@ -29,8 +30,11 @@ Item {
     property real alignment: Qt.AlignTop | Qt.AlignLeft;
 
     property real tooltipDelay: Theme.tooltip_delay;
+    property real popoverDelay: Theme.popover_delay;
+
 
     property var tooltip: null;
+    property var popover: null;
 
     z: 0;
 
@@ -99,6 +103,8 @@ Item {
         for(i=0; i < children.length; i++){
             if( children[i].type === "tooltip" ){
                 tooltip = children[i];
+            } else if(children[i].type === "popover"){
+                popover = children[i];
             }
         }
     }
@@ -121,6 +127,28 @@ Item {
         onTriggered: {
             if( tooltip != null ){
                 tooltip.tooltipVisible = true;
+            }
+        }
+    }
+
+    Connections {
+        ignoreUnknownSignals: true
+        target: self
+        onClicked: {
+            if(self.popover) {
+                popoverTimer.start();
+            }
+        }
+
+    }
+
+    Timer {
+        id: popoverTimer;
+        interval: popoverDelay;
+        repeat: false;
+        onTriggered: {
+            if( popover != null ){
+                popover.popoverVisible = !popover.popoverVisible;
             }
         }
     }

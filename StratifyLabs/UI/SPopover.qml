@@ -20,17 +20,24 @@ import "SCustomize.js" as Theme
 import "Fa-4.5.0.js" as Fa
 
 SItem {
+
     id: base;
-    property alias text: text.text;
+    property alias title: textTitle.text;
+    property alias content: textContent.text;
     property real pixelRatio: Screen.devicePixelRatio;
+
+    // TODO: to add Dismissive popover functionality
+    property string trigger: ""
+
     type: "popover";
     visible: false;
-    z: 1;
+    opacity: 0
+    z: parent.z + 1
 
     property string currentStyle;
 
-    implicitWidth: text.width + 2*Theme.tooltip_arrow_width;
-    implicitHeight: text.height + 2*Theme.tooltip_arrow_width;
+    implicitWidth: Math.max(textTitle.width, textContent.width) + 2*Theme.popover_arrow_width;
+    implicitHeight: rectanglTitle.height + rectangleContent.height + 2*Theme.popover_arrow_width;
 
     property string position: "left";
 
@@ -38,12 +45,33 @@ SItem {
     padding_vertical: Theme.padding_small_vertical;
     padding_horizontal: Theme.padding_small_horizontal;
 
-    onVisibleChanged: {
+    property bool popoverVisible: false
+    onPopoverVisibleChanged: {
         if( currentStyle != style ){
             updateStyle();
             currentStyle = style;
             canvas.requestPaint();
         }
+    }
+    states: [
+        State { when: popoverVisible;
+            PropertyChanges {
+                target: base;
+                opacity: 1.0;
+                visible: true
+            }
+        },
+        State { when: !popoverVisible;
+            PropertyChanges {
+                target: base;
+                opacity: 0.0;
+                visible: false;
+            }
+        }
+    ]
+
+    transitions: Transition {
+        NumberAnimation { property: "opacity"; duration: 250 }
     }
 
     function updateStyle(){
@@ -78,16 +106,67 @@ SItem {
         }
     }
 
-    Rectangle {
-        id: rectangle;
-        x: Theme.tooltip_arrow_width;
-        y: Theme.tooltip_arrow_width;
-        color: Theme.tooltip_bg;
-        width: text.width;
-        height: text.height;
+    SRoundedRectangle {
+        id: rectanglTitle;
+        x: Theme.popover_arrow_width;
+        y: Theme.popover_arrow_width;
+        color: Theme.popover_title_bg;
+        width: parent.width;
+        height: textTitle.height;
         radius: Theme.btn_border_radius_small;
-        border.color: Theme.tooltip_bg;
+        borderColor: Theme.tooltip_bg;
+
+        implicitWidth: textTitle.width;
+        implicitHeight: textTitle.height;
+
+        Text {
+            id: textTitle;
+            x: Theme.popover_arrow_width;
+            y: Theme.popover_arrow_width;
+            topPadding: Theme.padding_base_vertical;
+            bottomPadding: Theme.padding_base_vertical;
+            leftPadding: Theme.padding_base_horizontal;
+            rightPadding: Theme.padding_base_horizontal;
+            color: Theme.text_color;
+            font.pointSize:  Theme.font_size_base;
+            font.family: openSansLight.name;
+            font.weight: Font.Light;
+            width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+        }
     }
+
+    SRoundedRectangle {
+        id: rectangleContent;
+        x: Theme.popover_arrow_width;
+        y: Theme.popover_arrow_width + rectanglTitle.height;
+        color: Theme.popover_bg;
+        width: parent.width;
+        height: textContent.height;
+        radius: Theme.btn_border_radius_small;
+        borderColor: Theme.tooltip_bg;
+
+        implicitWidth: textContent.width;
+        implicitHeight: textContent.height;
+
+        Text {
+            id: textContent;
+            x: Theme.popover_arrow_width;
+            y: Theme.popover_arrow_width;
+            topPadding: padding_vertical;
+            bottomPadding: padding_vertical;
+            leftPadding: padding_horizontal;
+            rightPadding: padding_horizontal;
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+            color: Theme.text_color;
+            font.pointSize: font_size;
+            font.family: openSansLight.name;
+            font.weight: Font.Light;
+            width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
+        }
+
+    }
+
 
 
     Canvas {
@@ -152,20 +231,7 @@ SItem {
         }
     }
 
-    Text {
-        id: text;
-        x: Theme.tooltip_arrow_width;
-        y: Theme.tooltip_arrow_width;
-        topPadding: padding_vertical;
-        bottomPadding: padding_vertical;
-        leftPadding: padding_horizontal;
-        rightPadding: padding_horizontal;
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-        color: Theme.tooltip_color;
-        font.pointSize: font_size;
-        font.family: openSansLight.name;
-        font.weight: Font.Light;
-        width: implicitWidth > Theme.tooltip_max_width ? Theme.tooltip_max_width : implicitWidth;
-    }
+
+
 
 }
