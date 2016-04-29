@@ -114,15 +114,13 @@ SItem {
         width: parent.width;
         height: textTitle.height;
         radius: Theme.btn_border_radius_small;
-        borderColor: Theme.tooltip_bg;
+        borderColor: Theme.panel_default_border;
 
         implicitWidth: textTitle.width;
         implicitHeight: textTitle.height;
 
         Text {
             id: textTitle;
-            x: Theme.popover_arrow_width;
-            y: Theme.popover_arrow_width;
             topPadding: Theme.padding_base_vertical;
             bottomPadding: Theme.padding_base_vertical;
             leftPadding: Theme.padding_base_horizontal;
@@ -144,15 +142,13 @@ SItem {
         width: parent.width;
         height: textContent.height;
         radius: Theme.btn_border_radius_small;
-        borderColor: Theme.tooltip_bg;
+        borderColor: Theme.panel_default_border;
 
         implicitWidth: textContent.width;
         implicitHeight: textContent.height;
 
         Text {
             id: textContent;
-            x: Theme.popover_arrow_width;
-            y: Theme.popover_arrow_width;
             topPadding: padding_vertical;
             bottomPadding: padding_vertical;
             leftPadding: padding_horizontal;
@@ -185,19 +181,19 @@ SItem {
             ctx.save();
             ctx.clearRect(0,0,width,height);
             ctx.lineWidth = 3;
-            ctx.strokeStyle = Theme.tooltip_bg;
+            ctx.strokeStyle = Theme.popover_bg;
             ctx.fillStyle = ctx.strokeStyle;
-            ctx.globalAlpha = Theme.tooltip_opacity;
+            ctx.globalAlpha = Theme.popover_opacity;
             ctx.lineJoin = "round";
 
             ctx.beginPath();
 
             if( (position === "left") || (position === "right") ){
-                twidth = Theme.tooltip_arrow_width*2;
-                theight = Theme.tooltip_arrow_width*4;
+                twidth = Theme.popover_arrow_width*2;
+                theight = Theme.popover_arrow_width*4;
             } else {
-                twidth = Theme.tooltip_arrow_width*4;
-                theight = Theme.tooltip_arrow_width*2;
+                twidth = Theme.popover_arrow_width*4;
+                theight = Theme.popover_arrow_width*2;
             }
 
             if( position === "left" ){
