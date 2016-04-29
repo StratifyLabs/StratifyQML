@@ -106,65 +106,6 @@ SItem {
         }
     }
 
-    SRoundedRectangle {
-        id: rectanglTitle;
-        x: Theme.popover_arrow_width;
-        y: Theme.popover_arrow_width;
-        color: Theme.popover_title_bg;
-        width: parent.width;
-        height: textTitle.height;
-        radius: Theme.btn_border_radius_small;
-        borderColor: Theme.panel_default_border;
-
-        implicitWidth: textTitle.width;
-        implicitHeight: textTitle.height;
-
-        Text {
-            id: textTitle;
-            topPadding: Theme.padding_base_vertical;
-            bottomPadding: Theme.padding_base_vertical;
-            leftPadding: Theme.padding_base_horizontal;
-            rightPadding: Theme.padding_base_horizontal;
-            color: Theme.text_color;
-            font.pointSize:  Theme.font_size_base;
-            font.family: openSansLight.name;
-            font.weight: Font.Light;
-            width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-        }
-    }
-
-    SRoundedRectangle {
-        id: rectangleContent;
-        x: Theme.popover_arrow_width;
-        y: Theme.popover_arrow_width + rectanglTitle.height;
-        color: Theme.popover_bg;
-        width: parent.width;
-        height: textContent.height;
-        radius: Theme.btn_border_radius_small;
-        borderColor: Theme.panel_default_border;
-
-        implicitWidth: textContent.width;
-        implicitHeight: textContent.height;
-
-        Text {
-            id: textContent;
-            topPadding: padding_vertical;
-            bottomPadding: padding_vertical;
-            leftPadding: padding_horizontal;
-            rightPadding: padding_horizontal;
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-            color: Theme.text_color;
-            font.pointSize: font_size;
-            font.family: openSansLight.name;
-            font.weight: Font.Light;
-            width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
-        }
-
-    }
-
-
-
     Canvas {
         id: canvas;
         antialiasing: true;
@@ -227,7 +168,61 @@ SItem {
         }
     }
 
+    SRoundedRectangle {
+        id: rectanglTitle;
+        x: Theme.popover_arrow_width;
+        y: Theme.popover_arrow_width;
+        color: Theme.popover_title_bg;
+        width: parent.width - 2*Theme.popover_arrow_width;
+        height: textTitle.height;
+        radius: Theme.btn_border_radius_small;
+        borderColor: Theme.panel_default_border;
 
+        implicitWidth: textTitle.width;
+        implicitHeight: textTitle.height;
+
+        Text {
+            id: textTitle;
+            topPadding: Theme.padding_base_vertical;
+            bottomPadding: Theme.padding_base_vertical;
+            leftPadding: Theme.padding_base_horizontal;
+            rightPadding: Theme.padding_base_horizontal;
+            color: Theme.text_color;
+            font.pointSize:  Theme.font_size_base;
+            font.family: openSansLight.name;
+            font.weight: Font.Light;
+            width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+        }
+    }
+
+    SRoundedRectangle {
+        id: rectangleContent;
+        x: Theme.popover_arrow_width;
+        y: Theme.popover_arrow_width + rectanglTitle.height;
+        color: Theme.popover_bg;
+        width: parent.width- 2*Theme.popover_arrow_width;
+        height: textContent.height;
+        radius: Theme.btn_border_radius_small;
+        borderColor: Theme.panel_default_border;
+
+        implicitWidth: textContent.width;
+        implicitHeight: textContent.height;
+
+        Text {
+            id: textContent;
+            topPadding: padding_vertical;
+            bottomPadding: padding_vertical;
+            leftPadding: padding_horizontal;
+            rightPadding: padding_horizontal;
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+            color: Theme.text_color;
+            font.pointSize: font_size;
+            font.family: openSansLight.name;
+            font.weight: Font.Light;
+            width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
+        }
+    }
 
 
 }
