@@ -82,13 +82,24 @@ SItem {
                 position = items[i];
                 anchors.verticalCenter = parent.verticalCenter;
                 anchors.horizontalCenter = undefined;
-                x = -1*width;
+                if ("contents" in parent) {
+                    anchors.right = parent.contents.left;
+                }
+                else
+                {
+                    x = -1*width;
+                }
                 y = 0;
             } else if( items[i] === "right" ){
                 position = items[i];
                 anchors.verticalCenter = parent.verticalCenter;
                 anchors.horizontalCenter = undefined;
-                x = parent.width;
+                if (parent.hasOwnProperty("contents")) {
+                    anchors.left = parent.contents.right;
+                }
+                else {
+                    x = parent.width;
+                }
                 y = 0;
             } else if( items[i] === "top" ){
                 position = items[i];
