@@ -77,42 +77,29 @@ SItem {
     function updateStyle(){
         var items = parseStyle();
         var i;
+        var parentContentItem;
+        if ("contents" in parent) {
+            parentContentItem = parent.contents;
+        } else {
+            parentContentItem = parent;
+        }
         for(i=0; i < items.length; i++){
             if( items[i] === "left" ){
                 position = items[i];
-                anchors.verticalCenter = parent.verticalCenter;
-                anchors.horizontalCenter = undefined;
-                if ("contents" in parent) {
-                    anchors.right = parent.contents.left;
-                }
-                else
-                {
-                    x = -1*width;
-                }
-                y = 0;
+                x = parentContentItem.mapToItem(parent, 0, 0).x - width;
+                y = parentContentItem.mapToItem(parent, 0, 0).y + parentContentItem.height/2 - height/2;
             } else if( items[i] === "right" ){
                 position = items[i];
-                anchors.verticalCenter = parent.verticalCenter;
-                anchors.horizontalCenter = undefined;
-                if (parent.hasOwnProperty("contents")) {
-                    anchors.left = parent.contents.right;
-                }
-                else {
-                    x = parent.width;
-                }
-                y = 0;
+                x = parentContentItem.mapToItem(parent, 0, 0).x + parentContentItem.width;
+                y = parentContentItem.mapToItem(parent, 0, 0).y + parentContentItem.height/2 - height/2;
             } else if( items[i] === "top" ){
                 position = items[i];
-                anchors.verticalCenter = undefined;
-                anchors.horizontalCenter = parent.horizontalCenter;
-                x = 0;
-                y = -1*height;
+                x = parentContentItem.mapToItem(parent, 0, 0).x + parentContentItem.width/2 - width/2;
+                y = parentContentItem.mapToItem(parent, 0, 0).y - height;
             } else if( items[i] === "bottom" ){
                 position = items[i];
-                anchors.verticalCenter = undefined;
-                anchors.horizontalCenter = parent.horizontalCenter;
-                x = 0;
-                y = parent.height;
+                x = parentContentItem.mapToItem(parent, 0, 0).x + parentContentItem.width/2 - width/2;
+                y = parentContentItem.mapToItem(parent, 0, 0).y + parentContentItem.height;
             }
         }
     }
