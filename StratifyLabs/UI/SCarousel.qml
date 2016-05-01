@@ -1,77 +1,119 @@
+import QtQuick 2.5
+import QtQuick.XmlListModel 2.0
+import QtQml.Models 2.1
 
-import QtQuick 2.6
 
 SItem {
 
     id: carousel;
     type: "carousel";
 
+//    var carousel_control_color = "#fff";
+//    var carousel_control_width = 15;
+//    var carousel_control_opacity = .5;
+//    var carousel_control_font_size = 20;
+//    var carousel_indicator_active_bg = "#fff";
+//    var carousel_indicator_border_color = "#fff";
+//    var carousel_caption_color = "#fff";
+
     property alias interval: switchViewTimer.interval;
     property bool wrap: true;
-    property bool keyboard : true;
+    property alias keyboard : carouselView.focus
 
+    interval: 5000
+    keyboard: true
     Keys.onLeftPressed: {
         if (keyboard) {
-            carouselView.decrementCurrentIndex();
+            decrementCurrentIndex();
         }
     }
     Keys.onRightPressed: {
         if (keyboard) {
-            carouselView.incrementCurrentIndex();
+            incrementCurrentIndex();
         }
     }
 
     PathView{
-        id: carouselView;
-         model:model
-        anchors.fill: parent;
-        delegate: delegate
-        path: Path {
-            startX: 120; startY: 100
-            id: pathModel;
-//            closed: true;
+        Rectangle {
+            anchors.fill: parent
+            border.color: "red"
+            color: "transparent"
+            border.width: 1
         }
-    }
+        id: carouselView;
+        model:visualModel;
+        anchors.fill: parent;
+        focus: true
+        clip: true
+        snapMode: PathView.SnapToItem
+        pathItemCount: 2
+        path: Path {
+            startX: -carouselView.width*0.5;
+            startY: carouselView.height*0.5;
 
-    Component {
-             id: delegate
-             Column {
-                 id: wrapperDelegate
-                 Image {
-                     anchors.horizontalCenter: nameText.horizontalCenter
-                     width: 64; height: 64
-                     source: icon
-                 }
-                 SText {
-                     id: nameText
-                     text: name
-                     color: wrapperDelegate.PathView.isCurrentItem ? "red" : "black"
-                 }
-             }
-         }
+            PathLine {
+                relativeX: carouselView.width;
+                relativeY: 0
+            }
 
-    ListModel {
-        id: model
-         ListElement {
-             name: "Name1"
-             icon: ""
-         }
-         ListElement {
-             name: "Name2"
-             icon: ""
-         }
-         ListElement {
-             name: "Name3"
-             icon: ""
-         }
+            PathLine {
+                relativeX: carouselView.width;
+                relativeY: 0
+            }
+        }
     }
 
     Timer {
         id: switchViewTimer;
-        interval: 5000;
         repeat: true;
+        running: true;
         onTriggered: {
-            carouselView.incrementCurrentIndex();
+            incrementCurrentIndex();
+        }
+    }
+
+    function incrementCurrentIndex() {
+        if (!wrap) {
+            if (carouselView.currentIndex === carouselView.count - 1) {
+                return;
+            }
+        }
+        carouselView.incrementCurrentIndex();
+    }
+
+    function decrementCurrentIndex() {
+        if (!wrap) {
+            if (carouselView.currentIndex === 0) {
+                return;
+            }
+        }
+        carouselView.decrementCurrentIndex();
+    }
+
+
+    DelegateModel {
+        id: visualModel
+
+        model: XmlListModel {
+            source: "http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/"
+            query: "/rss/channel/item"
+
+            XmlRole { name: "title"; query: "title/string()" }
+            XmlRole { name: "imageSource"; query: "substring-before(substring-after(description/string(), 'img src=\"'), '\"')" }
+        }
+
+        delegate: Item {
+            id: delegateItem
+
+            width: carouselView.width
+            height: carouselView.height
+
+            Image {
+                id: image
+                anchors.fill: parent
+                source: imageSource
+                fillMode: Image.PreserveAspectCrop
+            }
         }
     }
 }
