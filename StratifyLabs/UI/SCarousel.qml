@@ -9,20 +9,12 @@ SItem {
     id: carousel;
     type: "carousel";
 
-    //    var carousel_control_color = "#fff";
-    //    var carousel_control_width = 15;
-    //    var carousel_control_opacity = .5;
-    //    var carousel_control_font_size = 20;
-    //    var carousel_indicator_active_bg = "#fff";
-    //    var carousel_indicator_border_colocarousel_indicator_active_bgr = "#fff";
-    //    var carousel_caption_color = "#fff";
-
     property alias interval: switchViewTimer.interval;
     property bool wrap: true;
-    property alias keyboard : carouselView.focus
+    property alias keyboard : carouselView.focus;
 
-    interval: 5000
-    keyboard: true
+
+    keyboard: true;
     Keys.onLeftPressed: {
         if (keyboard) {
             decrementCurrentIndex();
@@ -37,25 +29,41 @@ SItem {
     PathView{
         id: carouselView;
         model:visualModel;
-        delegate: delegateComponent
+        delegate: delegateComponent;
         anchors.fill: parent;
-        focus: true
-        clip: true
-        snapMode: PathView.SnapToItem
-        flickDeceleration: 5000
-        pathItemCount: 2
+        focus: true;
+        clip: true;
+        snapMode: PathView.SnapToItem;
+        pathItemCount: 2;
         path: Path {
             startX: -carouselView.width*0.5;
             startY: carouselView.height*0.5;
 
             PathLine {
                 relativeX: carouselView.width;
-                relativeY: 0
+                relativeY: 0;
             }
 
             PathLine {
                 relativeX: carouselView.width;
-                relativeY: 0
+                relativeY: 0;
+            }
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent;
+        hoverEnabled: true;
+        propagateComposedEvents: true;
+        acceptedButtons: Qt.NoButton;
+        onEntered: {
+            if (switchViewTimer.running) {
+                switchViewTimer.stop();
+            }
+        }
+        onExited: {
+            if (interval>0) {
+                switchViewTimer.start();
             }
         }
     }
@@ -67,9 +75,15 @@ SItem {
         anchors.bottom: carousel.bottom;
 
         text: Fa.Icon.chevron_left;
+
         opacity: Theme.carousel_control_opacity;
+        color: Theme.carousel_control_color;
+        width: Theme.carousel_control_width;
+        font_size: Theme.carousel_control_font_size;
+
         onClicked: {
             carouselView.decrementCurrentIndex();
+            switchViewTimer.restart();
         }
     }
 
@@ -80,32 +94,42 @@ SItem {
         anchors.bottom: carousel.bottom;
 
         text: Fa.Icon.chevron_right;
+
         opacity: Theme.carousel_control_opacity;
+        color: Theme.carousel_control_color;
+        width: Theme.carousel_control_width;
+        font_size: Theme.carousel_control_font_size;
 
         onClicked: {
             carouselView.incrementCurrentIndex();
+            switchViewTimer.restart();
         }
     }
 
+
+
     SRow {
-        anchors.bottom: carousel.bottom
-        anchors.bottomMargin: 42
-        anchors.horizontalCenter: carousel.horizontalCenter
+        id: rowIndicators
+        anchors.bottom: carousel.bottom;
+        anchors.bottomMargin: 4;
+        anchors.horizontalCenter: carousel.horizontalCenter;
+        clip: true;
 
         Repeater {
-            model: carouselView.model.count
+            model: carouselView.model.count;
 
             SRoundedRectangle {
-                color: carouselView.currentIndex === index ? Theme.carousel_indicator_active_bg : "transparent"
-                borderColor: Theme.carousel_indicator_active_bg
+                id: roundRectangle
+                color: carouselView.currentIndex === index ? Theme.carousel_indicator_active_bg : "transparent";
+                borderColor: Theme.carousel_indicator_border_color;
 
-                width: Theme.carousel_control_width
-                height: Theme.carousel_control_width
-                radius: Theme.carousel_control_width
+                width: Theme.carousel_control_width;
+                height: Theme.carousel_control_width;
+                radius: Theme.carousel_control_width;
                 opacity: Theme.carousel_control_opacity;
 
                 MouseArea {
-                    anchors.fill: parent
+                    anchors.fill: parent;
                     onClicked: {
                         carouselView.currentIndex = index;
                     }
@@ -118,6 +142,7 @@ SItem {
         id: switchViewTimer;
         repeat: true;
         running: true;
+        interval: 5000;
         onTriggered: {
             incrementCurrentIndex();
         }
@@ -141,30 +166,45 @@ SItem {
         carouselView.decrementCurrentIndex();
     }
 
-
-
-    XmlListModel {
-        id: visualModel
-        source: "http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/"
-        query: "/rss/channel/item"
-
-        XmlRole { name: "imageSource"; query: "substring-before(substring-after(description/string(), 'img src=\"'), '\"')" }
-    }
-
     Component {
         id: delegateComponent
         Item {
-            id: delegateItem
+            id: delegateItem;
 
-            width: carouselView.width
-            height: carouselView.height
+            width: carouselView.width;
+            height: carouselView.height;
 
             Image {
-                id: image
-                anchors.fill: parent
-                source: imageSource
-                fillMode: Image.PreserveAspectCrop
+                SText {
+
+                    id: textCaption;
+                    text: imageCaption;
+                    anchors.left: parent.left;
+                    anchors.right: parent.right;
+                    anchors.bottom: parent.bottom;
+                    anchors.bottomMargin: rowIndicators.height + 4
+                    text_color: Theme.carousel_caption_color;
+                    onTextChanged: {
+                        console.log("### Text changed!!!" , text);
+                    }
+                }
+                id: image;
+                anchors.fill: parent;
+                source: imageSource;
+                fillMode: Image.PreserveAspectCrop;
             }
         }
     }
+
+    // For testing purposes.
+    XmlListModel {
+        id: visualModel;
+        source: "http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/";
+        query: "/rss/channel/item";
+
+        XmlRole { name: "imageSource"; query: "substring-before(substring-after(description/string(), 'img src=\"'), '\"')" }
+        XmlRole { name: "imageCaption"; query: "title/string()" }
+
+    }
+
 }
