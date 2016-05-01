@@ -26,7 +26,7 @@ Stratify QML is released under the ASL 2.0.  If you are willing to release contr
 - Carousel
 - Breadcrumbs
 - Jumbotron
-- List Group
+- <del>List Group</del>
 - Input Groups
 - <del>Radio Button</del>
 - <del>Text Box</del>
