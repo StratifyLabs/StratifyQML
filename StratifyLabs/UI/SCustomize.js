@@ -401,3 +401,6 @@ var dl_horizontal_breakpoint = grid_float_breakpoint;
 var hr_border = gray_lighter;
 
 var tooltip_delay = 500;
+var popover_delay = 500;
+var popover_title_bg = panel_footer_bg;
+var popover_opacity = 1;

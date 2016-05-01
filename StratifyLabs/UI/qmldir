@@ -1,4 +1,4 @@
-module StratifyLabs.IO
+module StratifyLabs.UI
 
 Firebase 1.0 firebase-2.4.2.js
 JSONPath 1.0 jsonpath-0.8.5.js
@@ -6,6 +6,7 @@ Fa 1.0 Fa-4.5.0.js
 
 Theme 1.0 SCustomize.js
 
+#STest 1.0 STest.qml
 
 SAlert 1.0 SAlert.qml
 SAnimationHPush 1.0 SAnimationHPush.qml
@@ -21,10 +22,33 @@ SLabel 1.0 SLabel.qml
 SNavbar 1.0 SNavbar.qml
 SPanel 1.0 SPanel.qml
 SProgressbar 1.0 SProgressbar.qml
+SProgresscircle 1.0 SProgresscircle.qml
 SRow 1.0 SRow.qml
 SRowSpacer 1.0 SRowSpacer.qml
 SScreen 1.0 SScreen.qml
 SText 1.0 SText.qml
 STextWrap 1.0 STextWrap.qml
 SWell 1.0 SWell.qml
+SJsonListModel 1.0 SJsonListModel.qml
+STooltip 1.0 STooltip.qml
+SModalFooter 1.0 SModalFooter.qml
+SPopover 1.0 SPopover.qml
+SListgroup 1.0 SListgroup.qml
+SRadioButton 1.0 SRadioButton.qml
+SGroup 1.0 SGroup.qml
+SHLine 1.0 SHLine.qml
+SModalHeader 1.0 SModalHeader.qml
+SModal 1.0 SModal.qml
+SDropdown 1.0 SDropdown.qml
+SIcon 1.0 SIcon.qml
+SRoundedRectangle 1.0 SRoundedRectangle.qml
+SList 1.0 SList.qml
+SRadioButtonControl 1.0 SRadioButtonControl.qml
+SLayout 1.0 SLayout.qml
+SCheckbox 1.0 SCheckbox.qml
+STextBox 1.0 STextBox.qml
+SPassword 1.0 SPassword.qml
+SCarousel 1.0 SCarousel.qml
 
+
+typeinfo StratifyLabsUI.qmltypes

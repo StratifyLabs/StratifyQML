@@ -25,7 +25,7 @@ SItem {
     property real pixelRatio: Screen.devicePixelRatio;
     type: "tooltip";
     visible: true;
-    z: 1000;
+    z: Infinity;
 
     property var target: parent;
 
@@ -67,23 +67,30 @@ SItem {
     function updateStyle(){
         var items = parseStyle();
         var i;
+        var parentContentItem;
+        if ("contents" in target) {
+            parentContentItem = target.contents;
+        } else {
+            parentContentItem = target;
+        }
+
         for(i=0; i < items.length; i++){
             if( items[i] === "left" ){
                 position = items[i];
-                x = target.mapToItem(parent, 0, 0).x - width;
-                y = target.mapToItem(parent, 0, 0).y + target.height/2 - height/2;
+                x = parentContentItem.mapToItem(parent, 0, 0).x - width;
+                y = parentContentItem.mapToItem(parent, 0, 0).y + parentContentItem.height/2 - height/2;
             } else if( items[i] === "right" ){
                 position = items[i];
-                x = target.mapToItem(parent, 0, 0).x + target.width;
-                y = target.mapToItem(parent, 0, 0).y + target.height/2 - height/2;
+                x = parentContentItem.mapToItem(parent, 0, 0).x + parentContentItem.width;
+                y = parentContentItem.mapToItem(parent, 0, 0).y + parentContentItem.height/2 - height/2;
             } else if( items[i] === "top" ){
                 position = items[i];
-                x = target.mapToItem(parent, 0, 0).x + target.width/2 - width/2;
-                y = target.mapToItem(parent, 0, 0).y - height;
+                x = parentContentItem.mapToItem(parent, 0, 0).x + parentContentItem.width/2 - width/2;
+                y = parentContentItem.mapToItem(parent, 0, 0).y - height;
             } else if( items[i] === "bottom" ){
                 position = items[i];
-                x = target.mapToItem(parent, 0, 0).x + target.width/2 - width/2;
-                y = target.mapToItem(parent, 0, 0).y + target.height;
+                x = parentContentItem.mapToItem(parent, 0, 0).x + parentContentItem.width/2 - width/2;
+                y = parentContentItem.mapToItem(parent, 0, 0).y + parentContentItem.height;
             }
         }
     }
