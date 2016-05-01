@@ -34,6 +34,7 @@ SList {
         SRoundedRectangle {
             id: base;
 
+
             /*
             property bool active: false;
 
@@ -79,6 +80,7 @@ SList {
                 id: contents;
                 SText {
                     id: text;
+                    blockWidth: true;
                     text: model.text;
                 }
             }
@@ -97,7 +99,5 @@ SList {
 
             }
         }
-
     }
-
 }

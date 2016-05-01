@@ -18,9 +18,12 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "Fa-4.5.0.js" as Fa
 import "SCustomize.js" as Theme
+import "STestListText.js" as List;
+
 
 SContainer {
     id: top;
+
     SRow {
         SColumn {
             span: 4;
@@ -36,11 +39,13 @@ SContainer {
             SPanel { style: "info"; heading: "Panel"; body: "Info"; }
             SPanel { style: "warning"; heading: "Panel"; body: "Warning"; }
 
-            SHLine{}
+            SHline{}
 
             SRow {
                 SButton{ span: 6; style: "btn-default xs center middle"; text: "Extra Small"; }
-                SButton{ span: 6; style: "btn-default sm center middle"; text: "Small"; }
+                SButton{ span: 6; style: "btn-default sm center middle"; text: "Small";
+                    SPopover{ content: "Default Button Middle"; style: "top"; }
+                }
             }
 
             SRow {
@@ -140,7 +145,7 @@ SContainer {
 
             SRow {
                 STextBox {
-                    span: 12; height: 400;
+                    span: 12; height: 200;
                 }
             }
 
@@ -152,7 +157,7 @@ SContainer {
             }
 
             SRow {
-                SListgroup { json: "ListText.json"; }
+                SListgroup { span: 12; json: List.data; }
             }
 
         }
