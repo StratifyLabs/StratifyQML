@@ -21,9 +21,10 @@ SBaseRectangleText {
     id: button;
     type: "btn";
 
-    bg_color: Theme.btn_default_bg;
-    text_color: Theme.btn_default_color;
-    border_color: Theme.btn_default_border;
+    //if no style is mentioned, button has no border
+    bg_color: Theme.body_bg;
+    text_color: Theme.text_color;
+    border_color: Theme.body_bg;
 
     signal clicked();
 

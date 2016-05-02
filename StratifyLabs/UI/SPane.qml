@@ -20,7 +20,6 @@ SItem {
     default property alias data: contents.data;
 
     implicitWidth: parent.width;
-    implicitHeight: parent.height;
 
     Flickable {
         id: contents;
@@ -28,7 +27,7 @@ SItem {
         width: parent.width;
         height: parent.height;
 
-        contentWidth: 800;
+        contentWidth: childrenRect.width;
         contentHeight: 800;
 
     }

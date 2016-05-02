@@ -19,8 +19,20 @@ import "SCustomize.js" as Theme
 
 SItem {
     type: "container";
-    x: padding_horizontal;
-    y: padding_vertical;
-    width: (parent.width - padding_horizontal*2);
-    height: childrenRect.height + padding_vertical*2;
+    default property alias data: contents.data;
+    property string background: "transparent";
+    width: parent.width;
+    height: contents.childrenRect.height + padding_vertical*2;
+
+    Rectangle {
+        anchors.fill: parent;
+        color: background;
+    }
+
+    Item {
+        x: padding_horizontal;
+        y: padding_vertical;
+        id: contents;
+        implicitWidth: (parent.width - padding_horizontal*2);
+    }
 }

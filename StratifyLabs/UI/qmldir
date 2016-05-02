@@ -21,6 +21,7 @@ SItem 1.0 SItem.qml
 SLabel 1.0 SLabel.qml
 SNavbar 1.0 SNavbar.qml
 SPanel 1.0 SPanel.qml
+SPane 1.0 SPane.qml
 SProgressbar 1.0 SProgressbar.qml
 SProgresscircle 1.0 SProgresscircle.qml
 SRow 1.0 SRow.qml

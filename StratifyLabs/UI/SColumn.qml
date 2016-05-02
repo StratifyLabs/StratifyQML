@@ -28,7 +28,8 @@ SItem {
     implicitHeight: contents.childrenRect.height;
 
     function resize(w){
-        contents.width = w;
+        width = w;
+        console.log("Resize width: " + w);
     }
 
     function alignChildren(){
@@ -46,6 +47,12 @@ SItem {
 
         Component.onCompleted: {
             alignChildren();
+        }
+
+        onWidthChanged:  {
+            for(var i = 0; i < children.length; i++){
+                children[i].Layout.preferredWidth = width;
+            }
         }
     }
 
