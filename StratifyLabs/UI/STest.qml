@@ -23,6 +23,73 @@ SContainer {
     id: top;
     SRow {
         SColumn {
+            SCarousel{
+                id: carousel1;
+                x:10;
+                y: 10;
+                width: 400;
+                height: 300;
+                model: ListModel {
+                    id: listModel;
+                    Component.onCompleted: {
+                        var xhr = new XMLHttpRequest();
+                        var source = "http://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
+                        var jsonResponse;
+                        xhr.open("GET", source);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === XMLHttpRequest.DONE){
+                                jsonResponse = xhr.responseText;
+                                // handling misformatted JSON from Flickr
+                                jsonResponse = jsonResponse.replace(/\\\'/g, "\'");
+                                console.log("#### JSON response: ", jsonResponse);
+                                var jsonObj = JSON.parse(jsonResponse);
+
+                                for (var i in jsonObj["items"]) {
+                                    var item = jsonObj["items"][i];
+                                    // model ROLE "source" is to display the image,
+                                    // model ROLE "caption" is to show the text
+                                    listModel.append({"source" : item["media"]["m"], "caption" : item["title"]});
+                                }
+                            }
+                        }
+                        xhr.send();
+                    }
+
+                }
+            }
+
+            SCarousel{
+                x:10;
+                anchors.left: parent.left;
+                anchors.top: carousel1.bottom;
+                width: 400;
+                height: 300;
+                interval: 1000
+                model: ListModel {
+                    id: listModel2;
+                    Component.onCompleted: {
+                        var xhr = new XMLHttpRequest();
+                        var source = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY"
+                        var jsonResponse;
+                        xhr.open("GET", source);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === XMLHttpRequest.DONE){
+                                jsonResponse = xhr.responseText;
+                                var jsonObj = JSON.parse(jsonResponse);
+
+                                for (var i in jsonObj["photos"]) {
+                                    var item = jsonObj["photos"][i];
+                                    // model ROLE "source" is to display the image,
+                                    // model ROLE "caption" is to show the text
+                                    listModel2.append({"source" : item["img_src"], "caption" : item["id"]});
+                                }
+                            }
+                        }
+                        xhr.send();
+                    }
+
+                }
+            }
             span: 4;
             SPanel { style: "default"; heading: "Panel";
                 SRow {
