@@ -12,6 +12,7 @@ SItem {
     property alias interval: switchViewTimer.interval;
     property bool wrap: true;
     property alias keyboard : carouselView.focus;
+    property alias model: carouselView.model;
 
 
     keyboard: true;
@@ -178,32 +179,29 @@ SItem {
                 SText {
 
                     id: textCaption;
-                    text: imageCaption;
+                    text: model.caption;
                     anchors.left: parent.left;
                     anchors.right: parent.right;
                     anchors.bottom: parent.bottom;
                     anchors.bottomMargin: rowIndicators.height + 4
                     text_color: Theme.carousel_caption_color;
-                    onTextChanged: {
-                        console.log("### Text changed!!!" , text);
-                    }
                 }
                 id: image;
                 anchors.fill: parent;
-                source: imageSource;
+                source: model.source;
                 fillMode: Image.PreserveAspectCrop;
             }
         }
     }
 
-    // For testing purposes.
+    // For testing purposes (default model)
     XmlListModel {
         id: visualModel;
         source: "http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/";
         query: "/rss/channel/item";
 
-        XmlRole { name: "imageSource"; query: "substring-before(substring-after(description/string(), 'img src=\"'), '\"')" }
-        XmlRole { name: "imageCaption"; query: "title/string()" }
+        XmlRole { name: "source"; query: "substring-before(substring-after(description/string(), 'img src=\"'), '\"')" }
+        XmlRole { name: "caption"; query: "title/string()" }
 
     }
 
