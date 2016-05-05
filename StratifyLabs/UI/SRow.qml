@@ -22,15 +22,24 @@ SItem {
     id: row;
     type: "row";
     default property alias data: contents.data;
-    skinny: width < Theme.screen_sm;
+    sm: width < Theme.screen_sm;
+
+    onSmChanged: {
+        for(var i = 0; i < contents.children.length; i++){
+            if( contents.children[i].type !== undefined ){
+                contents.children[i].sm = sm;
+            }
+        }
+    }
 
     implicitWidth: parent.width;
-    implicitHeight: contents.childrenRect.height;
+    implicitHeight: fillHeight ? parent.height : contents.childrenRect.height;
 
     GridLayout {
-        rowSpacing: Theme.padding_base_horizontal;
+        rowSpacing: padding_horizontal;
         rows: 1;
         id: contents;
+        height: fillHeight ? parent.height : undefined;
         width: parent.width;
 
         function alignChildren(){

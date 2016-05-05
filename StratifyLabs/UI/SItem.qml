@@ -25,13 +25,14 @@ Item {
     property string type: "item";
     property bool blockWidth: false;
     property real span: 1;
-    property bool hideOnSkinny: false;
-    property bool skinny: (parent.item !== undefined) ? parent.item.skinny : false;
-    property real alignment: Qt.AlignTop | Qt.AlignLeft;
+    property bool hideOnSm: false;
+    property bool sm: false;
+    property real alignment: Qt.AlignTop | Qt.AlignCenter;
 
     property real tooltipDelay: Theme.tooltip_delay;
     property real popoverDelay: Theme.popover_delay;
 
+    property bool fillHeight: false;
 
     property var tooltip: null;
     property var popover: null;
@@ -43,15 +44,17 @@ Item {
     property real font_size: Theme.font_size_base;
 
 
-    visible: hideOnSkinny && skinny ? false : true;
+    visible: hideOnSm && sm ? false : true;
 
-    function parseStyle(){ return (style.replace("-", " ")).split(" "); }
+    function parseStyle(){ return style.split(" "); }
 
     onStyleChanged: {
         var items = parseStyle();
         for(var i=0; i < items.length; i++){
             if( items[i] === "hide-sm" ){
-                hideOnSkinny = true;
+                hideOnSm = true;
+            } else if( items[i] === "fill" ){
+                fillHeight = true;
             } else if( items[i] === "top" ){
                 alignment &= ~(Qt.AlignBottom | Qt.AlignCenter);
                 alignment |= Qt.AlignTop;

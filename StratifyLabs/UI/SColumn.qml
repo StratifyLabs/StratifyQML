@@ -25,25 +25,31 @@ SItem {
     type: "column";
 
     implicitWidth: parent.width;
-    implicitHeight: contents.childrenRect.height;
+    implicitHeight: fillHeight ? parent.height: contents.childrenRect.height;
 
     function resize(w){
         width = w;
         console.log("Resize width: " + w);
     }
 
-    function alignChildren(){
-        for(var i = 0; i < children.length; i++){
-            if( children[i].alignment !== undefined ){
-                children[i].Layout.alignment = children[i].alignment;
+    GridLayout {
+        id: contents;
+        columns: 1;
+        width: parent.width;
+        height: fillHeight ? parent.height : undefined;
+        columnSpacing: padding_vertical;
+
+        function alignChildren(){
+            for(var i = 0; i < children.length; i++){
+                if( children[i].alignment !== undefined ){
+                    //children[i].Layout.alignment = children[i].alignment;
+                }
+
+                if( children[i].fillHeight === true ){
+                    children[i].Layout.fillHeight = true;
+                }
             }
         }
-    }
-
-    ColumnLayout {
-        id: contents;
-        width: parent.width;
-        spacing: Theme.padding_base_vertical;
 
         Component.onCompleted: {
             alignChildren();

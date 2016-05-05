@@ -23,7 +23,7 @@ SBaseRectangle {
     property string icon;
     property string text;
     property alias textObject: baseRectangleTextText;
-    property bool hideTextOnSkinny: true;
+    property bool hideTextOnSm: true;
 
     property alias iconObject: rectangleIcon;
 
@@ -81,7 +81,7 @@ SBaseRectangle {
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
-                visible: (icon !== "") && (hideTextOnSkinny) ? !skinny : true;
+                visible: (icon !== "") && (hideTextOnSm) ? !sm : true;
             }
         }
 

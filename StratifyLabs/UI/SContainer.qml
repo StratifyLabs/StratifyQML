@@ -22,45 +22,7 @@ SItem {
     default property alias data: contents.data;
     property string background: "transparent";
     width: parent.width;
-    height: contents.childrenRect.height + padding_vertical*2;
-
-    property bool affixBottom: false;
-    property bool affixTop: false;
-    property bool affixLeft: false;
-    property bool affixRight: false;
-
-    anchors.bottom: affixBottom ? parent.bottom : undefined;
-    anchors.top: affixTop ? parent.top : undefined;
-    anchors.left: affixLeft ? parent.left : undefined;
-    anchors.right: affixRight ? parent.right : undefined;
-    z: affixBottom | affixTop | affixLeft | affixRight ? 1 : 0;
-
-    onStyleChanged: {
-        var items = parseStyle();
-        var i;
-        for(i=0; i < items.length; i++){
-            if( i  > 0 ){
-                if((items[i] === "top") && (items[i-1] === "affix") ){
-                    affixTop = true;
-                }
-
-                if((items[i] === "bottom") && (items[i-1] === "affix") ){
-                    affixBottom = true;
-                }
-
-                if((items[i] === "left") && (items[i-1] === "affix") ){
-                    affixLeft = true;
-                }
-
-                if((items[i] === "right") && (items[i-1] === "affix") ){
-                    affixRigth = true;right
-                }
-
-
-            }
-        }
-
-    }
+    height: fillHeight ? parent.height: contents.childrenRect.height + padding_vertical*2;
 
     Rectangle {
         anchors.fill: parent;
@@ -70,6 +32,7 @@ SItem {
     Item {
         x: padding_horizontal;
         y: padding_vertical;
+        height: fillHeight ? parent.height - padding_vertical*2: undefined;
         id: contents;
         implicitWidth: (parent.width - padding_horizontal*2);
     }
