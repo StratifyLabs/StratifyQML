@@ -34,6 +34,6 @@ SItem {
         y: padding_vertical;
         height: fillHeight ? parent.height - padding_vertical*2: undefined;
         id: contents;
-        implicitWidth: (parent.width - padding_horizontal*2);
+        width: (parent.width - padding_horizontal*2);
     }
 }

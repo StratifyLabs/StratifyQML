@@ -32,32 +32,33 @@ SItem {
 
     implicitWidth: parent.width;
     implicitHeight: panelHeading.height + panelBody.height;
+    blockWidth: true;
 
     onStyleChanged: {
         var items = parseStyle();
         var i;
         for(i=0; i < items.length; i++){
-            if( items[i] === "primary" ){
+            if( items[i] === "panel-primary" ){
                 heading_bg = Theme.panel_primary_heading_bg;
                 border_color = Theme.panel_primary_border;
                 heading_color = Theme.panel_primary_text;
-            } else if( items[i] === "success" ){
+            } else if( items[i] === "panel-success" ){
                 heading_bg = Theme.panel_success_heading_bg;
                 border_color = Theme.panel_success_border;
                 heading_color = Theme.panel_success_text;
-            } else if( items[i] === "danger" ){
+            } else if( items[i] === "panel-danger" ){
                 heading_bg = Theme.panel_danger_heading_bg;
                 border_color = Theme.panel_danger_border;
                 heading_color = Theme.panel_danger_text;
-            } else if( items[i] === "warning" ){
+            } else if( items[i] === "panel-warning" ){
                 heading_bg = Theme.panel_warning_heading_bg;
                 border_color = Theme.panel_warning_border;
                 heading_color = Theme.panel_warning_text;
-            } else if( items[i] === "info" ){
+            } else if( items[i] === "panel-info" ){
                 heading_bg = Theme.panel_info_heading_bg;
                 border_color = Theme.panel_info_border;
                 heading_color = Theme.panel_info_text;
-            } else if( items[i] === "default" ){
+            } else if( items[i] === "panel-default" ){
                 heading_bg = Theme.panel_default_heading_bg;
                 border_color = Theme.panel_default_border;
                 heading_color = Theme.panel_default_text;

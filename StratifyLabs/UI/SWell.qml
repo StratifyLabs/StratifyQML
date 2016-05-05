@@ -33,12 +33,15 @@ SItem {
         var items = parseStyle();
         var i;
         for(i=0; i < items.length; i++){
-            if( items[i] === "sm" ){
+            if( items[i] === "well-sm" ){
                 padding_vertical = Theme.padding_small_vertical;
                 padding_horizontal = Theme.padding_small_horizontal;
-            } else if( items[i] === "lg" ){
+            } else if( items[i] === "well-lg" ){
                 padding_vertical = Theme.padding_large_vertical;
                 padding_horizontal = Theme.padding_large_horizontal;
+            } else if( items[i] === "well-default" ){
+                padding_vertical = Theme.padding_base_vertical;
+                padding_horizontal = Theme.padding_base_horizontal;
             }
         }
     }

@@ -33,8 +33,6 @@ SList {
 
         SRoundedRectangle {
             id: base;
-
-
             /*
             property bool active: false;
 
@@ -99,5 +97,6 @@ SList {
 
             }
         }
+
     }
 }

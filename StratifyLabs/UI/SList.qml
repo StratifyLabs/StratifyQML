@@ -24,7 +24,8 @@ SItem {
     property alias json: listModel.json;
 
     implicitWidth: parent.width;
-    implicitHeight: parent.height;
+
+
     blockWidth:  true;
 
     SJsonListModel {

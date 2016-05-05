@@ -24,13 +24,8 @@ SItem {
     property alias contents: contents;
     type: "column";
 
-    implicitWidth: parent.width;
+    width: parent.width;
     implicitHeight: fillHeight ? parent.height: contents.childrenRect.height;
-
-    function resize(w){
-        width = w;
-        console.log("Resize width: " + w);
-    }
 
     GridLayout {
         id: contents;
@@ -42,7 +37,7 @@ SItem {
         function alignChildren(){
             for(var i = 0; i < children.length; i++){
                 if( children[i].alignment !== undefined ){
-                    //children[i].Layout.alignment = children[i].alignment;
+                    children[i].Layout.alignment = children[i].alignment;
                 }
 
                 if( children[i].fillHeight === true ){
@@ -56,6 +51,7 @@ SItem {
         }
 
         onWidthChanged:  {
+            console.log("Column layout width: " + width);
             for(var i = 0; i < children.length; i++){
                 children[i].Layout.preferredWidth = width;
             }

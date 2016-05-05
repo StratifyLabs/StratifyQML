@@ -20,11 +20,12 @@ import "SCustomize.js" as Theme
 
 Item {
     id: self;
+    property string name;
     property alias item: self;
     property string style;
     property string type: "item";
     property bool blockWidth: false;
-    property real span: 1;
+    property real span: 0;
     property bool hideOnSm: false;
     property bool sm: false;
     property real alignment: Qt.AlignTop | Qt.AlignCenter;

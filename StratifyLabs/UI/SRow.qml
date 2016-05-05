@@ -24,6 +24,7 @@ SItem {
     default property alias data: contents.data;
     sm: width < Theme.screen_sm;
 
+
     onSmChanged: {
         for(var i = 0; i < contents.children.length; i++){
             if( contents.children[i].type !== undefined ){
@@ -32,7 +33,8 @@ SItem {
         }
     }
 
-    implicitWidth: parent.width;
+
+    width: parent.width;
     implicitHeight: fillHeight ? parent.height : contents.childrenRect.height;
 
     GridLayout {
@@ -54,13 +56,11 @@ SItem {
             for(var i = 0; i < children.length; i++){
                 var w;
                 if( children[i].span !== undefined ){
+                    console.log("Span is " + children[i].span + " for " + children[i].type);
                     if( children[i].span > 0 ){
                         w = (width - (children.length-1)*rowSpacing) * children[i].span / Theme.grid_columns;
                         if( w > children[i].implicitWidth ){
                             children[i].Layout.preferredWidth = w;
-                        }
-                        if( children[i].type === "column" ){
-                            children[i].resize(w);
                         }
                     }
                 }
