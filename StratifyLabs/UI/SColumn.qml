@@ -24,28 +24,37 @@ SItem {
     property alias contents: contents;
     type: "column";
 
-    implicitWidth: parent.width;
-    implicitHeight: contents.childrenRect.height;
+    width: parent.width;
+    implicitHeight: fillHeight ? parent.height: contents.childrenRect.height;
 
-    function resize(w){
-        contents.width = w;
-    }
+    GridLayout {
+        id: contents;
+        columns: 1;
+        width: parent.width;
+        height: fillHeight ? parent.height : undefined;
+        columnSpacing: padding_vertical;
 
-    function alignChildren(){
-        for(var i = 0; i < children.length; i++){
-            if( children[i].alignment !== undefined ){
-                children[i].Layout.alignment = children[i].alignment;
+        function alignChildren(){
+            for(var i = 0; i < children.length; i++){
+                if( children[i].alignment !== undefined ){
+                    children[i].Layout.alignment = children[i].alignment;
+                }
+
+                if( children[i].fillHeight === true ){
+                    children[i].Layout.fillHeight = true;
+                }
             }
         }
-    }
-
-    ColumnLayout {
-        id: contents;
-        width: parent.width;
-        spacing: Theme.padding_base_vertical;
 
         Component.onCompleted: {
             alignChildren();
+        }
+
+        onWidthChanged:  {
+            console.log("Column layout width: " + width);
+            for(var i = 0; i < children.length; i++){
+                children[i].Layout.preferredWidth = width;
+            }
         }
     }
 

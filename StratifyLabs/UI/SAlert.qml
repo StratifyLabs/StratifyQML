@@ -62,19 +62,19 @@ SItem {
     onStyleChanged: {
         var items = parseStyle();
         for(var i = 0; i < items.length; i++){
-            if( items[i] === "danger" ){
+            if( items[i] === "alert-danger" ){
                 bg_color = Theme.alert_danger_bg;
                 text_color = Theme.alert_danger_text;
                 border_color = Theme.alert_danger_border;
-            } else if( items[i] === "success" ){
+            } else if( items[i] === "alert-success" ){
                 bg_color = Theme.alert_success_bg;
                 text_color = Theme.alert_success_text;
                 border_color = Theme.alert_success_border;
-            } else if( items[i] === "info" ){
+            } else if( items[i] === "alert-info" ){
                 bg_color = Theme.alert_info_bg;
                 text_color = Theme.alert_info_text;
                 border_color = Theme.alert_info_border;
-            } else if( items[i] === "warning" ){
+            } else if( items[i] === "alert-warning" ){
                 bg_color = Theme.alert_warning_bg;
                 text_color = Theme.alert_warning_text;
                 border_color = Theme.alert_warning_border;

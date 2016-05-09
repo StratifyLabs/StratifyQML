@@ -22,7 +22,7 @@ SBaseRectangle {
     id: baseRectangleInput;
     property alias text: input.text;
     property string placeholder: "placeholder";
-    type: "input";
+    type: "textbox";
     blockWidth: true;
     color: Theme.input_bg;
     border_color: Theme.input_border;
@@ -30,7 +30,7 @@ SBaseRectangle {
 
     property alias inputObject: input;
 
-    height: font_size + Theme.padding_base_vertical*3;
+    implicitHeight: font_size + Theme.padding_base_vertical*3;
     width: parent.width;
 
     onStyleChanged: {

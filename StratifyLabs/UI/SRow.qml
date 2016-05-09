@@ -22,15 +22,26 @@ SItem {
     id: row;
     type: "row";
     default property alias data: contents.data;
-    skinny: width < Theme.screen_sm;
+    sm: width < Theme.screen_sm;
 
-    implicitWidth: parent.width;
-    implicitHeight: contents.childrenRect.height;
+
+    onSmChanged: {
+        for(var i = 0; i < contents.children.length; i++){
+            if( contents.children[i].type !== undefined ){
+                contents.children[i].sm = sm;
+            }
+        }
+    }
+
+
+    width: parent.width;
+    implicitHeight: fillHeight ? parent.height : contents.childrenRect.height;
 
     GridLayout {
-        rowSpacing: Theme.padding_base_horizontal;
+        rowSpacing: padding_horizontal;
         rows: 1;
         id: contents;
+        height: fillHeight ? parent.height : undefined;
         width: parent.width;
 
         function alignChildren(){
@@ -45,13 +56,11 @@ SItem {
             for(var i = 0; i < children.length; i++){
                 var w;
                 if( children[i].span !== undefined ){
+                    console.log("Span is " + children[i].span + " for " + children[i].type);
                     if( children[i].span > 0 ){
                         w = (width - (children.length-1)*rowSpacing) * children[i].span / Theme.grid_columns;
                         if( w > children[i].implicitWidth ){
                             children[i].Layout.preferredWidth = w;
-                        }
-                        if( children[i].type === "column" ){
-                            children[i].resize(w);
                         }
                     }
                 }

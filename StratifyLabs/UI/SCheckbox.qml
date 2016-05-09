@@ -30,7 +30,7 @@ SBaseRectangleText {
     iconObject.width: font_size;
     icon: checked ? checkMark : (uncheckMark);
     text: "Checkbox";
-    hideTextOnSkinny: false;
+    hideTextOnSm: false;
 
     bg_color: Theme.body_bg;
     text_color: Theme.text_color;

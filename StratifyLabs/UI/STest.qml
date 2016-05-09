@@ -18,9 +18,12 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "Fa-4.5.0.js" as Fa
 import "SCustomize.js" as Theme
+import "STestListText.js" as List;
+
 
 SContainer {
     id: top;
+
     SRow {
         SColumn {
             SCarousel{
@@ -93,21 +96,23 @@ SContainer {
             span: 4;
             SPanel { style: "default"; heading: "Panel";
                 SRow {
-                    SButton { text: "Default"; }
-                    SButton { text: "Panel"; }
+                    SButton { text: "Default"; style: "btn-default"; }
+                    SButton { text: "Panel"; style: "btn-default"; }
                 }
             }
-            SPanel { style: "primary"; heading: "Panel"; body: "Primary"; }
-            SPanel { style: "danger"; heading: "Panel"; body: "Danger"; }
-            SPanel { style: "success"; heading: "Panel"; body: "Success"; }
-            SPanel { style: "info"; heading: "Panel"; body: "Info"; }
-            SPanel { style: "warning"; heading: "Panel"; body: "Warning"; }
+            SPanel { style: "panel-primary"; heading: "Panel"; body: "Primary"; }
+            SPanel { style: "panel-danger"; heading: "Panel"; body: "Danger"; }
+            SPanel { style: "panel-success"; heading: "Panel"; body: "Success"; }
+            SPanel { style: "panel-info"; heading: "Panel"; body: "Info"; }
+            SPanel { style: "panel-warning"; heading: "Panel"; body: "Warning"; }
 
-            SHLine{}
+            SHline{}
 
             SRow {
                 SButton{ span: 6; style: "btn-default xs center middle"; text: "Extra Small"; }
-                SButton{ span: 6; style: "btn-default sm center middle"; text: "Small"; }
+                SButton{ span: 6; style: "btn-default sm center middle"; text: "Small";
+                    SPopover{ content: "Default Button Middle"; style: "top"; }
+                }
             }
 
             SRow {
@@ -121,7 +126,7 @@ SContainer {
 
 
             SRow {
-                SButton{ id: blockButton; span: 6; style: "lg center middle block"; text: "Block";
+                SButton{ id: blockButton; span: 6; style: "btn-lg btn-default center middle block"; text: "Block";
                     tooltip: STooltip{ target: blockButton; parent: top; text: "Large Center Middle Block"; style: "right"; }
                 }
                 SButton{ span: 6; style: "kg center middle"; text: "Default"; }
@@ -135,8 +140,8 @@ SContainer {
             SAlert { style: "alert-warning"; text: "<b>Alert!</b> Warning"; }
             SAlert { style: "alert-danger"; text: "<b>Alert!</b> Danger"; }
             SWell { style: "well-lg"; text: "Large Well"; }
-            SWell { style: "sm"; text: "Small Well"; }
-            SWell { style: "default"; text: "Well"; }
+            SWell { style: "well-sm"; text: "Small Well"; }
+            SWell { style: "well-default"; text: "Well"; }
 
             SRow { SText{ style: "left"; text: "Buttons:"; span:12; } }
 
@@ -172,6 +177,8 @@ SContainer {
                 }
                 SLabel{ span: 4; style: "label-danger center"; text: "Danger"; }
             }
+
+            SDropdown{ style: "btn-default"; text: "Hello"; }
         }
 
         SColumn {
@@ -207,7 +214,7 @@ SContainer {
 
             SRow {
                 STextBox {
-                    span: 12; height: 400;
+                    span: 12; height: 200;
                 }
             }
 
@@ -218,12 +225,13 @@ SContainer {
                 SRadioButton { control: radioButtonControl; text: "Option 3"; }
             }
 
-            SRow {
-                SListgroup { json: "ListText.json"; }
-            }
+            //SRow {
+                SListgroup { name: "List"; json: List.data; }
+            //}
+
 
         }
 
-
     }
+
 }
