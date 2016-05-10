@@ -17,7 +17,7 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import "Fa-4.5.0.js" as Fa
-import "SCustomize.js" as Theme
+import "."
 import "STestListText.js" as List;
 
 
@@ -44,7 +44,6 @@ SContainer {
                                 jsonResponse = xhr.responseText;
                                 // handling misformatted JSON from Flickr
                                 jsonResponse = jsonResponse.replace(/\\\'/g, "\'");
-                                console.log("#### JSON response: ", jsonResponse);
                                 var jsonObj = JSON.parse(jsonResponse);
 
                                 for (var i in jsonObj["items"]) {
@@ -106,7 +105,7 @@ SContainer {
             SPanel { style: "panel-info"; heading: "Panel"; body: "Info"; }
             SPanel { style: "panel-warning"; heading: "Panel"; body: "Warning"; }
 
-            SHline{}
+            SHLine{}
 
             SRow {
                 SButton{ span: 6; style: "btn-default xs center middle"; text: "Extra Small"; }

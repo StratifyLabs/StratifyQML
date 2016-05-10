@@ -15,7 +15,8 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import "SCustomize.js" as Theme
+import "."
+
 import "Fa-4.5.0.js" as Fa
 
 SBaseRectangle {
@@ -71,7 +72,7 @@ SBaseRectangle {
         text: Fa.Icon.times_circle;
         font.pointSize: font_size;
         anchors.right: parent.right;
-        font.family: fontawesome.name;
+        font.family: Theme.fontawesome.name;
         rightPadding: padding_horizontal;
         font.weight: Font.Light;
         horizontalAlignment: Text.AlignHCenter;

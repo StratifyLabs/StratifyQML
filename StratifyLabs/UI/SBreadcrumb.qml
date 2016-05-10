@@ -1,7 +1,8 @@
 import QtQuick 2.5
 import QtQuick.XmlListModel 2.0
 import QtQml.Models 2.1
-import "SCustomize.js" as Theme
+import "."
+
 import "Fa-4.5.0.js" as Fa
 
 SItem {

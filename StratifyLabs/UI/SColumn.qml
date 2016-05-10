@@ -16,7 +16,8 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import QtQuick.Layouts 1.3
-import "SCustomize.js" as Theme
+import "."
+
 
 SItem {
     id: column;

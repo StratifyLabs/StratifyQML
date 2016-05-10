@@ -15,6 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.0
+import "."
 
 SItem {
     default property alias data: contents.data;
