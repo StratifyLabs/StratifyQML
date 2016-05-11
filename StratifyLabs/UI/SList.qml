@@ -20,26 +20,29 @@ import "SCustomize.js" as Theme
 SItem {
     property alias listViewObject: listView;
     property alias delegate: listView.delegate;
-    property alias query: listModel.query;
-    property alias json: listModel.json;
+    property alias model: listView.model;
+    property alias background: listViewRect.color;
+    //property alias border_color: listViewRect.border.color;
 
     implicitWidth: parent.width;
-
-
     blockWidth:  true;
-
-    SJsonListModel {
-        id: listModel;
-        json: List.data;
-        query: "$.data[*]";
-    }
 
     ListView {
         id: listView;
         anchors.fill: parent;
+
+        Rectangle {
+            id: listViewRect;
+            anchors.fill: parent;
+            color: "transparent";
+            border.color: "transparent";
+            border.width: 1;
+            radius: Theme.panel_border_radius;
+        }
+
         clip: true;
         spacing: padding_vertical;
-        model: listModel.model;
+
     }
 
 }

@@ -21,6 +21,9 @@ import "Fa-4.5.0.js" as Fa
 SBaseRectangle {
     id: baseRectangleText;
 
+
+    property alias model: menu.model;
+
     property string icon;
     property string text;
     property string dropdown: Fa.Icon.caret_down;
@@ -75,6 +78,29 @@ SBaseRectangle {
                 bg_color = "transparent";
                 text_color = Theme.text_muted;
                 border_color = "transparent";
+            }
+        }
+
+        var parentContentItem;
+        if ("contents" in menu.target) {
+            parentContentItem = menu.target.contents;
+        } else {
+            parentContentItem = menu.target;
+        }
+
+        for(i=0; i < items.length; i++){
+            if( items[i] === "left" ){
+                menu.listViewObject.x = parentContentItem.mapToItem(menu.parent, 0, 0).x - width;
+                menu.listViewObject.y = parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height/2 - height/2;
+            } else if( items[i] === "right" ){
+                menu.listViewObject.x = parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width;
+                menu.listViewObject.y = parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height/2 - height/2;
+            } else if( items[i] === "top" ){
+                menu.listViewObject.x = parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width/2 - width/2;
+                menu.listViewObject.y = parentContentItem.mapToItem(menu.parent, 0, 0).y - height;
+            } else if( items[i] === "bottom" ){
+                menu.listViewObject.x = parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width/2 - width/2;
+                menu.listViewObject.y = parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height;
             }
         }
     }
@@ -144,4 +170,8 @@ SBaseRectangle {
             onClicked: baseRectangleText.clicked();
         }
     ]
+
+    SDropdownMenu {
+        id: menu;
+    }
 }

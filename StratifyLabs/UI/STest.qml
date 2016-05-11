@@ -111,7 +111,7 @@ SContainer {
                 SLabel{ span: 4; style: "label-danger center"; text: "Danger"; }
             }
 
-            SDropdown{ style: "btn-default"; text: "Hello"; }
+            //SDropdown{ style: "btn-default"; text: "Hello"; }
         }
 
         SColumn {
@@ -159,7 +159,15 @@ SContainer {
             }
 
             //SRow {
-                SListgroup { name: "List"; json: List.data; }
+                SListgroup {
+                    name: "List";
+                    SJsonListModel {
+                        id: jsonModel;
+                        json: List.data;
+                    }
+
+                    model: jsonModel.model;
+                }
             //}
 
 

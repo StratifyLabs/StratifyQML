@@ -8,9 +8,9 @@ import QtQuick 2.5
 import "jsonpath-0.8.5.js" as JSONPath
 
 Item {
-    property string source: ""
-    property string json: ""
-    property string query: ""
+    property string source: "";
+    property string json: "";
+    property string query: "$.data[*]";
 
     property ListModel model : ListModel { id: jsonModel }
     property alias count: jsonModel.count
