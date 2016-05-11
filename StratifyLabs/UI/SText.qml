@@ -15,7 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import "SCustomize.js" as Theme
+import "."
 
 SBaseRectangle {
     id: base;
@@ -40,7 +40,7 @@ SBaseRectangle {
             } else if( items[i] === "text-center" ){
                 text.horizontalAlignment = Text.AlignRight;
             } else if( items[i] === "fa" ){
-                text.font.family = fontawesome.name;
+                text.font.family = Theme.fontawesome.name;
                 text.font.pointSize = font_size + padding_vertical*2;
             } else if( items[i] === "bold" ){
                 text.font.weight = Font.Bold;
@@ -57,7 +57,7 @@ SBaseRectangle {
             rightPadding: padding_horizontal;
             color: text_color;
             font.pointSize: font_size;
-            font.family: openSansLight.name;
+            font.family: Theme.opensans.name
             font.weight: Font.Light;
         }
     ]

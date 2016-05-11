@@ -15,6 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
+import "."
 
 SItem {
     id: root;

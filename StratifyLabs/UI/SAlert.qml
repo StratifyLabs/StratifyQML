@@ -15,8 +15,8 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import "SCustomize.js" as Theme
 import "Fa-4.5.0.js" as Fa
+import "."
 
 SItem {
     id: base;
@@ -102,7 +102,7 @@ SItem {
                 color: text_color;
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
                 font.pointSize: font_size;
-                font.family: openSansLight.name;
+                font.family: Theme.opensans.name;
                 font.weight: Font.Light;
                 verticalAlignment: Text.AlignVCenter;
             }
@@ -120,7 +120,7 @@ SItem {
             color: Qt.lighter(Theme.text_color, 3.0);
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             font.pointSize: font_size;
-            font.family: fontawesome.name;
+            font.family: Theme.fontawesome.name;
             visible: dismissible;
             verticalAlignment: Text.AlignVCenter;
 

@@ -15,7 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import "SCustomize.js" as Theme
+import "."
 
 SBaseRectangle {
     id: baseRectangleText;
@@ -65,7 +65,7 @@ SBaseRectangle {
                 color: text_color;
                 text: icon;
                 font.pointSize: font_size*1.15;
-                font.family: fontawesome.name;
+                font.family: Theme.fontawesome.name;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
@@ -77,7 +77,7 @@ SBaseRectangle {
                 color: text_color;
                 text: baseRectangleText.text;
                 font.pointSize: font_size;
-                font.family: openSansLight.name;
+                font.family: Theme.opensans.name;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;

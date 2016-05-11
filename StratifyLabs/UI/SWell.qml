@@ -15,7 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import "SCustomize.js" as Theme
+import "."
 
 SItem {
     id: base;
@@ -70,7 +70,7 @@ SItem {
                 color: Theme.text_color;
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
                 font.pointSize: font_size;
-                font.family: openSansLight.name;
+                font.family: Theme.opensans.name;
                 font.weight: Font.Light;
             }
         }

@@ -16,8 +16,8 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import QtQuick.Window 2.2
-import "SCustomize.js" as Theme
 import "Fa-4.5.0.js" as Fa
+import "."
 
 
 Item {

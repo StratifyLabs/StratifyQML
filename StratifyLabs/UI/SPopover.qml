@@ -16,8 +16,8 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import QtQuick.Window 2.2
-import "SCustomize.js" as Theme
 import "Fa-4.5.0.js" as Fa
+import "."
 
 SItem {
 
@@ -187,7 +187,7 @@ SItem {
             rightPadding: Theme.padding_base_horizontal;
             color: Theme.text_color;
             font.pointSize:  Theme.font_size_base;
-            font.family: openSansLight.name;
+            font.family: Theme.opensans.name;
             font.weight: Font.Light;
             width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
@@ -216,7 +216,7 @@ SItem {
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             color: Theme.text_color;
             font.pointSize: font_size;
-            font.family: openSansLight.name;
+            font.family: Theme.opensans.name;
             font.weight: Font.Light;
             width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
         }

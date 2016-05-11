@@ -16,7 +16,7 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.5
 import QtQuick.Window 2.2
-import "SCustomize.js" as Theme
+import "."
 
 Item {
     id: self;

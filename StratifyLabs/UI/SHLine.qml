@@ -15,7 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import "SCustomize.js" as Theme
+import "."
 
 SItem {
     type: "hline";

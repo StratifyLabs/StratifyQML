@@ -15,7 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import "SCustomize.js" as Theme
+import "."
 
 SItem {
 
@@ -86,7 +86,7 @@ SItem {
             text: "Panel Heading";
             color: heading_color;
             font.pointSize: heading_font_size;
-            font.family: openSansLight.name;
+            font.family: Theme.opensans.name;
             font.weight: Font.Light;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
         }
@@ -110,7 +110,7 @@ SItem {
                 text: "";
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
                 font.pointSize: font_size;
-                font.family: openSansLight.name;
+                font.family: Theme.opensans.name;
                 font.weight: Font.Light;
             }
         }
