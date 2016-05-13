@@ -24,15 +24,15 @@ Item {
     property alias item: self;
     property string style;
     property string type: "item";
-    property bool blockWidth: false;
     property real span: 0;
     property bool hideOnSm: false;
     property bool sm: false;
-    property real alignment: Qt.AlignTop | Qt.AlignCenter;
+    property real alignment: Qt.AlignTop | Qt.AlignLeft;
 
     property real tooltipDelay: Theme.tooltip_delay;
     property real popoverDelay: Theme.popover_delay;
 
+    property bool blockWidth: false;
     property bool fillHeight: false;
 
     property var tooltip: null;
@@ -56,6 +56,8 @@ Item {
                 hideOnSm = true;
             } else if( items[i] === "fill" ){
                 fillHeight = true;
+            } else if( items[i] === "block" ){
+                blockWidth = true;
             } else if( items[i] === "top" ){
                 alignment &= ~(Qt.AlignBottom | Qt.AlignCenter);
                 alignment |= Qt.AlignTop;

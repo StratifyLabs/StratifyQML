@@ -15,41 +15,47 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
+import QtQuick.Layouts 1.3
 import "."
 import "Fa-4.5.0.js" as Fa
 
 SBaseRectangle {
-    id: baseRectangleText;
+    id: baseRectangleDropdown;
+    type: "dropdown";
 
-
+    property alias menuParent: menu.parent;
     property alias model: menu.model;
-
     property string icon;
     property string text;
     property string dropdown: Fa.Icon.caret_down;
-    property alias textObject: baseRectangleTextText;
+    property alias textObject: baseRectangleDropdownText;
     property bool hideTextOnSm: true;
-
     property alias iconObject: rectangleIcon;
+    property alias activeText: menu.activeText;
 
     signal clicked();
+    signal itemClicked();
+
+    blockWidth: true;
+
 
     //size the rectangle based on the size of the text box
     implicitHeight: font_size + Theme.padding_base_vertical*3;
-    implicitWidth: baseRectangleTextText.width;
+    implicitWidth: (blockWidth == true) ? parent.width : baseRectangleDropdownText.width;
+
 
     onStyleChanged: {
         var items = style.split(" ");
         for(var i=0; i < items.length; i++){
             if( items[i] === "text-left" ){
-                baseRectangleTextText.anchors.centerIn = undefined;
-                baseRectangleTextText.anchors.left = baseRectangleTextText.parent.left;
+                baseRectangleDropdownText.anchors.centerIn = undefined;
+                baseRectangleDropdownText.anchors.left = baseRectangleDropdownText.parent.left;
             } else if( items[i] === "text-right" ){
-                baseRectangleTextText.horizontalAlignment = Text.AlightRight;
+                baseRectangleDropdownText.horizontalAlignment = Text.AlightRight;
             } else if( items[i] === "text-center" ){
-                baseRectangleTextText.horizontalAlignment = Text.AlignHCenter;
+                baseRectangleDropdownText.horizontalAlignment = Text.AlignHCenter;
             } else if( items[i] === "bold" ){
-                baseRectangleTextText.font.weight = Font.Bold;
+                baseRectangleDropdownText.font.weight = Font.Bold;
             } else if( (items[i] === "primary") || (items[i] === "btn-primary") ){
                 bg_color = Theme.btn_primary_bg;
                 text_color = Theme.btn_primary_color;
@@ -78,52 +84,58 @@ SBaseRectangle {
                 bg_color = "transparent";
                 text_color = Theme.text_muted;
                 border_color = "transparent";
+            } else if( items[i] === "block" ){
+                blockWidth = true;
             }
         }
 
         var parentContentItem;
         if ("contents" in menu.target) {
+            console.log("Contents in menu target");
             parentContentItem = menu.target.contents;
         } else {
+            console.log("No Contents in menu target");
             parentContentItem = menu.target;
         }
 
         for(i=0; i < items.length; i++){
             if( items[i] === "left" ){
-                menu.listViewObject.x = parentContentItem.mapToItem(menu.parent, 0, 0).x - width;
-                menu.listViewObject.y = parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height/2 - height/2;
+                dropdown = Fa.Icon.caret_left;
+                menu.x = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).x - width - padding_horizontal});
+                menu.y = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height/2 - height/2});
             } else if( items[i] === "right" ){
-                menu.listViewObject.x = parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width;
-                menu.listViewObject.y = parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height/2 - height/2;
+                dropdown = Fa.Icon.caret_right;
+                menu.x = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width + padding_horizontal});
+                menu.y = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height/2 - height/2});
             } else if( items[i] === "top" ){
-                menu.listViewObject.x = parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width/2 - width/2;
-                menu.listViewObject.y = parentContentItem.mapToItem(menu.parent, 0, 0).y - height;
+                dropdown = Fa.Icon.caret_up;
+                menu.x = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width/2 - width/2});
+                menu.y = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).y - height - padding_vertical});
             } else if( items[i] === "bottom" ){
-                menu.listViewObject.x = parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width/2 - width/2;
-                menu.listViewObject.y = parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height;
+                dropdown = Fa.Icon.caret_down;
+                menu.x = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width/2 - width/2});
+                menu.y = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height + padding_vertical});
             }
         }
     }
 
 
-    contents.data: [
+    RowLayout {
+        id: baseRectangleDropdownText;
+        width: parent.width;
+        spacing: Theme.padding_base_horizontal;
 
         Row {
-            id: baseRectangleTextText;
-            anchors.centerIn: parent;
-
+            Layout.fillWidth: true;
             leftPadding: padding_horizontal;
-            rightPadding: padding_horizontal;
-            bottomPadding: padding_vertical;
             topPadding: padding_vertical;
             spacing: Theme.padding_base_horizontal/4;
-
             Text {
                 id: rectangleIcon;
                 color: text_color;
                 text: icon;
                 font.pointSize: font_size*1.15;
-                font.family: fontawesome.name;
+                font.family: Theme.fontawesome.name;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
@@ -133,45 +145,58 @@ SBaseRectangle {
             Text {
                 id: rectangleText;
                 color: text_color;
-                text: baseRectangleText.text;
+                text: baseRectangleDropdown.text;
                 font.pointSize: font_size;
-                font.family: openSansLight.name;
+                font.family: Theme.opensans.name;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
                 visible: (icon !== "") && (hideTextOnSm) ? !sm : true;
             }
-
-            Text {
-                id: dropDownIcon;
-                color: text_color;
-                text: baseRectangleText.dropdown;
-                font.pointSize: font_size;
-                font.family: fontawesome.name;
-                horizontalAlignment: Text.AlignHCenter;
-                verticalAlignment: Text.AlignVCenter;
-                height: rectangleText.height;
-            }
-        },
-
-        MouseArea {
-            anchors.fill: parent;
-            hoverEnabled: true;
-            onEntered: {
-                bg_color = Qt.darker(bg_color, 1.1);
-                startHover();
-            }
-
-            onExited: {
-                bg_color = Qt.lighter(bg_color, 1.1);
-                stopHover();
-            }
-
-            onClicked: baseRectangleText.clicked();
         }
-    ]
+
+        Text {
+            topPadding: padding_vertical;
+            rightPadding: padding_horizontal;
+            id: dropDownIcon;
+            color: text_color;
+            text: baseRectangleDropdown.dropdown;
+            font.pointSize: font_size;
+            font.family: Theme.fontawesome.name;
+            horizontalAlignment: Text.AlignHCenter;
+            verticalAlignment: Text.AlignVCenter;
+            height: rectangleText.height;
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent;
+        hoverEnabled: true;
+        onEntered: {
+            bg_color = Qt.darker(bg_color, 1.1);
+            startHover();
+        }
+
+        onExited: {
+            bg_color = Qt.lighter(bg_color, 1.1);
+            stopHover();
+        }
+
+        onClicked: {
+            menu.visible = true;
+            style = style;
+            baseRectangleDropdown.clicked();
+        }
+    }
 
     SDropdownMenu {
         id: menu;
+        target: baseRectangleDropdown;
+        visible: false;
+        width: target.width;
+
+        onClicked: {
+            itemClicked();
+        }
     }
 }

@@ -51,7 +51,6 @@ SItem {
         }
 
         onWidthChanged:  {
-            console.log("Column layout width: " + width);
             for(var i = 0; i < children.length; i++){
                 children[i].Layout.preferredWidth = width;
             }

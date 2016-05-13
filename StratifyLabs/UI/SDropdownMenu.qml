@@ -26,42 +26,65 @@ SList {
     implicitHeight: listViewObject.count * (font_size + padding_vertical*5);
     listViewObject.spacing: 0;
 
+    signal clicked();
+
     property var target: parent;
-    property real active;
+    property string activeText;
 
     Component {
         id: listDelegate;
 
         SContainer {
-            id: contents;
+            id: container;
+            parent: base.parent;
             SText {
                 id: text;
                 blockWidth: true;
                 text: model.text;
             }
-
             MouseArea {
-                anchors.fill: parent;
+                width: container.width;
+                height: text.height;
                 hoverEnabled: true;
 
                 onEntered: {
-                    contents.background = Theme.dropdown_link_active_bg;
+                    text.text_color = Theme.dropdown_link_hover_color;
+                    container.background = Theme.dropdown_link_hover_bg;
+                    startHover();
                 }
 
                 onExited: {
-                    contents.background = Theme.dropdown_bg;
+                    text.text_color = Theme.text_color;
+                    container.background = "transparent";
+                    stopHover;
+                }
+
+                onClicked: {
+                    base.visible = false;
+                    base.activeText = text.text;
+                    base.clicked();
                 }
 
             }
+
+
         }
     }
 
 
     Rectangle {
         anchors.fill: parent;
+        color: Theme.dropdown_bg;
+        radius: Theme.btn_border_radius_base;
+        z:-1;
+    }
+
+    Rectangle {
+        anchors.fill: parent;
         color: "transparent";
         border.color: Theme.dropdown_border;
         radius: Theme.btn_border_radius_base;
+        z:1;
     }
 
 }

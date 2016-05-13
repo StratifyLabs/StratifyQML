@@ -46,25 +46,103 @@ SBaseRectangle {
         }
     }
 
-    TextEdit {
-        id: input;
-        color: text_color;
-        text: "";
+    Flickable {
+        id: flick;
         width: parent.width;
         height: parent.height;
-        leftPadding: padding_horizontal;
-        rightPadding: padding_horizontal;
-        bottomPadding: padding_vertical;
-        topPadding: padding_vertical;
-        font.pointSize: font_size;
-        font.family: Theme.font_family_base;
-        horizontalAlignment: TextEdit.AlignLeft;
-        verticalAlignment: TextEdit.AlignTop;
-        selectByMouse: true;
-        selectionColor: Qt.lighter(text_color, 3.0);
-        selectedTextColor: text_color;
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
         clip: true;
+
+        contentWidth: width;
+        contentHeight: input.contentHeight;
+
+        function ensureVisible(r){
+            //since text is wrapped -- only need to adjust Y
+            if (contentY >= r.y) contentY = r.y;
+            else if (contentY+height <= r.y+r.height) contentY = r.y+r.height-height;
+        }
+
+        onActiveFocusChanged: {
+            console.log("Flick active focus");
+        }
+
+
+        TextEdit {
+            id: input;
+            color: text_color;
+            text: "";
+            focus: true;
+            leftPadding: padding_horizontal;
+            rightPadding: padding_horizontal;
+            bottomPadding: padding_vertical;
+            topPadding: padding_vertical;
+            width: baseRectangleInput.width;
+            height: contentHeight; //height needs to grow with content so mouse events work
+            font.pointSize: font_size;
+            font.family: Theme.font_family_base;
+            horizontalAlignment: TextEdit.AlignLeft;
+            verticalAlignment: TextEdit.AlignTop;
+            selectByMouse: true;
+            mouseSelectionMode: TextEdit.SelectCharacters;
+            selectionColor: Qt.lighter(text_color, 3.0);
+            selectedTextColor: text_color;
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+            onCursorRectangleChanged: flick.ensureVisible(cursorRectangle);
+
+            onActiveFocusChanged: {
+                console.log("Text active focus");
+            }
+        }
+
+    }
+
+    Rectangle {
+        id: scrollBar;
+        visible: flick.contentHeight > flick.height;
+        radius: Theme.badge_border_radius;
+        width: 8;
+        color: Qt.lighter(Theme.gray_lighter, 2.0);
+        height: calcHeight();
+        x: flick.width - width * 1.5;
+        y: calcY();
+
+        function calcHeight(){
+            var r = flick.height * flick.height / flick.contentHeight;
+            if( r < 10 ){
+                r = 10;
+            }
+            return r;
+        }
+
+        function calcY(){
+            var r;
+            r = flick.contentY / flick.contentHeight * flick.height;
+            if( r + height > flick.height ){
+                r = flick.height - height;
+            }
+
+            if( r < 0 ){
+                r = 0;
+            }
+
+            return r;
+        }
+
+        MouseArea {
+            id: scrollMouseArea;
+            anchors.fill: parent;
+            drag {
+                target: scrollBar;
+                axis: Drag.YAxis;
+                minimumY: 0;
+                maximumY: flick.height - scrollBar.height;
+            }
+            onMouseYChanged: {
+                if( scrollMouseArea.drag.active ){
+                    flick.contentY = scrollBar.y * flick.contentHeight / flick.height;
+                }
+            }
+        }
+
     }
 
 }
