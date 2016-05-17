@@ -22,6 +22,7 @@ SBaseRectangle {
     id: baseRectangleInput;
     property alias text: input.text;
     property string placeholder: "placeholder";
+    property alias readOnly: input.readOnly;
     type: "textbox";
     blockWidth: true;
     color: Theme.input_bg;
@@ -37,11 +38,13 @@ SBaseRectangle {
         var items = style.split(" ");
         for(var i=0; i < items.length; i++){
             if( items[i] === "text-left" ){
-                input.horizontalAlignment = Text.AlignLeft;
+                input.horizontalAlignment = Text.AlignLeft;STextBox
             } else if( items[i] === "text-right" ){
                 input.horizontalAlignment = Text.AlignRight;
             } else if( items[i] === "text-center" ){
                 input.horizontalAlignment = Text.AlignHCenter;
+            } else if( items[i] === "read-only" ){
+                readOnly = true;
             }
         }
     }
@@ -49,7 +52,8 @@ SBaseRectangle {
     Flickable {
         id: flick;
         width: parent.width;
-        height: parent.height;
+        y: padding_vertical;
+        height: parent.height - padding_vertical*2;
         clip: true;
 
         contentWidth: width;
@@ -87,10 +91,6 @@ SBaseRectangle {
             selectedTextColor: text_color;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             onCursorRectangleChanged: flick.ensureVisible(cursorRectangle);
-
-            onActiveFocusChanged: {
-                console.log("Text active focus");
-            }
         }
 
     }

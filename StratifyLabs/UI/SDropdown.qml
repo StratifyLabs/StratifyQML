@@ -45,6 +45,9 @@ SBaseRectangle {
 
 
     onStyleChanged: {
+     updateStyle();
+    }
+    function updateStyle(){
         var items = style.split(" ");
         for(var i=0; i < items.length; i++){
             if( items[i] === "text-left" ){
@@ -89,35 +92,31 @@ SBaseRectangle {
             }
         }
 
-        var parentContentItem;
-        if ("contents" in menu.target) {
-            console.log("Contents in menu target");
-            parentContentItem = menu.target.contents;
-        } else {
-            console.log("No Contents in menu target");
-            parentContentItem = menu.target;
-        }
-
         for(i=0; i < items.length; i++){
             if( items[i] === "left" ){
                 dropdown = Fa.Icon.caret_left;
-                menu.x = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).x - width - padding_horizontal});
-                menu.y = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height/2 - height/2});
+                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x - width - padding_horizontal});
+                menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y + height/2 - height/2});
             } else if( items[i] === "right" ){
                 dropdown = Fa.Icon.caret_right;
-                menu.x = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width + padding_horizontal});
-                menu.y = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height/2 - height/2});
+                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x + width + padding_horizontal});
+                menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y + height/2 - height/2});
             } else if( items[i] === "top" ){
                 dropdown = Fa.Icon.caret_up;
-                menu.x = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width/2 - width/2});
-                menu.y = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).y - height - padding_vertical});
+                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x + width/2 - width/2});
+                menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y - menu.height - padding_vertical});
             } else if( items[i] === "bottom" ){
                 dropdown = Fa.Icon.caret_down;
-                menu.x = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).x + parentContentItem.width/2 - width/2});
-                menu.y = Qt.binding(function(){ return parentContentItem.mapToItem(menu.parent, 0, 0).y + parentContentItem.height + padding_vertical});
+                menu.x = Qt.binding(function(){ return menu.parent.mapFromItem(menu.target, 0, 0).x });
+                menu.y = Qt.binding(function(){ return menu.parent.mapFromItem(menu.target, 0, 0).y + height + padding_vertical });
+                console.log(menu.parent.mapFromItem(menu.target, 0, 0).x + "," + menu.parent.mapFromItem(menu.target, 0, 0).y);
             }
         }
     }
+
+    Component.onCompleted: styleChanged();
+    onHeightChanged: styleChanged();
+    onWidthChanged: styleChanged();
 
 
     RowLayout {
@@ -197,6 +196,10 @@ SBaseRectangle {
 
         onClicked: {
             itemClicked();
+            console.log(parent.mapFromItem(target, 0, 0).x + ", " + parent.mapFromItem(target, 0, 0).y);
         }
+
+        //x: parent.mapFromItem(target, 0, 0).x;
+        //y: parent.mapFromItem(target, 0, 0).y;
     }
 }

@@ -145,11 +145,11 @@ SContainer {
                 SPassword { span: 10; text: ""; }
             }
 
-            //SRow {
+            SRow {
                 STextBox {
                     span: 12; implicitHeight: 400;
                 }
-            //}
+            }
 
             SRow {
                 SRadioButtonControl { id: radioButtonControl; }
