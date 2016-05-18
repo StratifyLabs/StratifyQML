@@ -16,10 +16,6 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import QtQuick.Window 2.2
-<<<<<<< HEAD
-=======
-import "."
->>>>>>> 367687bb69eb6ca5c89a5c509368fc232cfcc37d
 import "Fa-4.5.0.js" as Fa
 import "."
 

@@ -216,11 +216,7 @@ SItem {
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             color: Theme.text_color;
             font.pointSize: font_size;
-<<<<<<< HEAD
             font.family: Theme.opensans.name;
-=======
-            font.family: Theme.openSansLight.name;
->>>>>>> 367687bb69eb6ca5c89a5c509368fc232cfcc37d
             font.weight: Font.Light;
             width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
         }

@@ -105,7 +105,7 @@ SContainer {
             SPanel { style: "panel-info"; heading: "Panel"; body: "Info"; }
             SPanel { style: "panel-warning"; heading: "Panel"; body: "Warning"; }
 
-            SHLine{}
+            SHline{}
 
             SRow {
                 SButton{ span: 6; style: "btn-default xs center middle"; text: "Extra Small"; }
