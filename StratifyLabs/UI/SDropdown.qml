@@ -15,7 +15,6 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import QtQuick.Layouts 1.3
 import "."
 import "Fa-4.5.0.js" as Fa
 
@@ -146,7 +145,11 @@ SBaseRectangle {
                 color: text_color;
                 text: baseRectangleDropdown.text;
                 font.pointSize: font_size;
+<<<<<<< HEAD
                 font.family: Theme.opensans.name;
+=======
+                font.family: Theme.openSansLight.name;
+>>>>>>> 367687bb69eb6ca5c89a5c509368fc232cfcc37d
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
@@ -154,6 +157,7 @@ SBaseRectangle {
             }
         }
 
+<<<<<<< HEAD
         Text {
             topPadding: padding_vertical;
             rightPadding: padding_horizontal;
@@ -167,6 +171,27 @@ SBaseRectangle {
             height: rectangleText.height;
         }
     }
+=======
+            Text {
+                id: dropDownIcon;
+                color: text_color;
+                text: baseRectangleText.dropdown;
+                font.pointSize: font_size;
+                font.family: Theme.fontawesome.name;
+                horizontalAlignment: Text.AlignHCenter;
+                verticalAlignment: Text.AlignVCenter;
+                height: rectangleText.height;
+            }
+        },
+
+        MouseArea {
+            anchors.fill: parent;
+            hoverEnabled: true;
+            onEntered: {
+                bg_color = Qt.darker(bg_color, 1.1);
+                startHover();
+            }
+>>>>>>> 367687bb69eb6ca5c89a5c509368fc232cfcc37d
 
     MouseArea {
         anchors.fill: parent;

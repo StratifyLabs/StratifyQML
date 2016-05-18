@@ -47,20 +47,32 @@ Item {
         transform: Scale { xScale: 1.0/pixelRatio; yScale: 1.0/pixelRatio; }
         onPaint: {
             var ctx = getContext("2d");
+
+            // Radius should never exceed half of the width or half of the height
+            var realTopLeftRadius = Math.min(Math.min(0.5*width, 0.5*height), topLeftRadius);
+            var realTopRightRadius = Math.min(Math.min(0.5*width, 0.5*height), topRightRadius);
+            var realBottomLeftRadius = Math.min(Math.min(0.5*width, 0.5*height), bottomLeftRadius);
+            var realBottomRightRadius = Math.min(Math.min(0.5*width, 0.5*height), bottomRightRadius);
+
             ctx.save();
 
+
             ctx.clearRect(0,0,width,height);
-            ctx.lineWidth = borderWidth*2;
+            ctx.lineWidth = borderWidth;
+
+            // Taking into an account pen width
+            var realWidth = width-2*ctx.lineWidth;
+            var realHeight = height-2*ctx.lineWidth;
+
             ctx.strokeStyle = borderColor;
             ctx.fillStyle = color;
             ctx.globalAlpha = opacity;
             ctx.lineJoin = "miter";
 
-            ctx.beginPath();
-            ctx.arc(topLeftRadius, topLeftRadius, topLeftRadius, Math.PI, Math.PI + Math.PI/2, false);
-            ctx.arc(width-topRightRadius, topRightRadius, topRightRadius, -Math.PI/2, 0, false);
-            ctx.arc(width-bottomRightRadius, height-bottomRightRadius, bottomRightRadius, 0, Math.PI/2, false);
-            ctx.arc(bottomLeftRadius, height-bottomLeftRadius, bottomLeftRadius, Math.PI/2, Math.PI,
+            ctx.arc(ctx.lineWidth + realTopLeftRadius, ctx.lineWidth +realTopLeftRadius, realTopLeftRadius, Math.PI, Math.PI + Math.PI/2, false);
+            ctx.arc(ctx.lineWidth +realWidth-realTopRightRadius, ctx.lineWidth +realTopRightRadius, realTopRightRadius, -Math.PI/2, 0, false);
+            ctx.arc(ctx.lineWidth +realWidth-realBottomRightRadius, ctx.lineWidth +realHeight-realBottomRightRadius,realBottomRightRadius, 0, Math.PI/2, false);
+            ctx.arc(ctx.lineWidth +realBottomLeftRadius, ctx.lineWidth +realHeight-realBottomLeftRadius, realBottomLeftRadius, Math.PI/2, Math.PI,
              false);
             ctx.closePath();
             ctx.fill();
