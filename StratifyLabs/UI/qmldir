@@ -53,6 +53,7 @@ SCheckbox 1.0 SCheckbox.qml
 STextBox 1.0 STextBox.qml
 SPassword 1.0 SPassword.qml
 SCarousel 1.0 SCarousel.qml
+SBreadcrumb 1.0 SBreadcrumb.qml
 
 
 typeinfo StratifyLabsUI.qmltypes

@@ -14,7 +14,7 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-.pragma library
+//.pragma library
 
 function lighten(col,amt){ return Qt.lighter(col, 1 + amt/100); }
 

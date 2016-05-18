@@ -17,7 +17,6 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "."
 
-
 Row {
 
     property var item: SItem {

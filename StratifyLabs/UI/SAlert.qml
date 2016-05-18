@@ -102,7 +102,11 @@ SItem {
                 color: text_color;
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
                 font.pointSize: font_size;
+<<<<<<< HEAD
                 font.family: Theme.opensans.name;
+=======
+                font.family: Theme.openSansLight.name;
+>>>>>>> 367687bb69eb6ca5c89a5c509368fc232cfcc37d
                 font.weight: Font.Light;
                 verticalAlignment: Text.AlignVCenter;
             }
