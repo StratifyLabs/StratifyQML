@@ -75,7 +75,7 @@ SItem {
         anchors.top: carousel.top;
         anchors.bottom: carousel.bottom;
 
-        text: Fa.Icon.chevron_left;
+        icon: Fa.Icon.chevron_left;
 
         opacity: Theme.carousel_control_opacity;
         color: Theme.carousel_control_color;
@@ -94,7 +94,7 @@ SItem {
         anchors.top: carousel.top;
         anchors.bottom: carousel.bottom;
 
-        text: Fa.Icon.chevron_right;
+        icon: Fa.Icon.chevron_right;
 
         opacity: Theme.carousel_control_opacity;
         color: Theme.carousel_control_color;

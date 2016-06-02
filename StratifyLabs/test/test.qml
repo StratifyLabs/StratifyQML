@@ -15,10 +15,6 @@ Window {
         }
     }
 
-    STest {
-        anchors.fill: parent
-    }
-
-
+    STest { anchors.fill: parent }
 
 }
