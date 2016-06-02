@@ -24,7 +24,7 @@ SList {
     blockWidth: true;
 
     implicitHeight: listViewObject.count * (font_size + padding_vertical*5);
-    listViewObject.spacing: 0;
+    listViewObject.spacing: -2;
 
     property real active;
 

@@ -26,6 +26,7 @@ SContainer {
 
     SRow {
         SColumn {
+            /*
             SCarousel{
                 id: carousel1;
                 x:10;
@@ -92,6 +93,7 @@ SContainer {
 
                 }
             }
+            */
             span: 4;
             SPanel { style: "default"; heading: "Panel";
                 SRow {

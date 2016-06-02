@@ -24,7 +24,7 @@ SItem {
     property alias contents: contents;
     type: "column";
 
-    width: parent.width;
+    implicitWidth: parent.width;
     implicitHeight: fillHeight ? parent.height: contents.childrenRect.height;
 
     GridLayout {

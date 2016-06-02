@@ -57,18 +57,21 @@ Item {
             ctx.save();
 
 
-            ctx.clearRect(0,0,width,height);
-            ctx.lineWidth = borderWidth;
+            ctx.lineWidth = 2*borderWidth;
 
             // Taking into an account pen width
             var realWidth = width-2*ctx.lineWidth;
             var realHeight = height-2*ctx.lineWidth;
+
+            ctx.clearRect(0,0,width,height);
+
 
             ctx.strokeStyle = borderColor;
             ctx.fillStyle = color;
             ctx.globalAlpha = opacity;
             ctx.lineJoin = "miter";
 
+            ctx.beginPath();
             ctx.arc(ctx.lineWidth + realTopLeftRadius, ctx.lineWidth +realTopLeftRadius, realTopLeftRadius, Math.PI, Math.PI + Math.PI/2, false);
             ctx.arc(ctx.lineWidth +realWidth-realTopRightRadius, ctx.lineWidth +realTopRightRadius, realTopRightRadius, -Math.PI/2, 0, false);
             ctx.arc(ctx.lineWidth +realWidth-realBottomRightRadius, ctx.lineWidth +realHeight-realBottomRightRadius,realBottomRightRadius, 0, Math.PI/2, false);
