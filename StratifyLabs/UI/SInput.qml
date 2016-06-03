@@ -57,7 +57,7 @@ SBaseRectangle {
         bottomPadding: padding_vertical;
         topPadding: padding_vertical;
         font.pointSize: font_size;
-        font.family: Theme.font_family_base;
+        font.family: textFont;
         horizontalAlignment: TextEdit.AlignLeft;
         verticalAlignment: TextEdit.AlignVCenter;
         selectByMouse: true;
@@ -81,6 +81,14 @@ SBaseRectangle {
             }
         }
 
+        onTextChanged: {
+            if( focus == false ){
+                if( (text !== "") && (text !== placeholder) ){
+                    showPlaceholder = false;
+                }
+            }
+        }
+
         onFocusChanged: {
             if( focus == true ){
                 if( showPlaceholder == true ){
@@ -98,7 +106,7 @@ SBaseRectangle {
         text: Fa.Icon.times_circle;
         font.pointSize: font_size;
         anchors.right: parent.right;
-        font.family: Theme.fontawesome.name;
+        font.family: iconFont;
         rightPadding: padding_horizontal;
         font.weight: Font.Light;
         horizontalAlignment: Text.AlignHCenter;

@@ -40,7 +40,7 @@ SBaseRectangle {
             } else if( items[i] === "text-center" ){
                 text.horizontalAlignment = Text.AlignRight;
             } else if( items[i] === "fa" ){
-                text.font.family = Theme.fontawesome.name;
+                text.font.family = iconFont;
                 text.font.pointSize = font_size + padding_vertical*2;
             } else if( items[i] === "bold" ){
                 text.font.weight = Font.Bold;
@@ -57,7 +57,7 @@ SBaseRectangle {
             rightPadding: padding_horizontal;
             color: text_color;
             font.pointSize: font_size;
-            font.family: Theme.opensans.name
+            font.family: textFont;
             font.weight: Font.Light;
         }
     ]

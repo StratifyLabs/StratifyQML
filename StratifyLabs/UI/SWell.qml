@@ -70,7 +70,7 @@ SItem {
                 color: Theme.text_color;
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
                 font.pointSize: font_size;
-                font.family: Theme.opensans.name;
+                font.family: textFont;
                 font.weight: Font.Light;
             }
         }

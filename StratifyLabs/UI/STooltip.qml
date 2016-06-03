@@ -182,7 +182,7 @@ SItem {
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
         color: Theme.tooltip_color;
         font.pointSize: font_size;
-        font.family: Theme.opensans.name;
+        font.family: textFont;
         font.weight: Font.Light;
         width: implicitWidth > Theme.tooltip_max_width ? Theme.tooltip_max_width : implicitWidth;
         z: parent.z;

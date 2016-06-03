@@ -187,7 +187,7 @@ SItem {
             rightPadding: Theme.padding_base_horizontal;
             color: Theme.text_color;
             font.pointSize:  Theme.font_size_base;
-            font.family: Theme.opensans.name;
+            font.family: textFont;
             font.weight: Font.Light;
             width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
@@ -216,7 +216,7 @@ SItem {
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             color: Theme.text_color;
             font.pointSize: font_size;
-            font.family: Theme.opensans.name;
+            font.family: textFont;
             font.weight: Font.Light;
             width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
         }

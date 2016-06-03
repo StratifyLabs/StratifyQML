@@ -102,7 +102,7 @@ SItem {
                 color: text_color;
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
                 font.pointSize: font_size;
-                font.family: Theme.opensans.name;
+                font.family: textFont;
                 font.weight: Font.Light;
                 verticalAlignment: Text.AlignVCenter;
             }
@@ -120,7 +120,7 @@ SItem {
             color: Qt.lighter(Theme.text_color, 3.0);
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             font.pointSize: font_size;
-            font.family: Theme.fontawesome.name;
+            font.family: iconFont;
             visible: dismissible;
             verticalAlignment: Text.AlignVCenter;
 

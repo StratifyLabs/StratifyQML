@@ -44,6 +44,9 @@ Item {
     property real padding_horizontal: Theme.padding_base_horizontal;
     property real font_size: Theme.font_size_base;
 
+    property string textFont: Theme.font_family_base.name;
+    property string iconFont: Theme.font_family_icon.name;
+
 
     visible: hideOnSm && sm ? false : true;
 
@@ -88,7 +91,7 @@ Item {
                 font_size = Theme.font_size_h5;
             } else if( items[i] === "h6" ){
                 font_size = Theme.font_size_h6;
-            } else  if( items[i] === "lg" ){
+            } else if( items[i] === "lg" ){
                 font_size = Theme.font_size_large;
                 padding_vertical = Theme.padding_large_vertical;
                 padding_horizontal = Theme.padding_large_horizontal;
@@ -100,6 +103,8 @@ Item {
                 font_size = Theme.font_size_small;
                 padding_vertical = Theme.padding_xs_vertical;
                 padding_horizontal = Theme.padding_xs_horizontal;
+            } else if( items[i] === "bold" ){
+                textFont = Theme.font_family_bold.name;
             }
         }
     }

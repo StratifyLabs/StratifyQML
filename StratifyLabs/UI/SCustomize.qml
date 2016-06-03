@@ -19,8 +19,10 @@ import QtQuick 2.6
 
 Item {
 
-    property var fontawesome: FontLoader { id: fontawesomeInternal; source: "assets/fontawesome-webfont.ttf"; }
-    property var opensans: FontLoader { id: opensansInternal; source: "assets/OpenSans-Light.ttf"; }
+    id: customize;
+    property var fontFontAwesome: FontLoader { id: fontFontAwesomeInternal; source: "assets/fontawesome-webfont.ttf"; }
+    property var fontOpenSans: FontLoader { id: fontOpenSansInternal; source: "assets/OpenSans-Regular.ttf"; }
+    property var fontOpenSansBold: FontLoader { id: fontOpenSansBoldInternal; source: "assets/OpenSans-ExtraBold.ttf"; }
 
     function lighten(col,amt){ return Qt.lighter(col, 1 + amt/100); }
     function darken(col,amt){ return Qt.darker(col, 1 + amt/100); }
@@ -41,10 +43,12 @@ Item {
     property string link_color: brand_primary;
     property string link_hover_color: darken(link_color, 15);
     property string link_hover_decoration: "underline";
-    property string font_family_sans_serif: "Open Sans Light";
-    property string font_family_serif: "Times New Roman";
-    property string font_family_monospace: "Monaco";
-    property string font_family_base: font_family_sans_serif;
+    property alias font_family_sans_serif: customize.fontOpenSans;
+    property alias font_family_serif: customize.fontOpenSans;
+    property alias font_family_monospace: customize.fontOpenSans;
+    property alias font_family_base: customize.fontOpenSans;
+    property var font_family_bold: customize.fontOpenSansBold;
+    property var font_family_icon: customize.fontFontAwesome;
     property real font_size_base: 18;
     property real font_size_large: Math.ceil((font_size_base * 1.25));
     property real font_size_small: Math.ceil((font_size_base * 0.75));

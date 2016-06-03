@@ -139,7 +139,7 @@ SBaseRectangle {
                 color: text_color;
                 text: icon;
                 font.pointSize: font_size*1.15;
-                font.family: Theme.fontawesome.name;
+                font.family: iconFont;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
@@ -151,7 +151,7 @@ SBaseRectangle {
                 color: text_color;
                 text: baseRectangleDropdown.text;
                 font.pointSize: font_size;
-                font.family: Theme.opensans.name;
+                font.family: textFont;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
@@ -166,7 +166,7 @@ SBaseRectangle {
             color: text_color;
             text: baseRectangleDropdown.dropdown;
             font.pointSize: font_size;
-            font.family: Theme.fontawesome.name;
+            font.family: iconFont;
             horizontalAlignment: Text.AlignHCenter;
             verticalAlignment: Text.AlignVCenter;
             height: rectangleText.height;

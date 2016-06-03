@@ -82,7 +82,7 @@ SBaseRectangle {
             width: baseRectangleInput.width;
             height: contentHeight; //height needs to grow with content so mouse events work
             font.pointSize: font_size;
-            font.family: Theme.font_family_base;
+            font.family: textFont;
             horizontalAlignment: TextEdit.AlignLeft;
             verticalAlignment: TextEdit.AlignTop;
             selectByMouse: true;

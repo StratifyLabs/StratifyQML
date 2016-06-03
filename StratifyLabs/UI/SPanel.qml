@@ -86,7 +86,7 @@ SItem {
             text: "Panel Heading";
             color: heading_color;
             font.pointSize: heading_font_size;
-            font.family: Theme.opensans.name;
+            font.family: textFont;
             font.weight: Font.Light;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
         }
@@ -110,7 +110,7 @@ SItem {
                 text: "";
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
                 font.pointSize: font_size;
-                font.family: Theme.opensans.name;
+                font.family: textFont;
                 font.weight: Font.Light;
             }
         }
