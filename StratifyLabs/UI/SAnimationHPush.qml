@@ -26,17 +26,17 @@ SItem {
     property real duration: 250;
     property real dir: 1;
 
-    function start(current, target){
+    property var targetParent: parent;
+
+    signal stopped();
+
+
+    function start(current, target, parent){
         inAnimation.target = target;
         outAnimation.target = current;
+        targetParent = parent;
 
-        target.anchors.fill = undefined;
-        current.anchors.fill = undefined;
-
-        target.parent = main;
-        target.width = main.width;
-        target.height = main.height;
-
+        target.parent = parent;
         target.visible = true;
 
         inAnimation.start();
@@ -50,10 +50,13 @@ SItem {
         path: Path {
             id: outAnimationPath;
             startX: 0; startY: 0;
-            PathCurve { id: outAnimationPathCurve; x: dir*main.width; y: 0; }
+            PathCurve { id: outAnimationPathCurve; x: dir*targetParent.width; y: 0; }
         }
 
-        onStopped: target.visible = false;
+        onStopped: {
+            target.visible = false;
+            root.stopped();
+        }
     }
 
     PathAnimation {
@@ -62,9 +65,11 @@ SItem {
         easing.type: Easing.InQuad;
         path: Path {
             id: inAnimationPath;
-            startX: -1*dir*main.width; startY: 0;
+            startX: -1*dir*targetParent.width; startY: 0;
             PathCurve { id: inAnimationPathCurve; x: 0; y: 0; }
         }
-        onStopped: target.anchors.fill = target.parent;
+        onStopped: {
+            root.stopped();
+        }
     }
 }

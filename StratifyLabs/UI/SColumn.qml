@@ -32,7 +32,7 @@ SItem {
         columns: 1;
         width: parent.width;
         height: fillHeight ? parent.height : undefined;
-        columnSpacing: padding_vertical;
+        rowSpacing: padding_vertical;
 
         function alignChildren(){
             for(var i = 0; i < children.length; i++){
@@ -51,8 +51,14 @@ SItem {
         }
 
         onWidthChanged:  {
+            var isSmall = width < Theme.screen_sm;
             for(var i = 0; i < children.length; i++){
+
                 children[i].Layout.preferredWidth = width;
+
+                if( children[i].type !== undefined ){
+                    children[i].sm = isSmall;
+                }
             }
         }
     }

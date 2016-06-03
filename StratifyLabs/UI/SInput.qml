@@ -21,7 +21,7 @@ import "."
 SBaseRectangle {
     id: baseRectangleInput;
     type: "input";
-    property alias text: input.text;
+    property string text;
     property string placeholder: "";
     blockWidth: true;
     color: Theme.input_bg;
@@ -33,6 +33,16 @@ SBaseRectangle {
 
     implicitHeight: font_size + Theme.padding_base_vertical*3;
     width: parent.width;
+
+    onTextChanged: {
+        if( text === "" ){
+            showPlaceholder = true;
+            input.text = placeholder;
+        } else {
+            showPlaceholder = false;
+            input.text = text;
+        }
+    }
 
     onStyleChanged: {
         var items = style.split(" ");
@@ -50,7 +60,7 @@ SBaseRectangle {
     TextInput {
         id: input;
         color: showPlaceholder ? Qt.lighter(text_color, 2.0) : text_color;
-        text: "";
+        text: baseRectangleInput.text;
         width: parent.width - clearIcon.width*1.25;
         leftPadding: padding_horizontal;
         rightPadding: padding_horizontal;
@@ -73,20 +83,8 @@ SBaseRectangle {
         }
 
         onEditingFinished: {
-            if( text === "" ){
-                text = placeholder;
-                showPlaceholder = true;
-            } else {
-                showPlaceholder = false;
-            }
-        }
-
-        onTextChanged: {
-            if( focus == false ){
-                if( (text !== "") && (text !== placeholder) ){
-                    showPlaceholder = false;
-                }
-            }
+            //this breaks any bindings to base text value
+            baseRectangleInput.text = text;
         }
 
         onFocusChanged: {
@@ -112,7 +110,7 @@ SBaseRectangle {
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;
         height: parent.height;
-        visible: !showPlaceholder || (input.text != placeholder);
+        visible: !showPlaceholder;
 
 
         MouseArea {

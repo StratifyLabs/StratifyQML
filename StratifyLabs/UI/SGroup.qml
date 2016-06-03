@@ -23,6 +23,13 @@ SItem {
     implicitWidth: contents.width;
     implicitHeight: contents.height;
 
+    onSmChanged: {
+        var i;
+        for(i=0; i < contents.children.length; i++){
+            contents.children[i].sm = sm;
+        }
+    }
+
     Row {
         id: contents;
         spacing: padding_horizontal;

@@ -19,6 +19,7 @@ SColumn 1.0 SColumn.qml
 SContainer 1.0 SContainer.qml
 SInput 1.0 SInput.qml
 SItem 1.0 SItem.qml
+SLoader 1.0 SLoader.qml
 SLabel 1.0 SLabel.qml
 SNavbar 1.0 SNavbar.qml
 SNavtree 1.0 SNavtree.qml

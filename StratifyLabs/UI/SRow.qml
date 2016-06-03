@@ -52,7 +52,7 @@ SItem {
             }
         }
 
-        onWidthChanged: {
+        function adjustWidth(){
             for(var i = 0; i < children.length; i++){
                 var w;
                 if( children[i].span !== undefined ){
@@ -64,8 +64,13 @@ SItem {
             }
         }
 
+        onWidthChanged: {
+            adjustWidth();
+        }
+
         Component.onCompleted: {
             alignChildren();
+            adjustWidth();
         }
     }
 

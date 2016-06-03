@@ -34,17 +34,17 @@ SBaseRectangle {
         var items = style.split(" ");
         radius = Theme.btn_border_radius_base;
         for(var i = 0; i < items.length; i++){
-            if( items[i] === "primary" ){
+            if( items[i] === "progress-bar-primary" ){
                 progress.color = Theme.progress_bar_bg;
-            } else if( items[i] === "default" ){
+            } else if( items[i] === "progress-bar-default" ){
                 progress.color = Theme.progress_bar_bg;
-            } else if( items[i] === "danger" ){
+            } else if( items[i] === "progress-bar-danger" ){
                 progress.color = Theme.progress_bar_danger_bg;
-            } else if( items[i] === "success" ){
+            } else if( items[i] === "progress-bar-success" ){
                 progress.color = Theme.progress_bar_success_bg;
-            } else if( items[i] === "info" ){
+            } else if( items[i] === "progress-bar-info" ){
                 progress.color = Theme.progress_bar_info_bg;
-            } else if( items[i] === "warning" ){
+            } else if( items[i] === "progress-bar-warning" ){
                 progress.color = Theme.progress_bar_warning_bg;
             }
         }

@@ -18,22 +18,17 @@ import QtQuick 2.6
 import "."
 
 SItem {
-    type: "container";
-    default property alias data: contents.data;
-    property string background: "transparent";
-    width: (parent != null) ? parent.width : 0;
-    height: fillHeight ? ((parent != null) ? parent.height : 0) : contents.childrenRect.height + padding_vertical*2;
+    id: loader;
+    type: "loader";
+    property alias source: loaderObject.source;
 
-    Rectangle {
+    Loader {
         anchors.fill: parent;
-        color: background;
+        id: loaderObject;
+        source: "";
+
+        onItemChanged: item.parent = loaderObject;
     }
 
-    Item {
-        x: padding_horizontal;
-        y: padding_vertical;
-        height: fillHeight ? parent.height - padding_vertical*2: undefined;
-        id: contents;
-        width: (parent.width - padding_horizontal*2);
-    }
 }
+

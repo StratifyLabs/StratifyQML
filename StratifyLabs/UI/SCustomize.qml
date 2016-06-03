@@ -65,7 +65,7 @@ Item {
     property real headings_line_height: 1.1;
     property string headings_color: "inherit";
     property string icon_font_path: "assets/fonts/";
-    property real padding_base_vertical: 6;
+    property real padding_base_vertical: 8;
     property real padding_base_horizontal: 12;
     property real padding_large_vertical: 10;
     property real padding_large_horizontal: 16;
