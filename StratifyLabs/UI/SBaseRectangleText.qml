@@ -23,7 +23,7 @@ SBaseRectangle {
     property string icon;
     property string text;
     property alias textObject: baseRectangleTextText;
-    property bool hideTextOnSm: true;
+    property bool hideTextOnSm: false;
 
     property alias iconObject: rectangleIcon;
 
@@ -43,6 +43,8 @@ SBaseRectangle {
                 baseRectangleTextText.horizontalAlignment = Text.AlignHCenter;
             } else if( items[i] === "bold" ){
                 baseRectangleTextText.font.weight = Font.Bold;
+            } else if( items[i] === "text-hide-sm"){
+                hideTextOnSm = true;
             }
         }
     }
@@ -81,7 +83,7 @@ SBaseRectangle {
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
-                visible: (icon !== "") && (hideTextOnSm) ? !sm : true;
+                visible: ((icon !== "") && (hideTextOnSm)) ? !sm : true;
             }
         }
 

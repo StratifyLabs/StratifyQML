@@ -20,14 +20,15 @@ import "."
 
 SBaseRectangle {
     id: baseRectangleInput;
-    property alias text: input.text;
-    property string placeholder: "placeholder";
     type: "input";
+    property alias text: input.text;
+    property string placeholder: "";
     blockWidth: true;
     color: Theme.input_bg;
     border_color: Theme.input_border;
     radius: Theme.input_border_radius;
 
+    property bool showPlaceholder: false;
     property alias inputObject: input;
 
     implicitHeight: font_size + Theme.padding_base_vertical*3;
@@ -48,8 +49,8 @@ SBaseRectangle {
 
     TextInput {
         id: input;
-        color: text_color;
-        text: placeholder;
+        color: showPlaceholder ? Qt.lighter(text_color, 2.0) : text_color;
+        text: "";
         width: parent.width - clearIcon.width*1.25;
         leftPadding: padding_horizontal;
         rightPadding: padding_horizontal;
@@ -63,6 +64,32 @@ SBaseRectangle {
         selectionColor: Qt.lighter(text_color, 3.0);
         selectedTextColor: text_color;
         clip: true;
+
+        Component.onCompleted: {
+            if( text === "" ){
+                showPlaceholder = true;
+                text = placeholder;
+            }
+        }
+
+        onEditingFinished: {
+            if( text === "" ){
+                text = placeholder;
+                showPlaceholder = true;
+            } else {
+                showPlaceholder = false;
+            }
+        }
+
+        onFocusChanged: {
+            if( focus == true ){
+                if( showPlaceholder == true ){
+                    text = "";
+                    showPlaceholder = false;
+                }
+            }
+        }
+
     }
 
     Text {
@@ -77,12 +104,16 @@ SBaseRectangle {
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;
         height: parent.height;
-        visible: input.text !== "";
+        visible: !showPlaceholder || (input.text != placeholder);
 
 
         MouseArea {
             anchors.fill: parent;
-            onClicked: input.text = "";
+            onClicked: {
+                showPlaceholder = true;
+                input.text = "";
+                input.forceActiveFocus();
+            }
         }
     }
 

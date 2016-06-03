@@ -127,7 +127,7 @@ Item {
     property string input_group_addon_border_color: input_border;
     property string cursor_disabled: "not_allowed";
     property string dropdown_bg: "#fff";
-    property string dropdown_border: "rgba(0,0,0,.15)";
+    property string dropdown_border: Qt.rgba(0,0,0,.15);
     property string dropdown_fallback_border: "#ccc";
     property string dropdown_divider_bg: "#e5e5e5";
     property string dropdown_link_color: gray_dark;
@@ -260,7 +260,7 @@ Item {
     property string tooltip_arrow_color: tooltip_bg;
     property string popover_bg: "#fff";
     property real popover_max_width: 276;
-    property string popover_border_color: "rgba(0,0,0,.2)";
+    property string popover_border_color: Qt.rgba(0,0,0,.2);
     property string popover_fallback_border_color: "#ccc";
     property string popover_title_bg: darken(popover_bg, 3);
     property real popover_arrow_width: 10;
@@ -280,7 +280,7 @@ Item {
     property real modal_title_padding: 15;
     property real modal_title_line_height: line_height_base;
     property string modal_content_bg: "#fff";
-    property string modal_content_border_color: "rgba(0,0,0,.2)";
+    property string modal_content_border_color: Qt.rgba(0,0,0,.2);
     property string modal_content_fallback_border_color: "#999";
     property string modal_backdrop_bg: "#000";
     property real modal_backdrop_opacity: .5;

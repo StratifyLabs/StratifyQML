@@ -9,6 +9,7 @@ singleton Theme 1.0 SCustomize.qml
 STest 1.0 STest.qml
 
 SAlert 1.0 SAlert.qml
+SHline 1.0 SHline.qml
 SAnimationHPush 1.0 SAnimationHPush.qml
 SBadge 1.0 SBadge.qml
 SBaseRectangle 1.0 SBaseRectangle.qml

@@ -76,6 +76,7 @@ SList {
         anchors.fill: parent;
         color: Theme.dropdown_bg;
         radius: Theme.btn_border_radius_base;
+        border.color: Theme.dropdown_border;
         z:-1;
     }
 
