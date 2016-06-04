@@ -37,8 +37,6 @@ Item {
             return;
         }
 
-        //console.log("JSON:" + json);
-
         var objectArray = parseJSONString(json, query);
         for ( var key in objectArray ) {
             var jo = objectArray[key];
@@ -56,7 +54,7 @@ Item {
     }
 
     function parseJSONString(jsonString, jsonPathQuery) {
-        console.log("String is " + jsonString);
+        console.log("JSON:" + jsonString);
         var objectArray = JSON.parse(jsonString);
         if ( jsonPathQuery !== "" ){
             objectArray = JSONPath.jsonPath(objectArray, jsonPathQuery);

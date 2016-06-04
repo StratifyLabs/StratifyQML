@@ -129,6 +129,8 @@ SBaseRectangle {
         width: parent.width;
         spacing: Theme.padding_base_horizontal;
 
+        clip: true;
+
         Row {
             Layout.fillWidth: true;
             leftPadding: padding_horizontal;

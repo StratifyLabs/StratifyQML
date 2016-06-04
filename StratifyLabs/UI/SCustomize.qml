@@ -27,12 +27,11 @@ Item {
     function lighten(col,amt){ return Qt.lighter(col, 1 + amt/100); }
     function darken(col,amt){ return Qt.darker(col, 1 + amt/100); }
     property string gray_base: "#333";
-    property string gray_darker: lighten(gray_base, 13.5);
-
-    property string gray_dark: lighten(gray_base, 20);
-    property string gray: lighten(gray_base, 33.5);
-    property string gray_light: lighten(gray_base, 46.7);
-    property string gray_lighter: lighten(gray_base, 93.5);
+    property string gray_darker: lighten(gray_base, 10);
+    property string gray_dark: lighten(gray_base, 50);
+    property string gray: lighten(gray_base, 100);
+    property string gray_light: lighten(gray_base, 250);
+    property string gray_lighter: lighten(gray_base, 350);
     property string brand_primary: darken("#1D7DC5", 6.5);
     property string brand_success: "#5cb85c";
     property string brand_info: "#44546A";
