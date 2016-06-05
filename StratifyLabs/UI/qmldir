@@ -12,6 +12,7 @@ SAlert 1.0 SAlert.qml
 SHline 1.0 SHline.qml
 SAnimationHPush 1.0 SAnimationHPush.qml
 SAnimationFade 1.0 SAnimationFade.qml
+SAnimationContainer 1.0 SAnimationContainer.qml
 SBadge 1.0 SBadge.qml
 SBaseRectangle 1.0 SBaseRectangle.qml
 SBaseRectangleText 1.0 SBaseRectangleText.qml

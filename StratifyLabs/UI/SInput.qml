@@ -34,6 +34,8 @@ SBaseRectangle {
     implicitHeight: font_size + Theme.padding_base_vertical*3;
     width: parent.width;
 
+    signal editingFinished();
+
     onTextChanged: {
         if( text === "" ){
             showPlaceholder = true;
@@ -41,6 +43,7 @@ SBaseRectangle {
         } else {
             showPlaceholder = false;
             input.text = text;
+            editingFinished();
         }
     }
 
@@ -100,7 +103,7 @@ SBaseRectangle {
 
     Text {
         id: clearIcon;
-        color: Theme.gray_lighter;
+        color: Theme.gray_light;
         text: Fa.Icon.times_circle;
         font.pointSize: font_size;
         anchors.right: parent.right;

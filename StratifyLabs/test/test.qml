@@ -8,13 +8,13 @@ import "../UI"
 Window {
     visible: true
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            Qt.quit();
-        }
-    }
+    minimumWidth: 600;
+    minimumHeight: 500;
 
     STest { anchors.fill: parent }
+
+    Component.onCompleted: {
+        Theme.screen_sm = 700;
+    }
 
 }

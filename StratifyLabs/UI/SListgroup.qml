@@ -15,6 +15,8 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
+import QtQuick.Window 2.2
+
 import "."
 
 SList {
@@ -24,7 +26,7 @@ SList {
     blockWidth: true;
 
     implicitHeight: listViewObject.count * (font_size + padding_vertical*5);
-    listViewObject.spacing: -2;
+    listViewObject.spacing: -2*Screen.devicePixelRatio;
 
     property real active;
 
@@ -71,7 +73,7 @@ SList {
             topRadius: index == 0 ? Theme.list_group_border_radius : 0;
             bottomRadius: index == (listViewObject.count-1) ? Theme.list_group_border_radius : 0;
             implicitWidth: parent.width;
-            implicitHeight: contents.height+2;
+            implicitHeight: contents.height-pixelRatio;
             color: Theme.list_group_bg;
             borderColor: Theme.list_group_border;
             SContainer {

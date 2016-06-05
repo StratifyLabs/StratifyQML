@@ -34,24 +34,29 @@ SBaseRectangleText {
     text: "Checkbox";
     hideTextOnSm: false;
 
-    bg_color: Theme.body_bg;
+    bg_color: "transparent";
+    border_color: "transparent";
     text_color: Theme.text_color;
-    border_color: Theme.body_bg;
 
     signal clicked();
+
+    function updateControl(){
+        if( control !== null ){
+            if( checked ){
+                control.active = check;
+            }
+        }
+    }
+
+    onCheckedChanged: {
+        updateControl();
+    }
 
     MouseArea {
         anchors.fill: parent;
         hoverEnabled: true;
         onClicked: {
-            if( control !== null ){
-                if( !checked ){
-                    control.active = check;
-                    checked = true;
-                }
-            } else {
-                checked = !checked;
-            }
+            checked = !checked;
             check.clicked();
         }
         onEntered: startHover();

@@ -57,11 +57,11 @@ Item {
             ctx.save();
 
 
-            ctx.lineWidth = 2*borderWidth;
+            ctx.lineWidth = pixelRatio*borderWidth;
 
             // Taking into an account pen width
-            var realWidth = width-2*ctx.lineWidth;
-            var realHeight = height-2*ctx.lineWidth;
+            var realWidth = width-pixelRatio*2*ctx.lineWidth;
+            var realHeight = height-pixelRatio*2*ctx.lineWidth;
 
             ctx.clearRect(0,0,width,height);
 

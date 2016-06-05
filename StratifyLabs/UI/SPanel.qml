@@ -94,7 +94,7 @@ SItem {
 
     SRoundedRectangle {
         id: panelBody;
-        y: panelHeading.height - 2*panelHeading.borderWidth - borderWidth;
+        y: panelHeading.height - 2*pixelRatio*panelHeading.borderWidth - borderWidth;
         bottomRadius: Theme.panel_border_radius;
         color: Theme.body_bg;
         borderColor: border_color;
