@@ -32,20 +32,19 @@ SBaseRectangle {
     property bool hideTextOnSm: true;
     property alias iconObject: rectangleIcon;
     property alias activeText: menu.activeText;
+    property bool hideMenuCountZero: true;
 
     signal clicked();
     signal itemClicked();
 
     blockWidth: true;
 
-
     //size the rectangle based on the size of the text box
     implicitHeight: font_size + Theme.padding_base_vertical*3;
     implicitWidth: (blockWidth == true) ? parent.width : baseRectangleDropdownText.width;
 
-
     onStyleChanged: {
-     updateStyle();
+        updateStyle();
     }
     function updateStyle(){
         var items = style.split(" ");
@@ -120,6 +119,7 @@ SBaseRectangle {
     }
 
     Component.onCompleted: styleChanged();
+    onVisibleChanged: if( visible ) updatePosition();
     onHeightChanged: updatePosition();
     onWidthChanged: updatePosition();
 
@@ -190,7 +190,14 @@ SBaseRectangle {
         }
 
         onClicked: {
-            menu.visible = true;
+            if( menu.visible == false ){
+                if( (menu.model.count !== 0) || !hideMenuCountZero ){
+                    menu.visible = true;
+                }
+            } else {
+                menu.visible = false;
+            }
+
             style = style;
             baseRectangleDropdown.clicked();
         }
@@ -206,7 +213,5 @@ SBaseRectangle {
             itemClicked();
         }
 
-        //x: parent.mapFromItem(target, 0, 0).x;
-        //y: parent.mapFromItem(target, 0, 0).y;
     }
 }

@@ -64,7 +64,7 @@ SBaseRectangle {
 
             Text {
                 id: rectangleIcon;
-                color: text_color;
+                color: enabled ? text_color : Theme.text_muted;
                 text: icon;
                 font.pointSize: font_size*1.15;
                 font.family: iconFont;
@@ -76,7 +76,7 @@ SBaseRectangle {
 
             Text {
                 id: rectangleText;
-                color: text_color;
+                color: enabled ? text_color : Theme.text_muted;
                 text: baseRectangleText.text;
                 font.pointSize: font_size;
                 font.family: textFont;

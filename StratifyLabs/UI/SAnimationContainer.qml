@@ -29,14 +29,14 @@ SItem {
 
         if( current !== undefined ){
 
-        if( resourceIndex(current) < resourceIndex(target) ){
-            animation.dir = -1;
-        } else {
-            animation.dir = 1;
-        }
+            if( resourceIndex(current) < resourceIndex(target) ){
+                animation.dir = -1;
+            } else {
+                animation.dir = 1;
+            }
 
-        animation.start(current, target, root);
-        current = target;
+            animation.start(current, target, root);
+            current = target;
         } else {
             current = target;
             showScreen(current);

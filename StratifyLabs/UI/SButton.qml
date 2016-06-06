@@ -77,11 +77,13 @@ SBaseRectangleText {
             hoverEnabled: true;
             onEntered: {
                 bg_color = Qt.darker(bg_color, 1.1);
+                border_color = Qt.darker(border_color, 1.1);
                 startHover();
             }
 
             onExited: {
                 bg_color = Qt.lighter(bg_color, 1.1);
+                border_color = Qt.lighter(border_color, 1.1);
                 stopHover();
             }
 
