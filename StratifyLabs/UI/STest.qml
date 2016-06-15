@@ -149,7 +149,7 @@ SItem {
                             SButton{ span: 4; style: "btn-danger center"; text: "Danger"; }
                         }
 
-                        SHLine{}
+                        SHline{}
 
                         SRow { SText{ style: "center"; text: "Labels:"; span:12; } }
 
@@ -172,7 +172,7 @@ SItem {
                             SLabel{ span: 4; style: "label-danger center"; text: "Danger"; }
                         }
 
-                        SHLine{}
+                        SHline{}
 
                         SRow { SText{ style: "right"; text: "Button Sizes:"; span:12; } }
 
