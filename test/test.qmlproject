@@ -16,9 +16,9 @@ Project {
         directory: "."
     }
     OtherFiles {
-        directories: ["../UI/resources/fonts", "../UI/qmldir"]
+        directories: ["../StratifyLabs/UI/resources/fonts", "../StratifyLabs/UI/qmldir"]
     }
 
     /* List of plugin directories passed to QML runtime */
-     importPaths: [ "../UI" ]
+     importPaths: [ ".." ]
 }
