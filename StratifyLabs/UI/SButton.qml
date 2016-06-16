@@ -62,10 +62,13 @@ SBaseRectangleText {
                 border_color = "transparent";
             } else if( items[i] === "lg" || (items[i] === "btn-lg")){
                 radius = Theme.btn_border_radius_large;
+                font_size = Theme.font_size_large;
             } else if( items[i] === "sm" || (items[i] === "btn-sm")){
                 radius = Theme.btn_border_radius_small;
+                font_size = Theme.font_size_small;
             } else if( items[i] === "xs" || (items[i] === "btn-xs")){
                 radius = Theme.btn_border_radius_small;
+                font_size = Theme.font_size_small;
             }
         }
     }

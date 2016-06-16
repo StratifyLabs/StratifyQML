@@ -27,7 +27,7 @@ SItem {
     SColumn {
         id: column;
         alignment: Qt.AlignHCenter | Qt.AlignCenter;
-        SHline{ id: line; }
+        SHLine{ id: line; }
         SColumn {
             contents.x: padding_horizontal;
             contents.width: parent.width - 2*padding_horizontal;

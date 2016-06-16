@@ -18,12 +18,14 @@ import QtQuick 2.5
 import "."
 
 SBaseRectangleText {
-    id: button;
+    id: label;
     type: "label";
 
-    bg_color: Theme.label_default_bg;
-    text_color: Theme.label_color;
-    border_color: Theme.label_default_bg;
+    bg_color: "transparent";
+    text_color: Theme.text_color;
+    border_color: "transparent";
+
+    signal clicked();
 
     onStyleChanged: {
         var items = parseStyle();
@@ -47,6 +49,12 @@ SBaseRectangleText {
             } else if( items[i] === "label-warning" ){
                 bg_color = Theme.label_warning_bg;
                 border_color = Theme.label_warning_bg;
+            } else if( items[i] === "label-lg" ){
+                font_size = Theme.font_size_large;
+                radius = Theme.btn_border_radius_large;
+            } else if( items[i] === "label-sm" ){
+                font_size = Theme.font_size_small;
+                radius = Theme.btn_border_radius_small;
             }
 
         }
@@ -58,6 +66,7 @@ SBaseRectangleText {
             hoverEnabled: true;
             onEntered: startHover();
             onExited: stopHover();
+            onClicked: label.clicked();
         }
     ]
 

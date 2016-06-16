@@ -25,7 +25,6 @@ SItem {
     property real heading_font_size: Theme.font_size_base;
     property string heading_color: Theme.text_color;
     property string body_color: Theme.text_color;
-    property real font_size: Theme.font_size_base;
     property alias body: panelBodyText.text;
     property alias heading: panelHeadingText.text;
 

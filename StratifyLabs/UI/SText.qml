@@ -23,9 +23,18 @@ SBaseRectangle {
     property alias icon: text.text;
     property alias textObject: text;
     property string text_color: Theme.text_color;
+    property bool spin: false;
     type: "text";
     implicitWidth: text.width;
     implicitHeight: font_size + padding_vertical*3;
+
+    onSpinChanged: {
+        if( spin == false ){
+            text.rotation = 0;
+        }
+    }
+
+    signal clicked();
 
     contents.color: "transparent";
     contents.border.color: "transparent";
@@ -44,6 +53,8 @@ SBaseRectangle {
                 text.font.pointSize = font_size + padding_vertical*2;
             } else if( items[i] === "bold" ){
                 text.font.weight = Font.Bold;
+            } else if( items[i] === "fa-spin" ){
+                spin = true;
             }
         }
     }
@@ -59,6 +70,16 @@ SBaseRectangle {
             font.pointSize: font_size;
             font.family: textFont;
             font.weight: Font.Light;
+
+
+            RotationAnimation on rotation {
+                loops: Animation.Infinite;
+                paused: !spin;
+                from: 0;
+                to: 360;
+                duration: 1200;
+            }
+
         }
     ]
 
@@ -67,6 +88,7 @@ SBaseRectangle {
         hoverEnabled: true;
         onEntered: startHover();
         onExited: stopHover();
+        onClicked: base.clicked();
     }
 
 }

@@ -35,7 +35,6 @@ SItem {
 
     onVisibleChanged: contents.adjustWidth();
 
-
     width: parent.width;
     implicitHeight: fillHeight ? parent.height : contents.childrenRect.height;
 

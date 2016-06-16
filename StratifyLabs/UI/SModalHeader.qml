@@ -37,6 +37,6 @@ SItem {
                 onClicked: { closeClicked(); }
             }
         }
-        SHline{}
+        SHLine{}
     }
 }
