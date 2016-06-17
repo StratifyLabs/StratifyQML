@@ -42,6 +42,7 @@ SItem {
                 SRadioButton { style: "text-hide-sm center"; checked:true; control: radioButtonControl; text: "PanelTest"; }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "AlertTest"; }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "ButtonTest"; }
+                SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "LabelTest"; }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "InputTest"; }
             }
 
@@ -151,6 +152,63 @@ SItem {
 
                         SHLine{}
 
+                        SRow { SText{ style: "center"; text: "Button Sizes:"; span:12; } }
+
+                        SRow {
+                            SButton{ span: 6; style: "btn-default btn-xs center middle"; text: "Extra Small"; }
+                            SButton{ span: 6; style: "btn-default btn-sm center middle"; text: "Small";
+                                SPopover{ content: "Default Button Middle"; style: "top"; }
+                            }
+                        }
+
+
+                        SRow {
+                            SButton{ span: 6; style: "btn-default center middle"; text: "Default";
+                                STooltip{ text: "Default Button Middle"; style: "top"; }
+                            }
+                            SButton{ span: 6; style: "btn-default btn-lg center middle"; text: "Large";
+                                STooltip{ text: "Default Large Button Middle"; style: "top"; }
+                            }
+                        }
+
+
+
+
+                        SHLine{}
+
+                        SRow { SText{ style: "center"; text: "Button Icons:"; span:12; } }
+
+                        SRow {
+                            SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.refresh; text: "Refresh"; }
+                            SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.cog; text: "Working"; }
+                            SButton{ span: 4; style: "btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.refresh; text: "Pulse"; }
+                        }
+
+                        SRow {
+                            SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.spinner; text: "Refresh"; spin: true; }
+                            SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.circle_o_notch; text: "Working"; spin: true; }
+                            SButton{ span: 4; style: "btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.spinner; text: "Pulse";  pulse: true; }
+                        }
+
+                        SRow {
+                            SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.location_arrow; text: "Naked"; }
+                            SButton{ span: 4; style: "btn-lg center fa-pulse"; icon: Fa.Icon.repeat; text: "Naked"; }
+                            SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.safari; text: "Naked"; }
+                        }
+
+
+                    }
+                },
+
+                SContainer {
+                    name: "LabelTest";
+                    SColumn {
+
+                        SPanel {
+                            heading: "Labels";
+                            body: "Labels look much like buttons but when don't change colors when hovered.  They do support onClicked signal handlers."
+                        }
+
                         SRow { SText{ style: "center"; text: "Labels:"; span:12; } }
 
                         SRow {
@@ -174,32 +232,9 @@ SItem {
 
                         SHLine{}
 
-                        SRow { SText{ style: "right"; text: "Button Sizes:"; span:12; } }
-
-                        SRow {
-                            SButton{ span: 6; style: "btn-default xs center middle"; text: "Extra Small"; }
-                            SButton{ span: 6; style: "btn-default sm center middle"; text: "Small";
-                                SPopover{ content: "Default Button Middle"; style: "top"; }
-                            }
-                        }
+                        SRow { SText{ style: "right"; text: "Label Sizes:"; span:12; } }
 
 
-                        SRow {
-                            SButton{ span: 6; style: "btn-default center middle"; text: "Default";
-                                STooltip{ text: "Default Button Middle"; style: "top"; }
-                            }
-                            SButton{ span: 6; style: "btn-default lg center middle"; text: "Large";
-                                STooltip{ text: "Default Large Button Middle"; style: "top"; }
-                            }
-                        }
-
-
-                        SRow {
-                            SButton{ id: blockButton; span: 6; style: "btn-lg btn-default center middle block"; text: "Block";
-                                tooltip: STooltip{ target: blockButton; parent: top; text: "Large Center Middle Block"; style: "right"; }
-                            }
-                            SButton{ span: 6; style: "lg center middle"; text: "Naked"; }
-                        }
                     }
                 },
 

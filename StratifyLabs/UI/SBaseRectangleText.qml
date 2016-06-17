@@ -24,12 +24,22 @@ SBaseRectangle {
     property string text;
     property alias textObject: baseRectangleTextText;
     property bool hideTextOnSm: false;
-
+    property bool spin: false;
+    property bool pulse: false;
+    property real pulseSteps: 8;
+    property real animationPeriod: 1200;
     property alias iconObject: rectangleIcon;
 
     //size the rectangle based on the size of the text box
     implicitHeight: font_size + Theme.padding_base_vertical*3;
     implicitWidth: baseRectangleTextText.width;
+
+    onSpinChanged: {
+        if( spin == false ){
+            rectangleIcon.rotation = 0;
+        }
+    }
+
 
     onStyleChanged: {
         var items = style.split(" ");
@@ -45,6 +55,12 @@ SBaseRectangle {
                 baseRectangleTextText.font.weight = Font.Bold;
             } else if( items[i] === "text-hide-sm"){
                 hideTextOnSm = true;
+            } else if( items[i] === "fa-spin" ){
+                pulse = false;
+                spin = true;
+            } else if( items[i] === "fa-pulse" ){
+                spin = false;
+                pulse = true;
             }
         }
     }
@@ -72,6 +88,24 @@ SBaseRectangle {
                 horizontalAlignment: Text.AlignHCenter;
                 verticalAlignment: Text.AlignVCenter;
                 height: rectangleText.height;
+
+                RotationAnimation on rotation {
+                    loops: Animation.Infinite;
+                    paused: !spin;
+                    from: 0;
+                    to: 360;
+                    duration: animationPeriod;
+                }
+
+                Timer {
+                    id: pulseTimer;
+                    running: pulse;
+                    repeat: true;
+                    interval: animationPeriod/pulseSteps;
+                    onTriggered: {
+                        rectangleIcon.rotation += 360/pulseSteps;
+                    }
+                }
             }
 
             Text {

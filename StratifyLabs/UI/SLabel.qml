@@ -34,27 +34,35 @@ SBaseRectangleText {
             if( items[i] === "label-primary" ){
                 bg_color = Theme.label_primary_bg;
                 border_color = Theme.label_primary_bg;
+                text_color = Theme.label_color;
             } else if( items[i] === "label-default" ){
                 bg_color = Theme.label_default_bg;
                 border_color = Theme.label_default_bg;
+                text_color = Theme.label_color;
             } else if( items[i] === "label-danger" ){
                 bg_color = Theme.label_danger_bg;
                 border_color = Theme.label_danger_bg;
+                text_color = Theme.label_color;
             } else if( items[i] === "label-success" ){
                 bg_color = Theme.label_success_bg;
                 border_color = Theme.label_success_bg;
+                text_color = Theme.label_color;
             } else if( items[i] === "label-info" ){
                 bg_color = Theme.label_info_bg;
                 border_color = Theme.label_info_bg;
+                text_color = Theme.label_color;
             } else if( items[i] === "label-warning" ){
                 bg_color = Theme.label_warning_bg;
                 border_color = Theme.label_warning_bg;
+                text_color = Theme.label_color;
             } else if( items[i] === "label-lg" ){
                 font_size = Theme.font_size_large;
                 radius = Theme.btn_border_radius_large;
+                text_color = Theme.label_color;
             } else if( items[i] === "label-sm" ){
                 font_size = Theme.font_size_small;
                 radius = Theme.btn_border_radius_small;
+                text_color = Theme.label_color;
             }
 
         }

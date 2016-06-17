@@ -24,6 +24,10 @@ SBaseRectangle {
     property alias textObject: text;
     property string text_color: Theme.text_color;
     property bool spin: false;
+    property bool pulse: false;
+    property real pulseSteps: 8;
+    property real animationPeriod: 1200;
+
     type: "text";
     implicitWidth: text.width;
     implicitHeight: font_size + padding_vertical*3;
@@ -54,7 +58,11 @@ SBaseRectangle {
             } else if( items[i] === "bold" ){
                 text.font.weight = Font.Bold;
             } else if( items[i] === "fa-spin" ){
+                pulse = false;
                 spin = true;
+            } else if( items[i] === "fa-pulse" ){
+                spin = false;
+                pulse = true;
             }
         }
     }
@@ -78,6 +86,16 @@ SBaseRectangle {
                 from: 0;
                 to: 360;
                 duration: 1200;
+            }
+
+            Timer {
+                id: pulseTimer;
+                running: pulse;
+                repeat: true;
+                interval: animationPeriod/pulseSteps;
+                onTriggered: {
+                    rectangleIcon.rotation += 360/pulseSteps;
+                }
             }
 
         }
