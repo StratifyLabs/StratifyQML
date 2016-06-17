@@ -56,6 +56,7 @@ SBaseRectangleText {
         anchors.fill: parent;
         hoverEnabled: true;
         onClicked: {
+            if(checked) return; //unchange status when this btn is alrady checked
             checked = !checked;
             check.clicked();
         }
