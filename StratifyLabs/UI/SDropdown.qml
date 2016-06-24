@@ -40,7 +40,7 @@ SBaseRectangle {
     blockWidth: true;
 
     //size the rectangle based on the size of the text box
-    implicitHeight: font_size + Theme.padding_base_vertical*3;
+    implicitHeight: fontSize + paddingVertical*3;
     implicitWidth: (blockWidth == true) ? parent.width : baseRectangleDropdownText.width;
 
     onStyleChanged: {
@@ -59,33 +59,33 @@ SBaseRectangle {
             } else if( items[i] === "bold" ){
                 baseRectangleDropdownText.font.weight = Font.Bold;
             } else if( (items[i] === "primary") || (items[i] === "btn-primary") ){
-                bg_color = Theme.btn_primary_bg;
-                text_color = Theme.btn_primary_color;
-                border_color = Theme.btn_primary_border;
+                backgroundColor = theme.btn_primary_bg;
+                textColor = theme.btn_primary_color;
+                borderColor = theme.btn_primary_border;
             } else if( items[i] === "default" || (items[i] === "btn-default") ){
-                bg_color = Theme.btn_default_bg;
-                text_color = Theme.btn_default_color;
-                border_color = Theme.btn_default_border;
+                backgroundColor = theme.btn_default_bg;
+                textColor = theme.btn_default_color;
+                borderColor = theme.btn_default_border;
             } else if( items[i] === "danger" || (items[i] === "btn-danger") ){
-                bg_color = Theme.btn_danger_bg;
-                text_color = Theme.btn_danger_color;
-                border_color = Theme.btn_danger_border;
+                backgroundColor = theme.btn_danger_bg;
+                textColor = theme.btn_danger_color;
+                borderColor = theme.btn_danger_border;
             } else if( items[i] === "success" || (items[i] === "btn-success") ){
-                bg_color = Theme.btn_success_bg;
-                text_color = Theme.btn_success_color;
-                border_color = Theme.btn_success_border;
+                backgroundColor = theme.btn_success_bg;
+                textColor = theme.btn_success_color;
+                borderColor = theme.btn_success_border;
             } else if( items[i] === "info" || (items[i] === "btn-info") ){
-                bg_color = Theme.btn_info_bg;
-                text_color = Theme.btn_info_color;
-                border_color = Theme.btn_info_border;
+                backgroundColor = theme.btn_info_bg;
+                textColor = theme.btn_info_color;
+                borderColor = theme.btn_info_border;
             } else if( items[i] === "warning" || (items[i] === "btn-warning") ){
-                bg_color = Theme.btn_warning_bg;
-                text_color = Theme.btn_warning_color;
-                border_color = Theme.btn_warning_border;
+                backgroundColor = theme.btn_warning_bg;
+                textColor = theme.btn_warning_color;
+                borderColor = theme.btn_warning_border;
             } else if( items[i] === "close" || (items[i] === "btn-close")){
-                bg_color = "transparent";
-                text_color = Theme.text_muted;
-                border_color = "transparent";
+                backgroundColor = "transparent";
+                textColor = theme.text_muted;
+                borderColor = "transparent";
             } else if( items[i] === "block" ){
                 blockWidth = true;
             }
@@ -100,20 +100,20 @@ SBaseRectangle {
         for(i=0; i < items.length; i++){
             if( items[i] === "left" ){
                 dropdown = Fa.Icon.caret_left;
-                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x - width - padding_horizontal});
+                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x - width - paddingHorizontal});
                 menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y + height/2 - height/2});
             } else if( items[i] === "right" ){
                 dropdown = Fa.Icon.caret_right;
-                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x + width + padding_horizontal});
+                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x + width + paddingHorizontal});
                 menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y + height/2 - height/2});
             } else if( items[i] === "top" ){
                 dropdown = Fa.Icon.caret_up;
                 menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x + width/2 - width/2});
-                menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y - menu.height - padding_vertical});
+                menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y - menu.height - paddingVertical});
             } else if( items[i] === "bottom" ){
                 dropdown = Fa.Icon.caret_down;
                 menu.x = Qt.binding(function(){ return menu.parent.mapFromItem(menu.target, 0, 0).x });
-                menu.y = Qt.binding(function(){ return menu.parent.mapFromItem(menu.target, 0, 0).y + height + padding_vertical });
+                menu.y = Qt.binding(function(){ return menu.parent.mapFromItem(menu.target, 0, 0).y + height + paddingVertical });
             }
         }
     }
@@ -127,20 +127,20 @@ SBaseRectangle {
     RowLayout {
         id: baseRectangleDropdownText;
         width: parent.width;
-        spacing: Theme.padding_base_horizontal;
+        spacing: theme.padding_base_horizontal;
 
         clip: true;
 
         Row {
             Layout.fillWidth: true;
-            leftPadding: padding_horizontal;
-            topPadding: padding_vertical;
-            spacing: Theme.padding_base_horizontal/4;
+            leftPadding: paddingHorizontal;
+            topPadding: paddingVertical;
+            spacing: theme.padding_base_horizontal/4;
             Text {
                 id: rectangleIcon;
-                color: text_color;
+                color: textColor;
                 text: icon;
-                font.pointSize: font_size*1.15;
+                font.pointSize: fontSize*1.15;
                 font.family: iconFont;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
@@ -150,9 +150,9 @@ SBaseRectangle {
 
             Text {
                 id: rectangleText;
-                color: text_color;
+                color: textColor;
                 text: baseRectangleDropdown.text;
-                font.pointSize: font_size;
+                font.pointSize: fontSize;
                 font.family: textFont;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
@@ -162,12 +162,12 @@ SBaseRectangle {
         }
 
         Text {
-            topPadding: padding_vertical;
-            rightPadding: padding_horizontal;
+            topPadding: paddingVertical;
+            rightPadding: paddingHorizontal;
             id: dropDownIcon;
-            color: text_color;
+            color: textColor;
             text: baseRectangleDropdown.dropdown;
-            font.pointSize: font_size;
+            font.pointSize: fontSize;
             font.family: iconFont;
             horizontalAlignment: Text.AlignHCenter;
             verticalAlignment: Text.AlignVCenter;
@@ -180,12 +180,12 @@ SBaseRectangle {
         anchors.fill: parent;
         hoverEnabled: true;
         onEntered: {
-            bg_color = Qt.darker(bg_color, 1.1);
+            backgroundColor = Qt.darker(backgroundColor, 1.1);
             startHover();
         }
 
         onExited: {
-            bg_color = Qt.lighter(bg_color, 1.1);
+            backgroundColor = Qt.lighter(backgroundColor, 1.1);
             stopHover();
         }
 

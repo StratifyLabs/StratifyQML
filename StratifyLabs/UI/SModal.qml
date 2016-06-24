@@ -23,16 +23,16 @@ SItem {
 
     Rectangle {
         anchors.fill: parent;
-        color: Qt.rgba(0,0,0,Theme.modal_backdrop_opacity);
+        color: Qt.rgba(0,0,0,theme.modal_backdrop_opacity);
         Rectangle {
             anchors.centerIn: parent;
-            width: Theme.modal_md > parent.width*0.75 ? parent.width*0.75 : Theme.modal_md;
+            width: theme.modal_md > parent.width*0.75 ? parent.width*0.75 : theme.modal_md;
             height: modalContents.height;
-            radius: Theme.panel_border_radius;
-            border.color: Theme.modal_header_border_color;
+            radius: theme.panel_border_radius;
+            border.color: theme.modal_header_border_color;
 
             SColumn {
-                y: padding_vertical;
+                y: paddingVertical;
                 id: modalContents;
             }
         }

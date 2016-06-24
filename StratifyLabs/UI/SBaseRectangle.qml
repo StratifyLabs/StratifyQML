@@ -31,8 +31,8 @@ SItem {
         implicitHeight: parent.height;
         width: (blockWidth == true) ? parent.width : parent.implicitWidth;
         radius: baseRectangle.radius;
-        border.color: enabled ? baseRectangle.borderColor : Theme.gray_lighter;
-        color: enabled ? baseRectangle.backgroundColor : Theme.gray_lighter;
+        border.color: enabled ? baseRectangle.borderColor : theme.gray_lighter;
+        color: enabled ? baseRectangle.backgroundColor : theme.gray_lighter;
         clip: true;
     }
 

@@ -23,7 +23,7 @@ SList {
     delegate: listDelegate;
     blockWidth: true;
 
-    implicitHeight: listViewObject.count * (font_size + padding_vertical*5);
+    implicitHeight: listViewObject.count * (fontSize + paddingVertical*5);
     listViewObject.spacing: 0;
 
     signal clicked();
@@ -48,13 +48,13 @@ SList {
                 hoverEnabled: true;
 
                 onEntered: {
-                    text.text_color = Theme.dropdown_link_hover_color;
-                    container.background = Theme.dropdown_link_hover_bg;
+                    text.textColor = theme.dropdown_link_hover_color;
+                    container.background = theme.dropdown_link_hover_bg;
                     startHover();
                 }
 
                 onExited: {
-                    text.text_color = Theme.text_color;
+                    text.textColor = theme.text_color;
                     container.background = "transparent";
                     stopHover;
                 }
@@ -74,17 +74,17 @@ SList {
 
     Rectangle {
         anchors.fill: parent;
-        color: Theme.dropdown_bg;
-        radius: Theme.btn_border_radius_base;
-        border.color: Theme.dropdown_border;
+        color: theme.dropdown_bg;
+        radius: theme.btn_border_radius_base;
+        border.color: theme.dropdown_border;
         z:-1;
     }
 
     Rectangle {
         anchors.fill: parent;
         color: "transparent";
-        border.color: Theme.dropdown_border;
-        radius: Theme.btn_border_radius_base;
+        border.color: theme.dropdown_border;
+        radius: theme.btn_border_radius_base;
         z:1;
     }
 

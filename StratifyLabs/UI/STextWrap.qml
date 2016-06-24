@@ -24,6 +24,6 @@ SText {
     x:1;
     textObject.wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
     textObject.width: parent.width-2;
-    implicitHeight: textObject.height + 3*padding_vertical;
+    implicitHeight: textObject.height + 3*paddingVertical;
 
 }

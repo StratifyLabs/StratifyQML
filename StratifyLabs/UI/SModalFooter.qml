@@ -22,15 +22,15 @@ SItem {
     default property alias data: contents.data;
 
     implicitWidth: parent.width;
-    implicitHeight: column.height + padding_vertical*3;
+    implicitHeight: column.height + paddingVertical*3;
 
     SColumn {
         id: column;
         alignment: Qt.AlignHCenter | Qt.AlignCenter;
         SHLine{ id: line; }
         SColumn {
-            contents.x: padding_horizontal;
-            contents.width: parent.width - 2*padding_horizontal;
+            contents.x: paddingHorizontal;
+            contents.width: parent.width - 2*paddingHorizontal;
             SRow { id: contents; }
         }
 

@@ -80,7 +80,7 @@ SBaseRectangle {
 
             Text {
                 id: rectangleIcon;
-                color: enabled ? textColor : Theme.text_muted;
+                color: enabled ? textColor : theme.text_muted;
                 text: icon;
                 font.pointSize: fontSize*1.15;
                 font.family: iconFont;
@@ -110,7 +110,7 @@ SBaseRectangle {
 
             Text {
                 id: rectangleText;
-                color: enabled ? textColor : Theme.text_muted;
+                color: enabled ? textColor : theme.text_muted;
                 text: baseRectangleText.text;
                 font.pointSize: fontSize;
                 font.family: textFont;

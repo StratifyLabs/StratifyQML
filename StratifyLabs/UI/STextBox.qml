@@ -31,7 +31,7 @@ SBaseRectangle {
 
     property alias inputObject: input;
 
-    implicitHeight: font_size + theme.padding_base_vertical*3;
+    implicitHeight: fontSize + paddingVertical*3;
     width: parent.width;
 
     onStyleChanged: {

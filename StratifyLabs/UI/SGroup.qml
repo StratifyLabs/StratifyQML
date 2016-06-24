@@ -32,7 +32,7 @@ SItem {
 
     Row {
         id: contents;
-        spacing: padding_horizontal;
+        spacing: paddingHorizontal;
     }
 
 }

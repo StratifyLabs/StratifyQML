@@ -22,30 +22,30 @@ SBaseRectangle {
     //supports success, info, warning, danger, striped, active (animated), stacked
 
     blockWidth: true;
-    bg_color: Theme.progress_bg;
-    text_color: Theme.progress_bar_color;
-    radius: Theme.progress_border_radius;
-    border_color: Theme.progress_bg;
+    backgroundColor: theme.progress_bg;
+    textColor: theme.progress_bar_color;
+    radius: theme.progress_border_radius;
+    borderColor: theme.progress_bg;
 
-    height: Theme.font_size_base;
+    height: theme.font_size_base;
     width: parent.width;
 
     onStyleChanged: {
         var items = style.split(" ");
-        radius = Theme.btn_border_radius_base;
+        radius = theme.btn_border_radius_base;
         for(var i = 0; i < items.length; i++){
             if( items[i] === "progress-bar-primary" ){
-                progress.color = Theme.progress_bar_bg;
+                progress.color = theme.progress_bar_bg;
             } else if( items[i] === "progress-bar-default" ){
-                progress.color = Theme.progress_bar_bg;
+                progress.color = theme.progress_bar_bg;
             } else if( items[i] === "progress-bar-danger" ){
-                progress.color = Theme.progress_bar_danger_bg;
+                progress.color = theme.progress_bar_danger_bg;
             } else if( items[i] === "progress-bar-success" ){
-                progress.color = Theme.progress_bar_success_bg;
+                progress.color = theme.progress_bar_success_bg;
             } else if( items[i] === "progress-bar-info" ){
-                progress.color = Theme.progress_bar_info_bg;
+                progress.color = theme.progress_bar_info_bg;
             } else if( items[i] === "progress-bar-warning" ){
-                progress.color = Theme.progress_bar_warning_bg;
+                progress.color = theme.progress_bar_warning_bg;
             }
         }
     }
@@ -59,8 +59,8 @@ SBaseRectangle {
             anchors.top: parent.top;
             height: parent.height;
             width: parent.width * value*1.0/100.0;
-            color: Theme.progress_bar_bg;
-            radius: Theme.progress_border_radius;
+            color: theme.progress_bar_bg;
+            radius: theme.progress_border_radius;
         }
     ]
 
