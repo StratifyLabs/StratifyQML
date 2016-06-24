@@ -35,41 +35,6 @@ SList {
 
         SRoundedRectangle {
             id: base;
-            /*
-            property bool active: false;
-
-            states: [
-                State { when: active;
-                    PropertyChanges {
-                        target: base;
-                        color: Theme.list_group_active_bg;
-                        borderColor: Theme.list_group_active_border;
-                    }
-                    PropertyChanges {
-                        target: text;
-                        text_color: Theme.list_group_active_color;
-                    }
-                },
-                State { when: !active;
-                    PropertyChanges {
-                        target: base;
-                        color: Theme.list_group_bg;
-                        borderColor: Theme.list_group_border;
-                    }
-                    PropertyChanges {
-                        target: text;
-                        text_color: Theme.text_color;
-                    }
-                }
-            ]
-
-            transitions: Transition {
-                ColorAnimation { property: "color"; duration: 100 }
-                ColorAnimation { property: "borderColor"; duration: 100 }
-                ColorAnimation { property: "text_color"; duration: 100 }
-            }
-            */
-
             topRadius: index == 0 ? Theme.list_group_border_radius : 0;
             bottomRadius: index == (listViewObject.count-1) ? Theme.list_group_border_radius : 0;
             implicitWidth: parent.width;

@@ -43,8 +43,17 @@ SItem {
         }
 
         clip: true;
-        spacing: padding_vertical;
-        delegate: listDelegate;
+
+        TableViewColumn {
+            title: "Name"
+            role: "fileName"
+            width: 300
+        }
+        TableViewColumn {
+            title: "Permissions"
+            role: "filePermissions"
+            width: 100
+        }
 
     }
 

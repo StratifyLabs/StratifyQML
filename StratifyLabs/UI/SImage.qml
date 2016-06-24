@@ -20,8 +20,9 @@ import "."
 SItem {
 
     default property alias data: contents.data;
-    property string border_color: Theme.panel_default_border;
+    property string border_color: "transparent";
     property alias source: image.source;
+    property alias cache: image.cache;
 
     implicitWidth: parent.width;
     implicitHeight: contents.height;
@@ -43,9 +44,8 @@ SItem {
 
 
     Rectangle {
-
-        // \todo This doesn't mask the corners off -- may have to use OpacityMask and generate the rounded image
         id: contents;
+        // \todo This doesn't mask the corners off -- may have to use OpacityMask and generate the rounded image
         radius: 0;
         color: Theme.body_bg;
         border.color: border_color;
@@ -56,9 +56,9 @@ SItem {
         clip: true;
 
         Image {
+            id: image;
             x: padding_horizontal;
             y: padding_vertical;
-            id: image;
 
 
         }

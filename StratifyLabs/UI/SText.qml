@@ -22,7 +22,7 @@ SBaseRectangle {
     property alias text: text.text;
     property alias icon: text.text;
     property alias textObject: text;
-    property string text_color: Theme.text_color;
+
     property bool spin: false;
     property bool pulse: false;
     property real pulseSteps: 8;

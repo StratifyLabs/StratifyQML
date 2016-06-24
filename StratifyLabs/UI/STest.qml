@@ -16,6 +16,7 @@ Copyright 2016 Tyler Gilbert
 
 
 import QtQuick 2.6
+import QtQuick.Controls 1.4
 import "Fa-4.5.0.js" as Fa
 import "STestListText.js" as List;
 import "."
@@ -28,6 +29,7 @@ SItem {
 
 
     SColumn {
+        style: "fill";
         SContainer {
             background: Theme.brand_danger;
             SRow {
@@ -39,11 +41,14 @@ SItem {
                     }
                 }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "CarouselTest"; }
-                SRadioButton { style: "text-hide-sm center"; checked:true; control: radioButtonControl; text: "PanelTest"; }
+                SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "PanelTest"; }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "AlertTest"; }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "ButtonTest"; }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "LabelTest"; }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "InputTest"; }
+                SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "NavtreeTest"; }
+                SRadioButton { style: "text-hide-sm center"; checked:true; control: radioButtonControl; text: "TableTest"; }
+
             }
 
         }
@@ -54,7 +59,7 @@ SItem {
             style: "fill";
 
             SAnimationHPush{ id: animation; }
-            screen: "PanelTest";
+            screen: "TableTest";
 
             Component.onCompleted: {
                 showScreen(current);
@@ -286,7 +291,113 @@ SItem {
                             model: jsonModel.model;
                         }
                     }
+                },
+
+                SContainer {
+                    style: "fill";
+                    name: "NavtreeTest";
+                    SNavtree{ style: "fill block"; }
+                },
+
+                SContainer {
+                    style: "fill";
+                    name: "TableTest";
+
+                    SColumn {
+                        style: "fill";
+
+
+                        ListModel {
+                            id: libraryModel
+                            ListElement {
+                                title: "A Masterpiece"
+                                author: "Gabriel"
+                            }
+                            ListElement {
+                                title: "Brilliance"
+                                author: "Jens"
+                            }
+                            ListElement {
+                                title: "Outstanding"
+                                author: "Frederik"
+                            }
+                            ListElement {
+                                title: "A Masterpiece"
+                                author: "Gabriel"
+                            }
+                        }
+
+
+                        STable{
+                            model: libraryModel;
+                            style: "block table-striped";
+
+                            TableViewColumn {
+                                role: "title";
+                                title: "Title";
+                                width: 200;
+                            }
+
+                            TableViewColumn {
+                                role: "author"
+                                title: "Author"
+                                width: 200
+                            }
+                        }
+
+                        STable{
+                            model: libraryModel;
+                            style: "block table-condensed";
+
+                            TableViewColumn {
+                                role: "title";
+                                title: "Title";
+                                width: 200;
+                            }
+
+                            TableViewColumn {
+                                role: "author"
+                                title: "Author"
+                                width: 200
+                            }
+                        }
+
+                        STable{
+                            model: libraryModel;
+                            style: "block table-bordered";
+
+                            TableViewColumn {
+                                role: "title";
+                                title: "Title";
+                                width: 200;
+                            }
+
+                            TableViewColumn {
+                                role: "author"
+                                title: "Author"
+                                width: 200
+                            }
+                        }
+
+                        STable{
+                            model: libraryModel;
+                            style: "fill block table-hover";
+
+                            TableViewColumn {
+                                role: "title";
+                                title: "Title";
+                                width: parent.width * 0.4;
+                            }
+
+                            TableViewColumn {
+                                role: "author"
+                                title: "Author"
+                                width: parent.width * 0.4;
+                            }
+                        }
+                    }
                 }
+
             ]
         }
     }

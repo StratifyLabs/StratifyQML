@@ -100,7 +100,7 @@ SBaseRectangle {
         visible: flick.contentHeight > flick.height;
         radius: Theme.badge_border_radius;
         width: 8;
-        color: Qt.lighter(Theme.gray_lighter, 2.0);
+        color: Theme.gray_lighter;
         height: calcHeight();
         x: flick.width - width * 1.5;
         y: calcY();

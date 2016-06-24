@@ -38,11 +38,17 @@ Item {
     property var tooltip: null;
     property var popover: null;
 
+    //This is the naming convention that should be used throughout private items (items not typically exposed to public)
+    property bool sItemHovered;
+
     z: 0;
 
+    //these names are not consistent -- need to user camelcase -- and add a prefix sItemPaddingVertical;
     property real padding_vertical: Theme.padding_base_vertical;
     property real padding_horizontal: Theme.padding_base_horizontal;
     property real font_size: Theme.font_size_base;
+    property color text_color: Theme.text_color;
+
 
     property string textFont: Theme.font_family_base.name;
     property string iconFont: Theme.font_family_icon.name;
@@ -122,10 +128,12 @@ Item {
 
     function startHover(){
         hoverTimer.start();
+        sItemHovered = true;
     }
 
     function stopHover(){
         hoverTimer.stop();
+        sItemHovered = false;
         if( tooltip != null ){
             tooltip.tooltipVisible = false;
         }

@@ -24,7 +24,6 @@ SItem {
     blockWidth: false;
 
     property alias bg_color: baseRectangle.color;
-    property string text_color: Theme.text_color;
 
     property real radius: Theme.btn_border_radius_base;
     property string color: Theme.body_bg;

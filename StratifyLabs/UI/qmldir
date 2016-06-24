@@ -26,6 +26,7 @@ SLoader 1.0 SLoader.qml
 SLabel 1.0 SLabel.qml
 SNavbar 1.0 SNavbar.qml
 SNavtree 1.0 SNavtree.qml
+STable 1.0 STable.qml
 STree 1.0 STree.qml
 SNavtreeItem 1.0 SNavtreeItem.qml
 SPanel 1.0 SPanel.qml
