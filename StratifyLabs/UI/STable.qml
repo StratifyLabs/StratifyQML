@@ -31,7 +31,7 @@ SItem {
     property bool hover: false;
     property bool bordered: false;
 
-    property color borderColor: Qt.darker(Theme.body_bg, 1.1);
+    property color borderColor: Qt.darker(theme.body_bg, 1.1);
 
     signal rowClicked();
 
@@ -41,7 +41,7 @@ SItem {
             if( items[i] === "table-striped" ){
                 striped = true;
             } else if( items[i] === "table-condensed" ){
-                padding_vertical = Theme.padding_small_vertical;
+                paddingVertical = theme.padding_small_vertical;
             } else if( items[i] === "table-hover" ){
                 hover = true;
             } else if( items[i] === "table-bordered" ){
@@ -86,7 +86,7 @@ SItem {
 
             handle: Rectangle {
                 implicitWidth: 8;
-                color: Theme.gray_lighter;
+                color: theme.gray_lighter;
                 radius: width/2;
             }
 
@@ -96,12 +96,12 @@ SItem {
 
         itemDelegate: Text {
             verticalAlignment: Text.AlignVCenter;
-            leftPadding: padding_horizontal;
-            rightPadding: padding_horizontal;
-            topPadding: padding_vertical;
-            bottomPadding: padding_vertical;
-            color: Theme.text_color;
-            font.pointSize: font_size;
+            leftPadding: paddingHorizontal;
+            rightPadding: paddingHorizontal;
+            topPadding: paddingVertical;
+            bottomPadding: paddingVertical;
+            color: textColor;
+            font.pointSize: fontSize;
             font.family: textFont;
             font.weight: Font.Light;
             text: styleData.value;
@@ -115,19 +115,19 @@ SItem {
 
         headerDelegate: Text {
             verticalAlignment: Text.AlignVCenter;
-            leftPadding: padding_horizontal;
-            rightPadding: padding_horizontal;
-            topPadding: padding_vertical;
-            bottomPadding: padding_vertical;
-            color: Theme.gray_base;
-            font.pointSize: font_size;
+            leftPadding: paddingHorizontal;
+            rightPadding: paddingHorizontal;
+            topPadding: paddingVertical;
+            bottomPadding: paddingVertical;
+            color: theme.gray_base;
+            font.pointSize: fontSize;
             font.family: textFont;
             font.weight: Font.Bold;
             text: styleData.value;
 
             Rectangle {
                 anchors.fill: parent;
-                color: Theme.body_bg;
+                color: theme.body_bg;
                 z: -1;
             }
 
@@ -149,9 +149,9 @@ SItem {
 
         rowDelegate: Rectangle {
             property bool hovered;
-            color: styleData.alternate ? Qt.darker(Theme.body_bg, 1.02 + hovered*0.05) : Qt.darker(Theme.body_bg, 1.0 + hovered*0.05);
+            color: styleData.alternate ? Qt.darker(theme.body_bg, 1.02 + hovered*0.05) : Qt.darker(theme.body_bg, 1.0 + hovered*0.05);
 
-            height: font_size + padding_vertical*3;
+            height: fontSize + paddingVertical*3;
 
             Rectangle {
                 width: parent.width;

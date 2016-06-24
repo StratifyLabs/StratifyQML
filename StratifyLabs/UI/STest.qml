@@ -31,7 +31,7 @@ SItem {
     SColumn {
         style: "fill";
         SContainer {
-            background: Theme.brand_danger;
+            background: theme.brand_danger;
             SRow {
                 SRadioButtonControl { id: radioButtonControl;
                     onActiveChanged: {

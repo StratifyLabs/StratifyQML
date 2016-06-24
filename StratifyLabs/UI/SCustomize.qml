@@ -14,7 +14,6 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-pragma Singleton;
 import QtQuick 2.6
 
 Item {

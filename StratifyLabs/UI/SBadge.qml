@@ -23,17 +23,17 @@ SBaseRectangleText {
 
     type: "badge";
     radius: Theme.badge_border_radius;
-    bg_color: Theme.badge_bg;
-    text_color: Theme.badge_color;
-    border_color: Theme.badge_bg;
+    backgroundColor: Theme.badge_bg;
+    textColor: Theme.badge_color;
+    borderColor: Theme.badge_bg;
 
     onStyleChanged: {
         var items = parseStyle();
         for(var i = 0; i < items.length; i++){
             if( items[i] === "active" ){
-                bg_color = Theme.badge_active_bg;
-                text_color = Theme.badge_active_color;
-                border_color = Theme.badge_active_bg;
+                backgroundColor = Theme.badge_active_bg;
+                textColor = Theme.badge_active_color;
+                borderColor = Theme.badge_active_bg;
             }
         }
     }

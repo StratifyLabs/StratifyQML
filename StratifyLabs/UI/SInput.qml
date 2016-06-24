@@ -24,14 +24,14 @@ SBaseRectangle {
     property string text;
     property string placeholder: "";
     blockWidth: true;
-    color: Theme.input_bg;
-    border_color: Theme.input_border;
-    radius: Theme.input_border_radius;
+    backgroundColor: theme.input_bg;
+    borderColor: theme.input_border;
+    radius: theme.input_border_radius;
 
     property bool showPlaceholder: false;
     property alias inputObject: input;
 
-    implicitHeight: font_size + Theme.padding_base_vertical*3;
+    implicitHeight: fontSize + paddingVertical*3;
     width: parent.width;
 
     signal editingFinished();
@@ -62,20 +62,20 @@ SBaseRectangle {
 
     TextInput {
         id: input;
-        color: showPlaceholder ? Qt.lighter(text_color, 2.0) : text_color;
+        color: showPlaceholder ? Qt.lighter(textColor, 2.0) : textColor;
         text: baseRectangleInput.text;
         width: parent.width - clearIcon.width*1.25;
-        leftPadding: padding_horizontal;
-        rightPadding: padding_horizontal;
-        bottomPadding: padding_vertical;
-        topPadding: padding_vertical;
-        font.pointSize: font_size;
+        leftPadding: paddingHorizontal;
+        rightPadding: paddingHorizontal;
+        bottomPadding: paddingVertical;
+        topPadding: paddingVertical;
+        font.pointSize: fontSize;
         font.family: textFont;
         horizontalAlignment: TextEdit.AlignLeft;
         verticalAlignment: TextEdit.AlignVCenter;
         selectByMouse: true;
-        selectionColor: Qt.lighter(text_color, 3.0);
-        selectedTextColor: text_color;
+        selectionColor: Qt.lighter(textColor, 3.0);
+        selectedTextColor: textColor;
         clip: true;
 
         Component.onCompleted: {
@@ -103,12 +103,12 @@ SBaseRectangle {
 
     Text {
         id: clearIcon;
-        color: Theme.gray_light;
+        color: theme.gray_light;
         text: Fa.Icon.times_circle;
-        font.pointSize: font_size;
+        font.pointSize: fontSize;
         anchors.right: parent.right;
         font.family: iconFont;
-        rightPadding: padding_horizontal;
+        rightPadding: paddingHorizontal;
         font.weight: Font.Light;
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;

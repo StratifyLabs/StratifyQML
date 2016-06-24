@@ -9,8 +9,8 @@ SItem {
     type: "breadcrumb"
 
     signal linkCliked(string hrefAddress);
-    padding_vertical: Theme.breadcrumb_padding_vertical;
-    padding_horizontal: Theme.breadcrumb_padding_horizontal;
+    paddingVertical: Theme.breadcrumb_padding_vertical;
+    paddingHorizontal: Theme.breadcrumb_padding_horizontal;
 
     property alias model: listView.model;
 

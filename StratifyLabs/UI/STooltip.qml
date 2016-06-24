@@ -55,14 +55,14 @@ SItem {
 
     property string currentStyle;
 
-    implicitWidth: text.width + 2*Theme.tooltip_arrow_width;
-    implicitHeight: text.height + 2*Theme.tooltip_arrow_width;
+    implicitWidth: text.width + 2*theme.tooltip_arrow_width;
+    implicitHeight: text.height + 2*theme.tooltip_arrow_width;
 
     property string position: "left";
 
-    font_size: Theme.font_size_small;
-    padding_vertical: Theme.padding_small_vertical;
-    padding_horizontal: Theme.padding_small_horizontal;
+    fontSize: theme.font_size_small;
+    paddingVertical: theme.padding_small_vertical;
+    paddingHorizontal: theme.padding_small_horizontal;
 
     function updateStyle(){
         var items = parseStyle();
@@ -97,13 +97,13 @@ SItem {
 
     Rectangle {
         id: rectangle;
-        x: Theme.tooltip_arrow_width;
-        y: Theme.tooltip_arrow_width;
-        color: Theme.tooltip_bg;
+        x: theme.tooltip_arrow_width;
+        y: theme.tooltip_arrow_width;
+        color: theme.tooltip_bg;
         width: text.width;
         height: text.height;
-        radius: Theme.btn_border_radius_small;
-        border.color: Theme.tooltip_bg;
+        radius: theme.btn_border_radius_small;
+        border.color: theme.tooltip_bg;
         z: parent.z;
     }
 
@@ -125,19 +125,19 @@ SItem {
             ctx.save();
             ctx.clearRect(0,0,width,height);
             ctx.lineWidth = 3;
-            ctx.strokeStyle = Theme.tooltip_bg;
+            ctx.strokeStyle = theme.tooltip_bg;
             ctx.fillStyle = ctx.strokeStyle;
-            ctx.globalAlpha = Theme.tooltip_opacity;
+            ctx.globalAlpha = theme.tooltip_opacity;
             ctx.lineJoin = "round";
 
             ctx.beginPath();
 
             if( (position === "left") || (position === "right") ){
-                twidth = Theme.tooltip_arrow_width*2;
-                theight = Theme.tooltip_arrow_width*4;
+                twidth = theme.tooltip_arrow_width*2;
+                theight = theme.tooltip_arrow_width*4;
             } else {
-                twidth = Theme.tooltip_arrow_width*4;
-                theight = Theme.tooltip_arrow_width*2;
+                twidth = theme.tooltip_arrow_width*4;
+                theight = theme.tooltip_arrow_width*2;
             }
 
             if( position === "left" ){
@@ -173,18 +173,18 @@ SItem {
 
     Text {
         id: text;
-        x: Theme.tooltip_arrow_width;
-        y: Theme.tooltip_arrow_width;
-        topPadding: padding_vertical;
-        bottomPadding: padding_vertical;
-        leftPadding: padding_horizontal;
-        rightPadding: padding_horizontal;
+        x: theme.tooltip_arrow_width;
+        y: theme.tooltip_arrow_width;
+        topPadding: paddingVertical;
+        bottomPadding: paddingVertical;
+        leftPadding: paddingHorizontal;
+        rightPadding: paddingHorizontal;
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-        color: Theme.tooltip_color;
-        font.pointSize: font_size;
+        color: theme.tooltip_color;
+        font.pointSize: fontSize;
         font.family: textFont;
         font.weight: Font.Light;
-        width: implicitWidth > Theme.tooltip_max_width ? Theme.tooltip_max_width : implicitWidth;
+        width: implicitWidth > theme.tooltip_max_width ? theme.tooltip_max_width : implicitWidth;
         z: parent.z;
     }
 

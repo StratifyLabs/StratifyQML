@@ -77,10 +77,10 @@ SItem {
 
         icon: Fa.Icon.chevron_left;
 
-        opacity: Theme.carousel_control_opacity;
-        color: Theme.carousel_control_color;
-        width: Theme.carousel_control_width;
-        font_size: Theme.carousel_control_font_size;
+        opacity: theme.carousel_control_opacity;
+        backgroundColor: theme.carousel_control_color;
+        width: theme.carousel_control_width;
+        fontSize: theme.carousel_control_font_size;
 
         onClicked: {
             carouselView.decrementCurrentIndex();
@@ -96,10 +96,10 @@ SItem {
 
         icon: Fa.Icon.chevron_right;
 
-        opacity: Theme.carousel_control_opacity;
-        color: Theme.carousel_control_color;
-        width: Theme.carousel_control_width;
-        font_size: Theme.carousel_control_font_size;
+        opacity: theme.carousel_control_opacity;
+        backgroundColor: theme.carousel_control_color;
+        width: theme.carousel_control_width;
+        fontSize: theme.carousel_control_font_size;
 
         onClicked: {
             carouselView.incrementCurrentIndex();
@@ -121,13 +121,13 @@ SItem {
 
             SRoundedRectangle {
                 id: roundRectangle
-                color: carouselView.currentIndex === index ? Theme.carousel_indicator_active_bg : "transparent";
-                borderColor: Theme.carousel_indicator_border_color;
+                color: carouselView.currentIndex === index ? theme.carousel_indicator_active_bg : "transparent";
+                borderColor: theme.carousel_indicator_border_color;
 
-                width: Theme.carousel_control_width;
-                height: Theme.carousel_control_width;
-                radius: Theme.carousel_control_width;
-                opacity: Theme.carousel_control_opacity;
+                width: theme.carousel_control_width;
+                height: theme.carousel_control_width;
+                radius: theme.carousel_control_width;
+                opacity: theme.carousel_control_opacity;
 
                 MouseArea {
                     anchors.fill: parent;
@@ -184,7 +184,7 @@ SItem {
                     anchors.right: parent.right;
                     anchors.bottom: parent.bottom;
                     anchors.bottomMargin: rowIndicators.height + 4
-                    text_color: Theme.carousel_caption_color;
+                    textColor: theme.carousel_caption_color;
                 }
                 id: image;
                 anchors.fill: parent;

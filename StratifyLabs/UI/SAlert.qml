@@ -24,9 +24,6 @@ SItem {
 
     default property alias data: contents.data;
     property alias text: alertText.text;
-    property real padding_vertical: Theme.padding_base_vertical;
-    property real padding_horizontal: Theme.padding_base_horizontal;
-    property real font_size: Theme.font_size_base;
 
     property bool dismissible: true;
     property bool dismissed: false;
@@ -52,9 +49,6 @@ SItem {
         NumberAnimation { property: "opacity"; duration: 150 }
     }
 
-    property string bg_color: Theme.alert_info_bg;
-    property string text_color: Theme.alert_info_text;
-    property string border_color: Theme.alert_info_border;
 
     implicitWidth: parent.width;
     implicitHeight: alertRectangle.height;
@@ -63,21 +57,21 @@ SItem {
         var items = parseStyle();
         for(var i = 0; i < items.length; i++){
             if( items[i] === "alert-danger" ){
-                bg_color = Theme.alert_danger_bg;
-                text_color = Theme.alert_danger_text;
-                border_color = Theme.alert_danger_border;
+                backgroundColor = theme.alert_danger_bg;
+                textColor = theme.alert_danger_text;
+                borderColor = theme.alert_danger_border;
             } else if( items[i] === "alert-success" ){
-                bg_color = Theme.alert_success_bg;
-                text_color = Theme.alert_success_text;
-                border_color = Theme.alert_success_border;
+                backgroundColor = theme.alert_success_bg;
+                textColor = theme.alert_success_text;
+                borderColor = theme.alert_success_border;
             } else if( items[i] === "alert-info" ){
-                bg_color = Theme.alert_info_bg;
-                text_color = Theme.alert_info_text;
-                border_color = Theme.alert_info_border;
+                backgroundColor = theme.alert_info_bg;
+                textColor = theme.alert_info_text;
+                borderColor = theme.alert_info_border;
             } else if( items[i] === "alert-warning" ){
-                bg_color = Theme.alert_warning_bg;
-                text_color = Theme.alert_warning_text;
-                border_color = Theme.alert_warning_border;
+                backgroundColor = theme.alert_warning_bg;
+                textColor = theme.alert_warning_text;
+                borderColor = theme.alert_warning_border;
             }
         }
     }
@@ -86,10 +80,10 @@ SItem {
         id: alertRectangle;
         implicitWidth: parent.width;
         implicitHeight: contents.height;
-        color: bg_color;
-        border.color: border_color;
+        color: backgroundColor;
+        border.color: borderColor;
         border.width: 1;
-        radius: Theme.alert_border_radius;
+        radius: theme.alert_border_radius;
 
         SContainer {
             id: contents;
@@ -99,9 +93,9 @@ SItem {
                 anchors.left: parent.left;
                 width: parent.width-2 - alertDismiss.width;
                 text: "";
-                color: text_color;
+                color: textColor;
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-                font.pointSize: font_size;
+                font.pointSize: fontSize;
                 font.family: textFont;
                 font.weight: Font.Light;
                 verticalAlignment: Text.AlignVCenter;
@@ -113,13 +107,13 @@ SItem {
             id: alertDismiss;
             anchors.verticalCenter: parent.verticalCenter;
             anchors.right: parent.right;
-            topPadding: padding_vertical;
-            bottomPadding: padding_vertical;
-            rightPadding: padding_horizontal;
+            topPadding: paddingVertical;
+            bottomPadding: paddingVertical;
+            rightPadding: paddingHorizontal;
             text: Fa.Icon.times;
-            color: Qt.lighter(Theme.text_color, 3.0);
+            color: Qt.lighter(textColor, 3.0);
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-            font.pointSize: font_size;
+            font.pointSize: fontSize;
             font.family: iconFont;
             visible: dismissible;
             verticalAlignment: Text.AlignVCenter;
@@ -133,17 +127,15 @@ SItem {
                 }
 
                 onEntered: {
-                    alertDismiss.color = Theme.text_color;
+                    alertDismiss.color = textColor;
                 }
 
                 onExited: {
-                    alertDismiss.color = Qt.lighter(Theme.text_color, 3.0);
+                    alertDismiss.color = Qt.lighter(textColor, 3.0);
                 }
 
             }
         }
-
-
 
     }
 

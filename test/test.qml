@@ -11,10 +11,12 @@ Window {
     minimumWidth: 600;
     minimumHeight: 500;
 
+    SCustomize {
+        id: theme;
+        screen_sm: 700;
+    }
+
     STest { anchors.fill: parent }
 
-    Component.onCompleted: {
-        Theme.screen_sm = 700;
-    }
 
 }

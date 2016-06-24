@@ -25,7 +25,7 @@ SList {
     delegate: listDelegate;
     blockWidth: true;
 
-    implicitHeight: listViewObject.count * (font_size + padding_vertical*5);
+    implicitHeight: listViewObject.count * (fontSize + paddingVertical*5);
     listViewObject.spacing: -2*Screen.devicePixelRatio;
 
     property real active;
@@ -35,12 +35,12 @@ SList {
 
         SRoundedRectangle {
             id: base;
-            topRadius: index == 0 ? Theme.list_group_border_radius : 0;
-            bottomRadius: index == (listViewObject.count-1) ? Theme.list_group_border_radius : 0;
+            topRadius: index == 0 ? theme.list_group_border_radius : 0;
+            bottomRadius: index == (listViewObject.count-1) ? theme.list_group_border_radius : 0;
             implicitWidth: parent.width;
             implicitHeight: contents.height-pixelRatio;
-            color: Theme.list_group_bg;
-            borderColor: Theme.list_group_border;
+            color: theme.list_group_bg;
+            borderColor: theme.list_group_border;
             SContainer {
                 id: contents;
                 SText {
@@ -55,11 +55,11 @@ SList {
                 hoverEnabled: true;
 
                 onEntered: {
-                    color = Theme.list_group_hover_bg;
+                    color = theme.list_group_hover_bg;
                 }
 
                 onExited: {
-                    color = Theme.list_group_bg;
+                    color = theme.list_group_bg;
                 }
 
             }

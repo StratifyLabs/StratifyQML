@@ -36,14 +36,14 @@ SItem {
 
     property string currentStyle;
 
-    implicitWidth: Math.max(textTitle.width, textContent.width) + 2*Theme.popover_arrow_width;
-    implicitHeight: rectanglTitle.height + rectangleContent.height + 2*Theme.popover_arrow_width;
+    implicitWidth: Math.max(textTitle.width, textContent.width) + 2*theme.popover_arrow_width;
+    implicitHeight: rectanglTitle.height + rectangleContent.height + 2*theme.popover_arrow_width;
 
     property string position: "left";
 
-    font_size: Theme.font_size_small;
-    padding_vertical: Theme.padding_small_vertical;
-    padding_horizontal: Theme.padding_small_horizontal;
+    fontSize: theme.font_size_small;
+    paddingVertical: theme.padding_small_vertical;
+    paddingHorizontal: theme.padding_small_horizontal;
 
     property bool popoverVisible: false
     onPopoverVisibleChanged: {
@@ -120,19 +120,19 @@ SItem {
             ctx.save();
             ctx.clearRect(0,0,width,height);
             ctx.lineWidth = 3;
-            ctx.strokeStyle = Theme.popover_bg;
+            ctx.strokeStyle = theme.popover_bg;
             ctx.fillStyle = ctx.strokeStyle;
-            ctx.globalAlpha = Theme.popover_opacity;
+            ctx.globalAlpha = theme.popover_opacity;
             ctx.lineJoin = "round";
 
             ctx.beginPath();
 
             if( (position === "left") || (position === "right") ){
-                twidth = Theme.popover_arrow_width*2;
-                theight = Theme.popover_arrow_width*4;
+                twidth = theme.popover_arrow_width*2;
+                theight = theme.popover_arrow_width*4;
             } else {
-                twidth = Theme.popover_arrow_width*4;
-                theight = Theme.popover_arrow_width*2;
+                twidth = theme.popover_arrow_width*4;
+                theight = theme.popover_arrow_width*2;
             }
 
             if( position === "left" ){
@@ -168,57 +168,57 @@ SItem {
 
     SRoundedRectangle {
         id: rectanglTitle;
-        x: Theme.popover_arrow_width;
-        y: Theme.popover_arrow_width;
-        color: Theme.popover_title_bg;
-        width: parent.width - 2*Theme.popover_arrow_width;
+        x: theme.popover_arrow_width;
+        y: theme.popover_arrow_width;
+        color: theme.popover_title_bg;
+        width: parent.width - 2*theme.popover_arrow_width;
         height: textTitle.height;
-        radius: Theme.btn_border_radius_small;
-        borderColor: Theme.panel_default_border;
+        radius: theme.btn_border_radius_small;
+        borderColor: theme.panel_default_border;
 
         implicitWidth: textTitle.width;
         implicitHeight: textTitle.height;
 
         Text {
             id: textTitle;
-            topPadding: Theme.padding_base_vertical;
-            bottomPadding: Theme.padding_base_vertical;
-            leftPadding: Theme.padding_base_horizontal;
-            rightPadding: Theme.padding_base_horizontal;
-            color: Theme.text_color;
-            font.pointSize:  Theme.font_size_base;
+            topPadding: theme.padding_base_vertical;
+            bottomPadding: theme.padding_base_vertical;
+            leftPadding: theme.padding_base_horizontal;
+            rightPadding: theme.padding_base_horizontal;
+            color: theme.text_color;
+            font.pointSize:  theme.font_size_base;
             font.family: textFont;
             font.weight: Font.Light;
-            width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
+            width: implicitWidth > theme.popover_max_width ? theme.popover_max_width : implicitWidth;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
         }
     }
 
     SRoundedRectangle {
         id: rectangleContent;
-        x: Theme.popover_arrow_width;
-        y: Theme.popover_arrow_width + rectanglTitle.height;
-        color: Theme.popover_bg;
-        width: parent.width- 2*Theme.popover_arrow_width;
+        x: theme.popover_arrow_width;
+        y: theme.popover_arrow_width + rectanglTitle.height;
+        color: theme.popover_bg;
+        width: parent.width- 2*theme.popover_arrow_width;
         height: textContent.height;
-        radius: Theme.btn_border_radius_small;
-        borderColor: Theme.panel_default_border;
+        radius: theme.btn_border_radius_small;
+        borderColor: theme.panel_default_border;
 
         implicitWidth: textContent.width;
         implicitHeight: textContent.height;
 
         Text {
             id: textContent;
-            topPadding: padding_vertical;
-            bottomPadding: padding_vertical;
-            leftPadding: padding_horizontal;
-            rightPadding: padding_horizontal;
+            topPadding: paddingVertical;
+            bottomPadding: paddingVertical;
+            leftPadding: paddingHorizontal;
+            rightPadding: paddingHorizontal;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-            color: Theme.text_color;
-            font.pointSize: font_size;
+            color: textColor;
+            font.pointSize: fontSize;
             font.family: textFont;
             font.weight: Font.Light;
-            width: implicitWidth > Theme.popover_max_width ? Theme.popover_max_width : implicitWidth;
+            width: implicitWidth > theme.popover_max_width ? theme.popover_max_width : implicitWidth;
         }
     }
 

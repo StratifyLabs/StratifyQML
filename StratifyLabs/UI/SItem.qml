@@ -29,8 +29,8 @@ Item {
     property bool sm: false;
     property real alignment: Qt.AlignTop | Qt.AlignLeft;
 
-    property real tooltipDelay: Theme.tooltip_delay;
-    property real popoverDelay: Theme.popover_delay;
+    property real tooltipDelay: theme.tooltip_delay;
+    property real popoverDelay: theme.popover_delay;
 
     property bool blockWidth: false;
     property bool fillHeight: false;
@@ -44,14 +44,16 @@ Item {
     z: 0;
 
     //these names are not consistent -- need to user camelcase -- and add a prefix sItemPaddingVertical;
-    property real padding_vertical: Theme.padding_base_vertical;
-    property real padding_horizontal: Theme.padding_base_horizontal;
-    property real font_size: Theme.font_size_base;
-    property color text_color: Theme.text_color;
+    property real paddingVertical: theme.padding_base_vertical;
+    property real paddingHorizontal: theme.padding_base_horizontal;
+    property real fontSize: theme.font_size_base;
+    property color textColor: theme.text_color;
+    property color backgroundColor: "transparent";
+    property real radius: theme.btn_border_radius_base;
+    property color borderColor: "transparent";
 
-
-    property string textFont: Theme.font_family_base.name;
-    property string iconFont: Theme.font_family_icon.name;
+    property string textFont: theme.font_family_base.name;
+    property string iconFont: theme.font_family_icon.name;
 
 
     visible: hideOnSm && sm ? false : true;
@@ -86,31 +88,31 @@ Item {
                 alignment &= ~(Qt.AlignLeft | Qt.AlignRight);
                 alignment |= Qt.AlignHCenter;
             } if( items[i] === "h1" ){
-                font_size = Theme.font_size_h1;
+                fontSize = theme.font_size_h1;
             } else if( items[i] === "h2" ){
-                font_size = Theme.font_size_h2;
+                fontSize = theme.font_size_h2;
             } else if( items[i] === "h3" ){
-                font_size = Theme.font_size_h3;
+                fontSize = theme.font_size_h3;
             } else if( items[i] === "h4" ){
-                font_size = Theme.font_size_h4;
+                fontSize = theme.font_size_h4;
             } else if( items[i] === "h5" ){
-                font_size = Theme.font_size_h5;
+                fontSize = theme.font_size_h5;
             } else if( items[i] === "h6" ){
-                font_size = Theme.font_size_h6;
+                fontSize = theme.font_size_h6;
             } else if( items[i] === "lg" ){
-                font_size = Theme.font_size_large;
-                padding_vertical = Theme.padding_large_vertical;
-                padding_horizontal = Theme.padding_large_horizontal;
+                fontSize = theme.font_size_large;
+                paddingVertical = theme.padding_large_vertical;
+                paddingHorizontal = theme.padding_large_horizontal;
             } else if( items[i] === "sm" ){
-                font_size = Theme.font_size_small;
-                padding_vertical = Theme.padding_small_vertical;
-                padding_horizontal = Theme.padding_small_horizontal;
+                fontSize = theme.font_size_small;
+                paddingVertical = theme.padding_small_vertical;
+                paddingHorizontal = theme.padding_small_horizontal;
             } else if( items[i] === "xs" ){
-                font_size = Theme.font_size_small;
-                padding_vertical = Theme.padding_xs_vertical;
-                padding_horizontal = Theme.padding_xs_horizontal;
+                fontSize = theme.font_size_small;
+                paddingVertical = theme.padding_xs_vertical;
+                paddingHorizontal = theme.padding_xs_horizontal;
             } else if( items[i] === "bold" ){
-                textFont = Theme.font_family_bold.name;
+                textFont = theme.font_family_bold.name;
             }
         }
     }

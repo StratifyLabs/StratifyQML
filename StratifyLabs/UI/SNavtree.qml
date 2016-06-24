@@ -39,7 +39,7 @@ SItem {
             color: "transparent";
             border.color: "transparent";
             border.width: 1;
-            radius: Theme.panel_border_radius;
+            radius: theme.panel_border_radius;
         }
 
         clip: true;

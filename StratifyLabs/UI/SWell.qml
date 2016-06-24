@@ -23,9 +23,9 @@ SItem {
 
     default property alias data: contents.data;
     property alias text: wellText.text;
-    property real padding_vertical: Theme.padding_base_vertical;
-    property real padding_horizontal: Theme.padding_base_horizontal;
-    property real font_size: Theme.font_size_base;
+    property real padding_vertical: theme.padding_base_vertical;
+    property real padding_horizontal: theme.padding_base_horizontal;
+    property real font_size: theme.font_size_base;
     implicitWidth: parent.width;
     implicitHeight: wellRectangle.height;
 
@@ -34,14 +34,14 @@ SItem {
         var i;
         for(i=0; i < items.length; i++){
             if( items[i] === "well-sm" ){
-                padding_vertical = Theme.padding_small_vertical;
-                padding_horizontal = Theme.padding_small_horizontal;
+                padding_vertical = theme.padding_small_vertical;
+                padding_horizontal = theme.padding_small_horizontal;
             } else if( items[i] === "well-lg" ){
-                padding_vertical = Theme.padding_large_vertical;
-                padding_horizontal = Theme.padding_large_horizontal;
+                padding_vertical = theme.padding_large_vertical;
+                padding_horizontal = theme.padding_large_horizontal;
             } else if( items[i] === "well-default" ){
-                padding_vertical = Theme.padding_base_vertical;
-                padding_horizontal = Theme.padding_base_horizontal;
+                padding_vertical = theme.padding_base_vertical;
+                padding_horizontal = theme.padding_base_horizontal;
             }
         }
     }
@@ -52,22 +52,22 @@ SItem {
         implicitWidth: parent.width;
         implicitHeight: contents.height;
 
-        color: Theme.well_bg;
-        border.color: Theme.well_border;
+        color: theme.well_bg;
+        border.color: theme.well_border;
         border.width: 1;
-        radius: Theme.panel_border_radius;
+        radius: theme.panel_border_radius;
 
         SContainer {
             id: contents;
-            padding_horizontal: base.padding_horizontal;
-            padding_vertical: base.padding_vertical;
+            paddingHorizontal: base.padding_horizontal;
+            paddingVertical: base.padding_vertical;
             Text {
                 id: wellText;
                 anchors.top: parent.top;
                 anchors.horizontalCenter: parent.horizontalCenter;
                 width: parent.width-2;
                 text: "";
-                color: Theme.text_color;
+                color: textColor;
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
                 font.pointSize: font_size;
                 font.family: textFont;

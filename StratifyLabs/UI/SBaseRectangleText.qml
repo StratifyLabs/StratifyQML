@@ -31,7 +31,7 @@ SBaseRectangle {
     property alias iconObject: rectangleIcon;
 
     //size the rectangle based on the size of the text box
-    implicitHeight: font_size + Theme.padding_base_vertical*3;
+    implicitHeight: fontSize + paddingVertical*3;
     implicitWidth: baseRectangleTextText.width;
 
     onSpinChanged: {
@@ -72,17 +72,17 @@ SBaseRectangle {
             id: baseRectangleTextText;
             anchors.centerIn: parent;
 
-            leftPadding: padding_horizontal;
-            rightPadding: padding_horizontal;
-            bottomPadding: padding_vertical;
-            topPadding: padding_vertical;
-            spacing: Theme.padding_base_horizontal/4;
+            leftPadding: paddingHorizontal;
+            rightPadding: paddingHorizontal;
+            bottomPadding: paddingVertical;
+            topPadding: paddingVertical;
+            spacing: paddingHorizontal/4;
 
             Text {
                 id: rectangleIcon;
-                color: enabled ? text_color : Theme.text_muted;
+                color: enabled ? textColor : Theme.text_muted;
                 text: icon;
-                font.pointSize: font_size*1.15;
+                font.pointSize: fontSize*1.15;
                 font.family: iconFont;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;
@@ -110,9 +110,9 @@ SBaseRectangle {
 
             Text {
                 id: rectangleText;
-                color: enabled ? text_color : Theme.text_muted;
+                color: enabled ? textColor : Theme.text_muted;
                 text: baseRectangleText.text;
-                font.pointSize: font_size;
+                font.pointSize: fontSize;
                 font.family: textFont;
                 font.weight: Font.Light;
                 horizontalAlignment: Text.AlignHCenter;

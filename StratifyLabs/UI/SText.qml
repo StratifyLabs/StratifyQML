@@ -30,7 +30,7 @@ SBaseRectangle {
 
     type: "text";
     implicitWidth: text.width;
-    implicitHeight: font_size + padding_vertical*3;
+    implicitHeight: fontSize + paddingVertical*3;
 
     onSpinChanged: {
         if( spin == false ){
@@ -54,7 +54,7 @@ SBaseRectangle {
                 text.horizontalAlignment = Text.AlignRight;
             } else if( items[i] === "fa" ){
                 text.font.family = iconFont;
-                text.font.pointSize = font_size + padding_vertical*2;
+                text.font.pointSize = fontSize + paddingVertical*2;
             } else if( items[i] === "bold" ){
                 text.font.weight = Font.Bold;
             } else if( items[i] === "fa-spin" ){
@@ -72,10 +72,10 @@ SBaseRectangle {
             id: text;
             anchors.verticalCenter: parent.verticalCenter;
             verticalAlignment: Text.AlignVCenter;
-            leftPadding: padding_horizontal;
-            rightPadding: padding_horizontal;
-            color: text_color;
-            font.pointSize: font_size;
+            leftPadding: paddingHorizontal;
+            rightPadding: paddingHorizontal;
+            color: textColor;
+            font.pointSize: fontSize;
             font.family: textFont;
             font.weight: Font.Light;
 

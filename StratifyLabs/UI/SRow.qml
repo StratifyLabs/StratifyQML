@@ -22,7 +22,7 @@ SItem {
     id: row;
     type: "row";
     default property alias data: contents.data;
-    sm: width < Theme.screen_sm;
+    sm: width < theme.screen_sm;
 
 
     onSmChanged: {
@@ -39,7 +39,7 @@ SItem {
     implicitHeight: fillHeight ? parent.height : contents.childrenRect.height;
 
     GridLayout {
-        rowSpacing: padding_horizontal;
+        rowSpacing: paddingHorizontal;
         rows: 1;
         id: contents;
         height: fillHeight ? parent.height : undefined;
@@ -58,7 +58,7 @@ SItem {
                 var w;
                 if( children[i].span !== undefined ){
                     if( children[i].span > 0 ){
-                        w = (width - (children.length-1)*rowSpacing) * children[i].span / Theme.grid_columns;
+                        w = (width - (children.length-1)*rowSpacing) * children[i].span / theme.grid_columns;
                         children[i].Layout.preferredWidth = w;
                     }
                 }

@@ -21,12 +21,12 @@ SItem {
     type: "hline";
 
     implicitWidth: parent.width;
-    height: Theme.padding_base_vertical*2 + 1;
+    height: theme.padding_base_vertical*2 + 1;
 
     Rectangle {
-        y: Theme.padding_base_vertical;
+        y: theme.padding_base_vertical;
         width: parent.width;
         height: 1;
-        color: Theme.btn_default_border;
+        color: theme.btn_default_border;
     }
 }

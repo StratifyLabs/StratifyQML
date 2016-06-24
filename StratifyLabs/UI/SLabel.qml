@@ -21,48 +21,44 @@ SBaseRectangleText {
     id: label;
     type: "label";
 
-    bg_color: "transparent";
-    text_color: Theme.text_color;
-    border_color: "transparent";
-
     signal clicked();
 
     onStyleChanged: {
         var items = parseStyle();
-        radius = Theme.btn_border_radius_base;
+        radius = theme.btn_border_radius_base;
         for(var i = 0; i < items.length; i++){
             if( items[i] === "label-primary" ){
-                bg_color = Theme.label_primary_bg;
-                border_color = Theme.label_primary_bg;
-                text_color = Theme.label_color;
+                backgroundColor = theme.label_primary_bg;
+                borderColor = theme.label_primary_bg;
+                textColor = theme.label_color;
             } else if( items[i] === "label-default" ){
-                bg_color = Theme.label_default_bg;
-                border_color = Theme.label_default_bg;
-                text_color = Theme.label_color;
+                backgroundColor = theme.label_default_bg;
+                borderColor = theme.label_default_bg;
+                textColor = theme.label_color;
             } else if( items[i] === "label-danger" ){
-                bg_color = Theme.label_danger_bg;
-                border_color = Theme.label_danger_bg;
-                text_color = Theme.label_color;
+                backgroundColor = theme.label_danger_bg;
+                borderColor = theme.label_danger_bg;
+                textColor = theme.label_color;
             } else if( items[i] === "label-success" ){
-                bg_color = Theme.label_success_bg;
-                border_color = Theme.label_success_bg;
-                text_color = Theme.label_color;
+                backgroundColor = theme.label_success_bg;
+                borderColor = theme.label_success_bg;
+                textColor = theme.label_color;
             } else if( items[i] === "label-info" ){
-                bg_color = Theme.label_info_bg;
-                border_color = Theme.label_info_bg;
-                text_color = Theme.label_color;
+                backgroundColor = theme.label_info_bg;
+                borderColor = theme.label_info_bg;
+                textColor = theme.label_color;
             } else if( items[i] === "label-warning" ){
-                bg_color = Theme.label_warning_bg;
-                border_color = Theme.label_warning_bg;
-                text_color = Theme.label_color;
+                backgroundColor = theme.label_warning_bg;
+                borderColor = theme.label_warning_bg;
+                textColor = theme.label_color;
             } else if( items[i] === "label-lg" ){
-                font_size = Theme.font_size_large;
-                radius = Theme.btn_border_radius_large;
-                text_color = Theme.label_color;
+                font_size = theme.font_size_large;
+                radius = theme.btn_border_radius_large;
+                textColor = theme.label_color;
             } else if( items[i] === "label-sm" ){
-                font_size = Theme.font_size_small;
-                radius = Theme.btn_border_radius_small;
-                text_color = Theme.label_color;
+                font_size = theme.font_size_small;
+                radius = theme.btn_border_radius_small;
+                textColor = theme.label_color;
             }
 
         }

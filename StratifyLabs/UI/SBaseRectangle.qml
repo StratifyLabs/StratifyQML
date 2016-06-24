@@ -23,12 +23,6 @@ SItem {
     type: "base";
     blockWidth: false;
 
-    property alias bg_color: baseRectangle.color;
-
-    property real radius: Theme.btn_border_radius_base;
-    property string color: Theme.body_bg;
-    property string border_color: Theme.body_bg;
-
     Rectangle {
         id: contents;
         anchors.horizontalCenter: parent.horizontalCenter;
@@ -37,8 +31,8 @@ SItem {
         implicitHeight: parent.height;
         width: (blockWidth == true) ? parent.width : parent.implicitWidth;
         radius: baseRectangle.radius;
-        border.color: enabled ? baseRectangle.border_color : Theme.gray_lighter;
-        color: enabled ? baseRectangle.color : Theme.gray_lighter;
+        border.color: enabled ? baseRectangle.borderColor : Theme.gray_lighter;
+        color: enabled ? baseRectangle.backgroundColor : Theme.gray_lighter;
         clip: true;
     }
 

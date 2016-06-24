@@ -29,14 +29,10 @@ SBaseRectangleText {
     property string checkMark: Fa.Icon.circle;
     property string uncheckMark: Fa.Icon.circle_o;
 
-    iconObject.width: font_size;
+    iconObject.width: fontSize;
     icon: checked ? checkMark : (uncheckMark);
     text: "Checkbox";
     hideTextOnSm: false;
-
-    bg_color: "transparent";
-    border_color: "transparent";
-    text_color: Theme.text_color;
 
     signal clicked();
 

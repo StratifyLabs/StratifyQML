@@ -20,11 +20,11 @@ import "."
 SItem {
 
     default property alias data: contents.data;
-    property string heading_bg: Theme.panel_default_heading_bg;
-    property string border_color: Theme.panel_default_border;
-    property real heading_font_size: Theme.font_size_base;
-    property string heading_color: Theme.text_color;
-    property string body_color: Theme.text_color;
+    property string heading_bg: theme.panel_default_heading_bg;
+    property string border_color: theme.panel_default_border;
+    property real heading_font_size: theme.font_size_base;
+    property string heading_color: theme.text_color;
+    property string body_color: theme.text_color;
     property alias body: panelBodyText.text;
     property alias heading: panelHeadingText.text;
 
@@ -38,29 +38,29 @@ SItem {
         var i;
         for(i=0; i < items.length; i++){
             if( items[i] === "panel-primary" ){
-                heading_bg = Theme.panel_primary_heading_bg;
-                border_color = Theme.panel_primary_border;
-                heading_color = Theme.panel_primary_text;
+                heading_bg = theme.panel_primary_heading_bg;
+                border_color = theme.panel_primary_border;
+                heading_color = theme.panel_primary_text;
             } else if( items[i] === "panel-success" ){
-                heading_bg = Theme.panel_success_heading_bg;
-                border_color = Theme.panel_success_border;
-                heading_color = Theme.panel_success_text;
+                heading_bg = theme.panel_success_heading_bg;
+                border_color = theme.panel_success_border;
+                heading_color = theme.panel_success_text;
             } else if( items[i] === "panel-danger" ){
-                heading_bg = Theme.panel_danger_heading_bg;
-                border_color = Theme.panel_danger_border;
-                heading_color = Theme.panel_danger_text;
+                heading_bg = theme.panel_danger_heading_bg;
+                border_color = theme.panel_danger_border;
+                heading_color = theme.panel_danger_text;
             } else if( items[i] === "panel-warning" ){
-                heading_bg = Theme.panel_warning_heading_bg;
-                border_color = Theme.panel_warning_border;
-                heading_color = Theme.panel_warning_text;
+                heading_bg = theme.panel_warning_heading_bg;
+                border_color = theme.panel_warning_border;
+                heading_color = theme.panel_warning_text;
             } else if( items[i] === "panel-info" ){
-                heading_bg = Theme.panel_info_heading_bg;
-                border_color = Theme.panel_info_border;
-                heading_color = Theme.panel_info_text;
+                heading_bg = theme.panel_info_heading_bg;
+                border_color = theme.panel_info_border;
+                heading_color = theme.panel_info_text;
             } else if( items[i] === "panel-default" ){
-                heading_bg = Theme.panel_default_heading_bg;
-                border_color = Theme.panel_default_border;
-                heading_color = Theme.panel_default_text;
+                heading_bg = theme.panel_default_heading_bg;
+                border_color = theme.panel_default_border;
+                heading_color = theme.panel_default_text;
             }
         }
     }
@@ -68,7 +68,7 @@ SItem {
 
     SRoundedRectangle {
         id: panelHeading;
-        topRadius: Theme.panel_border_radius;
+        topRadius: theme.panel_border_radius;
         color: heading_bg;
         borderColor: border_color;
         borderWidth: 1;
@@ -78,10 +78,10 @@ SItem {
 
         Text {
             id: panelHeadingText;
-            topPadding: Theme.padding_base_vertical;
-            bottomPadding: Theme.padding_base_vertical;
-            leftPadding: Theme.padding_base_horizontal;
-            rightPadding: Theme.padding_base_horizontal;
+            topPadding: theme.padding_base_vertical;
+            bottomPadding: theme.padding_base_vertical;
+            leftPadding: theme.padding_base_horizontal;
+            rightPadding: theme.padding_base_horizontal;
             text: "Panel Heading";
             color: heading_color;
             font.pointSize: heading_font_size;
@@ -94,8 +94,8 @@ SItem {
     SRoundedRectangle {
         id: panelBody;
         y: panelHeading.height - 2*pixelRatio*panelHeading.borderWidth - borderWidth;
-        bottomRadius: Theme.panel_border_radius;
-        color: Theme.body_bg;
+        bottomRadius: theme.panel_border_radius;
+        color: theme.body_bg;
         borderColor: border_color;
         borderWidth: 1;
         width: parent.width;
@@ -108,7 +108,7 @@ SItem {
                 width: parent.width-2;
                 text: "";
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-                font.pointSize: font_size;
+                font.pointSize: fontSize;
                 font.family: textFont;
                 font.weight: Font.Light;
             }

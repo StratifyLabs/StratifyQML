@@ -25,13 +25,13 @@ SBaseRectangle {
     property alias readOnly: input.readOnly;
     type: "textbox";
     blockWidth: true;
-    color: Theme.input_bg;
-    border_color: Theme.input_border;
-    radius: Theme.input_border_radius;
+    backgroundColor: theme.input_bg;
+    borderColor: theme.input_border;
+    radius: theme.input_border_radius;
 
     property alias inputObject: input;
 
-    implicitHeight: font_size + Theme.padding_base_vertical*3;
+    implicitHeight: font_size + theme.padding_base_vertical*3;
     width: parent.width;
 
     onStyleChanged: {
@@ -52,8 +52,8 @@ SBaseRectangle {
     Flickable {
         id: flick;
         width: parent.width;
-        y: padding_vertical;
-        height: parent.height - padding_vertical*2;
+        y: paddingVertical;
+        height: parent.height - paddingVertical*2;
         clip: true;
 
         contentWidth: width;
@@ -72,23 +72,23 @@ SBaseRectangle {
 
         TextEdit {
             id: input;
-            color: text_color;
+            color: textColor;
             text: "";
             focus: true;
-            leftPadding: padding_horizontal;
-            rightPadding: padding_horizontal;
-            bottomPadding: padding_vertical;
-            topPadding: padding_vertical;
+            leftPadding: paddingHorizontal;
+            rightPadding: paddingHorizontal;
+            bottomPadding: paddingVertical;
+            topPadding: paddingVertical;
             width: baseRectangleInput.width;
             height: contentHeight; //height needs to grow with content so mouse events work
-            font.pointSize: font_size;
+            font.pointSize: fontSize;
             font.family: textFont;
             horizontalAlignment: TextEdit.AlignLeft;
             verticalAlignment: TextEdit.AlignTop;
             selectByMouse: true;
             mouseSelectionMode: TextEdit.SelectCharacters;
-            selectionColor: Qt.lighter(text_color, 3.0);
-            selectedTextColor: text_color;
+            selectionColor: Qt.lighter(textColor, 3.0);
+            selectedTextColor: textColor;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             onCursorRectangleChanged: flick.ensureVisible(cursorRectangle);
         }
@@ -98,9 +98,9 @@ SBaseRectangle {
     Rectangle {
         id: scrollBar;
         visible: flick.contentHeight > flick.height;
-        radius: Theme.badge_border_radius;
+        radius: theme.badge_border_radius;
         width: 8;
-        color: Theme.gray_lighter;
+        color: theme.gray_lighter;
         height: calcHeight();
         x: flick.width - width * 1.5;
         y: calcY();

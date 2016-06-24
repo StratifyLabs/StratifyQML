@@ -22,7 +22,7 @@ SItem {
     default property alias data: contents.data;
     property string background: "transparent";
     width: (parent != null) ? parent.width : 0;
-    height: fillHeight ? ((parent != null) ? parent.height : 0) : contents.childrenRect.height + padding_vertical*2;
+    height: fillHeight ? ((parent != null) ? parent.height : 0) : contents.childrenRect.height + paddingVertical*2;
 
     Rectangle {
         anchors.fill: parent;
@@ -30,10 +30,10 @@ SItem {
     }
 
     Item {
-        x: padding_horizontal;
-        y: padding_vertical;
-        height: fillHeight ? parent.height - padding_vertical*2: undefined;
+        x: paddingHorizontal;
+        y: paddingVertical;
+        height: fillHeight ? parent.height - paddingVertical*2: undefined;
         id: contents;
-        width: (parent.width - padding_horizontal*2);
+        width: (parent.width - paddingHorizontal*2);
     }
 }
