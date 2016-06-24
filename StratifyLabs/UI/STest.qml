@@ -332,16 +332,16 @@ SItem {
                             model: libraryModel;
                             style: "block table-striped";
 
-                            TableViewColumn {
+                            STableColumn {
+                                span: 6;
                                 role: "title";
                                 title: "Title";
-                                width: 200;
                             }
 
-                            TableViewColumn {
+                            STableColumn {
+                                span: 6;
                                 role: "author"
                                 title: "Author"
-                                width: 200
                             }
                         }
 
@@ -349,16 +349,16 @@ SItem {
                             model: libraryModel;
                             style: "block table-condensed";
 
-                            TableViewColumn {
+                            STableColumn {
+                                span: 6;
                                 role: "title";
                                 title: "Title";
-                                width: 200;
                             }
 
-                            TableViewColumn {
+                            STableColumn {
+                                span: 6;
                                 role: "author"
                                 title: "Author"
-                                width: 200
                             }
                         }
 
@@ -366,16 +366,16 @@ SItem {
                             model: libraryModel;
                             style: "block table-bordered";
 
-                            TableViewColumn {
+                            STableColumn {
+                                span: 6;
                                 role: "title";
                                 title: "Title";
-                                width: 200;
                             }
 
-                            TableViewColumn {
+                            STableColumn {
+                                span: 6;
                                 role: "author"
                                 title: "Author"
-                                width: 200
                             }
                         }
 
@@ -383,16 +383,16 @@ SItem {
                             model: libraryModel;
                             style: "fill block table-hover";
 
-                            TableViewColumn {
+                            STableColumn {
+                                span: 6;
                                 role: "title";
                                 title: "Title";
-                                width: parent.width * 0.4;
                             }
 
-                            TableViewColumn {
+                            STableColumn {
+                                span: 6;
                                 role: "author"
                                 title: "Author"
-                                width: parent.width * 0.4;
                             }
                         }
                     }
