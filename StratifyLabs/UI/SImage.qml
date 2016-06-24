@@ -20,7 +20,6 @@ import "."
 SItem {
 
     default property alias data: contents.data;
-    property string border_color: "transparent";
     property alias source: image.source;
     property alias cache: image.cache;
 
@@ -33,7 +32,7 @@ SItem {
         var i;
         for(i=0; i < items.length; i++){
             if( items[i] === "img-rounded" ){
-                contents.radius = Theme.border_radius_large;
+                contents.radius = theme.border_radius_large;
             } else if( items[i] === "img-circle" ){
                 contents.radius = Qt.binding(function(){ return contents.width/2 });
             } else if( items[i] === "img-thumbnail" ){
@@ -47,20 +46,18 @@ SItem {
         id: contents;
         // \todo This doesn't mask the corners off -- may have to use OpacityMask and generate the rounded image
         radius: 0;
-        color: Theme.body_bg;
-        border.color: border_color;
+        color: theme.body_bg;
+        border.color: borderColor;
         border.width: 1;
 
         implicitWidth: parent.width;
-        implicitHeight: image.height + 2*padding_vertical;
+        implicitHeight: image.height + 2*paddingVertical;
         clip: true;
 
         Image {
             id: image;
-            x: padding_horizontal;
-            y: padding_vertical;
-
-
+            x: paddingHorizontal;
+            y: paddingVertical;
         }
     }
 
