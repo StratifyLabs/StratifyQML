@@ -16,12 +16,11 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
 import "."
 
 TableViewColumn {
     property real span: 0;
-    width: span ? parent.width * span / theme.grid_columns : 100;
+    width: span ? (parent ? parent.width * span / theme.grid_columns : 100) : 100;
 }
 
 

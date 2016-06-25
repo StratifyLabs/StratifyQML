@@ -25,11 +25,10 @@ SImage 1.0 SImage.qml
 SLoader 1.0 SLoader.qml
 SLabel 1.0 SLabel.qml
 SNavbar 1.0 SNavbar.qml
-SNavtree 1.0 SNavtree.qml
 STable 1.0 STable.qml
 STableColumn 1.0 STableColumn.qml
 STree 1.0 STree.qml
-SNavtreeItem 1.0 SNavtreeItem.qml
+STreeColumn 1.0 STreeColumn.qml
 SPanel 1.0 SPanel.qml
 SPane 1.0 SPane.qml
 SProgressbar 1.0 SProgressbar.qml

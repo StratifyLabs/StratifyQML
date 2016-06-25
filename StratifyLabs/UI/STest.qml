@@ -17,6 +17,7 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import QtQuick.Controls 1.4
+import Qt.labs.folderlistmodel 2.1
 import "Fa-4.5.0.js" as Fa
 import "STestListText.js" as List;
 import "."
@@ -46,7 +47,6 @@ SItem {
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "ButtonTest"; }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "LabelTest"; }
                 SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "InputTest"; }
-                SRadioButton { style: "text-hide-sm center"; control: radioButtonControl; text: "NavtreeTest"; }
                 SRadioButton { style: "text-hide-sm center"; checked:true; control: radioButtonControl; text: "TableTest"; }
 
             }
@@ -295,12 +295,6 @@ SItem {
 
                 SContainer {
                     style: "fill";
-                    name: "NavtreeTest";
-                    SNavtree{ style: "fill block"; }
-                },
-
-                SContainer {
-                    style: "fill";
                     name: "TableTest";
 
                     SColumn {
@@ -308,7 +302,7 @@ SItem {
 
 
                         ListModel {
-                            id: libraryModel
+                            id: libraryModel;
                             ListElement {
                                 title: "A Masterpiece"
                                 author: "Gabriel"

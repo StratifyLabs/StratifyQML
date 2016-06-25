@@ -15,14 +15,10 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
+import QtQuick.Controls 1.4
 import "."
 
-SItem {
-    type: "navtreeitem";
-    implicitWidth: parent.width;
-    blockWidth:  true;
-    property real indentation: 0;
-    property alias text: text.text;
-    x: indentation * padding_horizontal;
-    SText { id: text; }
+TableViewColumn {
+    property real span: 0;
+    width: span ? (parent ? parent.width * span / theme.grid_columns : 100) : 100;
 }
