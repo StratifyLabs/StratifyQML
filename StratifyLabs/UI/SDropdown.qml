@@ -34,6 +34,9 @@ SBaseRectangle {
     property alias activeText: menu.activeText;
     property bool hideMenuCountZero: true;
 
+    property alias minimumVisibleItems: menu.minVisible;
+    property alias maximumVisibleItems: menu.maxVisible;
+
     signal clicked();
     signal itemClicked();
 

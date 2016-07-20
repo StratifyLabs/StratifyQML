@@ -33,8 +33,6 @@ SItem {
 
     property color borderColor: Qt.darker(theme.body_bg, 1.1);
 
-    signal rowClicked();
-
     onStyleChanged: {
         var items = parseStyle();
         for(var i = 0; i < items.length; i++){
@@ -56,6 +54,9 @@ SItem {
     blockWidth:  true;
     TreeView {
         id: treeViewObject;
+
+        property real selected: -1;
+        property var currentIndex;
 
         width: parent.width;
         height: fillHeight ? parent.height : undefined;
@@ -197,7 +198,7 @@ SItem {
 
         rowDelegate: Rectangle {
             property bool hovered;
-            color: styleData.selected ? Qt.darker(theme.body_bg, 1.02 + hovered*0.05) : Qt.darker(theme.body_bg, 1.0 + hovered*0.05);
+            color: (styleData.selected) ? Qt.darker(theme.body_bg, 1.02 + hovered*0.05) : Qt.darker(theme.body_bg, 1.0 + hovered*0.05);
 
             height: fontSize + paddingVertical*3;
 
@@ -218,9 +219,13 @@ SItem {
                     hovered = true && base.hover;
                 }
                 onExited: hovered = false;
-                onClicked: base.rowClicked();
+                onClicked: {
+                    base.rowClicked();
+                    treeViewObject.selected = styleData.row;
+                }
             }
             */
+
         }
 
 

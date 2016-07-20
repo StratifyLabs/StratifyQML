@@ -23,7 +23,27 @@ SList {
     delegate: listDelegate;
     blockWidth: true;
 
-    implicitHeight: listViewObject.count * (fontSize + paddingVertical*5);
+    property real minVisible: 1;
+    property real maxVisible: 4;
+
+    implicitHeight: {
+        var itemHeight = (fontSize + paddingVertical*5);
+        var minHeight = itemHeight * minVisible;
+        var defaultHeight = listViewObject.count * minHeight;
+        var maxHeight = itemHeight * maxVisible;
+
+        if( maxHeight < minHeight ){
+            maxHeight = minHeight;
+        }
+
+        if( defaultHeight < minHeight ){
+            return minHeight;
+        } else if( defaultHeight > maxHeight ){
+            return maxHeight;
+        }
+        return defaultHeight;
+    }
+
     listViewObject.spacing: 0;
 
     signal clicked();
