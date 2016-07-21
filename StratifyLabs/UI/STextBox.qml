@@ -91,6 +91,13 @@ SBaseRectangle {
             selectedTextColor: textColor;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
             onCursorRectangleChanged: flick.ensureVisible(cursorRectangle);
+
+            onTextChanged: {
+                if( readOnly ){
+                    //if scroll is at the max -- keep it at the max
+                    cursorPosition = text.length;
+                }
+            }
         }
 
     }
