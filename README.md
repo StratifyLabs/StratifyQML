@@ -75,4 +75,4 @@ SContainer {
 }
 ```
 
-![Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/stratify-qml-demo.gif "Stratify QML Preview")
+![Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/stratify-qmldemo.gif "Stratify QML Preview")
