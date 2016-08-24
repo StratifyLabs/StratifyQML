@@ -75,6 +75,4 @@ SContainer {
 }
 ```
 
-![Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/preview-20160419.png "Stratify QML Preview")
-
-![Modal Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/modal-20160414.png "Stratify Modal Preview")
+![Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/stratify-qml-demo.gif "Stratify QML Preview")
