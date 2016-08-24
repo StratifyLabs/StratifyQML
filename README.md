@@ -6,6 +6,10 @@ Stratify QML is a QML UI framework inspired by Twitter Bootstrap.  The goal is t
 
 Stratify QML is released under the ASL 2.0.  If you are willing to release contributions under this license and would like to contribute, please let me know.
 
+![Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/stratify-qml-demo.gif "Stratify QML Preview")
+![Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/stratify-qml-button-demo.gif "Stratify QML Preview")
+
+
 ##TODO
 
 - <del>Modal</del>
@@ -74,6 +78,3 @@ SContainer {
    }
 }
 ```
-
-![Preview](https://github.com/StratifyLabs/StratifyQML/blob/master/img/stratify-qml-demo.gif "Stratify QML Preview")
-
