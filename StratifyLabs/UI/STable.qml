@@ -30,8 +30,9 @@ SItem {
     property alias striped: tableViewObject.alternatingRowColors;
     property bool hover: false;
     property bool bordered: false;
-
     property color borderColor: Qt.darker(theme.body_bg, 1.1);
+    property bool highlightSelectedRow: false;
+    property bool highlightSelectedItem: false;
 
     signal rowClicked();
 
@@ -148,8 +149,9 @@ SItem {
         }
 
         rowDelegate: Rectangle {
+
             property bool hovered;
-            color: styleData.alternate ? Qt.darker(theme.body_bg, 1.02 + hovered*0.05) : Qt.darker(theme.body_bg, 1.0 + hovered*0.05);
+            color: styleData.alternate ? Qt.darker(theme.body_bg, 1.02 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08) : Qt.darker(theme.body_bg, 1.0 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08);
 
             height: fontSize + paddingVertical*3;
 
@@ -169,7 +171,12 @@ SItem {
                     hovered = true && base.hover;
                 }
                 onExited: hovered = false;
-                onClicked: base.rowClicked();
+                onClicked: {
+                    tableViewObject.selection.clear();
+                    tableViewObject.selection.select(styleData.row, styleData.row);
+                    tableViewObject.currentRow = styleData.row;
+                    base.rowClicked();
+                }
             }
         }
 
