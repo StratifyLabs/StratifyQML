@@ -48,6 +48,7 @@ Item {
     property real paddingHorizontal: theme.padding_base_horizontal;
     property real fontSize: theme.font_size_base;
     property color textColor: theme.text_color;
+    property real textOpacity: 1.0;
     property color backgroundColor: "transparent";
     property real radius: theme.btn_border_radius_base;
     property color borderColor: "transparent";

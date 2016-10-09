@@ -78,6 +78,7 @@ SBaseRectangle {
             font.pointSize: fontSize;
             font.family: textFont;
             font.weight: Font.Light;
+            opacity: textOpacity;
 
 
             RotationAnimation on rotation {
