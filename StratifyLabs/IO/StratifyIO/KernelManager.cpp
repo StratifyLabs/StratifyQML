@@ -32,129 +32,15 @@ Copyright 2016 Tyler Gilbert
 
 #include "AppManager.h"
 #include "TerminalManager.h"
+#include "Helper.h"
 
 using namespace StratifyIO;
 
-
 KernelManager::KernelManager(Link & link) : DeviceManager(link){}
-KernelManager::KernelManager(Link & link, Link::update_callback_t update, void * context) : DeviceManager(link, update, context){}
-
-static int son_add_json_array(son_t * son, const QJsonArray & array, const QString & arrayKey);
-static int son_add_json_object(son_t * son, const QJsonObject & object, const QString & objectKey);
-
-static int son_add_json_value(son_t * son, const QJsonValue & value, const QString & valueKey){
-    int ret = 0;
-    const char * k = valueKey.toStdString().c_str();
-
-    switch(value.type()){
-    case QJsonValue::Null: ret = son_write_null(son, k); break;
-    case QJsonValue::Bool:
-        if( value.toBool() ){
-            ret = son_write_true(son, k);
-        } else {
-            ret = son_write_false(son, k);
-        }
-        break;
-    case QJsonValue::Double:
-        ret = son_write_float(son, k, (float)value.toDouble());
-        break;
-    case QJsonValue::String:
-        ret = son_write_str(son, k, value.toString().toStdString().c_str());
-        break;
-    case QJsonValue::Array:
-        ret = son_add_json_array(son, value.toArray(), valueKey);
-        break;
-    case QJsonValue::Object:
-        ret = son_add_json_object(son, value.toObject(), valueKey);
-        break;
-    case QJsonValue::Undefined:
-
-        break;
-    }
-    return ret;
-}
-
-static int son_add_json_array(son_t * son, const QJsonArray & array, const QString & arrayKey){
-    int ret = 0;
-    if( son_open_array(son, arrayKey.toStdString().c_str(), 1) < 0 ){
-        return -1;
-    }
-
-
-    for(int i = 0; i < array.size(); i++){
-        if( son_add_json_value(son, array.at(i), QString::number(i)) < 0 ){
-            ret = -1;
-            break;
-        }
-    }
-
-    son_close_array(son);
-    return ret;
-}
-
-static int son_add_json_object(son_t * son, const QJsonObject & object, const QString & objectKey){
-    int ret = 0;
-    if( son_open_obj(son, objectKey.toStdString().c_str()) < 0 ){
-        return -1;
-    }
-
-    foreach(QString key, object.keys()){
-
-        //QJsonValue value = object.value(key);
-        if( son_add_json_value(son, object.value(key), key) < 0 ){
-            ret = -1;
-            break;
-        }
-
-    }
-
-    son_close_obj(son);
-    return ret;
-}
-
-static int son_create_from_json(const QString & dest, const QString & source, int son_stack_size = 256){
-    QFile inputFile;
-    int ret = 0;
-
-    son_stack_t son_stack[son_stack_size];
-    son_t son;
-
-
-
-    inputFile.setFileName(source);
-
-    if( inputFile.open(QFile::ReadOnly) == false ){
-        qDebug() << "Failed to open" << source;
-        return -1;
-    }
-
-    QJsonDocument doc = QJsonDocument::fromJson(inputFile.readAll());
-    inputFile.close();
-
-    QJsonObject object = doc.object();
-
-    son_set_driver(&son, 0);
-
-    if( son_create(&son, dest.toStdString().c_str(), son_stack, son_stack_size) < 0 ){
-        qDebug() << "Failed to create" << dest;
-        return -1;
-    }
-
-    if( son_add_json_object(&son, object, "root") < 0 ){
-        qDebug() << "Failed to add root object";
-        ret = -1;
-    }
-
-    son_close(&son, 1);
-
-    return ret;
-
-}
 
 
 int KernelManager::installKernel(const QString & source, bool verifyInstall){
     QString projectName;
-    vector<string> deviceList;
     int i;
 
     //projectName = ui->installer->project();
@@ -166,33 +52,39 @@ int KernelManager::installKernel(const QString & source, bool verifyInstall){
 
 
         if ( mLink.is_bootloader() == false ){
-            emit updateStatus("Reset Bootloader");
+            emit statusChanged(INFO, "Reset Bootloader");
             updateProgress(0, 0);
-
             qDebug("now reset to bootloader");
             //Invoke the bootloader
             if ( mLink.reset_bootloader() == 0 ){
+                emit connectionChanged();
 
                 //need to wait until the device is available
-                emit updateStatus("Waiting for bootloader");
+                emit statusChanged(INFO, "Waiting for bootloader");
 
 
                 for(i=0; i < 60; i++){
 
                     QThread::msleep(500);
 
-                    deviceList = mLink.get_device_list(mLink.driver());
+                    DeviceManager::refreshDeviceList(mLink);
 
-                    if ( deviceList.size() > 0 ){
+                    if ( DeviceManager::deviceList().count() > 0 ){
                         //connect to last known serial number
-                        //mLink.reinit(); //suppress any error messages
+                        emit statusChanged(DEBUG, "Reconnect to last serial number");
+                        mLink.reinit(); //suppress any error messages
                     }
 
                     QThread::msleep(500);
 
+                    emit statusChanged(DEBUG, "Check if device is reconnected");
+
                     if ( mLink.get_is_connected() ){
+                        emit statusChanged(DEBUG, "Reconnected to device; check for bootloader");
+
+                        emit connectionChanged();
                         if( mLink.is_bootloader() ){
-                            emit updateStatus("Connecting to Bootloader");
+                            emit statusChanged(INFO, "Connecting to Bootloader");
                         }
                         break;
                     }
@@ -202,11 +94,12 @@ int KernelManager::installKernel(const QString & source, bool verifyInstall){
 
                 if ( i == 60 ){
                     mError = "Bootloader did not load. Try invoking manually.";
+                    emit statusChanged(ERROR, mError);
                     return -1;
                 }
 
             } else {
-                emit updateStatus("Failed to start bootloader");
+                emit statusChanged(ERROR, "Failed to start bootloader");
                 return -1;
             }
         }
@@ -215,20 +108,23 @@ int KernelManager::installKernel(const QString & source, bool verifyInstall){
 
     if( mLink.update_os(source.toStdString(),
                          verifyInstall,
-                         mUpdate,
-                         mContext) < 0 ){
+                         updateProgressCallback,
+                         this) < 0 ){
         mError = mLink.error_message().c_str();
-        emit updateStatus("Failed to Install");
+        emit statusChanged(ERROR, "Failed to Install");
+        emit connectionChanged();
 
         return -1;
     }
 
-    emit updateStatus("Kernel Update Complete");
-
+    emit statusChanged(INFO, "Kernel Update Complete");
 
     updateProgress(0, 0);
 
     mLink.reset();
+
+    emit connectionChanged();
+
 
     return 0;
 
@@ -292,7 +188,7 @@ int KernelManager::installData(const QString & projectPath, bool runTests){
 
     foreach(QString key, keys){
         app++;
-        emit updateStatus("Installing " + key);
+        emit statusChanged(INFO, "Installing " + key);
 
         qDebug() << "Process Key" << key;
 
@@ -356,7 +252,7 @@ int KernelManager::installAppObject(const QString & projectPath, const QJsonObje
         qDebug() << "Copy" << source << "to" << destination;
 
 
-        if( copyFileToDevice(source, destination + "/" + key) < 0 ){
+        if( copyFileToDeviceCummulative(source, destination + "/" + key) < 0 ){
             qDebug() << mLink.error_message().c_str();
             mError = QString("Failed to copy " + source + " to " + destination);
             return -1;
@@ -381,7 +277,7 @@ int KernelManager::installAppObject(const QString & projectPath, const QJsonObje
 
                 sonFilePath = fileInfo.path() + "/" + fileInfo.completeBaseName() + ".son";
 
-                if( son_create_from_json(
+                if( Helper::son_create_from_json(
                             sonFilePath,
                             fileInfo.filePath()
                             ) < 0 ){
@@ -409,7 +305,7 @@ int KernelManager::installAppObject(const QString & projectPath, const QJsonObje
             }
 
             //now copy the file to the device
-            if( copyFileToDevice(sourceFilePath, destination + "/" + destFileName) < 0 ){
+            if( copyFileToDeviceCummulative(sourceFilePath, destination + "/" + destFileName) < 0 ){
                 qDebug() << mLink.error_message().c_str();
                 mError = mLink.error_message().c_str();
                 return -1;
@@ -441,7 +337,7 @@ int KernelManager::installDataObject(const QString & projectPath, const QJsonObj
         info.setFile(projectPath + "/" + filesArray.at(i).toString());
 
         qDebug() << "Copy" << info.filePath() << "to" << dest + "/" + info.fileName();
-        if( copyFileToDevice(info.filePath(), dest + "/" + info.fileName()) < 0 ){
+        if( copyFileToDeviceCummulative(info.filePath(), dest + "/" + info.fileName()) < 0 ){
             return -1;
         }
     }
@@ -504,7 +400,7 @@ int KernelManager::runTest(const QString & projectPath, const QJsonObject & test
     int count;
     QFile testReport;
 
-    AppManager appManager(mLink, mUpdateEffective, mContextEffective);
+    AppManager appManager(mLink);
     TerminalManager terminalManager(mLink);
     QByteArray terminalData;
     QJsonDocument doc;
@@ -588,7 +484,7 @@ int KernelManager::runTest(const QString & projectPath, const QJsonObject & test
     emit updateProgress(0,0);
 
     if( !testComplete ){
-        emit updateStatus(name + " failed (timeout)");
+        emit statusChanged(INFO, name + " failed (timeout)");
         qDebug() << "Test timed out";
         return -1;
     } else {
@@ -616,16 +512,16 @@ int KernelManager::runTest(const QString & projectPath, const QJsonObject & test
 
         foreach(QString key, reportObject.keys()){
             if( key != "status" ){
-                emit updateStatus(key + ":" + reportObject.value(key).toString());
+                emit statusChanged(INFO, key + ":" + reportObject.value(key).toString());
             }
         }
 
         if( reportObject.value("status").toString() != "passed" ){
-            emit updateStatus(name + " failed");
+            emit statusChanged(INFO, name + " failed");
             qDebug() << "Test failed";
             return -1;
         } else {
-            emit updateStatus(name + " passed");
+            emit statusChanged(INFO, name + " passed");
         }
     }
 

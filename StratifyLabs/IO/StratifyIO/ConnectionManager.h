@@ -31,8 +31,8 @@ public:
     int connectToDevice(const QString & serialNumber);
     int disconnectFromDevice();
 
-    bool isBootloader() const { return mIsBootloader; }
-    bool isConnected() const { return mIsConnected; }
+    bool isBootloader() const { return mLink.is_bootloader(); }
+    bool isConnected() const { return mLink.get_is_connected(); }
 
     QString name() const { return QString(mSysAttr.name); }
     QString signature() const { return QString::number(mSysAttr.signature, 16); }
@@ -44,8 +44,6 @@ signals:
     void connectionChanged();
 
 private:
-    bool mIsBootloader;
-    bool mIsConnected;
 
     sys_attr_t mSysAttr;
 

@@ -20,8 +20,6 @@ using namespace StratifyIO;
 
 ConnectionManager::ConnectionManager(Link & link) : DeviceManager(link)
 {
-    mIsConnected = false;
-    mIsBootloader = false;
     memset(&mSysAttr, 0, sizeof(mSysAttr));
 }
 
@@ -46,9 +44,6 @@ int ConnectionManager::connectToDevice(const QString & serialNumber){
         return -1;
     }
 
-    mIsBootloader = mLink.is_bootloader();
-    mIsConnected = true;
-
     int fd;
 
     fd = mLink.open("/dev/sys", LINK_O_RDWR);
@@ -67,14 +62,10 @@ int ConnectionManager::connectToDevice(const QString & serialNumber){
 }
 
 int ConnectionManager::disconnectFromDevice(){
-
     if( mLink.get_is_connected() ){
         mLink.exit();
-        mIsConnected = false;
-        mIsBootloader = false;
         memset(&mSysAttr, 0, sizeof(mSysAttr));
         emit connectionChanged();
     }
-
     return 0;
 }

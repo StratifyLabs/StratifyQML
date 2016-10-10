@@ -26,7 +26,6 @@ class AppManager : public DeviceManager
     Q_OBJECT
 public:
     AppManager(Link & link);
-    AppManager(Link & link, Link::update_callback_t update, void * context);
 
     int kill(const QString & name);
     int installFiles(const QString & settingsPath);

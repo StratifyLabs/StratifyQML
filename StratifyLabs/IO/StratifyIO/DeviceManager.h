@@ -50,7 +50,6 @@ class DeviceManager: public QObject
     Q_OBJECT
 public:
     DeviceManager(Link & link);
-    DeviceManager(Link & link, Link::update_callback_t update, void * context);
     const QString & error() const { return mError; }
 
     static void refreshDeviceList(Link & link);
@@ -59,28 +58,46 @@ public:
 
     int copyFileToDevice(QString source, QString dest, link_mode_t mode = 0666){
         return mLink.copy_file_to_device(source.toStdString(),
-                                   dest.toStdString(),
-                                   mode,
-                                   mUpdateEffective,
-                                   mContextEffective);
+                                         dest.toStdString(),
+                                         mode,
+                                         updateProgressCallback,
+                                         this);
     }
+
+    int copyFileToDeviceCummulative(QString source, QString dest, link_mode_t mode = 0666){
+        return mLink.copy_file_to_device(source.toStdString(),
+                                         dest.toStdString(),
+                                         mode,
+                                         updateCummulativeCallback,
+                                         this);
+    }
+
 
     void setCummulativeMax(int value);
     void resetCummulativeMax();
 
+    enum {
+        FATAL,
+        CRITICAL,
+        WARNING,
+        ERROR,
+        INFO,
+        DEBUG
+    };
+
 signals:
-    void updateStatus(const QString & status);
+    void statusChanged(int type, const QString & status); //update status and log
+    void progressChanged(int value, int max); //update the user with the progress update
+    void connectionChanged();
 
 protected:
 
     static void loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr);
 
+    static bool updateProgressCallback(void * context, int progress, int max);
     bool updateProgress(int value, int max);
     Link & mLink;
-    Link::update_callback_t mUpdate;
-    Link::update_callback_t mUpdateEffective;
-    void * mContext;
-    void * mContextEffective;
+
     static bool updateCummulativeCallback(void*context, int progress, int max);
     bool updateCummulative(int progress, int max);
     int mCummulativeProgress;

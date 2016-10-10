@@ -22,7 +22,6 @@ Copyright 2016 Tyler Gilbert
 using namespace StratifyIO;
 
 AppManager::AppManager(Link & link) : DeviceManager(link){}
-AppManager::AppManager(Link & link, Link::update_callback_t update, void * context) : DeviceManager(link, update, context){}
 
 
 int AppManager::kill(const QString & name){
@@ -60,21 +59,26 @@ int AppManager::installApp(const QString & sourcePath, const QString & installPa
     while( mLink.unlink(unlinkPath.toStdString()) >= 0 ){
         //delete all versions
         qDebug() << "unlinked" << unlinkPath;
+        emit statusChanged(DEBUG, "unlinked " + unlinkPath);
     }
 
     unlinkPath = "/app/ram/" + name;
     while( mLink.unlink(unlinkPath.toStdString()) >= 0 ){
         //delete all versions
         qDebug() << "unlinked" << unlinkPath;
+        emit statusChanged(DEBUG, "unlinked " + unlinkPath);
+
     }
 
     qDebug() << "Install" << sourcePath << "at" << installPath << "as" << name;
     if( mLink.install_app(sourcePath.toStdString(),
                            installPath.toStdString(),
                            name.toStdString(),
-                           mUpdate, mContext) < 0 ){
+                           updateProgressCallback, this) < 0 ){
 
         qDebug() << "Failed to install App" << name << "from" << sourcePath << "in" << installPath;
+        emit statusChanged(ERROR, mLink.error_message().c_str());
+
         mError = mLink.error_message().c_str();
         return -1;
     }
@@ -88,12 +92,14 @@ int AppManager::runApp(const QString & name){
 
     if( mLink.get_is_connected() == false ){
         mError = "Can't run (not connected)";
+        emit statusChanged(ERROR, mError);
         return -1;
     }
 
 
     if( mLink.get_pid(name.toStdString()) >= 0 ){
         mError = name + " is already running";
+        emit statusChanged(ERROR, mError);
         return 1;
     }
 
@@ -103,6 +109,7 @@ int AppManager::runApp(const QString & name){
         appPath = "/app/ram/" + name;
         if( mLink.run_app(appPath.toStdString()) < 0 ){
             mError = "Failed to run app " + QString(mLink.error_message().c_str());
+            emit statusChanged(ERROR, mError);
             return -1;
         }
     }
@@ -113,6 +120,7 @@ int AppManager::runApp(const QString & name){
 int AppManager::uninstallApp(const QString & path, const QString & name){
 
     qDebug() << "Uninstall App" << path << name;
+    emit statusChanged(DEBUG, "Uninstalled " + path + "/" + name);
 
     if( mLink.unlink("/app/flash/" + name.toStdString()) == 0 ){
         return 0;
@@ -126,7 +134,8 @@ int AppManager::uninstallApp(const QString & path, const QString & name){
         return 0;
     }
 
-    mError = "Failed to uninstall " + name;
+    mError = "Failed to uninstall " + path + "/" + name;
+    emit statusChanged(ERROR, mError);
     return -1;
 
 }

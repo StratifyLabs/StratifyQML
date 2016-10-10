@@ -23,18 +23,9 @@ using namespace StratifyIO;
 QList<DeviceListItem> DeviceManager::mDeviceList;
 
 DeviceManager::DeviceManager(Link & link) : mLink(link){
-    mUpdate = 0;
-    mContext = 0;
-    mUpdateEffective = 0;
-    mContextEffective = 0;
 }
 
-DeviceManager::DeviceManager(Link & link, Link::update_callback_t update, void * context) : mLink(link){
-    mUpdate = update;
-    mUpdateEffective = mUpdate;
-    mContext = context;
-    mContextEffective = context;
-}
+
 
 const DeviceListItem * DeviceManager::lookupSerialNumber(const QString & serialNumber){
     for(int i=0; i < deviceList().count(); i++){
@@ -121,11 +112,13 @@ void DeviceManager::loadSysAttr(Link & link, const QString & systemLocation, sys
 
 }
 
+bool DeviceManager::updateProgressCallback(void * context, int progress, int max){
+    DeviceManager* object = (DeviceManager*)context;
+    return object->updateProgress(progress, max);
+}
 
 bool DeviceManager::updateProgress(int value, int max){
-    if( mUpdateEffective ){
-        return mUpdateEffective(mContextEffective, value, max);
-    }
+    emit progressChanged(value, max);
     return false;
 }
 
@@ -144,9 +137,8 @@ bool DeviceManager::updateCummulative(int progress, int max){
     mCummulativeProgress += (progress - mCummulativeProgressCached);
     mCummulativeProgressCached = progress;
 
-    if( mUpdate ){
-        return mUpdate(mContext, mCummulativeProgress, mCummulativeMax);
-    }
+    emit progressChanged(mCummulativeProgress, mCummulativeMax);
+
     return false;
 }
 
@@ -154,13 +146,6 @@ void DeviceManager::setCummulativeMax(int value){
     mCummulativeProgress = 0;
     mCummulativeProgressCached = 0;
     mCummulativeMax = value;
-    if( value == 0 ){
-        mUpdateEffective = mUpdate;
-        mContextEffective = mContext;
-    } else {
-        mUpdateEffective = updateCummulativeCallback;
-        mContextEffective = this;
-    }
 }
 
 void DeviceManager::resetCummulativeMax(){
