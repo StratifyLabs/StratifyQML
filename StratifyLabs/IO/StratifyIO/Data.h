@@ -35,19 +35,17 @@ public:
     void setDataService(DataService * dataService){ mDataService = dataService; }
 
 
-    void getValue(){ checkService(); mDataService->getValue(mToken, mValue); }
-    void putValue(){ checkService(); mDataService->putValue(mToken, mValue); }
-    void post(){ checkService(); mDataService->post(mToken, mValue); }
-    void patch(){ checkService(); mDataService->patch(mToken, mValue); }
-    void deleteValue(){ checkService(); mDataService->deleteValue(mToken); }
+    void getValue(const QString & token, QString & value){ checkService(); mDataService->getValue(token, value); }
+    void putValue(const QString & token, const QString & value){ checkService(); mDataService->putValue(token, value); }
+    void post(const QString & token, const QString & value){ checkService(); mDataService->post(token, value); }
+    void patch(const QString & token, const QString & value){ checkService(); mDataService->patch(token, value); }
+    void deleteValue(const QString & token){ checkService(); mDataService->deleteValue(token); }
 
 protected:
     DataService & dataService(){ return *mDataService; }
 
 
 private:
-    QString mToken;
-    QString mValue;
 
     static DataService * mDefaultDataService;
     DataService * mDataService;

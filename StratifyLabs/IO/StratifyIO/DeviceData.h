@@ -37,6 +37,12 @@ public:
     const QString & bootVersion() const { return mBootVersion; }
 
 private:
+
+    QString serialNoToken() const { return "serial_no"; } //all lowercase tokens with underscores between words
+    QString versionToken() const { return "version"; }
+    QString bootVersionToken() const { return "boot_version"; }
+    QString testsToken() const { return "tests"; }
+
     QString mSerialNo;
     QString mVersion;
     QString mBootVersion;
