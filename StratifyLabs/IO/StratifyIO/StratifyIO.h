@@ -24,18 +24,18 @@ namespace StratifyIO {
 using namespace StratifyIO;
 
 //Data structure objects
-#include "App.h"
-#include "Hardware.h"
-#include "User.h"
-#include "Device.h"
+#include "AppData.h"
+#include "HardwareData.h"
+#include "UserData.h"
+#include "DeviceData.h"
 
 //Hardware Access classes
-#include "DeviceManager.h"
-#include "ConnectionManager.h"
-#include "NotificationManager.h"
-#include "AppManager.h"
-#include "KernelManager.h"
-#include "TerminalManager.h"
+#include "IO.h"
+#include "ConnectionIO.h"
+#include "NotificationIO"
+#include "AppIO.h"
+#include "KernelIO.h"
+#include "TerminalIO.h"
 
 //Thread Management
 #include "Worker.h"

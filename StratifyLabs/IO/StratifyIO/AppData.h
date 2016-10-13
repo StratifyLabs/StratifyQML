@@ -17,13 +17,14 @@ Copyright 2016 Tyler Gilbert
 #ifndef APP_H
 #define APP_H
 
+#include "Data.h"
 
-namespace StratifyIO {
+namespace StratifyData {
 
-class App
+class AppData : public Data
 {
 public:
-    App();
+    AppData();
 };
 
 }

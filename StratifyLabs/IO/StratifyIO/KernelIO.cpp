@@ -15,7 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 
-#include "KernelManager.h"
+#include "KernelIO.h"
 
 #include <QTimer>
 #include <QThread>
@@ -30,16 +30,16 @@ Copyright 2016 Tyler Gilbert
 #include <QDateTime>
 #include <stfy/son.h>
 
-#include "AppManager.h"
-#include "TerminalManager.h"
+#include "AppIO.h"
+#include "TerminalIO.h"
 #include "Helper.h"
 
 using namespace StratifyIO;
 
-KernelManager::KernelManager(Link & link) : DeviceManager(link){}
+KernelIO::KernelIO(Link & link) : IO(link){}
 
 
-int KernelManager::installKernel(const QString & source, bool verifyInstall){
+int KernelIO::installKernel(const QString & source, bool verifyInstall){
     QString projectName;
     int i;
 
@@ -67,9 +67,9 @@ int KernelManager::installKernel(const QString & source, bool verifyInstall){
 
                     QThread::msleep(500);
 
-                    DeviceManager::refreshDeviceList(mLink);
+                    IO::refreshDeviceList(mLink);
 
-                    if ( DeviceManager::deviceList().count() > 0 ){
+                    if ( IO::deviceList().count() > 0 ){
                         //connect to last known serial number
                         emit statusChanged(DEBUG, "Reconnect to last serial number");
                         mLink.reinit(); //suppress any error messages
@@ -132,7 +132,7 @@ int KernelManager::installKernel(const QString & source, bool verifyInstall){
 }
 
 
-int KernelManager::installData(const QString & projectPath, bool runTests){
+int KernelIO::installData(const QString & projectPath, bool runTests){
     //load the StratifyKernelInstallApps.json file
     QFile file;
     int app;
@@ -219,7 +219,7 @@ int KernelManager::installData(const QString & projectPath, bool runTests){
 
 }
 
-int KernelManager::installAppObject(const QString & projectPath, const QJsonObject & appObject, const QString & key){
+int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & appObject, const QString & key){
     QStringList appKeys;
     QString source;
     QString destination;
@@ -320,7 +320,7 @@ int KernelManager::installAppObject(const QString & projectPath, const QJsonObje
 
 }
 
-int KernelManager::installDataObject(const QString & projectPath, const QJsonObject & dataObject, const QString & key){
+int KernelIO::installDataObject(const QString & projectPath, const QJsonObject & dataObject, const QString & key){
 
     QString dest;
     int i;
@@ -345,7 +345,7 @@ int KernelManager::installDataObject(const QString & projectPath, const QJsonObj
     return 0;
 }
 
-int KernelManager::calcAppObject(const QString & projectPath, const QJsonObject & appObject){
+int KernelIO::calcAppObject(const QString & projectPath, const QJsonObject & appObject){
     QJsonArray filesArray;
     QString source;
     QString settings;
@@ -375,7 +375,7 @@ int KernelManager::calcAppObject(const QString & projectPath, const QJsonObject 
     return cummulativeMax;
 }
 
-int KernelManager::calcDataObject(const QString & projectPath, const QJsonObject & dataObject){
+int KernelIO::calcDataObject(const QString & projectPath, const QJsonObject & dataObject){
     int cummulativeMax;
     QJsonArray filesArray;
     QFileInfo info;
@@ -389,7 +389,7 @@ int KernelManager::calcDataObject(const QString & projectPath, const QJsonObject
     return cummulativeMax;
 }
 
-int KernelManager::runTest(const QString & projectPath, const QJsonObject & testObject){
+int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObject){
     QString binary;
     QString name;
     QString output;
@@ -400,8 +400,8 @@ int KernelManager::runTest(const QString & projectPath, const QJsonObject & test
     int count;
     QFile testReport;
 
-    AppManager appManager(mLink);
-    TerminalManager terminalManager(mLink);
+    AppIO appManager(mLink);
+    TerminaIO terminalManager(mLink);
     QByteArray terminalData;
     QJsonDocument doc;
     QJsonObject reportObject;

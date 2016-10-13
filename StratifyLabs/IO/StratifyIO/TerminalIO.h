@@ -14,36 +14,32 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#ifndef DEVICE_H
-#define DEVICE_H
+#ifndef TERMINALMANAGER_H
+#define TERMINALMANAGER_H
 
-#include <QString>
-#include <QStringList>
-
-#include "Data.h"
+#include "IO.h"
+#include "NotificationIO"
 
 namespace StratifyIO {
 
-class Device : public Data
-{
-public:
-    Device();
 
-    void setSerialNo(const QString& value){ mSerialNo = value; }
-    const QString & serialNo() const { return mSerialNo; }
-    void setVersion(const QString& value){ mVersion = value; }
-    const QString & version() const { return mVersion; }
-    void setBootVersion(const QString& value){ mBootVersion = value; }
-    const QString & bootVersion() const { return mBootVersion; }
+class TerminaIO : public IO {
+    Q_OBJECT
+public:
+    TerminaIO(Link & link);
+
+    int open();
+    int close();
+    QByteArray read();
+    int write(const QByteArray & data);
+
 
 private:
-    QString mSerialNo;
-    QString mVersion;
-    QString mBootVersion;
-    QStringList mTests;
+    int mInFd;
+    int mOutFd;
 
 };
 
 }
 
-#endif // DEVICE_H
+#endif // TERMINALMANAGER_H

@@ -14,7 +14,7 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "NotificationManager.h"
+#include "NotificationIO"
 
 #include <QThread>
 #include <QDebug>
@@ -22,11 +22,11 @@ Copyright 2016 Tyler Gilbert
 using namespace StratifyIO;
 
 
-NotificationManager::NotificationManager(Link & link) : DeviceManager(link){}
+NotificationIO::NotificationIO(Link & link) : IO(link){}
 
 #include <iface/link.h>
 
-void NotificationManager::listen(){
+void NotificationIO::listen(){
 
     char buffer[128];
     QString str;

@@ -14,33 +14,12 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#ifndef NOTIFICATIONMANAGER_H
-#define NOTIFICATIONMANAGER_H
-
-#include "DeviceManager.h"
-
-namespace StratifyIO {
+#include "HardwareData.h"
 
 
-class NotificationManager : DeviceManager
+using namespace StratifyData;
+
+HardwareData::HardwareData()
 {
-    Q_OBJECT
-public:
-    NotificationManager(Link & link);
-
-    void listen();
-    void stop(){ mStop = false; }
-
-signals:
-    void deviceAccess(const QString & device, bool read, int nbyte);
-    void fileAccess(const QString & file, bool read, int nbyte);
-    void traceEvent();
-
-private:
-    volatile bool mStop;
-
-};
 
 }
-
-#endif // NOTIFICATIONMANAGER_H

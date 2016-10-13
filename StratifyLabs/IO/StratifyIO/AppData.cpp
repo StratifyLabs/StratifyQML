@@ -14,14 +14,14 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#ifndef DATAFIREBASE_H
-#define DATAFIREBASE_H
+#include "AppData.h"
 
 
-class DataFirebase
+using namespace StratifyData;
+
+AppData::AppData()
 {
-public:
-    DataFirebase();
-};
 
-#endif // DATAFIREBASE_H
+}
+
+

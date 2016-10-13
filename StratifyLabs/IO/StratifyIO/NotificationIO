@@ -14,32 +14,33 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#ifndef TERMINALMANAGER_H
-#define TERMINALMANAGER_H
+#ifndef NOTIFICATIONMANAGER_H
+#define NOTIFICATIONMANAGER_H
 
-#include "DeviceManager.h"
-#include "NotificationManager.h"
+#include "IO.h"
 
 namespace StratifyIO {
 
 
-class TerminalManager : public DeviceManager {
+class NotificationIO : IO
+{
     Q_OBJECT
 public:
-    TerminalManager(Link & link);
+    NotificationIO(Link & link);
 
-    int open();
-    int close();
-    QByteArray read();
-    int write(const QByteArray & data);
+    void listen();
+    void stop(){ mStop = false; }
 
+signals:
+    void deviceAccess(const QString & device, bool read, int nbyte);
+    void fileAccess(const QString & file, bool read, int nbyte);
+    void traceEvent();
 
 private:
-    int mInFd;
-    int mOutFd;
+    volatile bool mStop;
 
 };
 
 }
 
-#endif // TERMINALMANAGER_H
+#endif // NOTIFICATIONMANAGER_H

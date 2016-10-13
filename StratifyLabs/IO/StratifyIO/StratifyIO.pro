@@ -14,35 +14,40 @@ CONFIG += staticlib
 DEFINES += __link __StratifyOS__
 
 SOURCES += \
-    App.cpp \
-    User.cpp \
-    Hardware.cpp \
-    Device.cpp \
     Data.cpp \
-    DataFirebase.cpp \
-    AppManager.cpp \
-    DeviceManager.cpp \
-    KernelManager.cpp \
-    NotificationManager.cpp \
-    TerminalManager.cpp \
-    ConnectionManager.cpp \
-    Helper.cpp
+    Helper.cpp \
+    AppIO.cpp \
+    ConnectionIO.cpp \
+    KernelIO.cpp \
+    NotificationIO.cpp \
+    TerminalIO.cpp \
+    AppData.cpp \
+    IO.cpp \
+    HardwareData.cpp \
+    UserData.cpp \
+    DeviceData.cpp \
+    StratifyObject.cpp \
+    FirebaseDataService.cpp \
+    DataService.cpp
 HEADERS += StratifyIO.h \
-    App.h \
-    User.h \
-    Hardware.h \
-    Device.h \
     Data.h \
-    DataFirebase.h \
-    AppManager.h \
-    DeviceManager.h \
-    KernelManager.h \
-    NotificationManager.h \
-    TerminalManager.h \
-    ConnectionManager.h \
     LinkDriver.h \
     Worker.h \
-    Helper.h
+    Helper.h \
+    AppIO.h \
+    ConnectionIO.h \
+    KernelIO.h \
+    NotificationIO \
+    TerminalIO.h \
+    AppData.h \
+    IO.h \
+    HardwareData.h \
+    DeviceData.h \
+    UserData.h \
+    StratifyData.h \
+    StratifyObject.h \
+    DataService.h \
+    FirebaseDataService.h
 
 INSTALL_HEADERS.files = $$HEADERS
 

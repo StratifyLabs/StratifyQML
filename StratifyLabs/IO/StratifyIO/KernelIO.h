@@ -17,16 +17,16 @@ Copyright 2016 Tyler Gilbert
 #ifndef KERNELMANAGER_H
 #define KERNELMANAGER_H
 
-#include "DeviceManager.h"
+#include "IO.h"
 
 namespace StratifyIO {
 
-class KernelManager: public DeviceManager
+class KernelIO: public IO
 {
     Q_OBJECT
 public:
-    KernelManager(Link & link);
-    KernelManager(Link & link, Link::update_callback_t update, void * context);
+    KernelIO(Link & link);
+    KernelIO(Link & link, Link::update_callback_t update, void * context);
 
     int installKernel(const QString & source, bool verifyInstall);
     int installData(const QString & projectPath, bool runTests = true);

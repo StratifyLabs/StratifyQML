@@ -14,11 +14,27 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "Device.h"
+#ifndef DATAFIREBASE_H
+#define DATAFIREBASE_H
 
-using namespace StratifyIO;
+#include <QString>
+#include "DataService.h"
 
-Device::Device()
+namespace StratifyData {
+
+
+class FirebaseDataService : public DataService
 {
+public:
+    FirebaseDataService();
+
+    void getValue(const QString & token, const QString & value);
+    void putValue(const QString & token, const QString & value);
+    void post(const QString & token, const QString & value);
+    void patch(const QString & token, const QString & value);
+    void deleteValue(const QString & token);
+};
 
 }
+
+#endif // DATAFIREBASE_H

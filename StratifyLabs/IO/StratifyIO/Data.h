@@ -18,26 +18,45 @@ Copyright 2016 Tyler Gilbert
 #define DATA_H
 
 #include <QString>
+#include "StratifyObject.h"
+#include "DataService.h"
 
-namespace StratifyIO {
+namespace StratifyData {
 
-class Data
+class Data : public StratifyObject
 {
 public:
     Data();
 
-    const QString & token() const { return mToken; }
-    void setToken(const QString & value){ mToken = value; }
+    static void setDefaultDataService(DataService * dataService){
+        mDefaultDataService = dataService;
+    }
 
-    virtual void getValue() = 0;
-    virtual void putValue() = 0;
-    virtual void post() = 0;
-    virtual void patch() = 0;
-    virtual void deleteValue() = 0;
+    void setDataService(DataService * dataService){ mDataService = dataService; }
+
+
+    void getValue(){ checkService(); mDataService->getValue(mToken, mValue); }
+    void putValue(){ checkService(); mDataService->putValue(mToken, mValue); }
+    void post(){ checkService(); mDataService->post(mToken, mValue); }
+    void patch(){ checkService(); mDataService->patch(mToken, mValue); }
+    void deleteValue(){ checkService(); mDataService->deleteValue(mToken); }
+
+protected:
+    DataService & dataService(){ return *mDataService; }
 
 
 private:
     QString mToken;
+    QString mValue;
+
+    static DataService * mDefaultDataService;
+    DataService * mDataService;
+
+    void checkService(){
+        if( mDataService == 0 ){
+            mDataService = mDefaultDataService;
+        }
+    }
 
 };
 

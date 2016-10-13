@@ -14,9 +14,19 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "DataFirebase.h"
+#ifndef HARDWARE_H
+#define HARDWARE_H
 
-DataFirebase::DataFirebase()
+#include "Data.h"
+
+namespace StratifyData {
+
+class HardwareData : public Data
 {
+public:
+    HardwareData();
+};
 
 }
+
+#endif // HARDWARE_H

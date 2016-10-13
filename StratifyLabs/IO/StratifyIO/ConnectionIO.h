@@ -18,15 +18,15 @@ Copyright 2016 Tyler Gilbert
 #define CONNECTIONMANAGER_H
 
 #include <QStringList>
-#include "DeviceManager.h"
+#include "IO.h"
 
 namespace StratifyIO {
 
-class ConnectionManager : public DeviceManager
+class ConnectionIO : public IO
 {
     Q_OBJECT
 public:
-    ConnectionManager(Link & link);
+    ConnectionIO(Link & link);
 
     int connectToDevice(const QString & serialNumber);
     int disconnectFromDevice();

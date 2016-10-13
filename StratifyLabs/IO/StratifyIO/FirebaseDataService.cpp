@@ -14,20 +14,31 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#ifndef HARDWARE_H
-#define HARDWARE_H
+#include "FirebaseDataService.h"
 
-#include "Device.h"
+using namespace StratifyData;
 
-namespace StratifyIO {
-
-
-class Hardware
+FirebaseDataService::FirebaseDataService()
 {
-public:
-    Hardware();
-};
 
 }
 
-#endif // HARDWARE_H
+void FirebaseDataService::getValue(const QString & token, const QString & value){
+
+}
+
+void FirebaseDataService::putValue(const QString & token, const QString & value){
+
+}
+
+void FirebaseDataService::post(const QString & token, const QString & value){
+
+}
+
+void FirebaseDataService::patch(const QString & token, const QString & value){
+
+}
+
+void FirebaseDataService::deleteValue(const QString & token){
+
+}

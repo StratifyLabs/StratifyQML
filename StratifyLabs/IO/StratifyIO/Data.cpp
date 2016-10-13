@@ -16,9 +16,8 @@ Copyright 2016 Tyler Gilbert
 
 #include "Data.h"
 
-using namespace StratifyIO;
+using namespace StratifyData;
 
-Data::Data()
-{
+DataService * Data::mDefaultDataService;
 
-}
+Data::Data(){}

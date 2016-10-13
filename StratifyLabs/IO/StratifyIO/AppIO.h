@@ -14,18 +14,28 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#ifndef USER_H
-#define USER_H
+#ifndef APPMANAGER_H
+#define APPMANAGER_H
+
+#include "IO.h"
 
 namespace StratifyIO {
 
-
-class User
+class AppIO : public IO
 {
+    Q_OBJECT
 public:
-    User();
+    AppIO(Link & link);
+
+    int kill(const QString & name);
+    int installFiles(const QString & settingsPath);
+    int installApp(const QString & sourcePath, const QString & installPath, const QString & name);
+    int runApp(const QString & name);
+    int uninstallApp(const QString & path, const QString & name);
+    int prepareBinary(const QString & sourcePath, const QString & name, bool startup, bool ram, int ramSize);
+
 };
 
 }
 
-#endif // USER_H
+#endif // APPMANAGER_H

@@ -14,20 +14,20 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "DeviceManager.h"
+#include "IO.h"
 
 #include <QDebug>
 
 using namespace StratifyIO;
 
-QList<DeviceListItem> DeviceManager::mDeviceList;
+QList<DeviceListItem> IO::mDeviceList;
 
-DeviceManager::DeviceManager(Link & link) : mLink(link){
+IO::IO(Link & link) : mLink(link){
 }
 
 
 
-const DeviceListItem * DeviceManager::lookupSerialNumber(const QString & serialNumber){
+const DeviceListItem * IO::lookupSerialNumber(const QString & serialNumber){
     for(int i=0; i < deviceList().count(); i++){
         if( deviceList().at(i).serialPortInfo().serialNumber() == serialNumber ){
             return &(deviceList().at(i));
@@ -38,7 +38,7 @@ const DeviceListItem * DeviceManager::lookupSerialNumber(const QString & serialN
 }
 
 
-void DeviceManager::refreshDeviceList(Link & link){
+void IO::refreshDeviceList(Link & link){
     //use QSerialPort to get a list of known devices
 
     QList<QSerialPortInfo> list;
@@ -80,7 +80,7 @@ void DeviceManager::refreshDeviceList(Link & link){
     }
 }
 
-void DeviceManager::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr){
+void IO::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr){
     memset(&attr, 0, sizeof(sys_attr_t));
 
     link.driver()->dev.handle = link.driver()->dev.open(systemLocation.toStdString().c_str(), 0);
@@ -112,23 +112,23 @@ void DeviceManager::loadSysAttr(Link & link, const QString & systemLocation, sys
 
 }
 
-bool DeviceManager::updateProgressCallback(void * context, int progress, int max){
-    DeviceManager* object = (DeviceManager*)context;
+bool IO::updateProgressCallback(void * context, int progress, int max){
+    IO* object = (IO*)context;
     return object->updateProgress(progress, max);
 }
 
-bool DeviceManager::updateProgress(int value, int max){
+bool IO::updateProgress(int value, int max){
     emit progressChanged(value, max);
     return false;
 }
 
-bool DeviceManager::updateCummulativeCallback(void * context, int progress, int max){
-    DeviceManager * object = (DeviceManager*)context;
+bool IO::updateCummulativeCallback(void * context, int progress, int max){
+    IO * object = (IO*)context;
     return object->updateCummulative(progress, max);
 
 }
 
-bool DeviceManager::updateCummulative(int progress, int max){
+bool IO::updateCummulative(int progress, int max){
     max = 0; //suppress warning
 
     if( mCummulativeProgressCached > progress ){
@@ -142,13 +142,13 @@ bool DeviceManager::updateCummulative(int progress, int max){
     return false;
 }
 
-void DeviceManager::setCummulativeMax(int value){
+void IO::setCummulativeMax(int value){
     mCummulativeProgress = 0;
     mCummulativeProgressCached = 0;
     mCummulativeMax = value;
 }
 
-void DeviceManager::resetCummulativeMax(){
+void IO::resetCummulativeMax(){
     setCummulativeMax(0);
 }
 

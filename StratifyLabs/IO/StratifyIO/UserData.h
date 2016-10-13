@@ -14,14 +14,20 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "App.h"
+#ifndef USER_H
+#define USER_H
+
+#include "Data.h"
+
+namespace StratifyData {
 
 
-using namespace StratifyIO;
-
-App::App()
+class User : public Data
 {
+public:
+    User();
+};
 
 }
 
-
+#endif // USER_H

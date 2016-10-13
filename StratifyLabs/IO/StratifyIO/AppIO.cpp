@@ -14,17 +14,17 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "AppManager.h"
+#include "AppIO.h"
 
 #include <QDebug>
 #include <QFile>
 
 using namespace StratifyIO;
 
-AppManager::AppManager(Link & link) : DeviceManager(link){}
+AppIO::AppIO(Link & link) : IO(link){}
 
 
-int AppManager::kill(const QString & name){
+int AppIO::kill(const QString & name){
     int pid;
 
     pid = mLink.get_pid(name.toStdString());
@@ -38,7 +38,7 @@ int AppManager::kill(const QString & name){
 }
 
 
-int AppManager::prepareBinary(const QString & sourcePath, const QString & name, bool startup, bool ram, int ramSize){
+int AppIO::prepareBinary(const QString & sourcePath, const QString & name, bool startup, bool ram, int ramSize){
     if( mLink.update_binary_install_options(sourcePath.toStdString().c_str(), name.toStdString().c_str(), startup, ram, ramSize) < 0 ){
         mError = mLink.error_message().c_str();
         qDebug() << "Failed to prepare binary";
@@ -48,7 +48,7 @@ int AppManager::prepareBinary(const QString & sourcePath, const QString & name, 
 }
 
 
-int AppManager::installApp(const QString & sourcePath, const QString & installPath, const QString & name){
+int AppIO::installApp(const QString & sourcePath, const QString & installPath, const QString & name){
 
     QString unlinkPath;
     //delete the app if it currently is in the app system
@@ -86,7 +86,7 @@ int AppManager::installApp(const QString & sourcePath, const QString & installPa
     return 0;
 }
 
-int AppManager::runApp(const QString & name){
+int AppIO::runApp(const QString & name){
     QString appPath;
     //look for the full path (flash or RAM)
 
@@ -117,7 +117,7 @@ int AppManager::runApp(const QString & name){
 }
 
 
-int AppManager::uninstallApp(const QString & path, const QString & name){
+int AppIO::uninstallApp(const QString & path, const QString & name){
 
     qDebug() << "Uninstall App" << path << name;
     emit statusChanged(DEBUG, "Uninstalled " + path + "/" + name);
@@ -140,7 +140,7 @@ int AppManager::uninstallApp(const QString & path, const QString & name){
 
 }
 
-int AppManager::installFiles(const QString & settingsPath){
+int AppIO::installFiles(const QString & settingsPath){
 
     qDebug() << "Settings Path" << settingsPath;
     //settingsPath is a JSON file which says which files are to be installed

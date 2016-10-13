@@ -22,8 +22,9 @@ Copyright 2016 Tyler Gilbert
 #include <QList>
 #include <QStringList>
 #include <QtSerialPort/QtSerialPort>
-
 #include <Link.h>
+
+#include "StratifyObject.h"
 
 namespace StratifyIO {
 
@@ -45,11 +46,11 @@ private:
     sys_attr_t mSysAttr;
 };
 
-class DeviceManager: public QObject
+class IO: public StratifyObject
 {
     Q_OBJECT
 public:
-    DeviceManager(Link & link);
+    IO(Link & link);
     const QString & error() const { return mError; }
 
     static void refreshDeviceList(Link & link);
@@ -75,20 +76,6 @@ public:
 
     void setCummulativeMax(int value);
     void resetCummulativeMax();
-
-    enum {
-        FATAL,
-        CRITICAL,
-        WARNING,
-        ERROR,
-        INFO,
-        DEBUG
-    };
-
-signals:
-    void statusChanged(int type, const QString & status); //update status and log
-    void progressChanged(int value, int max); //update the user with the progress update
-    void connectionChanged();
 
 protected:
 

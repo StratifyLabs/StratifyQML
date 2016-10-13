@@ -14,9 +14,9 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "User.h"
+#include "UserData.h"
 
-using namespace StratifyIO;
+using namespace StratifyData;
 
 User::User()
 {

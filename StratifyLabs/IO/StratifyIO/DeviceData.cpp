@@ -14,12 +14,11 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "Hardware.h"
+#include "DeviceData.h"
 
+using namespace StratifyData;
 
-using namespace StratifyIO;
-
-Hardware::Hardware()
+DeviceData::DeviceData()
 {
 
 }

@@ -14,7 +14,7 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "TerminalManager.h"
+#include "TerminalIO.h"
 
 #include <iface/dev/fifo.h>
 #include <stfy/hal.hpp>
@@ -22,13 +22,13 @@ Copyright 2016 Tyler Gilbert
 using namespace StratifyIO;
 
 
-TerminalManager::TerminalManager(Link & link) : DeviceManager(link){
+TerminaIO::TerminaIO(Link & link) : IO(link){
     mInFd = -1;
     mOutFd = -1;
 }
 
 
-int TerminalManager::open(){
+int TerminaIO::open(){
     sys_attr_t attr;
     QString tmpIn;
     QString tmpOut;
@@ -98,7 +98,7 @@ int TerminalManager::open(){
     return 0;
 }
 
-int TerminalManager::close(){
+int TerminaIO::close(){
 
     if( mInFd >= 0 ){
         if( mLink.get_is_connected() ){
@@ -120,7 +120,7 @@ int TerminalManager::close(){
 
 }
 
-QByteArray TerminalManager::read(){
+QByteArray TerminaIO::read(){
     char buffer[1024];
     int ret;
     QByteArray data;
@@ -144,7 +144,7 @@ QByteArray TerminalManager::read(){
     return data;
 }
 
-int TerminalManager::write(const QByteArray & data){
+int TerminaIO::write(const QByteArray & data){
     if( mLink.get_is_connected() == false ){
         close();
         return -1;

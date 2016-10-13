@@ -14,16 +14,16 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "ConnectionManager.h"
+#include "ConnectionIO.h"
 
 using namespace StratifyIO;
 
-ConnectionManager::ConnectionManager(Link & link) : DeviceManager(link)
+ConnectionIO::ConnectionIO(Link & link) : IO(link)
 {
     memset(&mSysAttr, 0, sizeof(mSysAttr));
 }
 
-int ConnectionManager::connectToDevice(const QString & serialNumber){
+int ConnectionIO::connectToDevice(const QString & serialNumber){
     QString sn;
     const DeviceListItem * item;
     sn = serialNumber;
@@ -34,7 +34,7 @@ int ConnectionManager::connectToDevice(const QString & serialNumber){
 
     emit connectionChanged();
 
-    item = DeviceManager::lookupSerialNumber(serialNumber);
+    item = IO::lookupSerialNumber(serialNumber);
 
     if( item == 0 ){
         return -1;
@@ -61,7 +61,7 @@ int ConnectionManager::connectToDevice(const QString & serialNumber){
 
 }
 
-int ConnectionManager::disconnectFromDevice(){
+int ConnectionIO::disconnectFromDevice(){
     if( mLink.get_is_connected() ){
         mLink.exit();
         memset(&mSysAttr, 0, sizeof(mSysAttr));
