@@ -44,34 +44,33 @@ int TerminalIO::open(){
     sysDevice.set_driver(mLink.driver());
 
     if( sysDevice.open("/dev/sys", Dev::READWRITE) < 0 ){
-        mError = "Failed to open system device";
+        emit statusChanged(ERROR, "Failed to open system device: " + QString(mLink.error_message().c_str()));
         return -1;
     }
 
     if( sysDevice.ioctl(I_SYS_GETATTR, &attr) < 0 ){
+        emit statusChanged(ERROR, "Failed to get system attributes: " + QString(mLink.error_message().c_str()));
         sysDevice.close();
-        mError = "Failed to get system attributes";
         return -1;
     }
 
     sysDevice.close();
 
     if( attr.flags & SYS_FLAGS_STDIO_VCP ){
-        mError = "VCP stdio is not yet supported";
-        return -1;
+        emit statusChanged(WARNING, "SYS_FLAGS_STDIO_VCP flag is deprecated");
     } else if( attr.flags & SYS_FLAGS_STDIO_FIFO ) {
 
         tmpIn = QString(attr.stdin_name);
         tmpOut = QString(attr.stdout_name);
 
         if ( mLink.is_bootloader() ){
-            mError = "Device is a bootloader";
+            emit statusChanged(ERROR, "Device is a bootloader");
             return -1;
         }
 
         mInFd = mLink.open(tmpOut.toStdString(), LINK_O_RDWR | LINK_O_NONBLOCK);
         if( mInFd < 0 ){
-            mError = "Failed to open /dev/" + tmpIn;
+            emit statusChanged(ERROR, "Failed to open /dev/" + tmpIn + ": " + mLink.error_message().c_str());
             mInFd = -1;
             mOutFd = -1;
             return -1;
@@ -83,10 +82,10 @@ int TerminalIO::open(){
         } else {
             mOutFd = mLink.open(tmpIn.toStdString(), LINK_O_RDWR | LINK_O_NONBLOCK);
             if( mOutFd < 0 ){
+                emit statusChanged(ERROR, "Failed to open /dev/" + tmpOut + ": " + mLink.error_message().c_str());
                 mLink.close(mInFd);
                 mInFd = -1;
                 mOutFd = -1;
-                mError = "Failed to open /dev/" + tmpOut;
                 return -1;
             }
         }

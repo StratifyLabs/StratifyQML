@@ -40,8 +40,7 @@ int AppIO::kill(const QString & name){
 
 int AppIO::prepareBinary(const QString & sourcePath, const QString & name, bool startup, bool ram, int ramSize){
     if( mLink.update_binary_install_options(sourcePath.toStdString().c_str(), name.toStdString().c_str(), startup, ram, ramSize) < 0 ){
-        mError = mLink.error_message().c_str();
-        qDebug() << "Failed to prepare binary";
+        emit statusChanged(ERROR, "Failed to prepare binary:" + QString(mLink.error_message().c_str()));
         return -1;
     }
     return 0;
@@ -59,14 +58,13 @@ int AppIO::installApp(const QString & sourcePath, const QString & installPath, c
     while( mLink.unlink(unlinkPath.toStdString()) >= 0 ){
         //delete all versions
         qDebug() << "unlinked" << unlinkPath;
-        emit statusChanged(DEBUG, "unlinked " + unlinkPath);
+        emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": unlinked " + unlinkPath);
     }
 
     unlinkPath = "/app/ram/" + name;
     while( mLink.unlink(unlinkPath.toStdString()) >= 0 ){
         //delete all versions
-        qDebug() << "unlinked" << unlinkPath;
-        emit statusChanged(DEBUG, "unlinked " + unlinkPath);
+        emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": unlinked " + unlinkPath);
 
     }
 
@@ -75,13 +73,11 @@ int AppIO::installApp(const QString & sourcePath, const QString & installPath, c
                            installPath.toStdString(),
                            name.toStdString(),
                            updateProgressCallback, this) < 0 ){
-
-        qDebug() << "Failed to install App" << name << "from" << sourcePath << "in" << installPath;
-        emit statusChanged(ERROR, mLink.error_message().c_str());
-
-        mError = mLink.error_message().c_str();
+        emit statusChanged(ERROR, "Failed to install " + name + ": " + mLink.error_message().c_str());
         return -1;
     }
+
+    emit statusChanged(INFO, "Successfully installed " + sourcePath + " to " + installPath);
 
     return 0;
 }
@@ -91,15 +87,13 @@ int AppIO::runApp(const QString & name){
     //look for the full path (flash or RAM)
 
     if( mLink.get_is_connected() == false ){
-        mError = "Can't run (not connected)";
-        emit statusChanged(ERROR, mError);
+        emit statusChanged(ERROR, "Can't run " + name + ": not connected");
         return -1;
     }
 
 
     if( mLink.get_pid(name.toStdString()) >= 0 ){
-        mError = name + " is already running";
-        emit statusChanged(ERROR, mError);
+        emit statusChanged(ERROR, "Can't run " + name + ": already running");
         return 1;
     }
 
@@ -108,34 +102,38 @@ int AppIO::runApp(const QString & name){
     if( mLink.run_app(appPath.toStdString()) < 0 ){
         appPath = "/app/ram/" + name;
         if( mLink.run_app(appPath.toStdString()) < 0 ){
-            mError = "Failed to run app " + QString(mLink.error_message().c_str());
-            emit statusChanged(ERROR, mError);
+            emit statusChanged(ERROR, "Failed to run app " + QString(mLink.error_message().c_str()));
             return -1;
         }
     }
+
+    emit statusChanged(INFO, "Successfully started " + name);
+
     return 0;
 }
 
 
 int AppIO::uninstallApp(const QString & path, const QString & name){
 
-    qDebug() << "Uninstall App" << path << name;
-    emit statusChanged(DEBUG, "Uninstalled " + path + "/" + name);
+    emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Uninstalled " + path + "/" + name);
 
     if( mLink.unlink("/app/flash/" + name.toStdString()) == 0 ){
+        emit statusChanged(INFO, "Successfully uninstalled " + name);
+
         return 0;
     }
 
     if( mLink.unlink("/app/ram/" + name.toStdString()) == 0 ){
+        emit statusChanged(INFO, "Successfully uninstalled " + name);
         return 0;
     }
 
     if( mLink.unlink(QString(path + "/" + name).toStdString()) == 0 ){
+        emit statusChanged(INFO, "Successfully uninstalled " + name);
         return 0;
     }
 
-    mError = "Failed to uninstall " + path + "/" + name;
-    emit statusChanged(ERROR, mError);
+    emit statusChanged(ERROR, "Failed to uninstall " + path + "/" + name + ": " + mLink.error_message().c_str());
     return -1;
 
 }

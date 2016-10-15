@@ -51,7 +51,6 @@ class IO: public StratifyObject
     Q_OBJECT
 public:
     IO(Link & link);
-    const QString & error() const { return mError; }
 
     static void refreshDeviceList(Link & link);
     static const QList<DeviceListItem> & deviceList() { return mDeviceList; }
@@ -91,7 +90,6 @@ protected:
     int mCummulativeProgressCached;
     int mCummulativeMax;
 
-    QString mError;
     static QList<DeviceListItem> mDeviceList;
 
 };

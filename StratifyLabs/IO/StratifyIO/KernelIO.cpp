@@ -46,7 +46,7 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
     //projectName = ui->installer->project();
 
     if ( mLink.get_is_connected() == false ){
-        mError = "Not Connected";
+        emit statusChanged(ERROR, "Not connected");
         return -1;
     } else {
 
@@ -71,16 +71,16 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
 
                     if ( IO::deviceList().count() > 0 ){
                         //connect to last known serial number
-                        emit statusChanged(DEBUG, "Reconnect to last serial number");
+                        emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Reconnect to last serial number");
                         mLink.reinit(); //suppress any error messages
                     }
 
                     QThread::msleep(500);
 
-                    emit statusChanged(DEBUG, "Check if device is reconnected");
+                    emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Check if device is reconnected");
 
                     if ( mLink.get_is_connected() ){
-                        emit statusChanged(DEBUG, "Reconnected to device; check for bootloader");
+                        emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Reconnected to device; check for bootloader");
 
                         emit connectionChanged();
                         if( mLink.is_bootloader() ){
@@ -93,13 +93,12 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
                 }
 
                 if ( i == 60 ){
-                    mError = "Bootloader did not load. Try invoking manually.";
-                    emit statusChanged(ERROR, mError);
+                    emit statusChanged(ERROR | PROMPT, "Bootloader did not load. Try invoking manually.");
                     return -1;
                 }
 
             } else {
-                emit statusChanged(ERROR, "Failed to start bootloader");
+                emit statusChanged(ERROR | PROMPT, "Failed to start bootloader. Try invoking manually");
                 return -1;
             }
         }
@@ -110,21 +109,15 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
                          verifyInstall,
                          updateProgressCallback,
                          this) < 0 ){
-        mError = mLink.error_message().c_str();
-        emit statusChanged(ERROR, "Failed to Install");
+        emit statusChanged(ERROR | PROMPT, "Failed to install: " + QString(mLink.error_message().c_str()));
         emit connectionChanged();
-
         return -1;
     }
 
-    emit statusChanged(INFO, "Kernel Update Complete");
-
-    updateProgress(0, 0);
-
+    emit statusChanged(INFO, "Kernel update complete");
+    emit progressChanged(0, 0);
     mLink.reset();
-
     emit connectionChanged();
-
 
     return 0;
 
@@ -143,7 +136,7 @@ int KernelIO::installData(const QString & projectPath, bool runTests){
     qDebug() << "Load Kernel Install Apps" << file.fileName();
 
     if( file.open(QFile::ReadOnly) == false ){
-        qDebug() << "Didn't open file";
+        emit statusChanged(ERROR, "Failed to open: " + file.fileName());
         return -1;
     }
 
@@ -175,7 +168,7 @@ int KernelIO::installData(const QString & projectPath, bool runTests){
             if( runTests == true ){
                 if( dataObject.value("when") == "before" ){
                     if( runTest(projectPath, dataObject) < 0 ){
-                        qDebug() << "Test failed";
+                        emit statusChanged(ERROR, "Test failed: " + dataObject.value("name").toString());
                         return -1;
                     }
                 }
@@ -196,13 +189,13 @@ int KernelIO::installData(const QString & projectPath, bool runTests){
 
         if( dataObject.value("type") == "app" ){
             if( installAppObject(projectPath, dataObject, key) < 0 ){
-                mError = "Failed to install " + key;
+                emit statusChanged(ERROR, "Failed to install " + key + ": " + QString(mLink.error_message().c_str()));
                 resetCummulativeMax();
                 return -1;
             }
         } else if( dataObject.value("type") == "data" ){
             if( installDataObject(projectPath, dataObject, key) < 0 ){
-                mError = "Failed to install " + key;
+                emit statusChanged(ERROR, "Failed to install " + key + ": " + QString(mLink.error_message().c_str()));
                 resetCummulativeMax();
                 return -1;
             }
@@ -244,7 +237,7 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
         qDebug() << "Create destination" << destination;
         if( mLink.mkdir(destination.toStdString(), 0777) < 0 ){
             if( link_errno != 17 ){ //17 is EEXIST
-                qDebug() << mLink.error_message().c_str();
+                emit statusChanged(ERROR, "Failed to create folder " + destination + ": " + QString(mLink.error_message().c_str()));
                 return -1;
             }
         }
@@ -253,14 +246,12 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
 
 
         if( copyFileToDeviceCummulative(source, destination + "/" + key) < 0 ){
-            qDebug() << mLink.error_message().c_str();
-            mError = QString("Failed to copy " + source + " to " + destination);
+            emit statusChanged(ERROR, "Failed to copy " + source + " to " + destination + ": " + QString(mLink.error_message().c_str()));
             return -1;
         }
 
     } else {
-        mError = QString(source + " doesn't exist");
-
+        emit statusChanged(ERROR, "Failed because " + source + " doesn't exist");
     }
 
     qDebug() << "App Settings:" << settings;
@@ -306,8 +297,7 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
 
             //now copy the file to the device
             if( copyFileToDeviceCummulative(sourceFilePath, destination + "/" + destFileName) < 0 ){
-                qDebug() << mLink.error_message().c_str();
-                mError = mLink.error_message().c_str();
+                emit statusChanged(ERROR, "Failed to copy " + sourceFilePath + " to " + destination + ": " + QString(mLink.error_message().c_str()));
                 return -1;
             }
 
@@ -400,12 +390,16 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     int count;
     QFile testReport;
 
-    AppIO appManager(mLink);
-    TerminalIO terminalManager(mLink);
+    AppIO appIO(mLink);
+    TerminalIO terminalIO(mLink);
     QByteArray terminalData;
     QJsonDocument doc;
     QJsonObject reportObject;
     QJsonObject testObjectLocal = testObject;
+
+    //enable error reporting on these objects
+    connect(&appIO, SIGNAL(statusChanged(int,const QString&)), this, SIGNAL(statusChanged(int,QString)));
+    connect(&terminalIO, SIGNAL(statusChanged(int,const QString&)), this, SIGNAL(statusChanged(int,QString)));
 
 
     binary = testObject.value("binary").toString();
@@ -417,7 +411,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
 
     qDebug() << "Check is connected";
     if( mLink.get_is_connected() == false ){
-        mError = "Device is not connected";
+        emit statusChanged(ERROR, "Device is not connected");
         return -1;
     }
 
@@ -428,28 +422,28 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     //Install the Test App in RAM
     info.setFile(projectPath + "/" + binary);
 
-    if( appManager.prepareBinary(info.filePath(), info.fileName(), false, true, 0) < 0 ){
-        qDebug() << "Failed to prepare binary file";
+    if( appIO.prepareBinary(info.filePath(), info.fileName(), false, true, 0) < 0 ){
+        //appIO will emit error status
         return -1;
     }
 
-    if( appManager.installApp(info.filePath(), "/app/flash", info.fileName()) < 0 ){
-        qDebug() << "Failed to install app" << appManager.error();
+    if( appIO.installApp(info.filePath(), "/app/flash", info.fileName()) < 0 ){
+        //appIO will emit error status
         return -1;
     }
 
 
-    if( terminalManager.open() < 0 ){
-        qDebug() << "Failed to open terminal";
+    if( terminalIO.open() < 0 ){
+        //terminalIO will emit error status
         return -1;
     }
 
-    terminalManager.read(); //flush any data in STDOUT
+    terminalIO.read(); //flush any data in STDOUT
 
     //Run the Test App
-    if( appManager.runApp(info.fileName()) < 0 ){
-        qDebug() << "Failed to run app" << info.fileName() << appManager.error();
-        terminalManager.close();
+    if( appIO.runApp(info.fileName()) < 0 ){
+        //appIO will emit error status
+        terminalIO.close();
         return -1;
     }
 
@@ -466,7 +460,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
         count++;
         emit updateProgress(count, timeout);
 
-        incoming = terminalManager.read();
+        incoming = terminalIO.read();
         terminalData += incoming;
         if( incoming.isEmpty() == false ){
             qDebug() << "Incoming:" << incoming.toStdString().c_str();
@@ -479,7 +473,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
         }
     }
 
-    terminalManager.close();
+    terminalIO.close();
 
     emit updateProgress(0,0);
 
@@ -517,7 +511,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
         }
 
         if( reportObject.value("status").toString() != "passed" ){
-            emit statusChanged(INFO, name + " failed");
+            emit statusChanged(WARNING, name + " failed");
             qDebug() << "Test failed";
             return -1;
         } else {

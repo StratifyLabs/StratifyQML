@@ -101,7 +101,8 @@ public:
         WARNING,
         ERROR,
         INFO,
-        DEBUG
+        DEBUG,
+        PROMPT = 0x80
     };
 
 signals:
@@ -112,6 +113,7 @@ signals:
 
 
 public slots:
+
 };
 
 #endif // STRATIFYOBJECT_H
