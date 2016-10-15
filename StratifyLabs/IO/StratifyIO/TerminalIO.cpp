@@ -22,13 +22,13 @@ Copyright 2016 Tyler Gilbert
 using namespace StratifyIO;
 
 
-TerminaIO::TerminaIO(Link & link) : IO(link){
+TerminalIO::TerminalIO(Link & link) : IO(link){
     mInFd = -1;
     mOutFd = -1;
 }
 
 
-int TerminaIO::open(){
+int TerminalIO::open(){
     sys_attr_t attr;
     QString tmpIn;
     QString tmpOut;
@@ -98,7 +98,7 @@ int TerminaIO::open(){
     return 0;
 }
 
-int TerminaIO::close(){
+int TerminalIO::close(){
 
     if( mInFd >= 0 ){
         if( mLink.get_is_connected() ){
@@ -120,7 +120,7 @@ int TerminaIO::close(){
 
 }
 
-QByteArray TerminaIO::read(){
+QByteArray TerminalIO::read(){
     char buffer[1024];
     int ret;
     QByteArray data;
@@ -144,7 +144,7 @@ QByteArray TerminaIO::read(){
     return data;
 }
 
-int TerminaIO::write(const QByteArray & data){
+int TerminalIO::write(const QByteArray & data){
     if( mLink.get_is_connected() == false ){
         close();
         return -1;

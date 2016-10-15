@@ -79,7 +79,7 @@ public:
 
 protected:
 
-    static void loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr);
+    static int loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr);
 
     static bool updateProgressCallback(void * context, int progress, int max);
     bool updateProgress(int value, int max);

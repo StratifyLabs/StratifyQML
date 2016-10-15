@@ -72,15 +72,16 @@ void IO::refreshDeviceList(Link & link){
             if( !alreadyAdded ){
                 //load sys attr
                 sys_attr_t attr;
-                loadSysAttr(link, info.systemLocation(), attr);
-                mDeviceList.append(DeviceListItem(info,attr));
-                qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+                if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
+                    mDeviceList.append(DeviceListItem(info,attr));
+                    qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+                }
             }
         }
     }
 }
 
-void IO::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr){
+int IO::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr){
     memset(&attr, 0, sizeof(sys_attr_t));
 
     link.driver()->dev.handle = link.driver()->dev.open(systemLocation.toStdString().c_str(), 0);
@@ -108,7 +109,9 @@ void IO::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & a
         link.driver()->dev.handle = LINK_PHY_OPEN_ERROR;
     } else {
         qDebug() << "Failed to open" << systemLocation;
+        return -1;
     }
+    return 0;
 
 }
 

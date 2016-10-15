@@ -23,10 +23,10 @@ Copyright 2016 Tyler Gilbert
 namespace StratifyIO {
 
 
-class TerminaIO : public IO {
+class TerminalIO : public IO {
     Q_OBJECT
 public:
-    TerminaIO(Link & link);
+    TerminalIO(Link & link);
 
     int open();
     int close();

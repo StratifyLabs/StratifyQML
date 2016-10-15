@@ -401,7 +401,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     QFile testReport;
 
     AppIO appManager(mLink);
-    TerminaIO terminalManager(mLink);
+    TerminalIO terminalManager(mLink);
     QByteArray terminalData;
     QJsonDocument doc;
     QJsonObject reportObject;
