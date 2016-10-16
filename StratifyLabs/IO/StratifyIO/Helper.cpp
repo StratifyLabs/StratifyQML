@@ -17,6 +17,7 @@ Copyright 2016 Tyler Gilbert
 
 #include <QFileInfo>
 #include <QDebug>
+#include <QFile>
 
 #include "Helper.h"
 
@@ -47,7 +48,7 @@ bool Helper::doesFileExist(const QString & dir, const QString & name){
 }
 
 
-int Helper::son_add_json_value(son_t * son, const QJsonValue & value, const QString & valueKey){
+int Helper::addJsonToSon(son_t * son, const QJsonValue & value, const QString & valueKey){
     int ret = 0;
     const char * k = valueKey.toStdString().c_str();
 
@@ -67,10 +68,10 @@ int Helper::son_add_json_value(son_t * son, const QJsonValue & value, const QStr
         ret = son_write_str(son, k, value.toString().toStdString().c_str());
         break;
     case QJsonValue::Array:
-        ret = son_add_json_array(son, value.toArray(), valueKey);
+        ret = addJsonArrayToSon(son, value.toArray(), valueKey);
         break;
     case QJsonValue::Object:
-        ret = son_add_json_object(son, value.toObject(), valueKey);
+        ret = addJsonObjecToSon(son, value.toObject(), valueKey);
         break;
     case QJsonValue::Undefined:
 
@@ -79,7 +80,7 @@ int Helper::son_add_json_value(son_t * son, const QJsonValue & value, const QStr
     return ret;
 }
 
-int Helper::son_add_json_array(son_t * son, const QJsonArray & array, const QString & arrayKey){
+int Helper::addJsonArrayToSon(son_t * son, const QJsonArray & array, const QString & arrayKey){
     int ret = 0;
     if( son_open_array(son, arrayKey.toStdString().c_str(), 1) < 0 ){
         return -1;
@@ -87,7 +88,7 @@ int Helper::son_add_json_array(son_t * son, const QJsonArray & array, const QStr
 
 
     for(int i = 0; i < array.size(); i++){
-        if( son_add_json_value(son, array.at(i), QString::number(i)) < 0 ){
+        if( addJsonToSon(son, array.at(i), QString::number(i)) < 0 ){
             ret = -1;
             break;
         }
@@ -97,7 +98,7 @@ int Helper::son_add_json_array(son_t * son, const QJsonArray & array, const QStr
     return ret;
 }
 
-int Helper::son_add_json_object(son_t * son, const QJsonObject & object, const QString & objectKey){
+int Helper::addJsonObjecToSon(son_t * son, const QJsonObject & object, const QString & objectKey){
     int ret = 0;
     if( son_open_obj(son, objectKey.toStdString().c_str()) < 0 ){
         return -1;
@@ -106,7 +107,7 @@ int Helper::son_add_json_object(son_t * son, const QJsonObject & object, const Q
     foreach(QString key, object.keys()){
 
         //QJsonValue value = object.value(key);
-        if( son_add_json_value(son, object.value(key), key) < 0 ){
+        if( addJsonToSon(son, object.value(key), key) < 0 ){
             ret = -1;
             break;
         }
@@ -117,41 +118,49 @@ int Helper::son_add_json_object(son_t * son, const QJsonObject & object, const Q
     return ret;
 }
 
-int Helper::son_create_from_json(const QString & dest, const QString & source, int son_stack_size){
+QJsonObject Helper::createJsonFromFile(const QString & path){
     QFile inputFile;
+    inputFile.setFileName(path);
+
+    if( inputFile.open(QFile::ReadOnly) == false ){
+        qDebug() << "Failed to open" << path;
+        return QJsonObject();
+    }
+
+    QJsonDocument doc = QJsonDocument::fromJson(inputFile.readAll());
+    QJsonObject object = doc.object();
+    inputFile.close();
+    return object;
+}
+
+
+int Helper::createSonFromJson(const QString & dest, const QString & source, int son_stack_size){
     int ret = 0;
 
     son_stack_t son_stack[son_stack_size];
     son_t son;
 
+    QJsonObject object = createJsonFromFile(source);
 
-
-    inputFile.setFileName(source);
-
-    if( inputFile.open(QFile::ReadOnly) == false ){
-        qDebug() << "Failed to open" << source;
-        return -1;
-    }
-
-    QJsonDocument doc = QJsonDocument::fromJson(inputFile.readAll());
-    inputFile.close();
-
-    QJsonObject object = doc.object();
-
+    qDebug() << Q_FUNC_INFO << "Set son driver";
     son_set_driver(&son, 0);
 
+    qDebug() << Q_FUNC_INFO << "Create SON file";
     if( son_create(&son, dest.toStdString().c_str(), son_stack, son_stack_size) < 0 ){
-        qDebug() << "Failed to create" << dest;
+        qDebug() << Q_FUNC_INFO << "Failed to create" << dest;
         return -1;
     }
 
-    if( son_add_json_object(&son, object, "root") < 0 ){
-        qDebug() << "Failed to add root object";
+    qDebug() << Q_FUNC_INFO << "Add JSON Object";
+    if( addJsonObjecToSon(&son, object, "root") < 0 ){
+        qDebug() << Q_FUNC_INFO << "Failed to add root object";
         ret = -1;
     }
 
-    son_close(&son, 1);
+    qDebug() << Q_FUNC_INFO << "Close SON file";
+    son_close(&son, 0);
 
+    qDebug() << Q_FUNC_INFO << "Return" << ret;
     return ret;
 
 }

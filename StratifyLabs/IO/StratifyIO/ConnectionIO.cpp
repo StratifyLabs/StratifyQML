@@ -41,7 +41,10 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
     }
 
     if( mLink.init(item->serialPortInfo().systemLocation().toStdString(), sn.toStdString()) < 0 ){
+        emit statusChanged(IO::ERROR, "Failed to connect to " + sn);
         return -1;
+    } else {
+
     }
 
     int fd;
@@ -55,7 +58,7 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
     }
 
     emit connectionChanged();
-
+    emit statusChanged(IO::INFO, "Successfully connected to " + sn);
 
     return 0;
 
@@ -66,6 +69,8 @@ int ConnectionIO::disconnectFromDevice(){
         mLink.exit();
         memset(&mSysAttr, 0, sizeof(mSysAttr));
         emit connectionChanged();
+        emit statusChanged(IO::INFO, "Successfully disconnected from " +
+                           QString(mLink.last_serial_no().c_str()));
     }
     return 0;
 }

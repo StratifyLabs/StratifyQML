@@ -106,9 +106,9 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
 
 
     if( mLink.update_os(source.toStdString(),
-                         verifyInstall,
-                         updateProgressCallback,
-                         this) < 0 ){
+                        verifyInstall,
+                        updateProgressCallback,
+                        this) < 0 ){
         emit statusChanged(ERROR | PROMPT, "Failed to install: " + QString(mLink.error_message().c_str()));
         emit connectionChanged();
         return -1;
@@ -125,12 +125,18 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
 }
 
 
-int KernelIO::installData(const QString & projectPath, bool runTests){
+int KernelIO::installData(const QString & projectPath, bool isInstallData, bool isRunTests){
     //load the StratifyKernelInstallApps.json file
     QFile file;
     int app;
     int appTotal;
     int cummulativeMax;
+
+    if( mLink.get_is_connected() == false ){
+        emit statusChanged(ERROR, "Failed to install data: not connected");
+        return -1;
+    }
+
     file.setFileName(projectPath + "/StratifyKernelData.json");
 
     qDebug() << "Load Kernel Install Apps" << file.fileName();
@@ -160,12 +166,16 @@ int KernelIO::installData(const QString & projectPath, bool runTests){
 
         dataObject = object.value(key).toObject();
         if( dataObject.value("type") == "app" ){
-            cummulativeMax += calcAppObject(projectPath, dataObject);
+            if( isInstallData == true ){
+                cummulativeMax += calcAppObject(projectPath, dataObject);
+            }
         } else if( dataObject.value("type") == "data" ){
-            cummulativeMax += calcDataObject(projectPath, dataObject);
+            if( isInstallData == true ){
+                cummulativeMax += calcDataObject(projectPath, dataObject);
+            }
         } else if( dataObject.value("type") == "test" ){
 
-            if( runTests == true ){
+            if( isRunTests == true ){
                 if( dataObject.value("when") == "before" ){
                     if( runTest(projectPath, dataObject) < 0 ){
                         emit statusChanged(ERROR, "Test failed: " + dataObject.value("name").toString());
@@ -181,35 +191,50 @@ int KernelIO::installData(const QString & projectPath, bool runTests){
 
     foreach(QString key, keys){
         app++;
-        emit statusChanged(INFO, "Installing " + key);
 
         qDebug() << "Process Key" << key;
 
         dataObject = object.value(key).toObject();
 
         if( dataObject.value("type") == "app" ){
-            if( installAppObject(projectPath, dataObject, key) < 0 ){
-                emit statusChanged(ERROR, "Failed to install " + key + ": " + QString(mLink.error_message().c_str()));
-                resetCummulativeMax();
-                return -1;
+            if( isInstallData ){
+                emit statusChanged(INFO, "Installing " + key);
+                if( installAppObject(projectPath, dataObject, key) < 0 ){
+                    emit statusChanged(ERROR, "Failed to install " + key + ": " + QString(mLink.error_message().c_str()));
+                    resetCummulativeMax();
+                    return -1;
+                }
             }
         } else if( dataObject.value("type") == "data" ){
-            if( installDataObject(projectPath, dataObject, key) < 0 ){
-                emit statusChanged(ERROR, "Failed to install " + key + ": " + QString(mLink.error_message().c_str()));
-                resetCummulativeMax();
-                return -1;
+            if( isInstallData ){
+                emit statusChanged(INFO, "Installing " + key);
+                if( installDataObject(projectPath, dataObject, key) < 0 ){
+                    emit statusChanged(ERROR, "Failed to install " + key + ": " + QString(mLink.error_message().c_str()));
+                    resetCummulativeMax();
+                    return -1;
+                }
             }
         }
+    }
 
-
+    if( isRunTests ){
+        foreach(QString key, keys){
+            dataObject = object.value(key).toObject();
+            if( dataObject.value("type") == "test" ){
+                if( dataObject.value("when") == "after" ){
+                    if( runTest(projectPath, dataObject) < 0 ){
+                        emit statusChanged(ERROR, "Test failed: " + dataObject.value("name").toString());
+                        return -1;
+                    }
+                }
+            }
+        }
     }
 
     resetCummulativeMax();
     updateProgress(0,0);
 
     return 0;
-
-
 }
 
 int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & appObject, const QString & key){
@@ -268,7 +293,7 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
 
                 sonFilePath = fileInfo.path() + "/" + fileInfo.completeBaseName() + ".son";
 
-                if( Helper::son_create_from_json(
+                if( Helper::createSonFromJson(
                             sonFilePath,
                             fileInfo.filePath()
                             ) < 0 ){
@@ -384,6 +409,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     QString name;
     QString output;
     int timeout;
+    int delay;
     QString when;
     bool reset;
     QFileInfo info;
@@ -401,13 +427,13 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     connect(&appIO, SIGNAL(statusChanged(int,const QString&)), this, SIGNAL(statusChanged(int,QString)));
     connect(&terminalIO, SIGNAL(statusChanged(int,const QString&)), this, SIGNAL(statusChanged(int,QString)));
 
-
     binary = testObject.value("binary").toString();
     name = testObject.value("name").toString();
     output = testObject.value("output").toString();
     timeout = testObject.value("timeout").toInt() * 10; //use 100ms update rate
     when = testObject.value("when").toString();
     reset = testObject.value("reset").toBool();
+    delay = testObject.value("delay").toInt();
 
     qDebug() << "Check is connected";
     if( mLink.get_is_connected() == false ){
@@ -452,8 +478,6 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
 
     QByteArray incoming;
     bool testComplete = false;
-
-
 
     while( (count < timeout) && !testComplete ){
         QThread::msleep(100);
@@ -519,6 +543,16 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
         }
     }
 
+    if( reset == true ){
+        mLink.reset();
+        emit statusChanged(INFO, "Resetting device after " + name);
+        emit connectionChanged();
+        QThread::msleep(delay);
+        if( mLink.reinit() == 0 ){
+            emit statusChanged(INFO, "Reconnect to " + QString(mLink.last_serial_no().c_str()));
+            emit connectionChanged();
+        }
+    }
 
     return 0;
 

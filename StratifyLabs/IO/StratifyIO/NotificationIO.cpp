@@ -14,7 +14,7 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "NotificationIO"
+#include "NotificationIO.h"
 
 #include <QThread>
 #include <QDebug>

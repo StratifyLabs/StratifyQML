@@ -18,7 +18,7 @@ Copyright 2016 Tyler Gilbert
 #define TERMINALMANAGER_H
 
 #include "IO.h"
-#include "NotificationIO"
+#include "NotificationIO.h"
 
 namespace StratifyIO {
 

@@ -32,7 +32,7 @@ using namespace StratifyIO;
 //Hardware Access classes
 #include "IO.h"
 #include "ConnectionIO.h"
-#include "NotificationIO"
+#include "NotificationIO.h"
 #include "AppIO.h"
 #include "KernelIO.h"
 #include "TerminalIO.h"

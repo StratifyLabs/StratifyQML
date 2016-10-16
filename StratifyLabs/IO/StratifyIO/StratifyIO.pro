@@ -11,7 +11,7 @@ TARGET = StratifyIO
 TEMPLATE = lib
 CONFIG += staticlib
 
-DEFINES += __link __StratifyOS__
+DEFINES += __link
 
 SOURCES += \
     Data.cpp \
@@ -28,7 +28,9 @@ SOURCES += \
     DeviceData.cpp \
     StratifyObject.cpp \
     FirebaseDataService.cpp \
-    DataService.cpp
+    DataService.cpp \
+    StratifyPrompt.cpp \
+    TraceEvent.cpp
 HEADERS += StratifyIO.h \
     Data.h \
     LinkDriver.h \
@@ -37,7 +39,6 @@ HEADERS += StratifyIO.h \
     AppIO.h \
     ConnectionIO.h \
     KernelIO.h \
-    NotificationIO \
     TerminalIO.h \
     AppData.h \
     IO.h \
@@ -47,7 +48,10 @@ HEADERS += StratifyIO.h \
     StratifyData.h \
     StratifyObject.h \
     DataService.h \
-    FirebaseDataService.h
+    FirebaseDataService.h \
+    NotificationIO.h \
+    StratifyPrompt.h \
+    TraceEvent.h
 
 INSTALL_HEADERS.files = $$HEADERS
 

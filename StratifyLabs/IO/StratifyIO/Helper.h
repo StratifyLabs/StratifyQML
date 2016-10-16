@@ -32,12 +32,13 @@ public:
 
     static QString convertStringListToJson(const QStringList & list, const QString & key);
     static bool doesFileExist(const QString & dir, const QString & name);
-    static int son_create_from_json(const QString & dest, const QString & source, int son_stack_size = 256);
+    static int createSonFromJson(const QString & dest, const QString & source, int son_stack_size = 256);
+    static QJsonObject createJsonFromFile(const QString & path);
 
 private:
-    static int son_add_json_value(son_t * son, const QJsonValue & value, const QString & valueKey);
-    static int son_add_json_array(son_t * son, const QJsonArray & array, const QString & arrayKey);
-    static int son_add_json_object(son_t * son, const QJsonObject & object, const QString & objectKey);
+    static int addJsonToSon(son_t * son, const QJsonValue & value, const QString & valueKey);
+    static int addJsonArrayToSon(son_t * son, const QJsonArray & array, const QString & arrayKey);
+    static int addJsonObjecToSon(son_t * son, const QJsonObject & object, const QString & objectKey);
 
 };
 }

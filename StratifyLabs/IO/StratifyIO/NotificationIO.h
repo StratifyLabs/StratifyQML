@@ -18,6 +18,7 @@ Copyright 2016 Tyler Gilbert
 #define NOTIFICATIONMANAGER_H
 
 #include "IO.h"
+#include "TraceEvent.h"
 
 namespace StratifyIO {
 
@@ -34,7 +35,7 @@ public:
 signals:
     void deviceAccess(const QString & device, bool read, int nbyte);
     void fileAccess(const QString & file, bool read, int nbyte);
-    void traceEvent();
+    void traceEvent(const TraceEvent & event);
 
 private:
     volatile bool mStop;

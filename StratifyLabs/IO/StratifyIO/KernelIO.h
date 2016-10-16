@@ -29,8 +29,7 @@ public:
     KernelIO(Link & link, Link::update_callback_t update, void * context);
 
     int installKernel(const QString & source, bool verifyInstall);
-    int installData(const QString & projectPath, bool runTests = true);
-
+    int installData(const QString & projectPath, bool isInstallData = true, bool isRunTests = true);
 
 private:
 
@@ -41,8 +40,6 @@ private:
 
     int calcAppObject(const QString & projectPath, const QJsonObject & appObject);
     int calcDataObject(const QString & projectPath, const QJsonObject & dataObject);
-
-
 
 };
 
