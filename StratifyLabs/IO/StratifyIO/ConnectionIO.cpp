@@ -14,6 +14,7 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
+#include "PortIO.h"
 #include "ConnectionIO.h"
 
 using namespace StratifyIO;
@@ -25,8 +26,9 @@ ConnectionIO::ConnectionIO(Link & link) : IO(link)
 
 int ConnectionIO::connectToDevice(const QString & serialNumber){
     QString sn;
-    const DeviceListItem * item;
+    const PortIO * item;
     sn = serialNumber;
+    QString notifyPort;
 
     if( mLink.get_is_connected() ){
         disconnectFromDevice();
@@ -34,13 +36,22 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
 
     emit connectionChanged();
 
-    item = IO::lookupSerialNumber(serialNumber);
+    item = PortIO::lookupSerialNumber(serialNumber);
 
     if( item == 0 ){
         return -1;
     }
 
-    if( mLink.init(item->serialPortInfo().systemLocation().toStdString(), sn.toStdString()) < 0 ){
+    if( item->isNotifyPortValid() ){
+        notifyPort = item->notifySerialPortInfo().systemLocation();
+    } else {
+        notifyPort.clear();
+    }
+
+    if( mLink.init(item->linkSerialPortInfo().systemLocation().toStdString(),
+                   sn.toStdString(),
+                   notifyPort.toStdString()
+                   ) < 0 ){
         emit statusChanged(IO::ERROR, "Failed to connect to " + sn);
         return -1;
     } else {
@@ -70,7 +81,9 @@ int ConnectionIO::disconnectFromDevice(){
         memset(&mSysAttr, 0, sizeof(mSysAttr));
         emit connectionChanged();
         emit statusChanged(IO::INFO, "Successfully disconnected from " +
-                           QString(mLink.last_serial_no().c_str()));
+                           QString(mLink.serial_no().c_str()));
     }
     return 0;
 }
+
+

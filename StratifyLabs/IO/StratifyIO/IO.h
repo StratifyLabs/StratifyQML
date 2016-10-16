@@ -14,8 +14,8 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#ifndef DEVICEMANAGER_H
-#define DEVICEMANAGER_H
+#ifndef STRATIFY_IO_H
+#define STRATIFY_IO_H
 
 #include <QObject>
 #include <QString>
@@ -28,33 +28,11 @@ Copyright 2016 Tyler Gilbert
 
 namespace StratifyIO {
 
-class DeviceListItem {
-public:
-    DeviceListItem(){}
-    DeviceListItem(const QSerialPortInfo & info, const sys_attr_t & attr){
-        mSerialPortInfo = info;
-        memcpy(&mSysAttr, &attr, sizeof(sys_attr_t));
-    }
-
-    const QSerialPortInfo & serialPortInfo() const { return mSerialPortInfo; }
-    QString name() const { return QString(mSysAttr.name); }
-    QString version() const { return QString(mSysAttr.sys_version); }
-    QString kernelVersion() const { return QString(mSysAttr.version); }
-
-private:
-    QSerialPortInfo mSerialPortInfo;
-    sys_attr_t mSysAttr;
-};
-
 class IO: public StratifyObject
 {
     Q_OBJECT
 public:
     IO(Link & link);
-
-    static void refreshDeviceList(Link & link);
-    static const QList<DeviceListItem> & deviceList() { return mDeviceList; }
-    static const DeviceListItem * lookupSerialNumber(const QString & serialNumber);
 
     int copyFileToDevice(QString source, QString dest, link_mode_t mode = 0666){
         return mLink.copy_file_to_device(source.toStdString(),
@@ -78,7 +56,6 @@ public:
 
 protected:
 
-    static int loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr);
 
     static bool updateProgressCallback(void * context, int progress, int max);
     bool updateProgress(int value, int max);
@@ -90,10 +67,8 @@ protected:
     int mCummulativeProgressCached;
     int mCummulativeMax;
 
-    static QList<DeviceListItem> mDeviceList;
-
 };
 
 }
 
-#endif // DEVICEMANAGER_H
+#endif // STRATIFY_IO_H

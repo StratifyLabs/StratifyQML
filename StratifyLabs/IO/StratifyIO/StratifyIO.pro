@@ -30,7 +30,8 @@ SOURCES += \
     FirebaseDataService.cpp \
     DataService.cpp \
     StratifyPrompt.cpp \
-    TraceEvent.cpp
+    TraceEvent.cpp \
+    PortIO.cpp
 HEADERS += StratifyIO.h \
     Data.h \
     LinkDriver.h \
@@ -51,7 +52,8 @@ HEADERS += StratifyIO.h \
     FirebaseDataService.h \
     NotificationIO.h \
     StratifyPrompt.h \
-    TraceEvent.h
+    TraceEvent.h \
+    PortIO.h
 
 INSTALL_HEADERS.files = $$HEADERS
 

@@ -17,7 +17,6 @@ Copyright 2016 Tyler Gilbert
 #ifndef CONNECTIONMANAGER_H
 #define CONNECTIONMANAGER_H
 
-#include <QStringList>
 #include "IO.h"
 
 namespace StratifyIO {
@@ -44,8 +43,8 @@ signals:
     void connectionChanged();
 
 private:
-
     sys_attr_t mSysAttr;
+
 
 };
 

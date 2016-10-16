@@ -32,6 +32,8 @@ Copyright 2016 Tyler Gilbert
 
 #include "AppIO.h"
 #include "TerminalIO.h"
+#include "ConnectionIO.h"
+#include "PortIO.h"
 #include "Helper.h"
 
 using namespace StratifyIO;
@@ -40,10 +42,6 @@ KernelIO::KernelIO(Link & link) : IO(link){}
 
 
 int KernelIO::installKernel(const QString & source, bool verifyInstall){
-    QString projectName;
-    int i;
-
-    //projectName = ui->installer->project();
 
     if ( mLink.get_is_connected() == false ){
         emit statusChanged(ERROR, "Not connected");
@@ -57,19 +55,36 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
             qDebug("now reset to bootloader");
             //Invoke the bootloader
             if ( mLink.reset_bootloader() == 0 ){
-                emit connectionChanged();
+                emit connectionChanged(); //disconnected
 
                 //need to wait until the device is available
                 emit statusChanged(INFO, "Waiting for bootloader");
 
+                if( PortIO::reconnect(mLink) == true ){
 
+                    if( mLink.is_bootloader() ){
+                        emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Reconnected to device; check for bootloader");
+
+                        emit connectionChanged();
+                        if( mLink.is_bootloader() ){
+                            emit statusChanged(INFO, "Succeessfully connected to bootloader: "  +
+                                               QString(mLink.serial_no().c_str()));
+                        }
+                    } else {
+                        emit statusChanged(ERROR | PROMPT, "Bootloader did not load. Try invoking manually.");
+                        return -1;
+                    }
+
+                }
+
+                /*
                 for(i=0; i < 60; i++){
 
                     QThread::msleep(500);
 
-                    IO::refreshDeviceList(mLink);
+                    PortIO::refreshPortList(mLink);
 
-                    if ( IO::deviceList().count() > 0 ){
+                    if ( PortIO::lookupSerialNumber(mLink.serial_no().c_str()) != 0 ){
                         //connect to last known serial number
                         emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Reconnect to last serial number");
                         mLink.reinit(); //suppress any error messages
@@ -96,6 +111,7 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
                     emit statusChanged(ERROR | PROMPT, "Bootloader did not load. Try invoking manually.");
                     return -1;
                 }
+                */
 
             } else {
                 emit statusChanged(ERROR | PROMPT, "Failed to start bootloader. Try invoking manually");
@@ -514,7 +530,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
         reportObject = doc.object();
         QJsonObject testReportObject;
 
-        testObjectLocal.insert("serial", mLink.last_serial_no().c_str());
+        testObjectLocal.insert("serial", mLink.serial_no().c_str());
         testObjectLocal.insert("date", QDateTime::currentDateTimeUtc().toString());
 
 
@@ -522,7 +538,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
         testReportObject.insert("results", reportObject);
         doc.setObject(testReportObject);
 
-        testReport.setFileName(projectPath + "/" + name + "-" + mLink.last_serial_no().c_str() + "-" + QDateTime::currentDateTimeUtc().toString() + ".json");
+        testReport.setFileName(projectPath + "/" + name + "-" + mLink.serial_no().c_str() + "-" + QDateTime::currentDateTimeUtc().toString() + ".json");
 
         testReport.open(QFile::WriteOnly);
         testReport.write(doc.toJson());
@@ -544,14 +560,18 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     }
 
     if( reset == true ){
-        mLink.reset();
         emit statusChanged(INFO, "Resetting device after " + name);
+        mLink.reset();
         emit connectionChanged();
-        QThread::msleep(delay);
-        if( mLink.reinit() == 0 ){
-            emit statusChanged(INFO, "Reconnect to " + QString(mLink.last_serial_no().c_str()));
+        if( PortIO::reconnect(mLink, 10, delay) == true ){
+            emit statusChanged(INFO, "Successfully reconnected to " + QString(mLink.serial_no().c_str()));
             emit connectionChanged();
+        } else {
+            emit statusChanged(ERROR, "Failed to reconnect to " +
+                               QString(mLink.serial_no().c_str()));
+            return -1;
         }
+
     }
 
     return 0;
