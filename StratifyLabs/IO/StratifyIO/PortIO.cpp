@@ -46,8 +46,13 @@ void PortIO::refreshPortList(Link & link){
 
     QList<QSerialPortInfo> list;
     list = QSerialPortInfo::availablePorts();
-    mPortList.clear();
     int i;
+
+    for(i=0; i < mPortList.count(); i++){
+        if( mPortList.at(i).mIsBootloader == true ){
+            mPortList.removeAt(i);
+        }
+    }
 
     //filter ports that are not ports StratifyOS data link ports
     foreach(QSerialPortInfo info, list){
@@ -73,9 +78,13 @@ void PortIO::refreshPortList(Link & link){
                     PortIO & item = mPortList[i];
                     if( item.linkSerialPortInfo().serialNumber() == info.serialNumber() ){
                         alreadyAdded = true;
-                        qDebug() << info.serialNumber() << "already added -- add notify port";
-                        item.mNotifySerialPortInfo = info;
-                        item.mIsNotifyPortValid = true;
+
+                        if( item.linkSerialPortInfo().systemLocation() != info.systemLocation() ){
+                            qDebug() << info.serialNumber() <<
+                                        "already added -- add notify port" << info.systemLocation();
+                            item.mNotifySerialPortInfo = info;
+                            item.mIsNotifyPortValid = true;
+                        }
                     }
                 }
 
@@ -83,7 +92,13 @@ void PortIO::refreshPortList(Link & link){
                     //load sys attr
                     sys_attr_t attr;
                     if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
-                        mPortList.append(PortIO(info,attr));
+                        PortIO item(info, attr);
+                        if( QString(attr.name) == "bootloader" ){
+                            item.mIsBootloader = true;
+                        } else {
+                            item.mIsBootloader = false;
+                        }
+                        mPortList.append(item);
                         qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
                     }
                 }

@@ -18,10 +18,15 @@ public:
     static const PortIO * lookupSerialNumber(const QString & serialNumber);
     static bool reconnect(Link & link, int count = 10, int delay = 1000);
 
-    PortIO(){}
+    PortIO(){
+        mIsNotifyPortValid = false;
+    }
+
     PortIO(const QSerialPortInfo & info, const sys_attr_t & attr){
         mLinkSerialPortInfo = info;
         memcpy(&mSysAttr, &attr, sizeof(sys_attr_t));
+        mIsNotifyPortValid = false;
+        mIsBootloader = false;
     }
 
     const QSerialPortInfo & linkSerialPortInfo() const { return mLinkSerialPortInfo; }
@@ -38,6 +43,7 @@ private:
     static QList<PortIO> mPortList;
 
     bool mIsNotifyPortValid;
+    bool mIsBootloader;
     QSerialPortInfo mLinkSerialPortInfo; //port for link protocol
     QSerialPortInfo mNotifySerialPortInfo; //port to receive notifications
     sys_attr_t mSysAttr;

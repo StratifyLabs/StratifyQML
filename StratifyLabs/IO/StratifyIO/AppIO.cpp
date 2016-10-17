@@ -27,13 +27,19 @@ AppIO::AppIO(Link & link) : IO(link){}
 int AppIO::kill(const QString & name){
     int pid;
 
+
     pid = mLink.get_pid(name.toStdString());
     if( pid < 0 ){
         //not currently running
         return 0;
     }
 
-    mLink.kill_pid(pid, LINK_SIGKILL);
+    if( mLink.kill_pid(pid, LINK_SIGKILL) < 0 ){
+        emit statusChanged(IO::WARNING, "Failed to kill " + name + ": " +
+                           QString(mLink.error_message().c_str()));
+    } else {
+        emit statusChanged(IO::INFO, "Killed " + name + " with SIGKILL");
+    }
     return 0;
 }
 

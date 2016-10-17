@@ -34,6 +34,8 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
 
     emit connectionChanged();
 
+    PortIO::refreshPortList(mLink);
+
     item = PortIO::lookupSerialNumber(serialNumber);
 
     if( item == 0 ){
@@ -57,7 +59,6 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
         emit statusChanged(IO::ERROR, "Failed to connect to " + sn);
         return -1;
     }
-
 
     if( mLink.is_notify() ){
         Worker::startWork(listenForNotificationsWork, this);
