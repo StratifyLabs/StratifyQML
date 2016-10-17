@@ -18,6 +18,7 @@ Copyright 2016 Tyler Gilbert
 #define CONNECTIONMANAGER_H
 
 #include "IO.h"
+#include "TraceEvent.h"
 
 namespace StratifyIO {
 
@@ -33,18 +34,28 @@ public:
     bool isBootloader() const { return mLink.is_bootloader(); }
     bool isConnected() const { return mLink.get_is_connected(); }
 
-    QString name() const { return QString(mSysAttr.name); }
-    QString signature() const { return QString::number(mSysAttr.signature, 16); }
-    QString version() const { return QString(mSysAttr.sys_version); }
-    QString kernelVersion() const { return QString(mSysAttr.version); }
-    int sysFlags() const { return mSysAttr.flags; }
+    QString name() const { return QString(mLink.sys_attr().name); }
+    QString signature() const { return QString::number(mLink.sys_attr().signature, 16); }
+    QString version() const { return QString(mLink.sys_attr().sys_version); }
+    QString kernelVersion() const { return QString(mLink.sys_attr().version); }
+    int sysFlags() const { return mLink.sys_attr().flags; }
+
+    //Monitor the connection on a separate thread
+    static void monitorWork(void * object){ ((ConnectionIO*)object)->monitorWorker(); }
+    void monitorWorker();
+
+    //Notifications
+    static void listenForNotificationsWork(void * object){ ((ConnectionIO*)object)->listenForNotificationsWorker(); }
+    void listenForNotificationsWorker();
+    void stopNotifications(){ mIsStopNotifications = true; }
 
 signals:
-    void connectionChanged();
+    void deviceAccessed(const QString & device, bool read, int nbyte);
+    void fileAccessed(const QString & file, bool read, int nbyte);
+    void traceEventReceived(const QJsonObject & object);
 
 private:
-    sys_attr_t mSysAttr;
-
+    volatile bool mIsStopNotifications;
 
 };
 

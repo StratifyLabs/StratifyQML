@@ -29,7 +29,7 @@ public:
     QString name() const { return QString(mSysAttr.name); }
     QString version() const { return QString(mSysAttr.sys_version); }
     QString kernelVersion() const { return QString(mSysAttr.version); }
-    sys_attr_t sysAttr(){ return mSysAttr; }
+    sys_attr_t sysAttr() const { return mSysAttr; }
     bool isNotifyPortValid() const { return mIsNotifyPortValid; }
 
 private:

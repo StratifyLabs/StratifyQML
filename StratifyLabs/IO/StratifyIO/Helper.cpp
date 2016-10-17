@@ -23,6 +23,24 @@ Copyright 2016 Tyler Gilbert
 
 using namespace StratifyIO;
 
+bool Helper::createFileFromJson(const QString & path, const QJsonObject & object){
+    QFile file;
+
+    file.setFileName(path);
+
+    //open (truncate and write only)
+    if( file.open(QFile::WriteOnly) == false ){
+        return false;
+    }
+
+    QJsonDocument doc(object);
+    file.write( doc.toJson() );
+    file.close();
+
+    return true;
+}
+
+
 QString Helper::convertStringListToJson(const QStringList & list, const QString & key){
     QJsonObject jsonObject;
     QJsonArray jsonArray;
@@ -164,3 +182,25 @@ int Helper::createSonFromJson(const QString & dest, const QString & source, int 
     return ret;
 
 }
+
+QJsonObject Helper::dataToJson(const QString & type, const void * buf, int nbyte){
+    QJsonObject object;
+    QByteArray data((const char*)buf, nbyte);
+    object.insert("type", type);
+    object.insert("data", data.toBase64().toStdString().c_str());
+    return object;
+}
+
+bool Helper::dataFromJson(const QJsonObject & object, const QString & type, void * buf, int nbyte){
+    QByteArray data;
+    memset(buf, 0, nbyte);
+    if( object.value("type").toString() == type ){
+        data = QByteArray::fromBase64(object.value("data").toString().toStdString().c_str());
+        if( data.size() == nbyte ){
+            memcpy(buf, data.data(), nbyte);
+            true;
+        }
+    }
+    return false;
+}
+

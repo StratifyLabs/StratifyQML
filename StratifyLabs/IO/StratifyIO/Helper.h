@@ -22,6 +22,7 @@ Copyright 2016 Tyler Gilbert
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QByteArray>
 #include <stfy/son.h>
 
 namespace StratifyIO {
@@ -34,6 +35,10 @@ public:
     static bool doesFileExist(const QString & dir, const QString & name);
     static int createSonFromJson(const QString & dest, const QString & source, int son_stack_size = 256);
     static QJsonObject createJsonFromFile(const QString & path);
+    static bool createFileFromJson(const QString & path, const QJsonObject & object);
+
+    static QJsonObject dataToJson(const QString & type, const void * buf, int nbyte);
+    static bool dataFromJson(const QJsonObject & object, const QString & type, void * buf, int nbyte);
 
 private:
     static int addJsonToSon(son_t * son, const QJsonValue & value, const QString & valueKey);

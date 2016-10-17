@@ -33,7 +33,6 @@ using namespace StratifyIO;
 #include "IO.h"
 #include "PortIO.h"
 #include "ConnectionIO.h"
-#include "NotificationIO.h"
 #include "AppIO.h"
 #include "KernelIO.h"
 #include "TerminalIO.h"

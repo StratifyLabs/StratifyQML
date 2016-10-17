@@ -19,7 +19,6 @@ SOURCES += \
     AppIO.cpp \
     ConnectionIO.cpp \
     KernelIO.cpp \
-    NotificationIO.cpp \
     TerminalIO.cpp \
     AppData.cpp \
     IO.cpp \
@@ -50,7 +49,6 @@ HEADERS += StratifyIO.h \
     StratifyObject.h \
     DataService.h \
     FirebaseDataService.h \
-    NotificationIO.h \
     StratifyPrompt.h \
     TraceEvent.h \
     PortIO.h

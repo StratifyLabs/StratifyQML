@@ -11,7 +11,6 @@ bool PortIO::reconnect(Link & link, int count, int delay){
     for(i=0; i < count; i++){
 
         QThread::msleep(delay/2);
-
         refreshPortList(link);
 
         if ( lookupSerialNumber(link.serial_no().c_str()) != 0 ){
@@ -48,37 +47,45 @@ void PortIO::refreshPortList(Link & link){
     QList<QSerialPortInfo> list;
     list = QSerialPortInfo::availablePorts();
     mPortList.clear();
-    int i=1;
+    int i;
 
     //filter ports that are not ports StratifyOS data link ports
     foreach(QSerialPortInfo info, list){
-        qDebug() << "Device:" << i++;
-        qDebug() << "\tMfg" << info.manufacturer();
-        qDebug() << "\tPID" << info.productIdentifier();
-        qDebug() << "\tVID" << info.vendorIdentifier();
-        qDebug() << "\tName" << info.portName();
-        qDebug() << "\tSystem Name" << info.systemLocation();
-        qDebug() << "\tDescription" << info.description();
-        qDebug() << "\tSerial Number" << info.serialNumber();
 
-        //is the device a StratifyOS device
-        if( info.description() == "StratifyOS" ){
-            bool alreadyAdded = false;
+        //ignore tty device (use cu device on mac OS X)
+        if( info.systemLocation().startsWith("/dev/tty") == false ){
 
-            //is the serial number already accounted for
-            foreach(PortIO item, mPortList){
-                if( item.linkSerialPortInfo().serialNumber() == info.serialNumber() ){
-                    alreadyAdded = true;
-                    qDebug() << info.serialNumber() << "already added";
+            qDebug() << "Device:" << i++;
+            qDebug() << "\tMfg" << info.manufacturer();
+            qDebug() << "\tPID" << info.productIdentifier();
+            qDebug() << "\tVID" << info.vendorIdentifier();
+            qDebug() << "\tName" << info.portName();
+            qDebug() << "\tSystem Name" << info.systemLocation();
+            qDebug() << "\tDescription" << info.description();
+            qDebug() << "\tSerial Number" << info.serialNumber();
+
+            //is the device a StratifyOS device
+            if( info.description() == "StratifyOS" ){
+                bool alreadyAdded = false;
+
+                //is the serial number already accounted for
+                for(i=0; i < mPortList.count(); i++){
+                    PortIO & item = mPortList[i];
+                    if( item.linkSerialPortInfo().serialNumber() == info.serialNumber() ){
+                        alreadyAdded = true;
+                        qDebug() << info.serialNumber() << "already added -- add notify port";
+                        item.mNotifySerialPortInfo = info;
+                        item.mIsNotifyPortValid = true;
+                    }
                 }
-            }
 
-            if( !alreadyAdded ){
-                //load sys attr
-                sys_attr_t attr;
-                if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
-                    mPortList.append(PortIO(info,attr));
-                    qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+                if( !alreadyAdded ){
+                    //load sys attr
+                    sys_attr_t attr;
+                    if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
+                        mPortList.append(PortIO(info,attr));
+                        qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+                    }
                 }
             }
         }

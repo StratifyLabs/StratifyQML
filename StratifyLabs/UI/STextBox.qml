@@ -20,6 +20,7 @@ import "."
 
 SBaseRectangle {
     id: baseRectangleInput;
+    property alias textBox: input;
     property alias text: input.text;
     property string placeholder: "placeholder";
     property alias readOnly: input.readOnly;

@@ -16,13 +16,11 @@ Copyright 2016 Tyler Gilbert
 
 #include "PortIO.h"
 #include "ConnectionIO.h"
+#include "Worker.h"
 
 using namespace StratifyIO;
 
-ConnectionIO::ConnectionIO(Link & link) : IO(link)
-{
-    memset(&mSysAttr, 0, sizeof(mSysAttr));
-}
+ConnectionIO::ConnectionIO(Link & link) : IO(link){}
 
 int ConnectionIO::connectToDevice(const QString & serialNumber){
     QString sn;
@@ -48,28 +46,34 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
         notifyPort.clear();
     }
 
+    emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + " Connecting to link: " +
+                       item->linkSerialPortInfo().systemLocation() +
+                       " notify: " + notifyPort);
+
     if( mLink.init(item->linkSerialPortInfo().systemLocation().toStdString(),
                    sn.toStdString(),
                    notifyPort.toStdString()
                    ) < 0 ){
         emit statusChanged(IO::ERROR, "Failed to connect to " + sn);
         return -1;
-    } else {
-
     }
 
-    int fd;
 
-    fd = mLink.open("/dev/sys", LINK_O_RDWR);
-    if( fd >= 0 ){
-        if( mLink.ioctl(fd, I_SYS_GETATTR, &mSysAttr) < 0 ){
-            memset(&mSysAttr, 0, sizeof(mSysAttr));
-        }
-        mLink.close(fd);
+    if( mLink.is_notify() ){
+        Worker::startWork(listenForNotificationsWork, this);
+        emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Notify supported on link");
+        emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Handles " +
+                           QString::number((quint64)mLink.driver()->dev.handle, 16) + " " +
+                           QString::number((quint64)mLink.driver()->dev.notify_handle, 16)
+                           );
+    } else {
+        emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Notify NOT supported on link");
     }
 
     emit connectionChanged();
-    emit statusChanged(IO::INFO, "Successfully connected to " + sn);
+    emit statusChanged(INFO, "Successfully connected to " + sn);
+    Worker::startWork(monitorWork, this);
+
 
     return 0;
 
@@ -78,12 +82,112 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
 int ConnectionIO::disconnectFromDevice(){
     if( mLink.get_is_connected() ){
         mLink.exit();
-        memset(&mSysAttr, 0, sizeof(mSysAttr));
         emit connectionChanged();
         emit statusChanged(IO::INFO, "Successfully disconnected from " +
                            QString(mLink.serial_no().c_str()));
     }
     return 0;
 }
+
+void ConnectionIO::listenForNotificationsWorker(){
+
+    const int bufferSize = 512;
+    char buffer[bufferSize];
+    char * bufPtr;
+    QString str;
+    TraceEvent event;
+    int ret;
+    int bytesProcessed;
+
+    u32 * id;
+    bool isRead;
+
+    if( mLink.get_is_connected() == false ){
+        //Device is not connected
+        qDebug() << "Device is not connected";
+        return;
+    }
+
+    if( mLink.is_notify() == false ){
+        //there won't be any notifications
+        qDebug() << "Device is not able to receive notifications";
+        return;
+    }
+
+    emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": listening to notify port");
+    link_notify_dev_t * notifyDev;
+    link_notify_file_t * notifyFile;
+    link_notify_posix_trace_event_t * notifyTraceEvent;
+
+
+    mIsStopNotifications = false; //must be changed in another thread
+    while( (mIsStopNotifications == false) && (mLink.get_is_connected()) ){
+        QThread::msleep(50);
+        memset(buffer, 0, bufferSize);
+        if( (ret = mLink.read_notify(buffer, bufferSize)) > 0 ){
+            bytesProcessed = 0;
+            while(bytesProcessed < ret){
+                bufPtr = &(buffer[bytesProcessed]);
+                //parse notification and emit signal
+                id = (u32*)bufPtr;
+                isRead = false;
+                switch(*id){
+                case LINK_NOTIFY_ID_DEVICE_READ:
+                    isRead = true;
+                case LINK_NOTIFY_ID_DEVICE_WRITE:
+                    if( (ret - bytesProcessed) >= (int)sizeof(link_notify_dev_t)){
+                        notifyDev = (link_notify_dev_t*)bufPtr;
+                        str = notifyDev->name;
+                        emit deviceAccessed(str, isRead, notifyDev->nbyte);
+                        bytesProcessed += sizeof(link_notify_dev_t);
+                    } else {
+                        bytesProcessed = ret;
+                    }
+                    break;
+                case LINK_NOTIFY_ID_FILE_READ:
+                    isRead = true;
+                case LINK_NOTIFY_ID_FILE_WRITE:
+                    if( (ret - bytesProcessed) >= (int)sizeof(link_notify_file_t)){
+                        notifyFile = (link_notify_file_t*)bufPtr;
+                        str = notifyFile->name;
+                        emit fileAccessed(str, isRead, notifyFile->nbyte);
+                        bytesProcessed += sizeof(link_notify_file_t);
+                    } else {
+                        bytesProcessed = ret;
+                    }
+                    break;
+                case LINK_NOTIFY_ID_POSIX_TRACE_EVENT:
+                    if( (ret - bytesProcessed) >= (int)sizeof(link_notify_posix_trace_event_t)){
+                        notifyTraceEvent = (link_notify_posix_trace_event_t*)bufPtr;
+                        event.setInfo(notifyTraceEvent->info);
+                        emit traceEventReceived(event.toJson());
+                        bytesProcessed += sizeof(link_notify_posix_trace_event_t);
+                    } else {
+                        bytesProcessed = ret;
+                    }
+                    break;
+                default:
+                    qDebug() << "Not recognized";
+                    bytesProcessed = ret;
+                    break;
+                }
+            }
+        }
+    }
+
+    emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": stopped listening");
+
+}
+
+void ConnectionIO::monitorWorker(){
+    while( mLink.get_is_connected() == true){
+        //check the IO list to see if the device is still present
+        QThread::msleep(500);
+    }
+
+    emit connectionChanged();
+    emit statusChanged(INFO, QString(mLink.serial_no().c_str()) + " disconnected");
+}
+
 
 
