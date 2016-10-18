@@ -55,20 +55,15 @@ HEADERS += StratifyIO.h \
 
 INSTALL_HEADERS.files = $$HEADERS
 
-macx {
-	target.path = /Applications/StratifyLabs-SDK/Tools/gcc/lib
-	INSTALL_HEADERS.path = /Applications/StratifyLabs-SDK/Tools/gcc/include/StratifyIO
-}
+macx:INSTALLPATH = /Applications/StratifyLabs-SDK/Tools/gcc
+win32:INSTALLPATH = c:/StratifyLabs-SDK/Tools/gcc
 
-unix {
-    INSTALLS += target
-	INSTALLS += INSTALL_HEADERS
-	TOOLSPATH = /Applications/StratifyLabs-SDK/Tools/gcc
-}
+target.path = $$INSTALLPATH/lib
+INSTALL_HEADERS.path = $$INSTALLPATH/include/StratifyIO
 
-win32 {
-	TOOLSPATH = c:/StratifyLabs-SDK/Tools/gcc
-}
+INSTALLS += target
+INSTALLS += INSTALL_HEADERS
 
-INCLUDEPATH += $$TOOLSPATH/include
+
+INCLUDEPATH += $$INSTALLPATH/include
 

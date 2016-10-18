@@ -17,7 +17,7 @@ Copyright 2016 Tyler Gilbert
 #ifndef WORKER_H
 #define WORKER_H
 
-
+#include <QMutex>
 #include <QThread>
 
 namespace StratifyIO {
