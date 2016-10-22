@@ -54,56 +54,81 @@ void PortIO::refreshPortList(Link & link){
         }
     }
 
-    //filter ports that are not ports StratifyOS data link ports
     foreach(QSerialPortInfo info, list){
+        bool alreadyAdded = false;
 
-        //ignore tty device (use cu device on mac OS X)
-        if( info.systemLocation().startsWith("/dev/tty") == false ){
 
-            qDebug() << "Device:" << i++;
-            qDebug() << "\tMfg" << info.manufacturer();
-            qDebug() << "\tPID" << info.productIdentifier();
-            qDebug() << "\tVID" << info.vendorIdentifier();
-            qDebug() << "\tName" << info.portName();
-            qDebug() << "\tSystem Name" << info.systemLocation();
-            qDebug() << "\tDescription" << info.description();
-            qDebug() << "\tSerial Number" << info.serialNumber();
+        qDebug() << "Device:" << i++;
+        qDebug() << "\tMfg" << info.manufacturer();
+        qDebug() << "\tPID" << info.productIdentifier();
+        qDebug() << "\tVID" << info.vendorIdentifier();
+        qDebug() << "\tName" << info.portName();
+        qDebug() << "\tSystem Name" << info.systemLocation();
+        qDebug() << "\tDescription" << info.description();
+        qDebug() << "\tSerial Number" << info.serialNumber();
 
-            //is the device a StratifyOS device
-            if( info.description() == "StratifyOS" ){
-                bool alreadyAdded = false;
 
-                //is the serial number already accounted for
-                for(i=0; i < mPortList.count(); i++){
-                    PortIO & item = mPortList[i];
-                    if( item.linkSerialPortInfo().serialNumber() == info.serialNumber() ){
-                        alreadyAdded = true;
-
-                        if( item.linkSerialPortInfo().systemLocation() != info.systemLocation() ){
-                            qDebug() << info.serialNumber() <<
-                                        "already added -- add notify port" << info.systemLocation();
-                            item.mNotifySerialPortInfo = info;
-                            item.mIsNotifyPortValid = true;
-                        }
-                    }
-                }
-
-                if( !alreadyAdded ){
-                    //load sys attr
-                    sys_attr_t attr;
-                    if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
-                        PortIO item(info, attr);
-                        if( QString(attr.name) == "bootloader" ){
-                            item.mIsBootloader = true;
-                        } else {
-                            item.mIsBootloader = false;
-                        }
-                        mPortList.append(item);
-                        qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+#if defined Q_OS_OSX
+        //is the device a StratifyOS device
+        if( info.description() == "StratifyOS" ){  //description on Mac OS X is "StratifyOS"
+            //is the serial number already accounted for
+            for(i=0; i < mPortList.count(); i++){
+                PortIO & item = mPortList[i];
+                if( item.linkSerialPortInfo().serialNumber() == info.serialNumber() ){
+                    alreadyAdded = true;
+                    if( item.linkSerialPortInfo().systemLocation() != info.systemLocation() ){
+                        qDebug() << info.serialNumber() <<
+                                    "already added -- add notify port" << info.systemLocation();
+                        item.mNotifySerialPortInfo = info;
+                        item.mIsNotifyPortValid = true;
                     }
                 }
             }
+
+            if( !alreadyAdded ){
+                //load sys attr
+                sys_attr_t attr;
+                if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
+                    PortIO item(info, attr);
+                    if( QString(attr.name) == "bootloader" ){
+                        item.mIsBootloader = true;
+                    } else {
+                        item.mIsBootloader = false;
+                    }
+                    mPortList.append(item);
+                    qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+                }
+            }
+
         }
+#endif
+
+#if defined Q_OS_WIN
+
+        if( info.description() == "StratifyOS Link Port" ){
+            sys_attr_t attr;
+            if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
+                PortIO item(info, attr);
+                if( QString(attr.name) == "bootloader" ){
+                    item.mIsBootloader = true;
+                } else {
+                    item.mIsBootloader = false;
+                }
+
+
+                foreach(QSerialPortInfo notify, list){
+                    if( notify.description() == "StratifyOS Notify Port" ){
+                        item.mIsNotifyPortValid = true;
+                        item.mNotifySerialPortInfo = notify;
+                    }
+                }
+
+                mPortList.append(item);
+                qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+
+            }
+        }
+#endif
     }
 }
 

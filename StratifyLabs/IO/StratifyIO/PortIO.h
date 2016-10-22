@@ -42,6 +42,7 @@ private:
     static int loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr);
     static QList<PortIO> mPortList;
 
+    bool mIsLinkPortValid;
     bool mIsNotifyPortValid;
     bool mIsBootloader;
     QSerialPortInfo mLinkSerialPortInfo; //port for link protocol
