@@ -106,26 +106,36 @@ void PortIO::refreshPortList(Link & link){
 #if defined Q_OS_WIN
 
         if( info.description() == "StratifyOS Link Port" ){
-            sys_attr_t attr;
-            if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
-                PortIO item(info, attr);
-                if( QString(attr.name) == "bootloader" ){
-                    item.mIsBootloader = true;
-                } else {
-                    item.mIsBootloader = false;
+
+            for(i=0; i < mPortList.count(); i++){
+                PortIO & item = mPortList[i];
+                if( item.linkSerialPortInfo().serialNumber() == info.serialNumber() ){
+                    alreadyAdded = true;
                 }
+            }
 
-
-                foreach(QSerialPortInfo notify, list){
-                    if( notify.description() == "StratifyOS Notify Port" ){
-                        item.mIsNotifyPortValid = true;
-                        item.mNotifySerialPortInfo = notify;
+            if( !alreadyAdded ){
+                sys_attr_t attr;
+                if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
+                    PortIO item(info, attr);
+                    if( QString(attr.name) == "bootloader" ){
+                        item.mIsBootloader = true;
+                    } else {
+                        item.mIsBootloader = false;
                     }
+
+
+                    foreach(QSerialPortInfo notify, list){
+                        if( notify.description() == "StratifyOS Notify Port" ){
+                            item.mIsNotifyPortValid = true;
+                            item.mNotifySerialPortInfo = notify;
+                        }
+                    }
+
+                    mPortList.append(item);
+                    qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+
                 }
-
-                mPortList.append(item);
-                qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
-
             }
         }
 #endif

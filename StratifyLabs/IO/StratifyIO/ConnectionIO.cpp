@@ -123,7 +123,6 @@ void ConnectionIO::listenForNotificationsWorker(){
 
     mIsStopNotifications = false; //must be changed in another thread
     while( (mIsStopNotifications == false) && (mLink.get_is_connected()) ){
-        QThread::msleep(50);
         memset(buffer, 0, bufferSize);
         if( (ret = mLink.read_notify(buffer, bufferSize)) > 0 ){
             bytesProcessed = 0;
@@ -174,6 +173,7 @@ void ConnectionIO::listenForNotificationsWorker(){
                 }
             }
         }
+        QThread::msleep(50);
     }
 
     emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": stopped listening");
