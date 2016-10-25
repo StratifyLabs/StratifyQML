@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += network serialport
+QT       += core network serialport
 QT       -= gui
 
 TARGET = StratifyIO
@@ -66,4 +66,7 @@ INSTALLS += INSTALL_HEADERS
 
 
 INCLUDEPATH += $$INSTALLPATH/include
+include(./FirebaseApi/firebaseapi.pri)
 
+
+DESTDIR = $$PWD/../../../StratifyExample/StratifyLib
