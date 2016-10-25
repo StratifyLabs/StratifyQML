@@ -49,10 +49,26 @@ void PortIO::refreshPortList(Link & link){
     int i;
 
     for(i=0; i < mPortList.count(); i++){
+        bool notFound = true;
         if( mPortList.at(i).mIsBootloader == true ){
             mPortList.removeAt(i);
         }
+
+
+        foreach(QSerialPortInfo info, list){
+            if( mPortList.at(i).mLinkSerialPortInfo.serialNumber() == info.serialNumber() ){
+                notFound = false;
+                break;
+            }
+        }
+
+        if( notFound ){
+            mPortList.removeAt(i);
+        }
+
     }
+
+
 
     foreach(QSerialPortInfo info, list){
         bool alreadyAdded = false;
@@ -99,7 +115,6 @@ void PortIO::refreshPortList(Link & link){
                     qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
                 }
             }
-
         }
 #endif
 

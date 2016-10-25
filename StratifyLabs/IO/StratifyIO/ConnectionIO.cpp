@@ -39,6 +39,7 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
     item = PortIO::lookupSerialNumber(serialNumber);
 
     if( item == 0 ){
+        emit statusChanged(WARNING, "Failed to connect: device is not connected");
         return -1;
     }
 
