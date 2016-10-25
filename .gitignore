@@ -2,3 +2,5 @@
 *.user
 
 StratifyLabs/IO/build-*
+
+StratifyExample/StratifyLib/*

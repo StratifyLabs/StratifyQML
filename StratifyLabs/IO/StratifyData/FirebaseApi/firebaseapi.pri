@@ -1,10 +1,8 @@
 
-HEADERS += \
+FIREBASE_HEADERS = \
     $$PWD/actionhandler.h \
     $$PWD/firebase.h \
-    $$PWD/datasnapshot.h \
-    $$PWD/subtitleparser.h \
-    $$PWD/timecodehelper.h
+	$$PWD/datasnapshot.h
 
 SOURCES += \
     $$PWD/actionhandler.cpp \

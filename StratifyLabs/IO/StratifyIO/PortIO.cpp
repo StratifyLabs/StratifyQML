@@ -52,6 +52,8 @@ void PortIO::refreshPortList(Link & link){
         bool notFound = true;
         if( mPortList.at(i).mIsBootloader == true ){
             mPortList.removeAt(i);
+            i = 0;
+            break;
         }
 
 
@@ -63,6 +65,7 @@ void PortIO::refreshPortList(Link & link){
         }
 
         if( notFound ){
+            i = 0;
             mPortList.removeAt(i);
         }
 

@@ -17,17 +17,13 @@ Copyright 2016 Tyler Gilbert
 #ifndef STRATIFYIO_H
 #define STRATIFYIO_H
 
+#include <StratifyIO/StratifyData.h>
+
 namespace StratifyIO {
 ;
 }
 
 using namespace StratifyIO;
-
-//Data structure objects
-#include "AppData.h"
-#include "HardwareData.h"
-#include "UserData.h"
-#include "DeviceData.h"
 
 //Hardware Access classes
 #include "IO.h"
@@ -36,9 +32,6 @@ using namespace StratifyIO;
 #include "AppIO.h"
 #include "KernelIO.h"
 #include "TerminalIO.h"
-
-//Thread Management
-#include "Worker.h"
 
 
 //Helper Routines

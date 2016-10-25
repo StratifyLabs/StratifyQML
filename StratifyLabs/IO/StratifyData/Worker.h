@@ -20,7 +20,7 @@ Copyright 2016 Tyler Gilbert
 #include <QMutex>
 #include <QThread>
 
-namespace StratifyIO {
+namespace Stratify {
 
 
 class Worker : public QThread {

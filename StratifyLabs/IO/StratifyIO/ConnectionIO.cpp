@@ -14,10 +14,13 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
+#include <StratifyIO/Worker.h>
+
 #include "PortIO.h"
 #include "ConnectionIO.h"
-#include "Worker.h"
 
+
+using namespace Stratify;
 using namespace StratifyIO;
 
 ConnectionIO::ConnectionIO(Link & link) : IO(link){}
