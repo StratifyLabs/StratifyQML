@@ -18,6 +18,8 @@ Copyright 2016 Tyler Gilbert
 #define DATA_H
 
 #include <QString>
+#include <QNetworkReply>
+
 #include "StratifyObject.h"
 #include "DataService.h"
 
@@ -25,36 +27,33 @@ namespace StratifyData {
 
 class Data : public StratifyObject
 {
+    Q_OBJECT
 public:
-    Data();
+    Data(DataService * dataService = 0);
 
-    static void setDefaultDataService(DataService * dataService){
-        mDefaultDataService = dataService;
-    }
+    static void setDefaultDataService(DataService * dataService){ mDefaultDataService = dataService; }
+    DataService * defaultDataService(){ return mDefaultDataService; }
 
-    void setDataService(DataService * dataService){ mDataService = dataService; }
+    DataService * dataService(){ return mDataService; }
 
+    void setValue(const QString & value);
 
-    void getValue(const QString & token, QString & value){ checkService(); mDataService->getValue(token, value); }
-    void putValue(const QString & token, const QString & value){ checkService(); mDataService->putValue(token, value); }
-    void post(const QString & token, const QString & value){ checkService(); mDataService->post(token, value); }
-    void patch(const QString & token, const QString & value){ checkService(); mDataService->patch(token, value); }
-    void deleteValue(const QString & token){ checkService(); mDataService->deleteValue(token); }
+    QString value() const { return mValue; }
+    QJsonObject json() const { return mJson; }
 
-protected:
-    DataService & dataService(){ return *mDataService; }
+signals:
+    void changed();
 
+public slots:
 
 private:
-
     static DataService * mDefaultDataService;
     DataService * mDataService;
 
-    void checkService(){
-        if( mDataService == 0 ){
-            mDataService = mDefaultDataService;
-        }
-    }
+    QJsonObject mJson;
+
+    QString mPath;
+    QString mValue;
 
 };
 

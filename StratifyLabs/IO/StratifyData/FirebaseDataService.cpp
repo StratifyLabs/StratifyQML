@@ -15,70 +15,93 @@ Copyright 2016 Tyler Gilbert
 */
 
 #include "FirebaseDataService.h"
+#include "Data.h"
 
 using namespace StratifyData;
 
+
 FirebaseDataService::FirebaseDataService(QString host, QString token)
 {
-    m_firebase = new Firebase(host);
-    m_firebase->setToken(token);
-    m_firebase->init();
-    m_firebase->listenEvents();
+    mHost = host;
+    mToken = token;
+    mFirebase = 0;
 
-    connect(m_firebase, SIGNAL(eventResponseReady(QString)), this, SLOT(onResponseReady(QString)));
-    connect(m_firebase, SIGNAL(eventDataChanged(DataSnapshot*)), this, SLOT(onDataChanged(DataSnapshot*)));
+    connect(&mNetworkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleNetworkReply(QNetworkReply*)));
+
 }
 
-FirebaseDataService::FirebaseDataService(Firebase *parentFirebase, QString childName)
-{
-    if (parentFirebase) {
-        m_firebase = parentFirebase->child(childName);
-        m_firebase->init();
-        m_firebase->listenEvents();
-
-        connect(m_firebase, SIGNAL(eventResponseReady(QString)), this, SLOT(onResponseReady(QString)));
-        connect(m_firebase, SIGNAL(eventDataChanged(DataSnapshot*)), this, SLOT(onDataChanged(DataSnapshot*)));
-    }
-    else
-        m_firebase = 0;
-}
-
-void FirebaseDataService::getValue(const QString & token, const QString & value){
-    if (m_firebase)
-        m_firebase->child(token)->getValue();
-}
-
-void FirebaseDataService::putValue(const QString & token, const QString & value){
-    if (m_firebase)
-        m_firebase->child(token)->setValue(value);
-}
-
-void FirebaseDataService::post(const QString & token, const QString & value){
-    if (m_firebase)
-        m_firebase->child(token)->setValue(value);
-}
-
-void FirebaseDataService::patch(const QString & token, const QString & value){
-    if (m_firebase) {
-        m_firebase->child(token)->deleteValue();
-        m_firebase->child(token)->setValue(value);
+FirebaseDataService::~FirebaseDataService(){
+    if( mFirebase ){
+        delete mFirebase;
     }
 }
 
-void FirebaseDataService::deleteValue(const QString & token){
-    if (m_firebase)
-        m_firebase->child(token)->deleteValue();
+
+void FirebaseDataService::handleNetworkReply(QNetworkReply *reply){
+    Data * owner = (Data*)reply->parent();
+    owner->setValue( reply->readAll() );
+    reply->deleteLater();
+    emit owner->changed();
 }
 
-Firebase *FirebaseDataService::getFirebase()
-{
-    return m_firebase;
+void FirebaseDataService::getValue(const QString & path, QObject * object){
+
+    QString requestPath = host() + "/" + path + "/.json?auth=" + token();
+    QNetworkRequest request(requestPath);
+    qDebug() << "Get value" << requestPath;
+
+    QNetworkReply *reply = mNetworkAccessManager.get(request);
+    qDebug() << Q_FUNC_INFO << reply->error();
+
+    reply->setParent(object);
+
+    connect(reply, SIGNAL(readyRead()), this, SLOT(handleReadyRead()));
+    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
+            this, SLOT(handleNetworkError(QNetworkReply::NetworkError)));
+    connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
+            this, SLOT(handleSslErrors(QList<QSslError>)));
+
+}
+
+void FirebaseDataService::handleReadyRead(){
+    qDebug() << "Ready to read";
+}
+
+void FirebaseDataService::handleNetworkError(QNetworkReply::NetworkError error){
+    qDebug() << "network error";
+}
+
+
+void FirebaseDataService::handleSslErrors(QList<QSslError> sslErrors){
+    qDebug() << "Ssl errors";
+}
+
+void FirebaseDataService::putValue(const QString & value){
+    if (mFirebase)
+        mFirebase->setValue(value);
+}
+
+void FirebaseDataService::postValue(const QString & value){
+    if (mFirebase)
+        mFirebase->setValue(value);
+}
+
+void FirebaseDataService::patchValue(const QString & value){
+    if (mFirebase) {
+        mFirebase->deleteValue();
+        mFirebase->setValue(value);
+    }
+}
+
+void FirebaseDataService::deleteValue(){
+    if (mFirebase)
+        mFirebase->deleteValue();
 }
 
 void FirebaseDataService::setRules()
 {
-    if (m_firebase)
-        m_firebase->setRules();
+    if (mFirebase)
+        mFirebase->setRules();
 }
 
 void FirebaseDataService::onResponseReady(QString data)
@@ -89,5 +112,6 @@ void FirebaseDataService::onResponseReady(QString data)
 void FirebaseDataService::onDataChanged(DataSnapshot *data)
 {
     qDebug()<<data->getDataMap();
-    m_values = data->getDataMap();
+    mValues = data->getDataMap();
+    emit changed();
 }

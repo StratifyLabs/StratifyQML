@@ -1,6 +1,9 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
 
+
+#include <QJsonObject>
+#include <QVariantMap>
 #include <QObject>
 #include <QString>
 
@@ -14,14 +17,26 @@ public:
 
     //TO DO Add authentication API
 
-    virtual void getValue(const QString & token, const QString & value) = 0;
-    virtual void putValue(const QString & token, const QString & value) = 0;
-    virtual void post(const QString & token, const QString & value) = 0;
-    virtual void patch(const QString & token, const QString & value) = 0;
-    virtual void deleteValue(const QString & token) = 0;
+    virtual void getValue(const QString & path, QObject * object) = 0;
+    virtual void putValue(const QString & value) = 0;
+    virtual void postValue(const QString & value) = 0;
+    virtual void patchValue(const QString & value) = 0;
+    virtual void deleteValue() = 0;
 
+    //QJsonObject value() const;
+    const QVariantMap & map() const { return mValues; }
 
-private:
+    const QString & host() const { return mHost; }
+    const QString & token() const { return mToken; }
+
+signals:
+    void changed();
+
+protected:
+    QString mHost;
+    QString mToken;
+    QVariantMap mValues;
+
 
 
 

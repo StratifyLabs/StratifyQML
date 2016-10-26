@@ -19,5 +19,5 @@ HEADERS += \
 INCLUDEPATH += $$PWD/StratifyLib
 DEPENDPATH += $$PWD/StratifyLib
 
-LIBS += -L$$PWD/StratifyLib/ -lStratifyIO
+LIBS += -L$$PWD/StratifyLib/ -lStratifyData
 

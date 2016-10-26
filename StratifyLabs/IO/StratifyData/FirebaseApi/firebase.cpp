@@ -149,6 +149,7 @@ void Firebase::setValue(QString strVal)
 void Firebase::getValue()
 {
     QNetworkRequest request(buildPath(0));
+    qDebug() << "Get value" << buildPath(0);
     manager->get(request);
 }
 void Firebase::listenEvents()

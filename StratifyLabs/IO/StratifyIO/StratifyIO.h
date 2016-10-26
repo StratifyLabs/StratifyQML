@@ -17,7 +17,7 @@ Copyright 2016 Tyler Gilbert
 #ifndef STRATIFYIO_H
 #define STRATIFYIO_H
 
-#include <StratifyIO/StratifyData.h>
+#include <StratifyData/StratifyData.h>
 
 namespace StratifyIO {
 ;

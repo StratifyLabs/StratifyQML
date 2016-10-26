@@ -18,7 +18,7 @@ Copyright 2016 Tyler Gilbert
 
 using namespace StratifyData;
 
-User::User()
+User::User() : Data(0)
 {
 
 }

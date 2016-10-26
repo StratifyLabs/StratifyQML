@@ -22,4 +22,5 @@ private:
     QString trimValue(const QString &line) const;
 };
 
+
 #endif // DATASNAPSHOT_H

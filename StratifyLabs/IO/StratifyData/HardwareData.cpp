@@ -19,7 +19,7 @@ Copyright 2016 Tyler Gilbert
 
 using namespace StratifyData;
 
-HardwareData::HardwareData()
+HardwareData::HardwareData() : Data(0)
 {
 
 }

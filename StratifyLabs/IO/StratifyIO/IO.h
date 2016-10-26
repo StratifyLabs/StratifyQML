@@ -24,7 +24,7 @@ Copyright 2016 Tyler Gilbert
 #include <QtSerialPort/QtSerialPort>
 #include <Link.h>
 
-#include <StratifyIO/StratifyObject.h>
+#include <StratifyData/StratifyObject.h>
 
 namespace StratifyIO {
 

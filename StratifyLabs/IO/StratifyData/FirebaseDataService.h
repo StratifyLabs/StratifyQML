@@ -18,6 +18,10 @@ Copyright 2016 Tyler Gilbert
 #define DATAFIREBASE_H
 
 #include <QString>
+#include <QJsonObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+
 #include "DataService.h"
 #include "FirebaseApi/firebase.h"
 
@@ -29,25 +33,31 @@ class FirebaseDataService : public DataService
     Q_OBJECT
 
 public:
+    FirebaseDataService(QString host, QString token); //create the base service
+    ~FirebaseDataService();
 
-    FirebaseDataService(QString host, QString token);
-    FirebaseDataService(Firebase *parentFirebase, QString childName);
-
-    virtual void getValue(const QString & token, const QString & value);
-    virtual void putValue(const QString & token, const QString & value);
-    virtual void post(const QString & token, const QString & value);
-    virtual void patch(const QString & token, const QString & value);
-    virtual void deleteValue(const QString & token);
-    Firebase *getFirebase();   
+    virtual void getValue(const QString & path, QObject * object);
+    virtual void putValue(const QString & value);
+    virtual void postValue(const QString & value);
+    virtual void patchValue(const QString & value);
+    virtual void deleteValue();
     void setRules();
 
 public slots:
     void onResponseReady(QString);
     void onDataChanged(DataSnapshot*);
 
+private slots:
+    void handleNetworkReply(QNetworkReply *reply);
+    void handleReadyRead();
+    void handleNetworkError(QNetworkReply::NetworkError error);
+    void handleSslErrors(QList<QSslError> sslErrors);
+
 private:
-    Firebase *m_firebase;
-    QVariantMap m_values;
+    QNetworkAccessManager mNetworkAccessManager;
+
+    Firebase * mFirebase;
+
 
 };
 

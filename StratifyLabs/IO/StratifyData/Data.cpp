@@ -14,10 +14,28 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
+
+#include <QJsonDocument>
 #include "Data.h"
 
 using namespace StratifyData;
 
 DataService * Data::mDefaultDataService;
 
-Data::Data(){}
+Data::Data(DataService * dataService){
+
+    if( dataService != 0 ){
+        mDataService = dataService;
+    } else {
+        mDataService = mDefaultDataService;
+    }
+
+}
+
+
+void Data::setValue(const QString & value){
+    mValue = value;
+    QJsonDocument doc = QJsonDocument::fromJson(mValue.toUtf8());
+    mJson = doc.object();
+}
+

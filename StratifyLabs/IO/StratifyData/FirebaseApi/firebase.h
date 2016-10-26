@@ -11,7 +11,8 @@
 #include <QtGlobal>
 #include <QVariantMap>
 #include <QJsonObject>
-#include <datasnapshot.h>
+#include "datasnapshot.h"
+
 class Firebase : public QObject
 {
     Q_OBJECT
@@ -31,6 +32,7 @@ public:
 signals:
     void eventResponseReady(QString);
     void eventDataChanged(DataSnapshot*);
+
 public slots:
     void replyFinished(QNetworkReply*);
     void onReadyRead(QNetworkReply*);

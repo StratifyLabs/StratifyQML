@@ -17,14 +17,27 @@ Copyright 2016 Tyler Gilbert
 #ifndef APP_H
 #define APP_H
 
+#include <QString>
+
 #include "Data.h"
 
 namespace StratifyData {
 
-class AppData : public Data
-{
+class AppData : public Data {
+    Q_OBJECT
 public:
-    AppData();
+    AppData(DataService * service = 0);
+
+    QString name() const;
+    QString github() const;
+
+private slots:
+    void change();
+
+private:
+    QString mPath;
+
+
 };
 
 }

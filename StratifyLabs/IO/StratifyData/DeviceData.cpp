@@ -18,7 +18,7 @@ Copyright 2016 Tyler Gilbert
 
 using namespace StratifyData;
 
-DeviceData::DeviceData()
+DeviceData::DeviceData() : Data(0)
 {
 
 }

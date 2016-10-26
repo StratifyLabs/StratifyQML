@@ -16,6 +16,7 @@ using namespace StratifyData;
 #include "AppData.h"
 #include "HardwareData.h"
 #include "UserData.h"
+#include "FirebaseDataService.h"
 
 //Thread Management
 #include "Worker.h"

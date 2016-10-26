@@ -14,7 +14,7 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include <StratifyIO/Worker.h>
+#include <StratifyData/Worker.h>
 
 #include "PortIO.h"
 #include "ConnectionIO.h"

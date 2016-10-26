@@ -14,14 +14,30 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
+#include <QJsonObject>
 #include "AppData.h"
-
 
 using namespace StratifyData;
 
-AppData::AppData()
-{
+AppData::AppData(DataService * service) : Data(service){
+   connect(dataService(), SIGNAL(changed()), this, SLOT(change()));
+}
 
+QString AppData::name() const {
+    return json().value("name").toString();
+}
+
+QString AppData::github() const {
+    return json().value("github").toString();
 }
 
 
+void AppData::change(){
+    //new data is ready
+    //QJsonObject object = dataService()->value();
+
+
+    //mName = object.value("name").toString();
+    //mGithub = object.value("github").toString();
+
+}
