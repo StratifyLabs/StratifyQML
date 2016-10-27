@@ -32,10 +32,54 @@ Data::Data(DataService * dataService){
 
 }
 
+void Data::checkService(){
+    if( mDataService == 0 ){
+        mDataService = mDefaultDataService;
+    }
+}
 
 void Data::setValue(const QString & value){
-    mValue = value;
-    QJsonDocument doc = QJsonDocument::fromJson(mValue.toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
     mJson = doc.object();
+}
+
+void Data::setPostName(const QString & name){
+    mPostName = name;
+}
+
+void Data::getValue(){
+    checkService();
+    if( mDataService ){
+        mDataService->getValue(this, mPath);
+    }
+}
+
+void Data::putValue(){
+    checkService();
+    if( mDataService ){
+        mDataService->putValue(this, mPath, value());
+    }
+}
+
+void Data::postValue(const QString & value){
+    checkService();
+    if( mDataService ){
+        mDataService->postValue(this, mPath, value);
+    }
+}
+
+void Data::patchValue(){
+    checkService();
+    if( mDataService ){
+        mDataService->patchValue(this, mPath, value());
+    }
+}
+
+
+void Data::deleteValue(){
+    checkService();
+    if( mDataService ){
+        mDataService->deleteValue(this, mPath);
+    }
 }
 

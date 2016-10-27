@@ -39,14 +39,22 @@ FirebaseDataService::~FirebaseDataService(){
 
 void FirebaseDataService::handleNetworkReply(QNetworkReply *reply){
     Data * owner = (Data*)reply->parent();
-    owner->setValue( reply->readAll() );
-    reply->deleteLater();
+    if( reply->operation() == QNetworkAccessManager::GetOperation ){
+        owner->setValue( reply->readAll() );
+    }
+
+    if( reply->operation() == QNetworkAccessManager::PostOperation ){
+        owner->setPostName( reply->readAll() );
+    }
+
     emit owner->changed();
+
+    reply->deleteLater();
 }
 
-void FirebaseDataService::getValue(const QString & path, QObject * object){
+void FirebaseDataService::getValue(QObject * object, const QString & path){
 
-    QString requestPath = host() + "/" + path + "/.json?auth=" + token();
+    QString requestPath = host() + "/" + path + ".json?auth=" + token();
     QNetworkRequest request(requestPath);
     qDebug() << "Get value" << requestPath;
 
@@ -55,63 +63,65 @@ void FirebaseDataService::getValue(const QString & path, QObject * object){
 
     reply->setParent(object);
 
-    connect(reply, SIGNAL(readyRead()), this, SLOT(handleReadyRead()));
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
-            this, SLOT(handleNetworkError(QNetworkReply::NetworkError)));
-    connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
-            this, SLOT(handleSslErrors(QList<QSslError>)));
-
 }
 
-void FirebaseDataService::handleReadyRead(){
-    qDebug() << "Ready to read";
-}
+void FirebaseDataService::putValue(QObject * object, const QString & path, const QString & value){
 
-void FirebaseDataService::handleNetworkError(QNetworkReply::NetworkError error){
-    qDebug() << "network error";
-}
+    QString requestPath = host() + "/" + path + ".json?auth=" + token();
 
+    QNetworkRequest request(requestPath);
+    request.setHeader(QNetworkRequest::ContentTypeHeader,
+                      "application/x-www-form-urlencoded");
 
-void FirebaseDataService::handleSslErrors(QList<QSslError> sslErrors){
-    qDebug() << "Ssl errors";
-}
-
-void FirebaseDataService::putValue(const QString & value){
-    if (mFirebase)
-        mFirebase->setValue(value);
-}
-
-void FirebaseDataService::postValue(const QString & value){
-    if (mFirebase)
-        mFirebase->setValue(value);
-}
-
-void FirebaseDataService::patchValue(const QString & value){
-    if (mFirebase) {
-        mFirebase->deleteValue();
-        mFirebase->setValue(value);
+    QNetworkReply * reply = mNetworkAccessManager.put(request, value.toUtf8());
+    if( reply ){
+        reply->setParent(object);
     }
 }
 
-void FirebaseDataService::deleteValue(){
-    if (mFirebase)
-        mFirebase->deleteValue();
+void FirebaseDataService::postValue(QObject * object, const QString & path, const QString & value){
+    QString requestPath = host() + "/" + path + ".json?auth=" + token();
+
+    QNetworkRequest request(requestPath);
+    request.setHeader(QNetworkRequest::ContentTypeHeader,
+                      "application/x-www-form-urlencoded");
+
+    QNetworkReply * reply = mNetworkAccessManager.post(request, value.toUtf8());
+    if( reply ){
+        reply->setParent(object);
+    }
 }
 
-void FirebaseDataService::setRules()
-{
-    if (mFirebase)
-        mFirebase->setRules();
+void FirebaseDataService::patchValue(QObject * object, const QString & path, const QString & value){
+    QString requestPath = host() + "/" + path + ".json?auth=" + token();
+
+    QNetworkRequest request(requestPath);
+    request.setHeader(QNetworkRequest::ContentTypeHeader,
+                      "application/x-www-form-urlencoded");
+
+    /*
+    QNetworkReply * reply = mNetworkAccessManager.sendCustomRequest(request, "PATCH", value.toUtf8());
+    if( reply ){
+        reply->setParent(object);
+    }
+    */
+
 }
 
-void FirebaseDataService::onResponseReady(QString data)
-{
-    qDebug()<<"answer";
-    qDebug()<<data;
+void FirebaseDataService::deleteValue(QObject * object, const QString & path){
+    QString requestPath = host() + "/" + path + ".json?auth=" + token();
+
+    QNetworkRequest request(requestPath);
+    request.setHeader(QNetworkRequest::ContentTypeHeader,
+                      "application/x-www-form-urlencoded");
+
+    QNetworkReply * reply = mNetworkAccessManager.deleteResource(request);
+    if( reply ){
+        reply->setParent(object);
+    }
 }
-void FirebaseDataService::onDataChanged(DataSnapshot *data)
-{
-    qDebug()<<data->getDataMap();
-    mValues = data->getDataMap();
-    emit changed();
+
+void FirebaseDataService::setRules(){
+
 }
+

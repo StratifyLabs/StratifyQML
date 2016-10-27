@@ -27,9 +27,24 @@ class AppData : public Data {
     Q_OBJECT
 public:
     AppData(DataService * service = 0);
+    AppData(const QJsonObject & object, DataService * service = 0);
+
+    virtual bool validate();
 
     QString name() const;
     QString github() const;
+    QString description() const;
+    QString tags() const;
+    QString version() const;
+    QStringList buildList() const;
+    bool getBuild(const QString & key, const QString & filename);
+
+    void setVersion(const QString & value);
+    void setName(const QString & value);
+    void setGithub(const QString & value);
+    void setDescription(const QString & value);
+    void setTags(const QString & value);
+    void setBuild(const QString & key, const QString & filename);
 
 private slots:
     void change();

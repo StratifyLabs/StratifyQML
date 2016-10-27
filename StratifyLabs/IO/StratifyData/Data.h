@@ -18,7 +18,8 @@ Copyright 2016 Tyler Gilbert
 #define DATA_H
 
 #include <QString>
-#include <QNetworkReply>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 #include "StratifyObject.h"
 #include "DataService.h"
@@ -31,14 +32,30 @@ class Data : public StratifyObject
 public:
     Data(DataService * dataService = 0);
 
+    void setDataService(DataService * service){ mDataService = service; }
+
     static void setDefaultDataService(DataService * dataService){ mDefaultDataService = dataService; }
     DataService * defaultDataService(){ return mDefaultDataService; }
 
     DataService * dataService(){ return mDataService; }
 
-    void setValue(const QString & value);
+    virtual bool validate(){ return true; }
 
-    QString value() const { return mValue; }
+    void getValue();
+    void putValue();
+    void postValue(const QString & value); //appends value as a JSON string to the cloud object
+    void patchValue();
+    void deleteValue();
+
+    void setPath(const QString & path){ mPath = path; }
+
+    virtual void setPostName(const QString & name);
+    virtual void setValue(const QString & value);
+
+    QString value() const {
+        QJsonDocument doc(mJson);
+        return doc.toJson();
+    }
     QJsonObject json() const { return mJson; }
 
 signals:
@@ -46,14 +63,15 @@ signals:
 
 public slots:
 
+protected:
+    QJsonObject mJson;
+    QString mPath;
+    QString mPostName;
+
 private:
     static DataService * mDefaultDataService;
     DataService * mDataService;
-
-    QJsonObject mJson;
-
-    QString mPath;
-    QString mValue;
+    void checkService();
 
 };
 

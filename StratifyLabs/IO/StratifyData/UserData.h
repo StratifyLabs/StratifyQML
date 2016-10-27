@@ -17,6 +17,7 @@ Copyright 2016 Tyler Gilbert
 #ifndef USER_H
 #define USER_H
 
+#include <QString>
 #include "Data.h"
 
 namespace StratifyData {
@@ -26,6 +27,12 @@ class User : public Data
 {
 public:
     User();
+
+    QString name() const;
+    QString email() const;
+    QString handle() const;
+    QString uid() const:
+
 };
 
 }

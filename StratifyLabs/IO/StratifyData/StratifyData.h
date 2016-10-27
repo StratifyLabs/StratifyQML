@@ -14,6 +14,7 @@ using namespace Stratify;
 using namespace StratifyData;
 
 #include "AppData.h"
+#include "AppListData.h"
 #include "HardwareData.h"
 #include "UserData.h"
 #include "FirebaseDataService.h"

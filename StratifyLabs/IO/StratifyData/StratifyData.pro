@@ -20,7 +20,9 @@ SOURCES += \
     FirebaseDataService.cpp \
     DataService.cpp \
 	StratifyObject.cpp \
-	StratifyPrompt.cpp
+	StratifyPrompt.cpp \
+    AppListData.cpp \
+    ListData.cpp
 
 HEADERS += Data.h \
     Worker.h \
@@ -32,7 +34,9 @@ HEADERS += Data.h \
 	DataService.h \
 	StratifyData.h \
     StratifyObject.h \
-	StratifyPrompt.h
+	StratifyPrompt.h \
+    AppListData.h \
+    ListData.h
 
 INSTALL_HEADERS.files = $$HEADERS
 

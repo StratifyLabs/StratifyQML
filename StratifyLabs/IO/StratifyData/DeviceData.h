@@ -28,25 +28,21 @@ class DeviceData : public Data
 {
 public:
     DeviceData();
+    DeviceData(const QJsonObject & object);
 
-    void setSerialNo(const QString& value){ mSerialNo = value; }
-    const QString & serialNo() const { return mSerialNo; }
-    void setVersion(const QString& value){ mVersion = value; }
-    const QString & version() const { return mVersion; }
-    void setBootVersion(const QString& value){ mBootVersion = value; }
-    const QString & bootVersion() const { return mBootVersion; }
+    void setSerialNo(const QString & value);
+    QString serialNo() const;
+    void setVersion(const QString & value);
+    QString version() const;
+    void setKernelVersion(const QString & value);
+    QString kernelVersion() const;
+    void setBootVersion(const QString & value);
+    QString bootVersion() const;
+    QStringList testList() const;
 
 private:
 
-    QString serialNoToken() const { return "serial_no"; } //all lowercase tokens with underscores between words
-    QString versionToken() const { return "version"; }
-    QString bootVersionToken() const { return "boot_version"; }
-    QString testsToken() const { return "tests"; }
 
-    QString mSerialNo;
-    QString mVersion;
-    QString mBootVersion;
-    QStringList mTests;
 
 };
 

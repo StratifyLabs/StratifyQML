@@ -36,22 +36,15 @@ public:
     FirebaseDataService(QString host, QString token); //create the base service
     ~FirebaseDataService();
 
-    virtual void getValue(const QString & path, QObject * object);
-    virtual void putValue(const QString & value);
-    virtual void postValue(const QString & value);
-    virtual void patchValue(const QString & value);
-    virtual void deleteValue();
+    virtual void getValue(QObject * object, const QString & path);
+    virtual void putValue(QObject * object, const QString & path, const QString & value);
+    virtual void postValue(QObject * object, const QString & path, const QString & value);
+    virtual void patchValue(QObject * object, const QString & path, const QString & value);
+    virtual void deleteValue(QObject * object, const QString & path);
     void setRules();
-
-public slots:
-    void onResponseReady(QString);
-    void onDataChanged(DataSnapshot*);
 
 private slots:
     void handleNetworkReply(QNetworkReply *reply);
-    void handleReadyRead();
-    void handleNetworkError(QNetworkReply::NetworkError error);
-    void handleSslErrors(QList<QSslError> sslErrors);
 
 private:
     QNetworkAccessManager mNetworkAccessManager;

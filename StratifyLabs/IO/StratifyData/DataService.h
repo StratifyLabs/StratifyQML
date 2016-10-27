@@ -17,11 +17,11 @@ public:
 
     //TO DO Add authentication API
 
-    virtual void getValue(const QString & path, QObject * object) = 0;
-    virtual void putValue(const QString & value) = 0;
-    virtual void postValue(const QString & value) = 0;
-    virtual void patchValue(const QString & value) = 0;
-    virtual void deleteValue() = 0;
+    virtual void getValue(QObject * object, const QString & path) = 0;
+    virtual void putValue(QObject * object, const QString & path, const QString & value) = 0;
+    virtual void postValue(QObject * object, const QString & path, const QString & value) = 0;
+    virtual void patchValue(QObject * object, const QString & path, const QString & value) = 0;
+    virtual void deleteValue(QObject * object, const QString & path) = 0;
 
     //QJsonObject value() const;
     const QVariantMap & map() const { return mValues; }

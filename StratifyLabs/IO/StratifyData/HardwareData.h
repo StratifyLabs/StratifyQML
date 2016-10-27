@@ -17,7 +17,10 @@ Copyright 2016 Tyler Gilbert
 #ifndef HARDWARE_H
 #define HARDWARE_H
 
+
+#include <QString>
 #include "Data.h"
+#include "DeviceData.h"
 
 namespace StratifyData {
 
@@ -25,6 +28,16 @@ class HardwareData : public Data
 {
 public:
     HardwareData();
+
+
+    QString version() const;
+    quint32 hardwareId() const;
+    QString description() const;
+    QStringList deviceList() const;
+    QString name() const;
+    DeviceData device(const QString & serialNo);
+
+
 };
 
 }
