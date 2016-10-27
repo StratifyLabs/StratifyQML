@@ -22,7 +22,6 @@ Copyright 2016 Tyler Gilbert
 
 namespace StratifyData {
 
-
 class User : public Data
 {
 public:
@@ -31,7 +30,7 @@ public:
     QString name() const;
     QString email() const;
     QString handle() const;
-    QString uid() const:
+    QString uid() const;
 
 };
 
