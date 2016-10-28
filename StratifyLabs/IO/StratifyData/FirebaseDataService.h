@@ -23,7 +23,6 @@ Copyright 2016 Tyler Gilbert
 #include <QNetworkReply>
 
 #include "DataService.h"
-#include "FirebaseApi/firebase.h"
 
 namespace StratifyData {
 
@@ -48,8 +47,6 @@ private slots:
 
 private:
     QNetworkAccessManager mNetworkAccessManager;
-
-    Firebase * mFirebase;
 
 
 };

@@ -24,16 +24,13 @@ FirebaseDataService::FirebaseDataService(QString host, QString token)
 {
     mHost = host;
     mToken = token;
-    mFirebase = 0;
 
     connect(&mNetworkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleNetworkReply(QNetworkReply*)));
 
 }
 
 FirebaseDataService::~FirebaseDataService(){
-    if( mFirebase ){
-        delete mFirebase;
-    }
+
 }
 
 
@@ -93,18 +90,18 @@ void FirebaseDataService::postValue(QObject * object, const QString & path, cons
 }
 
 void FirebaseDataService::patchValue(QObject * object, const QString & path, const QString & value){
-    QString requestPath = host() + "/" + path + ".json?auth=" + token();
+    QString requestPath = host() + "/" + path + ".json?auth=" + token() + "?x-http-method-override=PATCH";
 
     QNetworkRequest request(requestPath);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
                       "application/x-www-form-urlencoded");
 
-    /*
-    QNetworkReply * reply = mNetworkAccessManager.sendCustomRequest(request, "PATCH", value.toUtf8());
+
+    QNetworkReply * reply = mNetworkAccessManager.post(request, value.toUtf8());
     if( reply ){
         reply->setParent(object);
     }
-    */
+
 
 }
 

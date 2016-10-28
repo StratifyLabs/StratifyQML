@@ -16,8 +16,9 @@ include(deployment.pri)
 
 HEADERS += \
 
-INCLUDEPATH += $$PWD/StratifyLib
-DEPENDPATH += $$PWD/StratifyLib
 
-LIBS += -L$$PWD/StratifyLib/ -lStratifyData
+
+INCLUDEPATH += $$PWD/../StratifyLabs/IO
+
+LIBS += -L$$PWD/../StratifyLabs/IO/build-StratifyData-Desktop_Qt_5_7_0_clang_64bit-Debug -lStratifyData
 

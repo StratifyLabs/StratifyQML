@@ -45,5 +45,3 @@ INSTALLS += target
 INSTALLS += INSTALL_HEADERS
 
 INCLUDEPATH += $$INSTALLPATH/include
-
-DESTDIR = $$PWD/../../../StratifyExample/StratifyLib

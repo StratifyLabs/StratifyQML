@@ -45,15 +45,9 @@ win32:INSTALLPATH = c:/StratifyLabs-SDK/Tools/gcc
 
 target.path = $$INSTALLPATH/lib
 INSTALL_HEADERS.path = $$INSTALLPATH/include/StratifyData
-INSTALL_FIREBASE_HEADERS.path = $$INSTALLPATH/include/StratifyData/FirebaseApi
 
-include(./FirebaseApi/firebaseapi.pri)
-
-INSTALL_FIREBASE_HEADERS.files = $$FIREBASE_HEADERS
-HEADERS += $$FIREBASE_HEADERS
 
 INSTALLS += target
 INSTALLS += INSTALL_HEADERS
-INSTALLS += INSTALL_FIREBASE_HEADERS
 
 

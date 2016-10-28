@@ -1,30 +1,34 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "FirebaseDataService.h"
 
-using namespace StratifyData;
+
+#include <StratifyData/StratifyData.h>
+
+//using namespace StratifyData;
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-
     QQmlApplicationEngine engine;
 
-    FirebaseDataService *fireService = new FirebaseDataService("https://test-3e97c.firebaseio.com/", "G33jmU56OrIgGSjvS8PEpPbtv860mklheKf8raqb");
-    fireService->setRules();
 
-    FirebaseDataService *rootFirebase = new  FirebaseDataService(fireService, "stratifylink");
-    FirebaseDataService *childFirebase = new  FirebaseDataService(rootFirebase, "apps");
-    FirebaseDataService *node1 = new  FirebaseDataService(childFirebase, "blinky");
-    FirebaseDataService *node2 = new  FirebaseDataService(childFirebase, "helloworld");
+    FirebaseDataService dataService("https://test-3e97c.firebaseio.com/", "G33jmU56OrIgGSjvS8PEpPbtv860mklheKf8raqb");
+    Data::setDefaultDataService(&dataService);
 
-    //node1->getFirebase()->child("github")->setValue("https://github.com/StratifyLabs/Blinky");
-    //node1->getFirebase()->child("name")->setValue("Test123");
+    AppListData appList; //this will use the default data service
+    AppData appData;
 
-    //node2->getFirebase()->child("github")->setValue("https://github.com/StratifyLabs/HelloWorld");
-    //node2->getFirebase()->child("name")->setValue("test");
+    appData.setPath("stratifylink/apps");
+
+    appData.setName("HelloWorld");
+    appData.setGithub("https://github.com/StratifyLabs/HelloWorld");
+
+    appList.append(&appData); //add App data to Applist
+
+
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
 
     return app.exec();
 }
