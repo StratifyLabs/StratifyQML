@@ -48,6 +48,8 @@ public:
     static void listenForNotificationsWork(void * object){ ((ConnectionIO*)object)->listenForNotificationsWorker(); }
     void listenForNotificationsWorker();
     void stopNotifications(){ mIsStopNotifications = true; }
+    bool isNotificationsStopped() const { return mIsNotificationsStopped; }
+
 
 signals:
     void deviceAccessed(const QString & device, bool read, int nbyte);
@@ -56,6 +58,9 @@ signals:
 
 private:
     volatile bool mIsStopNotifications;
+    volatile bool mIsNotificationsStopped;
+    volatile bool mIsStopMonitor;
+    volatile bool mIsMonitorStopped;
 
 };
 

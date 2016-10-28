@@ -183,9 +183,8 @@ int PortIO::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t 
             }
         }
         qDebug() << "Close";
-        link.driver()->dev.close(link.driver()->dev.handle);
+        link.driver()->dev.close(&(link.driver()->dev.handle));
         qDebug() << "Close complete";
-        link.driver()->dev.handle = LINK_PHY_OPEN_ERROR;
     } else {
         qDebug() << "Failed to open" << systemLocation;
         return -1;

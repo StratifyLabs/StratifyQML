@@ -86,6 +86,15 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
 
 int ConnectionIO::disconnectFromDevice(){
     if( mLink.get_is_connected() ){
+
+        mIsStopNotifications = true;
+        mIsStopMonitor = true;
+
+        //wait for the threads to release the device
+        while( (mIsNotificationsStopped == false) || (mIsMonitorStopped == false) ){
+            QThread::yieldCurrentThread();
+        }
+
         mLink.exit();
         emit connectionChanged();
         emit statusChanged(IO::INFO, "Successfully disconnected from " +
@@ -124,7 +133,7 @@ void ConnectionIO::listenForNotificationsWorker(){
     link_notify_file_t * notifyFile;
     link_notify_posix_trace_event_t * notifyTraceEvent;
 
-
+    mIsNotificationsStopped = false;
     mIsStopNotifications = false; //must be changed in another thread
     while( (mIsStopNotifications == false) && (mLink.get_is_connected()) ){
         memset(buffer, 0, bufferSize);
@@ -180,18 +189,23 @@ void ConnectionIO::listenForNotificationsWorker(){
         QThread::msleep(50);
     }
 
+    mIsNotificationsStopped = true;
     emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": stopped listening");
 
 }
 
 void ConnectionIO::monitorWorker(){
-    while( mLink.get_is_connected() == true){
+    mIsMonitorStopped = false;
+    while( (mLink.get_is_connected() == true) && (mIsStopMonitor == false) ){
         //check the IO list to see if the device is still present
         QThread::msleep(500);
     }
 
-    emit connectionChanged();
-    emit statusChanged(INFO, QString(mLink.serial_no().c_str()) + " disconnected");
+    if( mIsStopMonitor == false ){
+        emit connectionChanged();
+        emit statusChanged(INFO, QString(mLink.serial_no().c_str()) + " disconnected");
+    }
+    mIsMonitorStopped = true;
 }
 
 

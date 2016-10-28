@@ -25,8 +25,6 @@ int main(int argc, char *argv[])
 
     appList.append(&appData); //add App data to Applist
 
-
-
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
 
