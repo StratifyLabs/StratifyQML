@@ -16,6 +16,9 @@ Copyright 2016 Tyler Gilbert
 
 #include "IO.h"
 
+#include <QByteArray>
+#include <QFile>
+#include <stfy/sys.hpp>
 #include <QDebug>
 
 using namespace StratifyIO;
@@ -62,5 +65,99 @@ void IO::setCummulativeMax(int value){
 
 void IO::resetCummulativeMax(){
     setCummulativeMax(0);
+}
+
+int IO::copyFileToDevice(QString source, QString dest, link_mode_t mode){
+    return copyFileToDevice(source, dest, mode, updateProgressCallback);
+}
+
+
+int IO::copyFileToDeviceCummulative(QString source, QString dest, link_mode_t mode){
+    return copyFileToDevice(source, dest, mode, updateCummulativeCallback);
+}
+
+int IO::copyFileFromDevice(QString source, QString dest, link_mode_t mode){
+    return copyFileFromDevice(source, dest, mode, updateProgressCallback);
+}
+
+int IO::copyFileFromDeviceCummulative(QString source, QString dest, link_mode_t mode){
+    return copyFileFromDevice(source, dest, mode, updateCummulativeCallback);
+}
+
+int IO::copyFileFromDevice(QString source,
+             QString dest,
+             link_mode_t mode,
+             bool (*update)(void*,int,int)
+             ){
+    int ret;
+
+    ret = mLink.copy_file_from_device(source.toStdString(),
+                                       dest.toStdString(),
+                                       mode,
+                                       update,
+                                       this);
+
+    if( ret < 0 ){
+        emit statusChanged(ERROR, "Failed to upload file " + source + ": " +
+                           QString(mLink.error_message().c_str()));
+    }
+
+    emit updateProgress(0,0);
+
+
+    return ret;
+}
+
+int IO::copyFileToDevice(QString source,
+             QString dest,
+             link_mode_t mode,
+             bool (*update)(void*,int,int)
+             ){
+    int ret;
+
+    emit statusChanged(IO::INFO, "Copying " + source + " to " + dest);
+
+    if( dest.startsWith("/app/flash") ){
+        //need to install in flash memory
+        QByteArray buffer;
+        QFile file;
+        QFileInfo info;
+
+        file.setFileName(source);
+        if( file.open(QFile::ReadOnly) == false ){
+            emit statusChanged(ERROR, "Failed to open: " + source);
+            return -1;
+        }
+
+        buffer = file.readAll();
+        info.setFile(dest);
+
+        emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + " copy " + dest + " to flash");
+        ret = Appfs::create(
+                    info.fileName().toStdString().c_str(),
+                    buffer.data(),
+                    buffer.size(),
+                    "/app",
+                    update,
+                    this,
+                    mLink.driver()
+                      );
+    } else {
+
+    ret = mLink.copy_file_to_device(source.toStdString(),
+                                     dest.toStdString(),
+                                     mode,
+                                     updateProgressCallback,
+                                     this);
+    }
+
+    emit updateProgress(0,0);
+
+    if( ret < 0 ){
+        emit statusChanged(ERROR, "Failed to copy " +
+                           source + " to " + dest + ":"
+                           + QString(mLink.error_message().c_str()));
+    }
+    return ret;
 }
 

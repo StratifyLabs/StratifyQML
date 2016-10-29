@@ -52,8 +52,17 @@ int AppIO::prepareBinary(const QString & sourcePath, const QString & name, bool 
     return 0;
 }
 
+int AppIO::installAppCummulative(const QString & sourcePath, const QString & installPath, const QString & name){
+    return installApp(sourcePath, installPath, name, updateCummulativeCallback, this);
+}
 
 int AppIO::installApp(const QString & sourcePath, const QString & installPath, const QString & name){
+    return installApp(sourcePath, installPath, name, updateProgressCallback, this);
+}
+
+int AppIO::installApp(const QString & sourcePath, const QString & installPath, const QString & name, bool (*update)(void*,int,int), void * object){
+
+
 
     QString unlinkPath;
     //delete the app if it currently is in the app system
@@ -78,7 +87,7 @@ int AppIO::installApp(const QString & sourcePath, const QString & installPath, c
     if( mLink.install_app(sourcePath.toStdString(),
                            installPath.toStdString(),
                            name.toStdString(),
-                           updateProgressCallback, this) < 0 ){
+                           update, object) < 0 ){
         emit statusChanged(ERROR, "Failed to install " + name + ": " + mLink.error_message().c_str());
         return -1;
     }

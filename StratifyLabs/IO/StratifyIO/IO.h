@@ -34,22 +34,11 @@ class IO: public StratifyObject
 public:
     IO(Link & link);
 
-    int copyFileToDevice(QString source, QString dest, link_mode_t mode = 0666){
-        return mLink.copy_file_to_device(source.toStdString(),
-                                         dest.toStdString(),
-                                         mode,
-                                         updateProgressCallback,
-                                         this);
-    }
+    int copyFileToDevice(QString source, QString dest, link_mode_t mode = 0666);
+    int copyFileToDeviceCummulative(QString source, QString dest, link_mode_t mode = 0666);
 
-    int copyFileToDeviceCummulative(QString source, QString dest, link_mode_t mode = 0666){
-        return mLink.copy_file_to_device(source.toStdString(),
-                                         dest.toStdString(),
-                                         mode,
-                                         updateCummulativeCallback,
-                                         this);
-    }
-
+    int copyFileFromDevice(QString source, QString dest, link_mode_t mode = 0666);
+    int copyFileFromDeviceCummulative(QString source, QString dest, link_mode_t mode = 0666);
 
     void setCummulativeMax(int value);
     void resetCummulativeMax();
@@ -66,6 +55,19 @@ protected:
     int mCummulativeProgress;
     int mCummulativeProgressCached;
     int mCummulativeMax;
+
+private:
+    int copyFileToDevice(QString source,
+                 QString dest,
+                 link_mode_t mode,
+                 bool (*update)(void*,int,int)
+                 );
+
+    int copyFileFromDevice(QString source,
+                 QString dest,
+                 link_mode_t mode,
+                 bool (*update)(void*,int,int)
+                 );
 
 };
 

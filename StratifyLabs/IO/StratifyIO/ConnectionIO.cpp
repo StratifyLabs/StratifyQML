@@ -85,13 +85,14 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
 }
 
 int ConnectionIO::disconnectFromDevice(){
+    int count = 0;
     if( mLink.get_is_connected() ){
 
         mIsStopNotifications = true;
         mIsStopMonitor = true;
 
         //wait for the threads to release the device
-        while( (mIsNotificationsStopped == false) || (mIsMonitorStopped == false) ){
+        while( ((mIsNotificationsStopped == false) || (mIsMonitorStopped == false)) && (count++ < 100) ){
             QThread::yieldCurrentThread();
         }
 
@@ -201,11 +202,12 @@ void ConnectionIO::monitorWorker(){
         QThread::msleep(500);
     }
 
+    mIsMonitorStopped = true;
+
     if( mIsStopMonitor == false ){
         emit connectionChanged();
         emit statusChanged(INFO, QString(mLink.serial_no().c_str()) + " disconnected");
     }
-    mIsMonitorStopped = true;
 }
 
 

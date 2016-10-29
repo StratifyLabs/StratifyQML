@@ -254,17 +254,35 @@ int KernelIO::installData(const QString & projectPath, bool isInstallData, bool 
 }
 
 int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & appObject, const QString & key){
+    AppIO appIO(mLink);
     QStringList appKeys;
     QString source;
     QString destination;
     QString settings;
     QString settingsFormat;
+    bool isRam;
+    bool isStartup;
+    bool isInstall;
+    int ramSize;
 
     appKeys = appObject.keys();
 
     source = projectPath + "/" + appObject.value("binary").toString();
     destination = appObject.value("dest").toString();
     settings = appObject.value("settings").toString();
+
+    if( destination.startsWith(("/app")) ){
+        isInstall = true;
+        isRam = appObject.value("ram").toBool();
+        isStartup = appObject.value("startup").toBool();
+        ramSize = appObject.value("ramsize").toInt();
+    } else {
+        isInstall = false;
+        isRam = false;
+        isStartup = false;
+        ramSize = 0;
+    }
+
     if( settings.isEmpty() == false ){
         settings = projectPath + "/" + settings;
     }
@@ -276,17 +294,25 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
     fileInfo.setFile(source);
     if( fileInfo.exists() ){
         qDebug() << "Create destination" << destination;
-        if( mLink.mkdir(destination.toStdString(), 0777) < 0 ){
-            if( link_errno != 17 ){ //17 is EEXIST
-                emit statusChanged(ERROR, "Failed to create folder " + destination + ": " + QString(mLink.error_message().c_str()));
-                return -1;
+
+        if( destination.startsWith("/app") == false ){
+            if( mLink.mkdir(destination.toStdString(), 0777) < 0 ){
+                if( link_errno != 17 ){ //17 is EEXIST
+                    emit statusChanged(ERROR, "Failed to create folder " + destination + ": " + QString(mLink.error_message().c_str()));
+                    return -1;
+                }
             }
         }
 
         qDebug() << "Copy" << source << "to" << destination;
 
+        if( isInstall == true ){
+            if( appIO.prepareBinary(source, key, isStartup, isRam, ramSize) < 0 ){
+                //failed to prepare binary
+            }
+        }
 
-        if( copyFileToDeviceCummulative(source, destination + "/" + key) < 0 ){
+        if( appIO.installApp(source, destination, key, updateCummulativeCallback, this) < 0 ){
             emit statusChanged(ERROR, "Failed to copy " + source + " to " + destination + ": " + QString(mLink.error_message().c_str()));
             return -1;
         }

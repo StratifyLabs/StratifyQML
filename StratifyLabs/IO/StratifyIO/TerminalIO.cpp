@@ -145,7 +145,6 @@ QByteArray TerminalIO::read(){
 
 int TerminalIO::write(const QByteArray & data){
     if( mLink.get_is_connected() == false ){
-        close();
         return -1;
     }
 

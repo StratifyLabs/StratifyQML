@@ -21,31 +21,24 @@ import "."
 SBaseRectangle {
     id: baseRectangleInput;
     type: "input";
-    property string text;
+    property alias text: input.text;
     property string placeholder: "";
+
     blockWidth: true;
     backgroundColor: theme.input_bg;
     borderColor: theme.input_border;
     radius: theme.input_border_radius;
 
     property bool showPlaceholder: false;
+
     property alias inputObject: input;
+    property alias contents: input;
 
     implicitHeight: fontSize + paddingVertical*3;
     width: parent.width;
 
     signal editingFinished();
-
-    onTextChanged: {
-        if( text === "" ){
-            showPlaceholder = true;
-            input.text = placeholder;
-        } else {
-            showPlaceholder = false;
-            input.text = text;
-            editingFinished();
-        }
-    }
+    signal returnPressed();
 
     onStyleChanged: {
         var items = style.split(" ");
@@ -63,7 +56,6 @@ SBaseRectangle {
     TextInput {
         id: input;
         color: showPlaceholder ? Qt.lighter(textColor, 2.0) : textColor;
-        text: baseRectangleInput.text;
         width: parent.width - clearIcon.width*1.25;
         leftPadding: paddingHorizontal;
         rightPadding: paddingHorizontal;
@@ -78,26 +70,21 @@ SBaseRectangle {
         selectedTextColor: textColor;
         clip: true;
 
-        Component.onCompleted: {
-            if( text === "" ){
-                showPlaceholder = true;
-                text = placeholder;
+        onTextChanged: {
+            if( focus === false ){
+                baseRectangleInput.editingFinished();
             }
         }
 
         onEditingFinished: {
-            //this breaks any bindings to base text value
-            baseRectangleInput.text = text;
+            baseRectangleInput.editingFinished();
         }
 
-        onFocusChanged: {
-            if( focus == true ){
-                if( showPlaceholder == true ){
-                    text = "";
-                    showPlaceholder = false;
-                }
-            }
+        Keys.onReturnPressed: {
+            baseRectangleInput.editingFinished();
+            returnPressed();
         }
+
 
     }
 
@@ -113,13 +100,12 @@ SBaseRectangle {
         horizontalAlignment: Text.AlignHCenter;
         verticalAlignment: Text.AlignVCenter;
         height: parent.height;
-        visible: !showPlaceholder;
+        visible: input.text !== "";
 
 
         MouseArea {
             anchors.fill: parent;
             onClicked: {
-                showPlaceholder = true;
                 input.text = "";
                 input.forceActiveFocus();
             }

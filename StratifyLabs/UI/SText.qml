@@ -86,7 +86,7 @@ SBaseRectangle {
                 paused: !spin;
                 from: 0;
                 to: 360;
-                duration: 1200;
+                duration: animationPeriod;
             }
 
             Timer {

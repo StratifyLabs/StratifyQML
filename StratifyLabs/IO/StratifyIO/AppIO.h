@@ -30,9 +30,14 @@ public:
     int kill(const QString & name);
     int installFiles(const QString & settingsPath);
     int installApp(const QString & sourcePath, const QString & installPath, const QString & name);
+    int installAppCummulative(const QString & sourcePath, const QString & installPath, const QString & name);
     int runApp(const QString & name);
     int uninstallApp(const QString & path, const QString & name);
     int prepareBinary(const QString & sourcePath, const QString & name, bool startup, bool ram, int ramSize);
+
+    int installApp(const QString & sourcePath, const QString & installPath, const QString & name, bool (*update)(void*,int,int), void * object);
+
+private:
 
 };
 
