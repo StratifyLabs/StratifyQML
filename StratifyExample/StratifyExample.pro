@@ -1,9 +1,10 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick webengine
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    UserDataProvider.cpp
 
 RESOURCES += qml.qrc
 
@@ -15,9 +16,10 @@ include(deployment.pri)
 
 
 HEADERS += \
+    UserDataProvider.h
 
-INCLUDEPATH += $$PWD/StratifyLib
-DEPENDPATH += $$PWD/StratifyLib
 
-LIBS += -L$$PWD/StratifyLib/ -lStratifyIO
+INCLUDEPATH += $$PWD/../StratifyLabs/IO
+
+LIBS += -L$$PWD/../StratifyLabs/IO/build-StratifyData-Desktop_Qt_5_7_0_clang_64bit-Debug -lStratifyData
 
