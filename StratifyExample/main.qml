@@ -1,19 +1,21 @@
-import QtQuick 2.5
 import QtQuick.Window 2.2
-import QtQuick.Controls 1.1
+import QtQuick.Controls 1.4
+import QtQuick 2.0
+import QtWebView 1.1
+import QtWebEngine 1.0
 
-Window {
+ApplicationWindow {
+    width: 750
+    height: 300
     visible: true
 
-    MouseArea {
+    WebEngineView {
+        id: webView
+        url: "http://localhost/index.html"
         anchors.fill: parent
-        onClicked: {
-            Qt.quit();
+        onJavaScriptConsoleMessage: {
+            // Store user id and token in appropriate properties in the UserDataProvider class
+            userProvider.saveUserData(message);
         }
-    }
-
-    Text {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
     }
 }
