@@ -33,7 +33,7 @@ AppData::AppData(const QJsonObject & object, DataService * service) : Data(servi
 
 bool AppData::validate(){
     //make sure the object has data populated appropriately
-
+    return false;
 }
 
 QString AppData::version() const {

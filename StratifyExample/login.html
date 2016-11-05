@@ -1,0 +1,102 @@
+<html>
+  <title>Login</title>
+  <body>
+  email<input type="text" name="email" id="email" >
+  password<input typy="password" name="pass" id="pass">
+	<button onclick="signUpFunction()">Sign Up</button>
+	<button onclick="signInFunction()">Sign In</button>
+	
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+<script>
+  
+function signUpFunction() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("pass").value;
+    console.log(email);
+    console.log(password);
+    
+    // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAPoSSsAv5FiEZ-CkzXzmvxX4C1ZiIJE9g",
+    authDomain: "test-3e97c.firebaseapp.com",
+    databaseURL: "https://test-3e97c.firebaseio.com",
+    storageBucket: "test-3e97c.appspot.com",
+    messagingSenderId: "562053603672"
+  };
+  
+  firebase.initializeApp(config);
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
+     var user = firebase.auth().currentUser;
+     alert("Successfully added user");
+  }, function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log("error code: " + errorCode);
+      console.log("error message: " + errorMessage);
+  });
+}
+
+function signInFunction() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("pass").value;
+    
+    // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAPoSSsAv5FiEZ-CkzXzmvxX4C1ZiIJE9g",
+    authDomain: "test-3e97c.firebaseapp.com",
+    databaseURL: "https://test-3e97c.firebaseio.com",
+    storageBucket: "test-3e97c.appspot.com",
+    messagingSenderId: "562053603672"
+  };
+  
+  firebase.initializeApp(config);
+  firebase.auth().signOut();
+  
+  if (firebase.auth().currentUser) {
+    // [START signout]
+    firebase.auth().signOut();
+    // [END signout]
+  } else {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('pass').value;
+    
+    // Sign in with email and pass.
+    // [START authwithemail]
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    }).then(function(result){
+
+    		result.getToken().then(function(token){
+        var userId = firebase.auth().currentUser.uid;
+        
+        console.log("UserID: " + userId);
+        console.log("Token: " + token);
+        
+        var path = 'stratifylink/users/' + userId + '/';
+		    firebase.database().ref(path).set({
+		    testData: "testValue_03"
+		    }).catch(function(error) {
+		      // Handle Errors here.
+		      var errorCode = error.code;
+		      var errorMessage = error.message;
+		      console.log("errror");
+		      console.log(errorMessage);
+		    });
+    });
+    });
+	}
+}
+</script>
+
+  </body>
+</html>
