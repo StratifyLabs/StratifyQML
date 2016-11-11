@@ -147,11 +147,13 @@ int IO::copyFileToDevice(QString source,
     ret = mLink.copy_file_to_device(source.toStdString(),
                                      dest.toStdString(),
                                      mode,
-                                     updateProgressCallback,
+                                     update,
                                      this);
     }
 
-    emit updateProgress(0,0);
+    if( update == updateProgressCallback ){
+        emit updateProgress(0,0);
+    }
 
     if( ret < 0 ){
         emit statusChanged(ERROR, "Failed to copy " +

@@ -70,12 +70,6 @@ SBaseRectangle {
         selectedTextColor: textColor;
         clip: true;
 
-        onTextChanged: {
-            if( focus === false ){
-                baseRectangleInput.editingFinished();
-            }
-        }
-
         onEditingFinished: {
             baseRectangleInput.editingFinished();
         }

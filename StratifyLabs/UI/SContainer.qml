@@ -30,10 +30,10 @@ SItem {
     }
 
     Item {
+        id: contents;
         x: paddingHorizontal;
         y: paddingVertical;
         height: fillHeight ? parent.height - paddingVertical*2: undefined;
-        id: contents;
         width: (parent.width - paddingHorizontal*2);
     }
 }

@@ -18,7 +18,7 @@ import QtQuick 2.6
 import "."
 
 SItem {
-
+    id: panelRoot;
     default property alias data: contents.data;
     property string heading_bg: theme.panel_default_heading_bg;
     property string border_color: theme.panel_default_border;
@@ -65,13 +65,13 @@ SItem {
         }
     }
 
-
     SRoundedRectangle {
         id: panelHeading;
         topRadius: theme.panel_border_radius;
         color: heading_bg;
         borderColor: border_color;
         borderWidth: 1;
+        visible: panelHeadingText.text != "";
 
         implicitWidth: parent.width;
         implicitHeight: panelHeadingText.height;
@@ -82,7 +82,7 @@ SItem {
             bottomPadding: theme.padding_base_vertical;
             leftPadding: theme.padding_base_horizontal;
             rightPadding: theme.padding_base_horizontal;
-            text: "Panel Heading";
+            text: "";
             color: heading_color;
             font.pointSize: heading_font_size;
             font.family: textFont;
@@ -93,7 +93,8 @@ SItem {
 
     SRoundedRectangle {
         id: panelBody;
-        y: panelHeading.height - 2*pixelRatio*panelHeading.borderWidth - borderWidth;
+        y: panelHeading.visible ? 0 : panelHeading.height - 2*pixelRatio*panelHeading.borderWidth - borderWidth;
+        topRadius: panelHeading.visible ? 0 : theme.panel_border_radius;
         bottomRadius: theme.panel_border_radius;
         color: theme.body_bg;
         borderColor: border_color;
