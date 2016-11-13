@@ -92,6 +92,7 @@ int ConnectionIO::disconnectFromDevice(){
     //wait for the threads to release the device
     while( ((mIsNotificationsStopped == false) || (mIsMonitorStopped == false)) && (count++ < 100) ){
         QThread::yieldCurrentThread();
+        QThread::msleep(10);
     }
 
     if( mLink.get_is_connected() ){
@@ -198,6 +199,7 @@ void ConnectionIO::listenForNotificationsWorker(){
 
 void ConnectionIO::monitorWorker(){
     mIsMonitorStopped = false;
+    mIsStopMonitor = false;
     while( (mLink.get_is_connected() == true) && (mIsStopMonitor == false) ){
         //check the IO list to see if the device is still present
         QThread::msleep(500);

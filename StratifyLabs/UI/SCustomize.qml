@@ -19,9 +19,9 @@ import QtQuick 2.6
 Item {
 
     id: customize;
-    property var fontFontAwesome: FontLoader { id: fontFontAwesomeInternal; source: "assets/fontawesome-webfont.ttf"; }
-    property var fontOpenSans: FontLoader { id: fontOpenSansInternal; source: "assets/OpenSans-Regular.ttf"; }
-    property var fontOpenSansBold: FontLoader { id: fontOpenSansBoldInternal; source: "assets/OpenSans-ExtraBold.ttf"; }
+    property var fontFontAwesome: FontLoader { id: fontFontAwesomeInternal; source: "fontawesome-webfont.ttf"; }
+    property var fontOpenSans: FontLoader { id: fontOpenSansInternal; source: "OpenSans-Regular.ttf"; }
+    property var fontOpenSansBold: FontLoader { id: fontOpenSansBoldInternal; source: "OpenSans-ExtraBold.ttf"; }
 
     function lighten(col,amt){ return Qt.lighter(col, 1 + amt/100); }
     function darken(col,amt){ return Qt.darker(col, 1 + amt/100); }

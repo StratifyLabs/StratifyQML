@@ -1,6 +1,5 @@
 module StratifyLabs.UI
 
-Firebase 1.0 firebase-2.4.2.js
 JSONPath 1.0 jsonpath-0.8.5.js
 Fa 1.0 Fa-4.5.0.js
 
