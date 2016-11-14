@@ -458,6 +458,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     int count;
     QFile testReport;
 
+    QDir testDir;
     AppIO appIO(mLink);
     TerminalIO terminalIO(mLink);
     QByteArray terminalData;
@@ -564,7 +565,11 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
         testReportObject.insert("results", reportObject);
         doc.setObject(testReportObject);
 
-        testReport.setFileName(projectPath + "/" + name + "-" + mLink.serial_no().c_str() + "-" + QDateTime::currentDateTimeUtc().toString() + ".json");
+
+        //make sure the test directly exists
+        testDir.setPath(projectPath + "/StratifyTestOutput");
+        testDir.mkpath(testDir.path());
+        testReport.setFileName(testDir.path() + "/" + name + "-" + mLink.serial_no().c_str() + "-" + QDateTime::currentDateTimeUtc().toString() + ".json");
 
         testReport.open(QFile::WriteOnly);
         testReport.write(doc.toJson());
