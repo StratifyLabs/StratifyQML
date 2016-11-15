@@ -7,15 +7,20 @@ QList<PortIO> PortIO::mPortList;
 
 bool PortIO::reconnect(Link & link, int count, int delay){
     int i;
+    const PortIO * port;
 
     for(i=0; i < count; i++){
 
         QThread::msleep(delay/2);
         refreshPortList(link);
 
-        if ( lookupSerialNumber(link.serial_no().c_str()) != 0 ){
-            //connect to last known serial number
-            link.reinit(); //suppress any error messages
+        //get the serial number of the last connected device in the new list
+        port = lookupSerialNumber(link.serial_no().c_str());
+        if( port != 0 ){
+            qDebug() << "Reconnect" << link.serial_no().c_str() << "to" << port->linkSerialPortInfo().systemLocation();
+            link.init(port->linkPath().toStdString(),
+                      link.serial_no(),
+                      port->notifyPath().toStdString());
         }
 
         QThread::msleep(delay/2);
@@ -35,7 +40,6 @@ const PortIO * PortIO::lookupSerialNumber(const QString & serialNumber){
         if( portList().at(i).linkSerialPortInfo().serialNumber() == serialNumber ){
             return &(portList().at(i));
         }
-
     }
     return 0;
 }
@@ -44,38 +48,21 @@ const PortIO * PortIO::lookupSerialNumber(const QString & serialNumber){
 void PortIO::refreshPortList(Link & link){
     //use QSerialPort to get a list of known devices
 
+    if( link.get_is_connected() ){
+        link.exit();
+    }
+
     QList<QSerialPortInfo> list;
     list = QSerialPortInfo::availablePorts();
     int i;
 
-    for(i=0; i < mPortList.count(); i++){
-        bool notFound = true;
-        if( mPortList.at(i).mIsBootloader == true ){
-            mPortList.removeAt(i);
-            i = 0;
-            break;
-        }
+    qDebug() << "There are" << list.count() << "ports available";
 
-
-        foreach(QSerialPortInfo info, list){
-            if( mPortList.at(i).mLinkSerialPortInfo.serialNumber() == info.serialNumber() ){
-                notFound = false;
-                break;
-            }
-        }
-
-        if( notFound ){
-            i = 0;
-            mPortList.removeAt(i);
-        }
-
-    }
-
+    mPortList.clear();
 
 
     foreach(QSerialPortInfo info, list){
         bool alreadyAdded = false;
-
 
         qDebug() << "Device:" << i++;
         qDebug() << "\tMfg" << info.manufacturer();
@@ -123,7 +110,7 @@ void PortIO::refreshPortList(Link & link){
 
 #if defined Q_OS_WIN
 
-        if( info.description() == "StratifyOS Link Port" ){
+        if( (info.description() == "StratifyOS Link Port") ){
 
             for(i=0; i < mPortList.count(); i++){
                 PortIO & item = mPortList[i];
@@ -144,7 +131,8 @@ void PortIO::refreshPortList(Link & link){
 
 
                     foreach(QSerialPortInfo notify, list){
-                        if( notify.description() == "StratifyOS Notify Port" ){
+                        if( (notify.description() == "StratifyOS Notify Port") &&
+                                (notify.serialNumber() == info.serialNumber()) ){
                             item.mIsNotifyPortValid = true;
                             item.mNotifySerialPortInfo = notify;
                         }
@@ -162,13 +150,17 @@ void PortIO::refreshPortList(Link & link){
 
 int PortIO::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr){
     memset(&attr, 0, sizeof(sys_attr_t));
+    int check_bootloader;
+    //check the local database to see if the info is already available
+
 
     link.driver()->dev.handle = link.driver()->dev.open(systemLocation.toStdString().c_str(), 0);
     if( link.driver()->dev.handle != LINK_PHY_OPEN_ERROR ){
 
-        if( link_isbootloader(link.driver()) ){
+        check_bootloader = link_isbootloader(link.driver());
+        if( check_bootloader > 0 ){
             strcpy(attr.name, "bootloader");
-        } else {
+        } else if( check_bootloader == 0 ){
             int sysFd;
             sysFd = link_open(link.driver(), "/dev/sys", LINK_O_RDWR);
             if( sysFd >= 0 ){
@@ -181,6 +173,9 @@ int PortIO::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t 
             } else {
                 qDebug() << "Failed to open /dev/sys";
             }
+        } else if( check_bootloader < 0 ){
+            qDebug() << "Failed to check bootloader";
+            strcpy(attr.name,"error");
         }
         qDebug() << "Close";
         link.driver()->dev.close(&(link.driver()->dev.handle));

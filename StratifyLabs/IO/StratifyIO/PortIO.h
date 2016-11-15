@@ -16,7 +16,7 @@ public:
     static void refreshPortList(Link & link);
     static const QList<PortIO> & portList() { return mPortList; }
     static const PortIO * lookupSerialNumber(const QString & serialNumber);
-    static bool reconnect(Link & link, int count = 10, int delay = 1000);
+    static bool reconnect(Link & link, int count = 10, int delay = 3000);
 
     PortIO(){
         mIsNotifyPortValid = false;
@@ -37,6 +37,15 @@ public:
     sys_attr_t sysAttr() const { return mSysAttr; }
     bool isNotifyPortValid() const { return mIsNotifyPortValid; }
 
+    QString linkPath() const { return mLinkSerialPortInfo.systemLocation(); }
+    QString notifyPath() const {
+        if( mIsNotifyPortValid ){
+            return mNotifySerialPortInfo.systemLocation();
+        } else {
+            return QString();
+        }
+    }
+
 private:
 
     static int loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr);
@@ -45,6 +54,7 @@ private:
     bool mIsLinkPortValid;
     bool mIsNotifyPortValid;
     bool mIsBootloader;
+    int mDevicePortCount;
     QSerialPortInfo mLinkSerialPortInfo; //port for link protocol
     QSerialPortInfo mNotifySerialPortInfo; //port to receive notifications
     sys_attr_t mSysAttr;

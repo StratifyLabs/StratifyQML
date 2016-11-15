@@ -29,7 +29,6 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
     QString sn;
     const PortIO * item;
     sn = serialNumber;
-    QString notifyPort;
 
     if( mLink.get_is_connected() ){
         disconnectFromDevice();
@@ -46,19 +45,13 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
         return -1;
     }
 
-    if( item->isNotifyPortValid() ){
-        notifyPort = item->notifySerialPortInfo().systemLocation();
-    } else {
-        notifyPort.clear();
-    }
-
     emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + " Connecting to link: " +
-                       item->linkSerialPortInfo().systemLocation() +
-                       " notify: " + notifyPort);
+                       item->linkPath() +
+                       " notify: " + item->notifyPath());
 
-    if( mLink.init(item->linkSerialPortInfo().systemLocation().toStdString(),
+    if( mLink.init(item->linkPath().toStdString(),
                    sn.toStdString(),
-                   notifyPort.toStdString()
+                   item->notifyPath().toStdString()
                    ) < 0 ){
         emit statusChanged(IO::ERROR, "Failed to connect to " + sn);
         return -1;

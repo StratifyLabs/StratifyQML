@@ -66,13 +66,13 @@ DISTFILES = qmldir \
     STooltip.qml \
     STree.qml \
     STreeColumn.qml \
-	SWell.qml \
-	fontawesome-webfont.ttf \
-	OpenSans-Bold.ttf \
-	OpenSans-ExtraBold.ttf \
-	OpenSans-Light.ttf \
-	OpenSans-Regular.ttf \
-	OpenSans-Semibold.ttf
+    SWell.qml \
+    fontawesome-webfont.ttf \
+    OpenSans-Bold.ttf \
+    OpenSans-ExtraBold.ttf \
+    OpenSans-Light.ttf \
+    OpenSans-Regular.ttf \
+    OpenSans-Semibold.ttf
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir
@@ -83,9 +83,9 @@ DISTFILES = qmldir \
 }
 
 qmldir.files = $$DISTFILES
-unix {
-    installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
-    qmldir.path = $$installPath
-    target.path = $$installPath
-	INSTALLS += target qmldir
-}
+
+installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
+qmldir.path = $$installPath
+target.path = $$installPath
+INSTALLS += target qmldir
+
