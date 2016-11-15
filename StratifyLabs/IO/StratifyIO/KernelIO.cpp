@@ -457,6 +457,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     QFileInfo info;
     int count;
     QFile testReport;
+    int ramSize;
 
     QDir testDir;
     AppIO appIO(mLink);
@@ -477,6 +478,8 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     when = testObject.value("when").toString();
     reset = testObject.value("reset").toBool();
     delay = testObject.value("delay").toInt();
+    ramSize = testObject.value("ramSize").toInt();
+
 
     qDebug() << "Check is connected";
     if( mLink.get_is_connected() == false ){
@@ -491,7 +494,8 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     //Install the Test App in RAM
     info.setFile(projectPath + "/" + binary);
 
-    if( appIO.prepareBinary(info.filePath(), info.fileName(), false, true, 0) < 0 ){
+    qDebug() << "Prepare with ramSize:" << ramSize;
+    if( appIO.prepareBinary(info.filePath(), info.fileName(), false, true, ramSize) < 0 ){
         //appIO will emit error status
         return -1;
     }
