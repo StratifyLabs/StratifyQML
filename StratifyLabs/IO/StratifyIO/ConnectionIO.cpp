@@ -65,7 +65,13 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
                            QString::number((quint64)mLink.driver()->dev.notify_handle, 16)
                            );
     } else {
+        mIsNotificationsStopped = true;
         emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Notify NOT supported on link");
+    }
+
+    if( mLink.is_bootloader() == false ){
+        sys_attr_t attr = mLink.sys_attr();
+        PortIO::setSysAttrCache(serialNumber, attr);
     }
 
     emit connectionChanged();
@@ -82,11 +88,15 @@ int ConnectionIO::disconnectFromDevice(){
     mIsStopNotifications = true;
     mIsStopMonitor = true;
 
+    qDebug() << Q_FUNC_INFO << "Stop Connection threads";
+
     //wait for the threads to release the device
     while( ((mIsNotificationsStopped == false) || (mIsMonitorStopped == false)) && (count++ < 100) ){
         QThread::yieldCurrentThread();
         QThread::msleep(10);
     }
+
+    qDebug() << Q_FUNC_INFO << "Connection threads stopped";
 
     if( mLink.get_is_connected() ){
         mLink.exit();
@@ -198,6 +208,7 @@ void ConnectionIO::monitorWorker(){
         QThread::msleep(500);
     }
 
+    qDebug() << Q_FUNC_INFO << "Monitor stopped";
     mIsMonitorStopped = true;
 
     if( mIsStopMonitor == false ){
