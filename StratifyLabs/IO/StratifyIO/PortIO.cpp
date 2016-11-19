@@ -156,7 +156,9 @@ void PortIO::refreshPortList(Link & link){
                 if( getSysAttrCache(info.serialNumber(), attr) == false ){
                     qDebug() << Q_FUNC_INFO << info.serialNumber() << "not in cache";
                     if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
-                        setSysAttrCache(info.serialNumber(), attr);
+                        if( QString(attr.name) != "bootloader" ){
+                            setSysAttrCache(info.serialNumber(), attr);
+                        }
                     }
                 } else {
                     qDebug() << Q_FUNC_INFO << "Loaded cached sysAttr";

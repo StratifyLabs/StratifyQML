@@ -28,6 +28,7 @@ Copyright 2016 Tyler Gilbert
 #include <QFileInfo>
 #include <QTemporaryDir>
 #include <QDateTime>
+#include <QList>
 #include <stfy/son.h>
 
 #include "AppIO.h"
@@ -147,6 +148,10 @@ int KernelIO::installData(const QString & projectPath, bool isInstallData, bool 
     int app;
     int appTotal;
     int cummulativeMax;
+    QList<QJsonObject> testList;
+    int orderFirst;
+    int orderLast;
+    bool orderInitialized = false;
 
     if( mLink.get_is_connected() == false ){
         emit statusChanged(ERROR, "Failed to install data: not connected");
@@ -177,9 +182,6 @@ int KernelIO::installData(const QString & projectPath, bool isInstallData, bool 
 
     cummulativeMax = 0;
     foreach(QString key, keys){
-        QStringList appKeys;
-
-
         dataObject = object.value(key).toObject();
         if( dataObject.value("type") == "app" ){
             if( isInstallData == true ){
@@ -190,39 +192,64 @@ int KernelIO::installData(const QString & projectPath, bool isInstallData, bool 
                 cummulativeMax += calcDataObject(projectPath, dataObject);
             }
         } else if( dataObject.value("type") == "test" ){
+            int order;
 
-            if( isRunTests == true ){
-                if( dataObject.value("when") == "before" ){
-                    if( runTest(projectPath, dataObject) < 0 ){
-                        emit statusChanged(ERROR, "Test failed: " + dataObject.value("name").toString());
-                        return -1;
-                    }
-                }
+            order = dataObject.value("order").toInt();
+            qDebug() << "Order for " << dataObject.value("name") << "is" << order;
+
+            if( orderInitialized == false ){
+                orderFirst = order;
+                orderLast = order;
+                orderInitialized = true;
             }
+
+            if( order < orderFirst ){
+                orderFirst = order;
+            }
+
+            if( order > orderLast ){
+                orderLast = order;
+            }
+
+            testList.append(dataObject);
 
         }
     }
 
+    if( isRunTests == true ){
+        for(int testOrder = orderFirst; testOrder < 0; testOrder++){
+            foreach(QJsonObject testObject, testList){
+                if( testObject.value("order").toInt() == testOrder ){
+                    qDebug() << Q_FUNC_INFO << "Run Test" << testObject.value("name").toString();
+                    if( runTest(projectPath, testObject) < 0 ){
+                        emit statusChanged(ERROR, "Test failed: " + testObject.value("name").toString());
+                        return -1;
+                    }
+                }
+            }
+        }
+    }
+
+
     setCummulativeMax(cummulativeMax);
+    if( isInstallData ){
 
-    foreach(QString key, keys){
-        app++;
+        foreach(QString key, keys){
+            app++;
 
-        qDebug() << "Process Key" << key;
+            qDebug() << "Process Key" << key;
 
-        dataObject = object.value(key).toObject();
+            dataObject = object.value(key).toObject();
 
-        if( dataObject.value("type") == "app" ){
-            if( isInstallData ){
+            if( dataObject.value("type") == "app" ){
                 emit statusChanged(INFO, "Installing " + key);
                 if( installAppObject(projectPath, dataObject, key) < 0 ){
                     emit statusChanged(ERROR, "Failed to install " + key + ": " + QString(mLink.error_message().c_str()));
                     resetCummulativeMax();
                     return -1;
                 }
-            }
-        } else if( dataObject.value("type") == "data" ){
-            if( isInstallData ){
+
+            } else if( dataObject.value("type") == "data" ){
                 emit statusChanged(INFO, "Installing " + key);
                 if( installDataObject(projectPath, dataObject, key) < 0 ){
                     emit statusChanged(ERROR, "Failed to install " + key + ": " + QString(mLink.error_message().c_str()));
@@ -233,13 +260,13 @@ int KernelIO::installData(const QString & projectPath, bool isInstallData, bool 
         }
     }
 
-    if( isRunTests ){
-        foreach(QString key, keys){
-            dataObject = object.value(key).toObject();
-            if( dataObject.value("type") == "test" ){
-                if( dataObject.value("when") == "after" ){
-                    if( runTest(projectPath, dataObject) < 0 ){
-                        emit statusChanged(ERROR, "Test failed: " + dataObject.value("name").toString());
+    if( isRunTests == true ){
+        for(int testOrder = 0; testOrder <= orderLast; testOrder++){
+            foreach(QJsonObject testObject, testList){
+                if( testObject.value("order").toInt() == testOrder ){
+                    qDebug() << Q_FUNC_INFO << "Run Test" << testObject.value("name").toString();
+                    if( runTest(projectPath, testObject) < 0 ){
+                        emit statusChanged(ERROR, "Test failed: " + testObject.value("name").toString());
                         return -1;
                     }
                 }
