@@ -24,7 +24,6 @@ SItem {
     default property alias data: contents.data;
     sm: width < theme.screen_sm;
 
-
     onSmChanged: {
         for(var i = 0; i < contents.children.length; i++){
             if( contents.children[i].type !== undefined ){
@@ -35,15 +34,17 @@ SItem {
 
     onVisibleChanged: contents.adjustWidth();
 
-    width: parent.width;
+    blockWidth: true;
+
+    implicitWidth: blockWidth ? parent.width : contents.childrenRect.width;
     implicitHeight: fillHeight ? parent.height : contents.childrenRect.height;
 
     GridLayout {
+        id: contents;
         rowSpacing: paddingHorizontal;
         rows: 1;
-        id: contents;
         height: fillHeight ? parent.height : undefined;
-        width: parent.width;
+        width: blockWidth ? parent.width : undefined;
 
         function alignChildren(){
             for(var i = 0; i < children.length; i++){

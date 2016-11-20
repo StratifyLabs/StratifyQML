@@ -20,13 +20,13 @@ import "."
 SItem {
     type: "container";
     default property alias data: contents.data;
-    property string background: "transparent";
-    width: (parent != null) ? parent.width : 0;
-    height: fillHeight ? ((parent != null) ? parent.height : 0) : contents.childrenRect.height + paddingVertical*2;
+    blockWidth: true;
+    implicitWidth: blockWidth ? ((parent != null) ? parent.width : 0) : contents.childrenRect.width + paddingHorizontal*2;
+    implicitHeight: fillHeight ? ((parent != null) ? parent.height : 0) : contents.childrenRect.height + paddingVertical*2;
 
     Rectangle {
         anchors.fill: parent;
-        color: background;
+        color: backgroundColor;
     }
 
     Item {
@@ -34,6 +34,6 @@ SItem {
         x: paddingHorizontal;
         y: paddingVertical;
         height: fillHeight ? parent.height - paddingVertical*2: undefined;
-        width: (parent.width - paddingHorizontal*2);
+        width: blockWidth ? parent.width - paddingHorizontal*2: undefined;
     }
 }
