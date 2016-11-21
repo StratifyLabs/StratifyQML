@@ -48,14 +48,17 @@ public:
     void deleteValue();
 
     void setPath(const QString & path){ mPath = path; }
+    const QString & path() const { return mPath; }
+    const QString & postName() const { return mPostName; }
 
-    virtual void setPostName(const QString & name);
+    virtual void setPostName(const QString & name); //unique key from a post request
     virtual void setValue(const QString & value);
 
     QString value() const {
         QJsonDocument doc(mJson);
         return doc.toJson();
     }
+
     QJsonObject json() const { return mJson; }
 
 signals:

@@ -22,9 +22,7 @@ Copyright 2016 Tyler Gilbert
 
 using namespace StratifyData;
 
-AppData::AppData(DataService * service) : Data(service){
-   connect(dataService(), SIGNAL(changed()), this, SLOT(change()));
-}
+AppData::AppData(DataService * service) : Data(service){}
 
 AppData::AppData(const QJsonObject & object, DataService * service) : Data(service) {
     mJson = object;
@@ -34,6 +32,10 @@ AppData::AppData(const QJsonObject & object, DataService * service) : Data(servi
 bool AppData::validate(){
     //make sure the object has data populated appropriately
     return false;
+}
+
+QString AppData::publisher() const {
+    return json().value("publisher").toString();
 }
 
 QString AppData::version() const {
@@ -48,19 +50,12 @@ QString AppData::github() const {
     return json().value("github").toString();
 }
 
-
-void AppData::change(){
-    //new data is ready
-    //QJsonObject object = dataService()->value();
-
-
-    //mName = object.value("name").toString();
-    //mGithub = object.value("github").toString();
-
-}
-
 QString AppData::description() const {
     return json().value("description").toString();
+}
+
+int AppData::description() const {
+    return json().value("ram").toInt();
 }
 
 QString AppData::tags() const {
@@ -112,6 +107,16 @@ void AppData::setDescription(const QString & value){
 void AppData::setTags(const QString & value){
     mJson["tags"] = value;
 }
+
+void AppData::setPublisher(const QString & value){
+    mJson["publisher"] = value;
+}
+
+void AppData::setRam(int value){
+    mJson["ram"] = value;
+}
+
+
 
 void AppData::setBuild(const QString & key, const QString & filename){
     QString value;

@@ -36,7 +36,9 @@ public:
     QString description() const;
     QString tags() const;
     QString version() const;
+    QString publisher() const;
     QStringList buildList() const;
+    int ram() const;
     bool getBuild(const QString & key, const QString & filename);
 
     void setVersion(const QString & value);
@@ -45,9 +47,8 @@ public:
     void setDescription(const QString & value);
     void setTags(const QString & value);
     void setBuild(const QString & key, const QString & filename);
-
-private slots:
-    void change();
+    void setPublisher(const QString & value);
+    void setRam(int value);
 
 private:
     QString mPath;

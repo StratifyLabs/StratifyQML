@@ -69,7 +69,7 @@ SList {
 
                 onEntered: {
                     text.textColor = theme.dropdown_link_hover_color;
-                    container.background = theme.dropdown_link_hover_bg;
+                    container.backgroundColor = theme.dropdown_link_hover_bg;
                     startHover();
                 }
 

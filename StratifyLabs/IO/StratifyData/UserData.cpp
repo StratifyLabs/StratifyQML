@@ -18,7 +18,47 @@ Copyright 2016 Tyler Gilbert
 
 using namespace StratifyData;
 
-User::User() : Data(0)
-{
+UserData::UserData(DataService * service) : Data(service){}
+
+UserData::UserData(const QJsonObject & object, DataService * service) : Data(service){
+    mJson = object;
+}
+
+bool UserData::validate(){
+     return true;
+ }
+
+QString UserData::name() const {
+    return json().value("name").toString();
 
 }
+
+QString UserData::email() const {
+    return json().value("email").toString();
+}
+
+QString UserData::handle() const {
+    return json().value("handle").toString();
+}
+
+QString UserData::uid() const {
+    return json().value("uid").toString();
+}
+
+void UserData::setName(const QString & value){
+    mJson["name"] = value;
+}
+
+void UserData::setEmail(const QString & value){
+    mJson["email"] = value;
+}
+
+
+void UserData::setHandle(const QString & value){
+    mJson["handle"] = value;
+}
+
+void UserData::setUid(const QString & value){
+    mJson["uid"] = value;
+}
+

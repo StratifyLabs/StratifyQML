@@ -45,6 +45,9 @@ public:
     const QString & host() const { return mHost; }
     const QString & token() const { return mToken; }
 
+    void setHost(const QString & value){ mHost = value; }
+    void setToken(const QString & value){ mToken = value; }
+
 signals:
     void changed();
 
