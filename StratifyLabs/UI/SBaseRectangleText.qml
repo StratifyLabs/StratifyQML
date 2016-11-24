@@ -22,7 +22,7 @@ SBaseRectangle {
 
     property string icon;
     property string text;
-    property alias textObject: baseRectangleTextText;
+    property alias textObject: rectangleText;
     property bool hideTextOnSm: false;
     property bool spin: false;
     property bool pulse: false;
@@ -45,14 +45,14 @@ SBaseRectangle {
         var items = style.split(" ");
         for(var i=0; i < items.length; i++){
             if( items[i] === "text-left" ){
-                baseRectangleTextText.anchors.centerIn = undefined;
-                baseRectangleTextText.anchors.left = baseRectangleTextText.parent.left;
+                textObject.anchors.centerIn = undefined;
+                textObject.anchors.left = baseRectangleTextText.parent.left;
             } else if( items[i] === "text-right" ){
-                baseRectangleTextText.horizontalAlignment = Text.AlightRight;
+                textObject.horizontalAlignment = Text.AlightRight;
             } else if( items[i] === "text-center" ){
-                baseRectangleTextText.horizontalAlignment = Text.AlignHCenter;
+                textObject.horizontalAlignment = Text.AlignHCenter;
             } else if( items[i] === "bold" ){
-                baseRectangleTextText.font.weight = Font.Bold;
+                textObject.font.weight = Font.Bold;
             } else if( items[i] === "text-hide-sm"){
                 hideTextOnSm = true;
             } else if( items[i] === "fa-spin" ){
@@ -70,6 +70,7 @@ SBaseRectangle {
 
         Row {
             id: baseRectangleTextText;
+            property alias textObject: rectangleText;
             anchors.centerIn: parent;
 
             leftPadding: paddingHorizontal;

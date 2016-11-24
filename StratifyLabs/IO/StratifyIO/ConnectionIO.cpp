@@ -23,7 +23,9 @@ Copyright 2016 Tyler Gilbert
 using namespace Stratify;
 using namespace StratifyIO;
 
-ConnectionIO::ConnectionIO(Link & link) : IO(link){}
+ConnectionIO::ConnectionIO(Link & link, QMutex * mutex) : IO(link){
+    mMutex = mutex;
+}
 
 int ConnectionIO::connectToDevice(const QString & serialNumber){
     QString sn;
@@ -141,9 +143,23 @@ void ConnectionIO::listenForNotificationsWorker(){
 
     mIsNotificationsStopped = false;
     mIsStopNotifications = false; //must be changed in another thread
-    while( (mIsStopNotifications == false) && (mLink.get_is_connected()) ){
+    while( mIsStopNotifications == false ){
         memset(buffer, 0, bufferSize);
-        if( (ret = mLink.read_notify(buffer, bufferSize)) > 0 ){
+        if( mMutex != 0 ){
+            mMutex->lock();
+        }
+
+        if( mLink.get_is_connected() ){
+            mIsStopNotifications = true;
+        }
+
+        ret = mLink.read_notify(buffer, bufferSize);
+
+        if( mMutex != 0 ){
+            mMutex->unlock();
+        }
+
+        if( ret > 0 ){
             bytesProcessed = 0;
             while(bytesProcessed < ret){
                 bufPtr = &(buffer[bytesProcessed]);
@@ -203,8 +219,20 @@ void ConnectionIO::listenForNotificationsWorker(){
 void ConnectionIO::monitorWorker(){
     mIsMonitorStopped = false;
     mIsStopMonitor = false;
-    while( (mLink.get_is_connected() == true) && (mIsStopMonitor == false) ){
+    bool isConnected = true;
+    while( mIsStopMonitor == false ){
         //check the IO list to see if the device is still present
+
+        if( mMutex != 0 ){
+            mMutex->lock();
+        }
+        isConnected = mLink.get_is_connected();
+        if( mMutex != 0 ){
+            mMutex->unlock();
+        }
+        if( isConnected == false ){
+            break;
+        }
         QThread::msleep(500);
     }
 

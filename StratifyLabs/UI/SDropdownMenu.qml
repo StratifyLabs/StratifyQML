@@ -75,7 +75,7 @@ SList {
 
                 onExited: {
                     text.textColor = theme.text_color;
-                    container.background = "transparent";
+                    container.backgroundColor = "transparent";
                     stopHover;
                 }
 

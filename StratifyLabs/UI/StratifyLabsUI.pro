@@ -68,8 +68,9 @@ DISTFILES = qmldir \
     STreeColumn.qml \
     SWell.qml \
     fontawesome-webfont.ttf \
-    OpenSans-Bold.ttf \
-    OpenSans-ExtraBold.ttf \
+	RobotoMono-Regular.ttf \
+	OpenSans-Bold.ttf \
+	OpenSans-ExtraBold.ttf \
     OpenSans-Light.ttf \
     OpenSans-Regular.ttf \
     OpenSans-Semibold.ttf

@@ -22,6 +22,7 @@ Item {
     property var fontFontAwesome: FontLoader { id: fontFontAwesomeInternal; source: "fontawesome-webfont.ttf"; }
     property var fontOpenSans: FontLoader { id: fontOpenSansInternal; source: "OpenSans-Regular.ttf"; }
     property var fontOpenSansBold: FontLoader { id: fontOpenSansBoldInternal; source: "OpenSans-ExtraBold.ttf"; }
+    property var fontMonospace: FontLoader { id: fontMonospace; source: "RobotoMono-Regular.ttf"; }
 
     function lighten(col,amt){ return Qt.lighter(col, 1 + amt/100); }
     function darken(col,amt){ return Qt.darker(col, 1 + amt/100); }
@@ -43,7 +44,7 @@ Item {
     property string link_hover_decoration: "underline";
     property alias font_family_sans_serif: customize.fontOpenSans;
     property alias font_family_serif: customize.fontOpenSans;
-    property alias font_family_monospace: customize.fontOpenSans;
+    property alias font_family_monospace: customize.fontMonospace;
     property alias font_family_base: customize.fontOpenSans;
     property var font_family_bold: customize.fontOpenSansBold;
     property var font_family_icon: customize.fontFontAwesome;
