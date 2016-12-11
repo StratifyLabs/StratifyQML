@@ -34,7 +34,7 @@ Item {
     property color gray_lighter: lighten(gray_base, 350);
     property color brand_primary: darken("#1D7DC5", 6.5);
     property color brand_success: "#5cb85c";
-    property color brand_info: "#44546A";
+    property color brand_info: "#1D7DC5";
     property color brand_warning: "#f0ad4e";
     property color brand_danger: "#d9534f";
     property color body_bg: "#fff";

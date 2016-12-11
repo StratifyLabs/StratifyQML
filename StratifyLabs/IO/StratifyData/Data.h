@@ -18,6 +18,7 @@ Copyright 2016 Tyler Gilbert
 #define DATA_H
 
 #include <QString>
+#include <QMutex>
 #include <QJsonObject>
 #include <QJsonDocument>
 
@@ -63,6 +64,17 @@ public:
 
     void clear(){ mJson = QJsonObject(); mPostName.clear(); mPath.clear(); }
 
+    bool isBusy(){
+        if( lock() ){
+            unlock();
+            return false;
+        }
+        return true;
+    }
+
+    bool lock(){ return mMutex.tryLock(); }
+    void unlock(){ return mMutex.unlock(); }
+
 signals:
     void changed();
 
@@ -74,6 +86,7 @@ protected:
     QString mPostName;
 
 private:
+    QMutex mMutex;
     static DataService * mDefaultDataService;
     DataService * mDataService;
     void checkService();

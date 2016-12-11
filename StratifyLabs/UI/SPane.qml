@@ -20,17 +20,15 @@ import "."
 SItem {
     default property alias data: contents.data;
 
-    implicitWidth: parent.width;
+    implicitWidth: blockWidth ? ((parent != null) ? parent.width : 0) : contents.childrenRect.width + paddingHorizontal*2;
+    implicitHeight: fillHeight ? ((parent != null) ? parent.height : 0) : contents.childrenRect.height + paddingVertical*2;
+    blockWidth:  true;
 
     Flickable {
         id: contents;
-
-        width: parent.width;
-        height: parent.height;
-
+        anchors.fill: parent;
         contentWidth: childrenRect.width;
-        contentHeight: 800;
-
+        contentHeight: childrenRect.height;
     }
 
 }
