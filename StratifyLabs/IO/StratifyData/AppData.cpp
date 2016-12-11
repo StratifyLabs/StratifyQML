@@ -35,35 +35,45 @@ bool AppData::validate(){
 }
 
 QString AppData::publisher() const {
-    return json().value("publisher").toString();
+    return json().value( AppData::publisherKey() ).toString();
 }
 
 QString AppData::version() const {
-    return json().value("version").toString();
+    return json().value( AppData::versionKey() ).toString();
 }
 
 QString AppData::name() const {
-    return json().value("name").toString();
+    return json().value( AppData::nameKey() ).toString();
 }
 
 QString AppData::github() const {
-    return json().value("github").toString();
+    return json().value( AppData::githubKey() ).toString();
 }
 
 QString AppData::description() const {
-    return json().value("description").toString();
+    return json().value( AppData::descriptionKey() ).toString();
 }
 
-int AppData::description() const {
-    return json().value("ram").toInt();
+int AppData::ram() const {
+    return json().value( AppData::ramKey() ).toInt();
 }
 
 QString AppData::tags() const {
-    return json().value("tags").toString();
+    return json().value( AppData::tagsKey() ).toString();
 }
 
+
+QString AppData::hardwareId() const {
+    return json().value( AppData::hardwareIdKey() ).toString();
+}
+
+QString AppData::buildPrefix() const {
+    return json().value( AppData::buildPrefixKey() ).toString();
+}
+
+
 QStringList AppData::buildList() const {
-    return json().value("buildlist").toObject().keys();
+    return json().value( AppData::buildListKey() ).toObject().keys();
 }
 
 bool AppData::getBuild(const QString & key, const QString & filename){
@@ -79,7 +89,7 @@ bool AppData::getBuild(const QString & key, const QString & filename){
 
     QByteArray data;
 
-    data = QByteArray::fromBase64(json().value("buildlist").toObject().value(key).toString().toStdString().c_str());
+    data = QByteArray::fromBase64(json().value( AppData::buildListKey() ).toObject().value(key).toString().toStdString().c_str());
 
     file.write(data);
     file.close();
@@ -88,38 +98,41 @@ bool AppData::getBuild(const QString & key, const QString & filename){
 }
 
 void AppData::setVersion(const QString & value){
-    mJson["version"] = value;
+    mJson[ AppData::versionKey() ] = value;
 }
 
 void AppData::setName(const QString & value){
-    mJson["name"] = value;
+    mJson[ AppData::nameKey() ] = value;
 }
 
 void AppData::setGithub(const QString & value){
-    mJson["github"] = value;
+    mJson[ AppData::githubKey() ] = value;
 }
 
 void AppData::setDescription(const QString & value){
-    mJson["description"] = value;
+    mJson[ AppData::descriptionKey() ] = value;
 
 }
 
 void AppData::setTags(const QString & value){
-    mJson["tags"] = value;
+    mJson[ AppData::tagsKey() ] = value;
 }
 
 void AppData::setPublisher(const QString & value){
-    mJson["publisher"] = value;
+    mJson[ AppData::publisherKey() ] = value;
+}
+
+void AppData::setBuildPrefix(const QString & value){
+    mJson[ AppData::buildPrefixKey() ] = value;
 }
 
 void AppData::setRam(int value){
-    mJson["ram"] = value;
+    mJson[ AppData::ramKey() ] = value;
 }
 
 
 
 void AppData::setBuild(const QString & key, const QString & filename){
-    QString value;
 
     QFile file;
     QByteArray data;
@@ -135,11 +148,11 @@ void AppData::setBuild(const QString & key, const QString & filename){
     data = file.readAll();
     file.close();
 
-    if( mJson.value("buildlist").toObject().isEmpty() ){
-        mJson.insert("buildlist", QJsonValue(QJsonObject()));
+    if( mJson.value( AppData::buildListKey() ).toObject().isEmpty() ){
+        mJson.insert( AppData::buildListKey() , QJsonValue(QJsonObject()));
     }
 
-    QJsonObject buildlistObject = mJson.value("buildlist").toObject();
+    QJsonObject buildlistObject = mJson.value( AppData::buildListKey() ).toObject();
     buildlistObject.insert(key, QJsonValue(data.toBase64().toStdString().c_str()));
-    mJson["buildlist"] = QJsonValue(buildlistObject);
+    mJson[ AppData::buildListKey() ] = QJsonValue(buildlistObject);
 }

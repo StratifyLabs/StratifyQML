@@ -31,6 +31,18 @@ public:
 
     virtual bool validate();
 
+    static QString nameKey() { return "name"; }
+    static QString githubKey() { return "github"; }
+    static QString descriptionKey() { return "description"; }
+    static QString tagsKey() { return "tags"; }
+    static QString versionKey() { return "version"; }
+    static QString publisherKey() { return "publisher"; }
+    static QString buildListKey() { return "buildlist"; }
+    static QString hardwareIdKey() { return "hardwareid"; }
+    static QString buildPrefixKey() { return "buildprefix"; }
+    static QString ramKey() { return "ram"; }
+
+
     QString name() const;
     QString github() const;
     QString description() const;
@@ -38,6 +50,8 @@ public:
     QString version() const;
     QString publisher() const;
     QStringList buildList() const;
+    QString hardwareId() const;
+    QString buildPrefix() const;
     int ram() const;
     bool getBuild(const QString & key, const QString & filename);
 
@@ -48,6 +62,7 @@ public:
     void setTags(const QString & value);
     void setBuild(const QString & key, const QString & filename);
     void setPublisher(const QString & value);
+    void setBuildPrefix(const QString & value);
     void setRam(int value);
 
 private:

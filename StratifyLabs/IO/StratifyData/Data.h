@@ -61,6 +61,8 @@ public:
 
     QJsonObject json() const { return mJson; }
 
+    void clear(){ mJson = QJsonObject(); mPostName.clear(); mPath.clear(); }
+
 signals:
     void changed();
 

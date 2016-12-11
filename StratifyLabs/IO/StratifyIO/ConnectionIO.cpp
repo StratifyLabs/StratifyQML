@@ -149,11 +149,12 @@ void ConnectionIO::listenForNotificationsWorker(){
             mMutex->lock();
         }
 
-        if( mLink.get_is_connected() ){
+        if( mLink.get_is_connected() == false ){
+            qDebug() << Q_FUNC_INFO << "Notify listener isn't connected";
             mIsStopNotifications = true;
+        } else {
+            ret = mLink.read_notify(buffer, bufferSize);
         }
-
-        ret = mLink.read_notify(buffer, bufferSize);
 
         if( mMutex != 0 ){
             mMutex->unlock();

@@ -36,12 +36,18 @@ FirebaseDataService::~FirebaseDataService(){
 
 void FirebaseDataService::handleNetworkReply(QNetworkReply *reply){
     Data * owner = (Data*)reply->parent();
+    QJsonDocument doc;
+    QJsonObject obj;
     if( reply->operation() == QNetworkAccessManager::GetOperation ){
         owner->setValue( reply->readAll() );
     }
 
+    qDebug() << Q_FUNC_INFO << "Operations:" << reply->operation() << "Error:" << reply->error();
+
     if( reply->operation() == QNetworkAccessManager::PostOperation ){
-        owner->setPostName( reply->readAll() );
+        doc = QJsonDocument::fromJson( reply->readAll() );
+        obj = doc.object();
+        owner->setPostName( obj.value("name").toString() );
     }
 
     emit owner->changed();
@@ -53,7 +59,7 @@ void FirebaseDataService::getValue(QObject * object, const QString & path){
 
     QString requestPath = host() + "/" + path + ".json?auth=" + token();
     QNetworkRequest request(requestPath);
-    qDebug() << "Get value" << requestPath;
+    qDebug() << Q_FUNC_INFO << requestPath;
 
     QNetworkReply *reply = mNetworkAccessManager.get(request);
     qDebug() << Q_FUNC_INFO << reply->error();
