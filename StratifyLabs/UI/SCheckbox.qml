@@ -28,7 +28,7 @@ SBaseRectangleText {
     property string uncheckMark: Fa.Icon.square_o;
 
     iconObject.width: fontSize;
-    icon: checked ? checkMark : (uncheckMark);
+    icon: (checked ? checkMark : (uncheckMark)) + " ";
     text: "Checkbox";
     hideTextOnSm: false;
 

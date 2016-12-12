@@ -43,7 +43,7 @@ SBaseRectangle {
     blockWidth: true;
 
     //size the rectangle based on the size of the text box
-    implicitHeight: fontSize + paddingVertical*3;
+    implicitHeight: fontContainerHeight;
     implicitWidth: (blockWidth == true) ? parent.width : baseRectangleDropdownText.width;
 
     onStyleChanged: {

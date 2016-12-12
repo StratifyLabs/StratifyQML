@@ -15,6 +15,7 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
+import QtQuick.Window 2.2
 import "."
 
 SBaseRectangle {
@@ -30,8 +31,9 @@ SBaseRectangle {
     property real animationPeriod: 1200;
     property alias iconObject: rectangleIcon;
 
+
     //size the rectangle based on the size of the text box
-    implicitHeight: fontSize + paddingVertical*3;
+    implicitHeight: fontContainerHeight;
     implicitWidth: baseRectangleTextText.width;
 
     onSpinChanged: {

@@ -30,7 +30,7 @@ SBaseRectangle {
 
     type: "text";
     implicitWidth: text.width;
-    implicitHeight: fontSize + paddingVertical*3;
+    implicitHeight: fontContainerHeight;
 
     onSpinChanged: {
         if( spin == false ){
