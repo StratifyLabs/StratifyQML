@@ -44,9 +44,11 @@ Item {
     z: 0;
 
     //these names are not consistent -- need to user camelcase -- and add a prefix sItemPaddingVertical;
+    property real pixelRatio: Screen.devicePixelRatio;
     property real paddingVertical: theme.padding_base_vertical;
     property real paddingHorizontal: theme.padding_base_horizontal;
     property real fontSize: theme.font_size_base;
+    property real fontContainerHeight: (fontSize + paddingVertical*3);
     property color textColor: theme.text_color;
     property real textOpacity: 1.0;
     property color backgroundColor: "transparent";
@@ -55,6 +57,7 @@ Item {
 
     property string textFont: theme.font_family_base.name;
     property string iconFont: theme.font_family_icon.name;
+
 
 
     visible: hideOnSm && sm ? false : true;
