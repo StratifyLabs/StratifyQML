@@ -1,6 +1,8 @@
 #ifndef PORTIO_H
 #define PORTIO_H
 
+#include <QJsonObject>
+#include <QJsonArray>
 #include <QObject>
 #include <QString>
 #include <QList>
@@ -12,6 +14,9 @@ namespace StratifyIO {
 
 class PortIO {
 public:
+
+    static void init();
+    static void exit();
 
     static void refreshPortList(Link & link);
     static const QList<PortIO> & portList() { return mPortList; }
@@ -46,7 +51,14 @@ public:
         }
     }
 
+    static void setSysAttrCache(const QString & serialNumber, sys_attr_t & attr);
+
 private:
+
+    static QJsonObject mPortSettings;
+
+
+    static bool getSysAttrCache(const QString & serialNumber, sys_attr_t & attr);
 
     static int loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr);
     static QList<PortIO> mPortList;
@@ -58,6 +70,10 @@ private:
     QSerialPortInfo mLinkSerialPortInfo; //port for link protocol
     QSerialPortInfo mNotifySerialPortInfo; //port to receive notifications
     sys_attr_t mSysAttr;
+
+
+
+
 };
 
 }

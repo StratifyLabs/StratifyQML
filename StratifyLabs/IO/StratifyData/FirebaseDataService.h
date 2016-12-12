@@ -30,9 +30,8 @@ namespace StratifyData {
 class FirebaseDataService : public DataService
 {
     Q_OBJECT
-
 public:
-    FirebaseDataService(QString host, QString token); //create the base service
+    FirebaseDataService(QString host = "", QString token = ""); //create the base service
     ~FirebaseDataService();
 
     virtual void getValue(QObject * object, const QString & path);

@@ -18,6 +18,7 @@ Copyright 2016 Tyler Gilbert
 #define DATA_H
 
 #include <QString>
+#include <QMutex>
 #include <QJsonObject>
 #include <QJsonDocument>
 
@@ -48,15 +49,31 @@ public:
     void deleteValue();
 
     void setPath(const QString & path){ mPath = path; }
+    const QString & path() const { return mPath; }
+    const QString & postName() const { return mPostName; }
 
-    virtual void setPostName(const QString & name);
+    virtual void setPostName(const QString & name); //unique key from a post request
     virtual void setValue(const QString & value);
 
     QString value() const {
         QJsonDocument doc(mJson);
         return doc.toJson();
     }
+
     QJsonObject json() const { return mJson; }
+
+    void clear(){ mJson = QJsonObject(); mPostName.clear(); mPath.clear(); }
+
+    bool isBusy(){
+        if( lock() ){
+            unlock();
+            return false;
+        }
+        return true;
+    }
+
+    bool lock(){ return mMutex.tryLock(); }
+    void unlock(){ return mMutex.unlock(); }
 
 signals:
     void changed();
@@ -69,6 +86,7 @@ protected:
     QString mPostName;
 
 private:
+    QMutex mMutex;
     static DataService * mDefaultDataService;
     DataService * mDataService;
     void checkService();

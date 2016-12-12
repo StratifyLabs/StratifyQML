@@ -52,11 +52,11 @@ SBaseRectangleText {
                 borderColor = theme.label_warning_bg;
                 textColor = theme.label_color;
             } else if( items[i] === "label-lg" ){
-                font_size = theme.font_size_large;
+                fontSize = theme.font_size_large;
                 radius = theme.btn_border_radius_large;
                 textColor = theme.label_color;
             } else if( items[i] === "label-sm" ){
-                font_size = theme.font_size_small;
+                fontSize = theme.font_size_small;
                 radius = theme.btn_border_radius_small;
                 textColor = theme.label_color;
             }

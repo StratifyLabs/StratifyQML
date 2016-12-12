@@ -36,85 +36,100 @@ FirebaseDataService::~FirebaseDataService(){
 
 void FirebaseDataService::handleNetworkReply(QNetworkReply *reply){
     Data * owner = (Data*)reply->parent();
+    QJsonDocument doc;
+    QJsonObject obj;
     if( reply->operation() == QNetworkAccessManager::GetOperation ){
         owner->setValue( reply->readAll() );
     }
 
+    qDebug() << Q_FUNC_INFO << "Operations:" << reply->operation() << "Error:" << reply->error();
+
     if( reply->operation() == QNetworkAccessManager::PostOperation ){
-        owner->setPostName( reply->readAll() );
+        doc = QJsonDocument::fromJson( reply->readAll() );
+        obj = doc.object();
+        owner->setPostName( obj.value("name").toString() );
     }
 
-    emit owner->changed();
-
+    owner->unlock();
     reply->deleteLater();
+
+    emit owner->changed();
 }
 
 void FirebaseDataService::getValue(QObject * object, const QString & path){
+    Data * owner = (Data*)object;
+    if( owner->lock() ){
+        QString requestPath = host() + "/" + path + ".json?auth=" + token();
+        QNetworkRequest request(requestPath);
+        qDebug() << Q_FUNC_INFO << requestPath;
 
-    QString requestPath = host() + "/" + path + ".json?auth=" + token();
-    QNetworkRequest request(requestPath);
-    qDebug() << "Get value" << requestPath;
+        QNetworkReply *reply = mNetworkAccessManager.get(request);
+        if( reply ){
+            qDebug() << Q_FUNC_INFO << reply->error();
+            reply->setParent(object);
+        }
+    }
 
-    QNetworkReply *reply = mNetworkAccessManager.get(request);
-    qDebug() << Q_FUNC_INFO << reply->error();
-
-    reply->setParent(object);
 
 }
 
 void FirebaseDataService::putValue(QObject * object, const QString & path, const QString & value){
+    Data * owner = (Data*)object;
 
-    QString requestPath = host() + "/" + path + ".json?auth=" + token();
-
-    QNetworkRequest request(requestPath);
-    request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "application/x-www-form-urlencoded");
-
-    QNetworkReply * reply = mNetworkAccessManager.put(request, value.toUtf8());
-    if( reply ){
-        reply->setParent(object);
+    if( owner->lock() ){
+        QString requestPath = host() + "/" + path + ".json?auth=" + token();
+        QNetworkRequest request(requestPath);
+        request.setHeader(QNetworkRequest::ContentTypeHeader,
+                          "application/x-www-form-urlencoded");
+        QNetworkReply * reply = mNetworkAccessManager.put(request, value.toUtf8());
+        if( reply ){
+            reply->setParent(object);
+        }
     }
 }
 
 void FirebaseDataService::postValue(QObject * object, const QString & path, const QString & value){
-    QString requestPath = host() + "/" + path + ".json?auth=" + token();
+    Data * owner = (Data*)object;
+    if( owner->lock() ){
+        QString requestPath = host() + "/" + path + ".json?auth=" + token();
+        QNetworkRequest request(requestPath);
+        request.setHeader(QNetworkRequest::ContentTypeHeader,
+                          "application/x-www-form-urlencoded");
 
-    QNetworkRequest request(requestPath);
-    request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "application/x-www-form-urlencoded");
-
-    QNetworkReply * reply = mNetworkAccessManager.post(request, value.toUtf8());
-    if( reply ){
-        reply->setParent(object);
+        QNetworkReply * reply = mNetworkAccessManager.post(request, value.toUtf8());
+        if( reply ){
+            reply->setParent(object);
+        }
     }
 }
 
 void FirebaseDataService::patchValue(QObject * object, const QString & path, const QString & value){
-    QString requestPath = host() + "/" + path + ".json?auth=" + token() + "?x-http-method-override=PATCH";
+    Data * owner = (Data*)object;
+    if( owner->lock() ){
+        QString requestPath = host() + "/" + path + ".json?auth=" + token() + "?x-http-method-override=PATCH";
+        QNetworkRequest request(requestPath);
+        request.setHeader(QNetworkRequest::ContentTypeHeader,
+                          "application/x-www-form-urlencoded");
 
-    QNetworkRequest request(requestPath);
-    request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "application/x-www-form-urlencoded");
-
-
-    QNetworkReply * reply = mNetworkAccessManager.post(request, value.toUtf8());
-    if( reply ){
-        reply->setParent(object);
+        QNetworkReply * reply = mNetworkAccessManager.post(request, value.toUtf8());
+        if( reply ){
+            reply->setParent(object);
+        }
     }
-
 
 }
 
 void FirebaseDataService::deleteValue(QObject * object, const QString & path){
-    QString requestPath = host() + "/" + path + ".json?auth=" + token();
-
-    QNetworkRequest request(requestPath);
-    request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "application/x-www-form-urlencoded");
-
-    QNetworkReply * reply = mNetworkAccessManager.deleteResource(request);
-    if( reply ){
-        reply->setParent(object);
+    Data * owner = (Data*)object;
+    if( owner->lock() ){
+        QString requestPath = host() + "/" + path + ".json?auth=" + token();
+        QNetworkRequest request(requestPath);
+        request.setHeader(QNetworkRequest::ContentTypeHeader,
+                          "application/x-www-form-urlencoded");
+        QNetworkReply * reply = mNetworkAccessManager.deleteResource(request);
+        if( reply ){
+            reply->setParent(object);
+        }
     }
 }
 

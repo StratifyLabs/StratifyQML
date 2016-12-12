@@ -1,9 +1,65 @@
+#include <QStandardPaths>
+#include <QFile>
+#include <QJsonDocument>
+#include <QDir>
 
+#include "Helper.h"
 #include "PortIO.h"
 
 using namespace StratifyIO;
 
+
+QJsonObject PortIO::mPortSettings;
 QList<PortIO> PortIO::mPortList;
+
+void PortIO::init(){
+    QString path;
+    QFile settingsFile;
+
+    path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/" + "PortIO.json";
+
+    settingsFile.setFileName(path);
+
+    qDebug() << Q_FUNC_INFO << "Load port settings from" << path;
+
+
+    //load the settings
+    if( settingsFile.open(QFile::ReadOnly) == true ){
+        //read the data into mPortSettings JsonObject
+        mPortSettings = QJsonDocument::fromJson( settingsFile.readAll() ).object();
+        settingsFile.close();
+    } else {
+        qDebug() << Q_FUNC_INFO << "Failed to load port settings";
+    }
+
+}
+
+void PortIO::exit(){
+
+    //save the settings
+    QFile settingsFile;
+    QString path;
+    QDir dir;
+
+    dir.setPath(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    path = dir.path() + "/" + "PortIO.json";
+    settingsFile.setFileName(path);
+
+    qDebug() << Q_FUNC_INFO << "Save port settings to" << path;
+
+    if( dir.exists() == false ){
+        dir.mkpath( dir.path() );
+    }
+
+    if( settingsFile.open(QFile::WriteOnly) == true ){
+        QJsonDocument doc;
+        doc.setObject(mPortSettings);
+        settingsFile.write( doc.toJson() );
+        settingsFile.close();
+    }
+
+
+}
 
 bool PortIO::reconnect(Link & link, int count, int delay){
     int i;
@@ -55,12 +111,14 @@ void PortIO::refreshPortList(Link & link){
     QList<QSerialPortInfo> list;
     list = QSerialPortInfo::availablePorts();
     int i;
+    int j;
 
     qDebug() << "There are" << list.count() << "ports available";
 
     mPortList.clear();
     i = 0;
 
+    i = 0;
     foreach(QSerialPortInfo info, list){
         bool alreadyAdded = false;
 
@@ -76,10 +134,10 @@ void PortIO::refreshPortList(Link & link){
 
 #if defined Q_OS_OSX
         //is the device a StratifyOS device
-        if( info.description() == "StratifyOS" ){  //description on Mac OS X is "StratifyOS"
+        if( info.description() == "StratifyOS" && info.portName().startsWith("cu.") ){  //description on Mac OS X is "StratifyOS"
             //is the serial number already accounted for
-            for(i=0; i < mPortList.count(); i++){
-                PortIO & item = mPortList[i];
+            for(j=0; j < mPortList.count(); j++){
+                PortIO & item = mPortList[j];
                 if( item.linkSerialPortInfo().serialNumber() == info.serialNumber() ){
                     alreadyAdded = true;
                     if( item.linkSerialPortInfo().systemLocation() != info.systemLocation() ){
@@ -94,16 +152,28 @@ void PortIO::refreshPortList(Link & link){
             if( !alreadyAdded ){
                 //load sys attr
                 sys_attr_t attr;
-                if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
-                    PortIO item(info, attr);
-                    if( QString(attr.name) == "bootloader" ){
-                        item.mIsBootloader = true;
-                    } else {
-                        item.mIsBootloader = false;
+
+                if( getSysAttrCache(info.serialNumber(), attr) == false ){
+                    qDebug() << Q_FUNC_INFO << info.serialNumber() << "not in cache";
+                    if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
+                        if( QString(attr.name) != "bootloader" ){
+                            setSysAttrCache(info.serialNumber(), attr);
+                        }
                     }
-                    mPortList.append(item);
-                    qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+                } else {
+                    qDebug() << Q_FUNC_INFO << "Loaded cached sysAttr";
                 }
+
+                qDebug() << "Add" << QString(attr.name) << "on" << info.systemLocation();
+                PortIO item(info, attr);
+                if( QString(attr.name) == "bootloader" ){
+                    item.mIsBootloader = true;
+                } else {
+                    item.mIsBootloader = false;
+                }
+                mPortList.append(item);
+
+
             }
         }
 #endif
@@ -147,6 +217,27 @@ void PortIO::refreshPortList(Link & link){
         }
 #endif
     }
+}
+
+void PortIO::setSysAttrCache(const QString & serialNumber, sys_attr_t & attr){
+    mPortSettings.remove(serialNumber);
+    mPortSettings.insert(serialNumber, Helper::dataToJson("sysAttr", &attr, sizeof(sys_attr_t)));
+}
+
+bool PortIO::getSysAttrCache(const QString & serialNumber, sys_attr_t & attr){
+    QStringList keys = mPortSettings.keys();
+    foreach(QString key, keys){
+        qDebug() << Q_FUNC_INFO << "Compare" << key << "From cache to" << serialNumber;
+        if( key == serialNumber ){
+            qDebug() << Q_FUNC_INFO << "Found a match in the cache";
+            if( Helper::dataFromJson(mPortSettings.value(key).toObject(), "sysAttr", &attr, sizeof(sys_attr_t)) == true ){
+                return true;
+            } else {
+                qDebug() << "Failed to load data from cache";
+            }
+        }
+    }
+    return false;
 }
 
 int PortIO::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t & attr){

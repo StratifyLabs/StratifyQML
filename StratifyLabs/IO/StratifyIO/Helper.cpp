@@ -196,10 +196,15 @@ bool Helper::dataFromJson(const QJsonObject & object, const QString & type, void
     memset(buf, 0, nbyte);
     if( object.value("type").toString() == type ){
         data = QByteArray::fromBase64(object.value("data").toString().toStdString().c_str());
+        qDebug() << Q_FUNC_INFO << "Loaded" << type << data.size() << "bytes of" << nbyte;
         if( data.size() == nbyte ){
             memcpy(buf, data.data(), nbyte);
             return true;
+        } else {
+            qDebug() << "Data size is wrong" << data.size() << "!=" << nbyte;
         }
+    } else {
+        qDebug() << Q_FUNC_INFO << "Cant' load" << type << "wrong type:" << object.value("type").toString();
     }
     return false;
 }

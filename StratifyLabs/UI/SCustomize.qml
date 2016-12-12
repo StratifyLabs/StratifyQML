@@ -22,6 +22,7 @@ Item {
     property var fontFontAwesome: FontLoader { id: fontFontAwesomeInternal; source: "fontawesome-webfont.ttf"; }
     property var fontOpenSans: FontLoader { id: fontOpenSansInternal; source: "OpenSans-Regular.ttf"; }
     property var fontOpenSansBold: FontLoader { id: fontOpenSansBoldInternal; source: "OpenSans-ExtraBold.ttf"; }
+    property var fontMonospace: FontLoader { id: fontMonospace; source: "RobotoMono-Regular.ttf"; }
 
     function lighten(col,amt){ return Qt.lighter(col, 1 + amt/100); }
     function darken(col,amt){ return Qt.darker(col, 1 + amt/100); }
@@ -33,7 +34,7 @@ Item {
     property color gray_lighter: lighten(gray_base, 350);
     property color brand_primary: darken("#1D7DC5", 6.5);
     property color brand_success: "#5cb85c";
-    property color brand_info: "#44546A";
+    property color brand_info: "#1D7DC5";
     property color brand_warning: "#f0ad4e";
     property color brand_danger: "#d9534f";
     property color body_bg: "#fff";
@@ -43,7 +44,7 @@ Item {
     property string link_hover_decoration: "underline";
     property alias font_family_sans_serif: customize.fontOpenSans;
     property alias font_family_serif: customize.fontOpenSans;
-    property alias font_family_monospace: customize.fontOpenSans;
+    property alias font_family_monospace: customize.fontMonospace;
     property alias font_family_base: customize.fontOpenSans;
     property var font_family_bold: customize.fontOpenSansBold;
     property var font_family_icon: customize.fontFontAwesome;

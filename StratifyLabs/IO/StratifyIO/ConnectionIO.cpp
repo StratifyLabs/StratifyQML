@@ -23,7 +23,9 @@ Copyright 2016 Tyler Gilbert
 using namespace Stratify;
 using namespace StratifyIO;
 
-ConnectionIO::ConnectionIO(Link & link) : IO(link){}
+ConnectionIO::ConnectionIO(Link & link, QMutex * mutex) : IO(link){
+    mMutex = mutex;
+}
 
 int ConnectionIO::connectToDevice(const QString & serialNumber){
     QString sn;
@@ -65,7 +67,13 @@ int ConnectionIO::connectToDevice(const QString & serialNumber){
                            QString::number((quint64)mLink.driver()->dev.notify_handle, 16)
                            );
     } else {
+        mIsNotificationsStopped = true;
         emit statusChanged(DEBUG, QString(Q_FUNC_INFO) + ": Notify NOT supported on link");
+    }
+
+    if( mLink.is_bootloader() == false ){
+        sys_attr_t attr = mLink.sys_attr();
+        PortIO::setSysAttrCache(serialNumber, attr);
     }
 
     emit connectionChanged();
@@ -82,11 +90,15 @@ int ConnectionIO::disconnectFromDevice(){
     mIsStopNotifications = true;
     mIsStopMonitor = true;
 
+    qDebug() << Q_FUNC_INFO << "Stop Connection threads";
+
     //wait for the threads to release the device
     while( ((mIsNotificationsStopped == false) || (mIsMonitorStopped == false)) && (count++ < 100) ){
         QThread::yieldCurrentThread();
         QThread::msleep(10);
     }
+
+    qDebug() << Q_FUNC_INFO << "Connection threads stopped";
 
     if( mLink.get_is_connected() ){
         mLink.exit();
@@ -131,9 +143,24 @@ void ConnectionIO::listenForNotificationsWorker(){
 
     mIsNotificationsStopped = false;
     mIsStopNotifications = false; //must be changed in another thread
-    while( (mIsStopNotifications == false) && (mLink.get_is_connected()) ){
+    while( mIsStopNotifications == false ){
         memset(buffer, 0, bufferSize);
-        if( (ret = mLink.read_notify(buffer, bufferSize)) > 0 ){
+        if( mMutex != 0 ){
+            mMutex->lock();
+        }
+
+        if( mLink.get_is_connected() == false ){
+            qDebug() << Q_FUNC_INFO << "Notify listener isn't connected";
+            mIsStopNotifications = true;
+        } else {
+            ret = mLink.read_notify(buffer, bufferSize);
+        }
+
+        if( mMutex != 0 ){
+            mMutex->unlock();
+        }
+
+        if( ret > 0 ){
             bytesProcessed = 0;
             while(bytesProcessed < ret){
                 bufPtr = &(buffer[bytesProcessed]);
@@ -193,11 +220,24 @@ void ConnectionIO::listenForNotificationsWorker(){
 void ConnectionIO::monitorWorker(){
     mIsMonitorStopped = false;
     mIsStopMonitor = false;
-    while( (mLink.get_is_connected() == true) && (mIsStopMonitor == false) ){
+    bool isConnected = true;
+    while( mIsStopMonitor == false ){
         //check the IO list to see if the device is still present
+
+        if( mMutex != 0 ){
+            mMutex->lock();
+        }
+        isConnected = mLink.get_is_connected();
+        if( mMutex != 0 ){
+            mMutex->unlock();
+        }
+        if( isConnected == false ){
+            break;
+        }
         QThread::msleep(500);
     }
 
+    qDebug() << Q_FUNC_INFO << "Monitor stopped";
     mIsMonitorStopped = true;
 
     if( mIsStopMonitor == false ){

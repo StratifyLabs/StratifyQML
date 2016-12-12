@@ -22,15 +22,25 @@ Copyright 2016 Tyler Gilbert
 
 namespace StratifyData {
 
-class User : public Data
+class UserData : public Data
 {
 public:
-    User();
+    UserData(DataService * service = 0);
+    UserData(const QJsonObject & object, DataService * service = 0);
+
+    virtual bool validate();
 
     QString name() const;
     QString email() const;
     QString handle() const;
     QString uid() const;
+
+    void setName(const QString & value);
+    void setEmail(const QString & value);
+    void setHandle(const QString & value);
+    void setUid(const QString & value);
+
+
 
 };
 

@@ -26,7 +26,7 @@ class ConnectionIO : public IO
 {
     Q_OBJECT
 public:
-    ConnectionIO(Link & link);
+    ConnectionIO(Link & link, QMutex * mutex = 0);
 
     int connectToDevice(const QString & serialNumber);
     int disconnectFromDevice();
@@ -57,6 +57,7 @@ signals:
     void traceEventReceived(const QJsonObject & object);
 
 private:
+    QMutex * mMutex;
     volatile bool mIsStopNotifications;
     volatile bool mIsNotificationsStopped;
     volatile bool mIsStopMonitor;

@@ -24,13 +24,15 @@ SItem {
     property alias contents: contents;
     type: "column";
 
-    implicitWidth: parent.width;
+    blockWidth: true;
+
+    implicitWidth: blockWidth ? parent.width : contents.childrenRect.width;
     implicitHeight: fillHeight ? parent.height: contents.childrenRect.height;
 
     GridLayout {
         id: contents;
         columns: 1;
-        width: parent.width;
+        width: blockWidth ? parent.width : undefined;
         height: fillHeight ? parent.height : undefined;
         rowSpacing: paddingVertical;
 
@@ -62,7 +64,5 @@ SItem {
             }
         }
     }
-
-
 }
 
