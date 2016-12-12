@@ -16,7 +16,7 @@ public:
     static void refreshPortList(Link & link);
     static const QList<PortIO> & portList() { return mPortList; }
     static const PortIO * lookupSerialNumber(const QString & serialNumber);
-    static bool reconnect(Link & link, int count = 10, int delay = 3000);
+    static bool reconnect(Link & link, int count = 10, int delay = 1000);
 
     PortIO(){
         mIsNotifyPortValid = false;

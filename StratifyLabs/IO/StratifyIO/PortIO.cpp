@@ -59,7 +59,7 @@ void PortIO::refreshPortList(Link & link){
     qDebug() << "There are" << list.count() << "ports available";
 
     mPortList.clear();
-
+    i = 0;
 
     foreach(QSerialPortInfo info, list){
         bool alreadyAdded = false;
@@ -121,6 +121,7 @@ void PortIO::refreshPortList(Link & link){
 
             if( !alreadyAdded ){
                 sys_attr_t attr;
+                qDebug() << "Load Sys Attr";
                 if( loadSysAttr(link, info.systemLocation(), attr) == 0 ){
                     PortIO item(info, attr);
                     if( QString(attr.name) == "bootloader" ){
@@ -157,11 +158,13 @@ int PortIO::loadSysAttr(Link & link, const QString & systemLocation, sys_attr_t 
     link.driver()->dev.handle = link.driver()->dev.open(systemLocation.toStdString().c_str(), 0);
     if( link.driver()->dev.handle != LINK_PHY_OPEN_ERROR ){
 
+        qDebug() << "Check bootloader";
         check_bootloader = link_isbootloader(link.driver());
         if( check_bootloader > 0 ){
             strcpy(attr.name, "bootloader");
         } else if( check_bootloader == 0 ){
             int sysFd;
+            qDebug() << "Open /dev/sys";
             sysFd = link_open(link.driver(), "/dev/sys", LINK_O_RDWR);
             if( sysFd >= 0 ){
                 if( link_ioctl(link.driver(), sysFd, I_SYS_GETATTR, &attr) == 0 ){

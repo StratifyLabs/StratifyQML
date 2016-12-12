@@ -46,8 +46,10 @@ bool IO::updateCummulativeCallback(void * context, int progress, int max){
 bool IO::updateCummulative(int progress, int max){
     max = 0; //suppress warning
 
-    if( mCummulativeProgressCached > progress ){
-        mCummulativeProgressCached = 0;
+    if( max == 0 ){ //more warning suppression
+        if( mCummulativeProgressCached > progress ){
+            mCummulativeProgressCached = 0;
+        }
     }
     mCummulativeProgress += (progress - mCummulativeProgressCached);
     mCummulativeProgressCached = progress;

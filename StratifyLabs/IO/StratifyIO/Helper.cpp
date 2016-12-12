@@ -198,7 +198,7 @@ bool Helper::dataFromJson(const QJsonObject & object, const QString & type, void
         data = QByteArray::fromBase64(object.value("data").toString().toStdString().c_str());
         if( data.size() == nbyte ){
             memcpy(buf, data.data(), nbyte);
-            true;
+            return true;
         }
     }
     return false;
