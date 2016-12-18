@@ -21,7 +21,8 @@ SOURCES += \
     TerminalIO.cpp \
     IO.cpp \
     TraceEvent.cpp \
-    PortIO.cpp
+    PortIO.cpp \
+    Link.cpp
 HEADERS += StratifyIO.h \
     LinkDriver.h \
     Helper.h \
@@ -31,7 +32,9 @@ HEADERS += StratifyIO.h \
     TerminalIO.h \
 	IO.h \
     TraceEvent.h \
-    PortIO.h
+    PortIO.h \
+    Link.h \
+    SLinkDriver.h
 
 INSTALL_HEADERS.files = $$HEADERS
 

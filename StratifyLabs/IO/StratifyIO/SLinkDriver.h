@@ -25,9 +25,7 @@ Copyright 2016 Tyler Gilbert
 #include <iface/link_transport.h>
 #include <QMutex>
 #include <QtSerialPort/QtSerialPort>
-#include "StratifyIO.h"
 
-namespace StratifyIO {
 
 class SerialPort : public QSerialPort {
 public:
@@ -40,11 +38,10 @@ private:
 };
 
 
-
-class LinkDriver {
+class SLinkDriver {
 public:
 
-    LinkDriver(){
+    SLinkDriver(){
 
         //initialize the driver
         m_driver.getname = getname;
@@ -205,7 +202,6 @@ private:
     link_transport_mdriver_t m_driver;
 
 };
-}
 
 #endif //QT_SERIALPORT_LIB
 
