@@ -19,7 +19,15 @@ Copyright 2016 Tyler Gilbert
 
 using namespace StratifyData;
 
-HardwareData::HardwareData() : Data(0)
-{
+HardwareData::HardwareData(DataService * service) : Data(service){}
+
+HardwareData::HardwareData(const QJsonObject & object, DataService * service) : Data(service) {
+    mJson = object;
+}
+
+
+QStringList HardwareData::deviceList() const {
+    return json().value( HardwareData::deviceListKey() ).toObject().keys();
 
 }
+

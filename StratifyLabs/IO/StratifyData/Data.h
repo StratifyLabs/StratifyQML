@@ -33,6 +33,36 @@ class Data : public StratifyObject
 public:
     Data(DataService * dataService = 0);
 
+    static QString nameKey() { return "name"; }
+    static QString githubKey() { return "github"; }
+    static QString descriptionKey() { return "description"; }
+    static QString tagsKey() { return "tags"; }
+    static QString versionKey() { return "version"; }
+    static QString publisherKey() { return "publisher"; }
+    static QString buildListKey() { return "buildlist"; }
+    static QString hardwareIdKey() { return "hardwareid"; }
+    static QString buildPrefixKey() { return "buildprefix"; }
+
+    QString name() const;
+    QString github() const;
+    QString description() const;
+    QString tags() const;
+    QString version() const;
+    QString publisher() const;
+    QStringList buildList() const;
+    QString hardwareId() const;
+    QString buildPrefix() const;
+    bool getBuild(const QString & key, const QString & filename);
+
+    void setVersion(const QString & value);
+    void setName(const QString & value);
+    void setGithub(const QString & value);
+    void setDescription(const QString & value);
+    void setTags(const QString & value);
+    void setBuild(const QString & key, const QString & filename);
+    void setPublisher(const QString & value);
+    void setBuildPrefix(const QString & value);
+
     void setDataService(DataService * service){ mDataService = service; }
 
     static void setDefaultDataService(DataService * dataService){ mDefaultDataService = dataService; }

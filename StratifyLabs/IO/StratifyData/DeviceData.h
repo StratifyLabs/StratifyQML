@@ -30,14 +30,20 @@ public:
     DeviceData();
     DeviceData(const QJsonObject & object);
 
+    static QString serialNumberKey() { return "serialno"; }
+    static QString kernelVersionKey() { return "kernelversion"; }
+    static QString bootVersionKey() { return "bootversion"; }
+    static QString testListKey() { return "testlist"; }
+
     void setSerialNo(const QString & value);
     QString serialNo() const;
-    void setVersion(const QString & value);
-    QString version() const;
+
     void setKernelVersion(const QString & value);
     QString kernelVersion() const;
+
     void setBootVersion(const QString & value);
     QString bootVersion() const;
+
     QStringList testList() const;
 
 private:

@@ -27,15 +27,16 @@ namespace StratifyData {
 class HardwareData : public Data
 {
 public:
-    HardwareData();
+    HardwareData(DataService * service = 0);
+    HardwareData(const QJsonObject & object, DataService * service = 0);
 
+    //keys unique to hardware
+    static QString assetsKey(){ return "assets"; }
+    static QString bootSuffixKey() { return "bootsuffix"; }
+    static QString deviceListKey() { return "devicelist"; }
 
-    QString version() const;
-    quint32 hardwareId() const;
-    QString description() const;
     QStringList deviceList() const;
-    QString name() const;
-    DeviceData device(const QString & serialNo);
+    //DeviceData device(const QString & serialNo);
 
 
 };

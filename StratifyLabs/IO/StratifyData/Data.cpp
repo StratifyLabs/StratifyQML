@@ -14,8 +14,11 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-
+#include <QJsonObject>
+#include <QFile>
+#include <QDebug>
 #include <QJsonDocument>
+
 #include "Data.h"
 
 using namespace StratifyData;
@@ -82,4 +85,119 @@ void Data::deleteValue(){
         mDataService->deleteValue(this, mPath);
     }
 }
+
+QString Data::publisher() const {
+    return json().value( Data::publisherKey() ).toString();
+}
+
+QString Data::version() const {
+    return json().value( Data::versionKey() ).toString();
+}
+
+QString Data::name() const {
+    return json().value( Data::nameKey() ).toString();
+}
+
+QString Data::github() const {
+    return json().value( Data::githubKey() ).toString();
+}
+
+QString Data::description() const {
+    return json().value( Data::descriptionKey() ).toString();
+}
+
+QString Data::tags() const {
+    return json().value( Data::tagsKey() ).toString();
+}
+
+
+QString Data::hardwareId() const {
+    return json().value( Data::hardwareIdKey() ).toString();
+}
+
+QString Data::buildPrefix() const {
+    return json().value( Data::buildPrefixKey() ).toString();
+}
+
+
+QStringList Data::buildList() const {
+    return json().value( Data::buildListKey() ).toObject().keys();
+}
+
+bool Data::getBuild(const QString & key, const QString & filename){
+
+    QFile file;
+
+    file.setFileName(filename);
+
+    if( file.open(QFile::WriteOnly) == false ){
+        emit statusChanged(ERROR, "Failed to create file: " + filename);
+        return false;
+    }
+
+    QByteArray data;
+
+    data = QByteArray::fromBase64(json().value( Data::buildListKey() ).toObject().value(key).toString().toStdString().c_str());
+
+    file.write(data);
+    file.close();
+
+    return true;
+}
+
+
+void Data::setVersion(const QString & value){
+    mJson[ Data::versionKey() ] = value;
+}
+
+void Data::setName(const QString & value){
+    mJson[ Data::nameKey() ] = value;
+}
+
+void Data::setGithub(const QString & value){
+    mJson[ Data::githubKey() ] = value;
+}
+
+void Data::setDescription(const QString & value){
+    mJson[ Data::descriptionKey() ] = value;
+
+}
+
+void Data::setTags(const QString & value){
+    mJson[ Data::tagsKey() ] = value;
+}
+
+void Data::setPublisher(const QString & value){
+    mJson[ Data::publisherKey() ] = value;
+}
+
+void Data::setBuildPrefix(const QString & value){
+    mJson[ Data::buildPrefixKey() ] = value;
+}
+
+void Data::setBuild(const QString & key, const QString & filename){
+
+    QFile file;
+    QByteArray data;
+
+    file.setFileName(filename);
+
+    if( file.open(QFile::ReadOnly) == false ){
+        qDebug() << "Failed to open file name";
+        emit statusChanged(ERROR, "Failed to open file: " + filename);
+        return;
+    }
+
+    data = file.readAll();
+    file.close();
+
+    if( mJson.value( Data::buildListKey() ).toObject().isEmpty() ){
+        mJson.insert( Data::buildListKey() , QJsonValue(QJsonObject()));
+    }
+
+    QJsonObject buildlistObject = mJson.value( Data::buildListKey() ).toObject();
+    buildlistObject.insert(key, QJsonValue(data.toBase64().toStdString().c_str()));
+    mJson[ Data::buildListKey() ] = QJsonValue(buildlistObject);
+}
+
 
