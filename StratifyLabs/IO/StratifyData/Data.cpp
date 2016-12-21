@@ -124,11 +124,11 @@ QStringList Data::buildList() const {
     return json().value( Data::buildListKey() ).toObject().keys();
 }
 
-bool Data::getBuild(const QString & key, const QString & filename){
+bool Data::getBuild(const QString & key, const QString & filename, const QString & suffix){
 
     QFile file;
 
-    file.setFileName(filename);
+    file.setFileName(filename + suffix);
 
     if( file.open(QFile::WriteOnly) == false ){
         emit statusChanged(ERROR, "Failed to create file: " + filename);
@@ -137,7 +137,7 @@ bool Data::getBuild(const QString & key, const QString & filename){
 
     QByteArray data;
 
-    data = QByteArray::fromBase64(json().value( Data::buildListKey() ).toObject().value(key).toString().toStdString().c_str());
+    data = QByteArray::fromBase64(json().value( Data::buildListKey() ).toObject().value(key).toString().toUtf8());
 
     file.write(data);
     file.close();
@@ -199,5 +199,38 @@ void Data::setBuild(const QString & key, const QString & filename){
     buildlistObject.insert(key, QJsonValue(data.toBase64().toStdString().c_str()));
     mJson[ Data::buildListKey() ] = QJsonValue(buildlistObject);
 }
+
+bool Data::createFileFromJson(const QString & path, const QJsonObject & object){
+    QFile file;
+
+    file.setFileName(path);
+
+    //open (truncate and write only)
+    if( file.open(QFile::WriteOnly) == false ){
+        return false;
+    }
+
+    QJsonDocument doc(object);
+    file.write( doc.toJson() );
+    file.close();
+
+    return true;
+}
+
+QJsonObject Data::createJsonFromFile(const QString & path){
+    QFile inputFile;
+    inputFile.setFileName(path);
+
+    if( inputFile.open(QFile::ReadOnly) == false ){
+        qDebug() << "Failed to open" << path;
+        return QJsonObject();
+    }
+
+    QJsonDocument doc = QJsonDocument::fromJson(inputFile.readAll());
+    QJsonObject object = doc.object();
+    inputFile.close();
+    return object;
+}
+
 
 

@@ -22,7 +22,6 @@ Copyright 2016 Tyler Gilbert
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
-#include <QJsonArray>
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
@@ -142,7 +141,7 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
 }
 
 
-int KernelIO::installData(const QString & projectPath, bool isInstallData, bool isRunTests){
+int KernelIO::installAssets(const QString & projectPath, const QString & assetsFileName, bool isInstallData, bool isRunTests){
     //load the StratifyKernelInstallApps.json file
     QFile file;
     int app;
@@ -158,7 +157,7 @@ int KernelIO::installData(const QString & projectPath, bool isInstallData, bool 
         return -1;
     }
 
-    file.setFileName(projectPath + "/StratifyKernelData.json");
+    file.setFileName(projectPath + "/" + assetsFileName);
 
     qDebug() << "Load Kernel Install Apps" << file.fileName();
 
@@ -182,6 +181,7 @@ int KernelIO::installData(const QString & projectPath, bool isInstallData, bool 
 
     cummulativeMax = 0;
     foreach(QString key, keys){
+        qDebug() << Q_FUNC_INFO <<  "Sum data sizes" << key;
         dataObject = object.value(key).toObject();
         if( dataObject.value("type") == "app" ){
             if( isInstallData == true ){
@@ -195,7 +195,7 @@ int KernelIO::installData(const QString & projectPath, bool isInstallData, bool 
             int order;
 
             order = dataObject.value("order").toInt();
-            qDebug() << "Order for " << dataObject.value("name") << "is" << order;
+            qDebug() << Q_FUNC_INFO << "Order for " << dataObject.value("name") << "is" << order;
 
             if( orderInitialized == false ){
                 orderFirst = order;
@@ -236,8 +236,7 @@ int KernelIO::installData(const QString & projectPath, bool isInstallData, bool 
 
         foreach(QString key, keys){
             app++;
-
-            qDebug() << "Process Key" << key;
+            qDebug() << Q_FUNC_INFO << "Process Key" << key;
 
             dataObject = object.value(key).toObject();
 
@@ -357,7 +356,7 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
             QString sourceFilePath;
             QString destFileName;
             if( settingsFormat == "son" ){
-                qDebug() << "Create SON file and transfer";
+                qDebug() << Q_FUNC_INFO << "Create SON file and transfer";
                 QString sonFilePath;
 
                 sonFilePath = fileInfo.path() + "/" + fileInfo.completeBaseName() + ".son";
@@ -372,6 +371,8 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
 
 
                 son_t son;
+                son_set_driver(&son, 0);
+
                 if( son_open(&son, sonFilePath.toStdString().c_str()) < 0 ){
                     qDebug() << "Failed to open" << sonFilePath;
                 } else {
@@ -407,19 +408,17 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
 int KernelIO::installDataObject(const QString & projectPath, const QJsonObject & dataObject, const QString & key){
 
     QString dest;
-    int i;
-    QJsonArray filesArray;
+    QJsonObject filesObject;
     QFileInfo info;
+    QStringList keyList;
 
-    qDebug() << "Install data object" << key;
-
+    qDebug() << Q_FUNC_INFO << "Install data object" << key << "at" << dest;
     dest = dataObject.value("dest").toString();
 
-    filesArray = dataObject.value("files").toArray();
-
-    for(i=0; i < filesArray.count(); i++){
-        info.setFile(projectPath + "/" + filesArray.at(i).toString());
-
+    filesObject = dataObject.value("files").toObject();
+    keyList = filesObject.keys();
+    foreach(QString key, keyList){
+        info.setFile(projectPath + "/" + filesObject.value(key).toString());
         qDebug() << "Copy" << info.filePath() << "to" << dest + "/" + info.fileName();
         if( copyFileToDeviceCummulative(info.filePath(), dest + "/" + info.fileName()) < 0 ){
             return -1;
@@ -430,12 +429,12 @@ int KernelIO::installDataObject(const QString & projectPath, const QJsonObject &
 }
 
 int KernelIO::calcAppObject(const QString & projectPath, const QJsonObject & appObject){
-    QJsonArray filesArray;
+    QJsonObject filesObject;
+    QStringList keyList;
     QString source;
     QString settings;
     int cummulativeMax;
     QFileInfo info;
-    int i;
 
     cummulativeMax = 0;
     source = projectPath + "/" + appObject.value("binary").toString();
@@ -450,9 +449,10 @@ int KernelIO::calcAppObject(const QString & projectPath, const QJsonObject & app
     cummulativeMax += info.size();
 
     //add the size of any other files
-    filesArray = appObject.value("files").toArray();
-    for(i=0; i < filesArray.count(); i++){
-        info.setFile(projectPath + "/" + filesArray.at(i).toString());
+    filesObject = appObject.value("files").toObject();
+    keyList = filesObject.keys();
+    foreach(QString key, keyList){
+        info.setFile(projectPath + "/" + filesObject.value(key).toString());
         cummulativeMax += info.size();
     }
 
@@ -461,13 +461,15 @@ int KernelIO::calcAppObject(const QString & projectPath, const QJsonObject & app
 
 int KernelIO::calcDataObject(const QString & projectPath, const QJsonObject & dataObject){
     int cummulativeMax;
-    QJsonArray filesArray;
+    QJsonObject filesObject;
     QFileInfo info;
-    int i;
+    QStringList keyList;
     cummulativeMax = 0;
-    filesArray = dataObject.value("files").toArray();
-    for(i=0; i < filesArray.count(); i++){
-        info.setFile(projectPath + "/" + filesArray.at(i).toString());
+    //add the size of any other files
+    filesObject = dataObject.value("files").toObject();
+    keyList = filesObject.keys();
+    foreach(QString key, keyList){
+        info.setFile(projectPath + "/" + filesObject.value(key).toString());
         cummulativeMax += info.size();
     }
     return cummulativeMax;

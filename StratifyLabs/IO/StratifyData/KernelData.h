@@ -24,16 +24,21 @@ Copyright 2016 Tyler Gilbert
 
 namespace StratifyData {
 
-class HardwareData : public Data
+class KernelData : public Data
 {
 public:
-    HardwareData(DataService * service = 0);
-    HardwareData(const QJsonObject & object, DataService * service = 0);
+    KernelData(DataService * service = 0);
+    KernelData(const QJsonObject & object, DataService * service = 0);
 
     //keys unique to hardware
     static QString assetsKey(){ return "assets"; }
     static QString bootSuffixKey() { return "bootsuffix"; }
     static QString deviceListKey() { return "devicelist"; }
+
+    void setAssets(const QJsonObject & assets);
+    void setBootSuffix(const QString & value);
+
+    QString bootSuffix() const;
 
     QStringList deviceList() const;
     //DeviceData device(const QString & serialNo);

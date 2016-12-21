@@ -52,7 +52,7 @@ public:
     QStringList buildList() const;
     QString hardwareId() const;
     QString buildPrefix() const;
-    bool getBuild(const QString & key, const QString & filename);
+    bool getBuild(const QString & key, const QString & filename, const QString & suffix = QString());
 
     void setVersion(const QString & value);
     void setName(const QString & value);
@@ -104,6 +104,9 @@ public:
 
     bool lock(){ return mMutex.tryLock(); }
     void unlock(){ return mMutex.unlock(); }
+
+    static QJsonObject createJsonFromFile(const QString & path);
+    static bool createFileFromJson(const QString & path, const QJsonObject & object);
 
 signals:
     void changed();

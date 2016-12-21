@@ -163,6 +163,8 @@ int Helper::createSonFromJson(const QString & dest, const QString & source, int 
     qDebug() << Q_FUNC_INFO << "Set son driver";
     son_set_driver(&son, 0);
 
+    qDebug() << Q_FUNC_INFO << "SON Driver is" << son.phy.driver;
+
     qDebug() << Q_FUNC_INFO << "Create SON file";
     if( son_create(&son, dest.toStdString().c_str(), son_stack, son_stack_size) < 0 ){
         qDebug() << Q_FUNC_INFO << "Failed to create" << dest;

@@ -59,7 +59,10 @@ void FirebaseDataService::handleNetworkReply(QNetworkReply *reply){
 void FirebaseDataService::getValue(QObject * object, const QString & path){
     Data * owner = (Data*)object;
     if( owner->lock() ){
-        QString requestPath = host() + "/" + path + ".json?auth=" + token();
+        QString requestPath = host() + "/" + path + ".json";
+        if( token().isEmpty() == false ){
+            requestPath.append("?auth=" + token());
+        }
         QNetworkRequest request(requestPath);
         qDebug() << Q_FUNC_INFO << requestPath;
 
@@ -77,7 +80,10 @@ void FirebaseDataService::putValue(QObject * object, const QString & path, const
     Data * owner = (Data*)object;
 
     if( owner->lock() ){
-        QString requestPath = host() + "/" + path + ".json?auth=" + token();
+        QString requestPath = host() + "/" + path + ".json";
+        if( token().isEmpty() == false ){
+            requestPath.append("?auth=" + token());
+        }
         QNetworkRequest request(requestPath);
         request.setHeader(QNetworkRequest::ContentTypeHeader,
                           "application/x-www-form-urlencoded");
@@ -91,7 +97,10 @@ void FirebaseDataService::putValue(QObject * object, const QString & path, const
 void FirebaseDataService::postValue(QObject * object, const QString & path, const QString & value){
     Data * owner = (Data*)object;
     if( owner->lock() ){
-        QString requestPath = host() + "/" + path + ".json?auth=" + token();
+        QString requestPath = host() + "/" + path + ".json";
+        if( token().isEmpty() == false ){
+            requestPath.append("?auth=" + token());
+        }
         QNetworkRequest request(requestPath);
         request.setHeader(QNetworkRequest::ContentTypeHeader,
                           "application/x-www-form-urlencoded");
@@ -106,7 +115,10 @@ void FirebaseDataService::postValue(QObject * object, const QString & path, cons
 void FirebaseDataService::patchValue(QObject * object, const QString & path, const QString & value){
     Data * owner = (Data*)object;
     if( owner->lock() ){
-        QString requestPath = host() + "/" + path + ".json?auth=" + token() + "?x-http-method-override=PATCH";
+        QString requestPath = host() + "/" + path + ".json?x-http-method-override=PATCH";
+        if( token().isEmpty() == false ){
+            requestPath.append("?auth=" + token());
+        }
         QNetworkRequest request(requestPath);
         request.setHeader(QNetworkRequest::ContentTypeHeader,
                           "application/x-www-form-urlencoded");
@@ -122,7 +134,10 @@ void FirebaseDataService::patchValue(QObject * object, const QString & path, con
 void FirebaseDataService::deleteValue(QObject * object, const QString & path){
     Data * owner = (Data*)object;
     if( owner->lock() ){
-        QString requestPath = host() + "/" + path + ".json?auth=" + token();
+        QString requestPath = host() + "/" + path + ".json";
+        if( token().isEmpty() == false ){
+            requestPath.append("?auth=" + token());
+        }
         QNetworkRequest request(requestPath);
         request.setHeader(QNetworkRequest::ContentTypeHeader,
                           "application/x-www-form-urlencoded");

@@ -14,20 +14,33 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-#include "HardwareData.h"
+#include "KernelData.h"
 
 
 using namespace StratifyData;
 
-HardwareData::HardwareData(DataService * service) : Data(service){}
+KernelData::KernelData(DataService * service) : Data(service){}
 
-HardwareData::HardwareData(const QJsonObject & object, DataService * service) : Data(service) {
+KernelData::KernelData(const QJsonObject & object, DataService * service) : Data(service) {
     mJson = object;
 }
 
 
-QStringList HardwareData::deviceList() const {
-    return json().value( HardwareData::deviceListKey() ).toObject().keys();
+QStringList KernelData::deviceList() const {
+    return json().value( KernelData::deviceListKey() ).toObject().keys();
 
 }
 
+
+void KernelData::setAssets(const QJsonObject & assets){
+    mJson.insert(assetsKey(), assets);
+}
+
+
+void KernelData::setBootSuffix(const QString & value){
+    mJson[ bootSuffixKey() ] = value;
+}
+
+QString KernelData::bootSuffix() const{
+    return mJson.value(bootSuffixKey()).toString();
+}

@@ -29,7 +29,7 @@ public:
     KernelIO(Link & link, Link::update_callback_t update, void * context);
 
     int installKernel(const QString & source, bool verifyInstall);
-    int installData(const QString & projectPath, bool isInstallData = true, bool isRunTests = true);
+    int installAssets(const QString & projectPath, const QString & assetsFileName, bool isInstallData = true, bool isRunTests = true);
 
 private:
 

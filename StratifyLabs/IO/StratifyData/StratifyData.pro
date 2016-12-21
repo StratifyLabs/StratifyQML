@@ -14,7 +14,6 @@ CONFIG += staticlib
 SOURCES += \
     Data.cpp \
     AppData.cpp \
-    HardwareData.cpp \
     UserData.cpp \
     DeviceData.cpp \
     FirebaseDataService.cpp \
@@ -22,12 +21,13 @@ SOURCES += \
 	StratifyObject.cpp \
 	StratifyPrompt.cpp \
     AppListData.cpp \
-    ListData.cpp
+    ListData.cpp \
+    KernelData.cpp \
+    KernelAssets.cpp
 
 HEADERS += Data.h \
     Worker.h \
     AppData.h \
-	HardwareData.h \
     UserData.h \
 	DeviceData.h \
 	FirebaseDataService.h \
@@ -36,7 +36,9 @@ HEADERS += Data.h \
     StratifyObject.h \
 	StratifyPrompt.h \
     AppListData.h \
-    ListData.h
+    ListData.h \
+    KernelData.h \
+    KernelAssets.h
 
 INSTALL_HEADERS.files = $$HEADERS
 
