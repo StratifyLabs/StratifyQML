@@ -370,6 +370,7 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
                 }
 
 
+#if defined SON_TESTING
                 son_t son;
                 son_set_driver(&son, 0);
 
@@ -379,6 +380,7 @@ int KernelIO::installAppObject(const QString & projectPath, const QJsonObject & 
                     son_to_json(&son, (sonFilePath + ".json").toStdString().c_str());
                     son_close(&son,0);
                 }
+#endif
 
                 sourceFilePath = sonFilePath;
                 destFileName = fileInfo.baseName() + ".son";
