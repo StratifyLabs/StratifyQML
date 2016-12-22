@@ -220,7 +220,7 @@ void PortIO::refreshPortList(Link & link){
 }
 
 void PortIO::setSysAttrCache(const QString & serialNumber, sys_attr_t & attr){
-    mPortSettings.remove(serialNumber);
+    qDebug() << Q_FUNC_INFO << "Add" << attr.version << attr.sys_version << attr.name << "to Cache";
     mPortSettings.insert(serialNumber, Helper::dataToJson("sysAttr", &attr, sizeof(sys_attr_t)));
 }
 
