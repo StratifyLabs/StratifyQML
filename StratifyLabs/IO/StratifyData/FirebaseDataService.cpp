@@ -44,10 +44,16 @@ void FirebaseDataService::handleNetworkReply(QNetworkReply *reply){
 
     qDebug() << Q_FUNC_INFO << "Operations:" << reply->operation() << "Error:" << reply->error();
 
-    if( reply->operation() == QNetworkAccessManager::PostOperation ){
-        doc = QJsonDocument::fromJson( reply->readAll() );
-        obj = doc.object();
-        owner->setPostName( obj.value("name").toString() );
+    if( reply->error() != QNetworkReply::NoError ){
+        emit owner->statusChanged(Data::ERROR, "Failed network operation on " + owner->path() + ": " + reply->errorString() );
+    } else {
+        if( reply->operation() == QNetworkAccessManager::PostOperation ){
+            doc = QJsonDocument::fromJson( reply->readAll() );
+            obj = doc.object();
+            owner->setPostName( obj.value("name").toString() );
+        }
+
+        emit owner->statusChanged(Data::INFO, "Successfully transferred " + owner->name());
     }
 
     owner->unlock();
@@ -70,6 +76,9 @@ void FirebaseDataService::getValue(QObject * object, const QString & path){
         if( reply ){
             qDebug() << Q_FUNC_INFO << reply->error();
             reply->setParent(object);
+            emit owner->statusChanged(Data::INFO, "Downloading data from cloud");
+        } else {
+            emit owner->statusChanged(Data::ERROR, "Failed to download data");
         }
     }
 
@@ -90,6 +99,9 @@ void FirebaseDataService::putValue(QObject * object, const QString & path, const
         QNetworkReply * reply = mNetworkAccessManager.put(request, value.toUtf8());
         if( reply ){
             reply->setParent(object);
+            emit owner->statusChanged(Data::INFO, "Uploading data to cloud");
+        } else {
+            emit owner->statusChanged(Data::ERROR, "Failed to upload data");
         }
     }
 }
@@ -108,6 +120,9 @@ void FirebaseDataService::postValue(QObject * object, const QString & path, cons
         QNetworkReply * reply = mNetworkAccessManager.post(request, value.toUtf8());
         if( reply ){
             reply->setParent(object);
+            emit owner->statusChanged(Data::INFO, "Uploading (posting) data to cloud");
+        } else {
+            emit owner->statusChanged(Data::ERROR, "Failed to upload (post) data");
         }
     }
 }
@@ -126,6 +141,9 @@ void FirebaseDataService::patchValue(QObject * object, const QString & path, con
         QNetworkReply * reply = mNetworkAccessManager.post(request, value.toUtf8());
         if( reply ){
             reply->setParent(object);
+            emit owner->statusChanged(Data::INFO, "Uploading (patching) data to cloud");
+        } else {
+            emit owner->statusChanged(Data::ERROR, "Failed to upload (patch) data");
         }
     }
 
@@ -144,6 +162,9 @@ void FirebaseDataService::deleteValue(QObject * object, const QString & path){
         QNetworkReply * reply = mNetworkAccessManager.deleteResource(request);
         if( reply ){
             reply->setParent(object);
+            emit owner->statusChanged(Data::INFO, "Deleting data from cloud");
+        } else {
+            emit owner->statusChanged(Data::ERROR, "Faield to delete data from cloud");
         }
     }
 }

@@ -22,10 +22,13 @@ Copyright 2016 Tyler Gilbert
 #include <QJsonDocument>
 #include <QJsonArray>
 
+#include "StratifyObject.h"
+
 namespace StratifyData {
 
-class KernelAssets
+class KernelAssets : public StratifyObject
 {
+    Q_OBJECT
 public:
     KernelAssets();
 
@@ -49,8 +52,8 @@ public:
 
     static QStringList types();
 
-    static bool collect(const QString & path, const QString & source, const QString & dest);
-    static bool extract(const QString & path, const QJsonObject & source, const QString & dest);
+    bool collect(const QString & path, const QString & source, const QString & dest);
+    bool extract(const QString & path, const QJsonObject & source, const QString & dest);
 
 
 private:

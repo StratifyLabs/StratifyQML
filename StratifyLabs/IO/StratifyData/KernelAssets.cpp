@@ -43,7 +43,10 @@ bool KernelAssets::collect(const QString & path, const QString & source, const Q
     QJsonObject object;
 
     object = Data::createJsonFromFile(path + "/" + source);
-    if( object.isEmpty() ){ return false; }
+    if( object.isEmpty() ){
+        emit statusChanged(ERROR, "Failed to open assets file:" + path + "/" + source);
+        return false;
+    }
 
     QStringList keys = object.keys();
 
@@ -75,7 +78,11 @@ bool KernelAssets::collect(const QString & path, const QString & source, const Q
         }
     }
 
-    return Data::createFileFromJson(path + "/" + dest, object);
+    if( Data::createFileFromJson(path + "/" + dest, object) == false){
+        emit statusChanged(ERROR, "Failed to create assets file: " + path + "/" + dest);
+        return false;
+    }
+    return true;
 }
 
 bool KernelAssets::extract(const QString & path, const QJsonObject & source, const QString & dest){
