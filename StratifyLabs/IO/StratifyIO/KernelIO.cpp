@@ -67,7 +67,7 @@ int KernelIO::installKernel(const QString & source, bool verifyInstall){
 
                         emit connectionChanged();
                         if( mLink.is_bootloader() ){
-                            emit statusChanged(INFO, "Succeessfully connected to bootloader: "  +
+                            emit statusChanged(INFO, "Successfully connected to bootloader: "  +
                                                QString(mLink.serial_no().c_str()));
                         }
                     } else {
