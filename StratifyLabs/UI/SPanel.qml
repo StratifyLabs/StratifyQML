@@ -31,7 +31,7 @@ SItem {
 
 
     implicitWidth: blockWidth ? parent.width : (panelHeading.width);
-    implicitHeight: panelHeading.height + panelBody.height + panelFooter.height;
+    implicitHeight: (panelHeading.visible ? panelHeading.height : 0) + panelBody.height + (panelFooter.visible ? panelFooter.height : 0);
     blockWidth: true;
 
     onStyleChanged: {
@@ -133,7 +133,7 @@ SItem {
         visible: panelFooterText.text != "";
 
         implicitWidth: parent.width;
-        implicitHeight: panelHeadingText.height;
+        implicitHeight: visible ? panelHeadingText.height : 0;
 
         Text {
             id: panelFooterText;
