@@ -33,6 +33,7 @@ class Data : public StratifyObject
 public:
     Data(DataService * dataService = 0);
 
+    static QString uidKey() { return "uid"; }
     static QString nameKey() { return "name"; }
     static QString githubKey() { return "github"; }
     static QString descriptionKey() { return "description"; }
@@ -43,6 +44,7 @@ public:
     static QString hardwareIdKey() { return "hardwareid"; }
     static QString buildPrefixKey() { return "buildprefix"; }
 
+    QString uid() const;
     QString name() const;
     QString github() const;
     QString description() const;
@@ -54,6 +56,7 @@ public:
     QString buildPrefix() const;
     bool getBuild(const QString & key, const QString & filename, const QString & suffix = QString());
 
+    void setUid(const QString & value);
     void setVersion(const QString & value);
     void setName(const QString & value);
     void setGithub(const QString & value);

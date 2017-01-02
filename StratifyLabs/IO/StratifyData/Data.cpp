@@ -50,6 +50,7 @@ void Data::setPostName(const QString & name){
     mPostName = name;
 }
 
+
 void Data::getValue(){
     checkService();
     if( mDataService ){
@@ -84,6 +85,10 @@ void Data::deleteValue(){
     if( mDataService ){
         mDataService->deleteValue(this, mPath);
     }
+}
+
+QString Data::uid() const {
+    return json().value( Data::uidKey() ).toString();
 }
 
 QString Data::publisher() const {
@@ -144,6 +149,11 @@ bool Data::getBuild(const QString & key, const QString & filename, const QString
 
     return true;
 }
+
+void Data::setUid(const QString & value){
+    mJson[ Data::uidKey() ] = value;
+}
+
 
 
 void Data::setVersion(const QString & value){
