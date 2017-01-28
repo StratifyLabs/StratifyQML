@@ -355,6 +355,10 @@ int Link::ioctl(int fd, int request, void * ctl){
         err = link_ioctl(m_driver, fd, request, ctl);
         if(err != LINK_PROT_ERROR) break;
     }
+    if( err < -1 ){
+        printf("Err----------------------------------------------%d\n", err);
+        fflush(stdout);
+    }
     if ( err < 0 ){
         m_error_message = gen_error("Failed to ioctl", link_errno);
     }
@@ -1358,6 +1362,7 @@ int Link::install_app(string source, string dest, string name, bool (*update)(vo
     int bytes_cumm;
     int bytes_total;
     string tmp_error;
+    int loc_err;
 
     //link_appfs_file_t * app_file;
 
@@ -1395,11 +1400,19 @@ int Link::install_app(string source, string dest, string name, bool (*update)(vo
             if( bytes_read > 0 ){
                 attr.nbyte = bytes_read;
                 bytes_cumm += attr.nbyte;
-                if( ioctl(fd, I_APPFS_INSTALL, &attr) < 0 ){
-                    tmp_error = m_error_message;
-                    m_error_message = "Failed to install file on device (";
-                    m_error_message.append(tmp_error);
-                    m_error_message.append(")");
+                if( (loc_err = ioctl(fd, I_APPFS_INSTALL, &attr)) < 0 ){
+                    if( link_errno == 8 ){ //ENOEXEC
+                        if( loc_err < -1 ){
+                            m_error_message = gen_error("Failed to install: missing symbol on device near", loc_err+1);
+                        } else {
+                            m_error_message = "Failed to install: missing symbol on device (symbol is past end of table)";
+                        }
+                    } else {
+                        tmp_error = m_error_message;
+                        m_error_message = "Failed to install file on device (";
+                        m_error_message.append(tmp_error);
+                        m_error_message.append(")");
+                    }
                     close(fd);
                     fclose(source_file);
                     return -1;

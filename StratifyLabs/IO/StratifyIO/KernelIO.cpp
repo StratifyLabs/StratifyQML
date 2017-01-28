@@ -528,17 +528,23 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     qDebug() << "Prepare with ramSize:" << ramSize;
     if( appIO.prepareBinary(info.filePath(), info.fileName(), false, true, ramSize) < 0 ){
         //appIO will emit error status
+        emit statusChanged(ERROR, "Failed to execute test (failed to prepare binary): " + name);
         return -1;
     }
 
     if( appIO.installApp(info.filePath(), "/app/flash", info.fileName()) < 0 ){
-        //appIO will emit error status
-        return -1;
+        QThread::msleep(100);
+        if( appIO.installApp(info.filePath(), "/app/flash", info.fileName()) < 0 ){
+            //appIO will emit error status
+            emit statusChanged(ERROR, "Failed to execute test (failed to install binary): " + name);
+            return -1;
+        }
     }
 
 
     if( terminalIO.open() < 0 ){
         //terminalIO will emit error status
+        emit statusChanged(ERROR, "Failed to execute test (failed to open terminal): " + name);
         return -1;
     }
 
@@ -546,9 +552,13 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
 
     //Run the Test App
     if( appIO.runApp(info.fileName()) < 0 ){
-        //appIO will emit error status
-        terminalIO.close();
-        return -1;
+        QThread::msleep(100);
+        if( appIO.runApp(info.fileName()) < 0 ){
+            //appIO will emit error status
+            emit statusChanged(ERROR, "Failed to execute test (failed to run app): " + name);
+            terminalIO.close();
+            return -1;
+        }
     }
 
     //Wait for the test to complete (output is created) or for a timeout
@@ -580,7 +590,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
     emit updateProgress(0,0);
 
     if( !testComplete ){
-        emit statusChanged(INFO, name + " failed (timeout)");
+        emit statusChanged(WARNING, "Failed to complete test (test timed out): " + name);
         qDebug() << "Test timed out";
         return -1;
     } else {
@@ -617,11 +627,11 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
         }
 
         if( reportObject.value("status").toString() != "passed" ){
-            emit statusChanged(WARNING, name + " failed");
+            emit statusChanged(WARNING, "Test executed but failed to pass: " + name);
             qDebug() << "Test failed";
             return -1;
         } else {
-            emit statusChanged(INFO, name + " passed");
+            emit statusChanged(WARNING, "Test executed and passed: " + name);
         }
     }
 
@@ -634,7 +644,7 @@ int KernelIO::runTest(const QString & projectPath, const QJsonObject & testObjec
             emit connectionChanged();
         } else {
             emit statusChanged(ERROR, "Failed to reconnect to " +
-                               QString(mLink.serial_no().c_str()));
+                               QString(mLink.serial_no().c_str()) + " after test: " + name);
             return -1;
         }
 

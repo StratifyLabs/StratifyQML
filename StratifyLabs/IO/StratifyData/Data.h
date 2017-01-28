@@ -43,6 +43,7 @@ public:
     static QString buildListKey() { return "buildlist"; }
     static QString hardwareIdKey() { return "hardwareid"; }
     static QString buildPrefixKey() { return "buildprefix"; }
+    static QString permissionsKey() { return "permissions"; }
 
     QString uid() const;
     QString name() const;
@@ -54,6 +55,7 @@ public:
     QStringList buildList() const;
     QString hardwareId() const;
     QString buildPrefix() const;
+    QString permissions() const;
     bool getBuild(const QString & key, const QString & filename, const QString & suffix = QString());
 
     void setUid(const QString & value);
@@ -65,6 +67,8 @@ public:
     void setBuild(const QString & key, const QString & filename);
     void setPublisher(const QString & value);
     void setBuildPrefix(const QString & value);
+
+    void setPermissions(const QString & value);
 
     void setDataService(DataService * service){ mDataService = service; }
 

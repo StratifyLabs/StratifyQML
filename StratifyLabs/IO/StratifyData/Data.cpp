@@ -124,6 +124,10 @@ QString Data::buildPrefix() const {
     return json().value( Data::buildPrefixKey() ).toString();
 }
 
+QString Data::permissions() const {
+    return json().value( Data::permissionsKey() ).toString();
+}
+
 
 QStringList Data::buildList() const {
     return json().value( Data::buildListKey() ).toObject().keys();
@@ -184,6 +188,15 @@ void Data::setPublisher(const QString & value){
 void Data::setBuildPrefix(const QString & value){
     mJson[ Data::buildPrefixKey() ] = value;
 }
+
+void Data::setPermissions(const QString & value){
+    if( (value == "public") || (value == "private") || (value == "searchable") ){
+        mJson[ Data::permissionsKey() ] = value;
+    } else {
+        mJson[ Data::permissionsKey() ] = "public";
+    }
+}
+
 
 void Data::setBuild(const QString & key, const QString & filename){
 

@@ -62,8 +62,6 @@ int AppIO::installApp(const QString & sourcePath, const QString & installPath, c
 
 int AppIO::installApp(const QString & sourcePath, const QString & installPath, const QString & name, bool (*update)(void*,int,int), void * object){
 
-
-
     QString unlinkPath;
     //delete the app if it currently is in the app system
     unlinkPath = "/app/flash/" + name;
