@@ -17,64 +17,65 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "."
 
-SItem {
+Rectangle {
     id: base;
-    type: "well";
 
-    default property alias data: contents.data;
-    property alias text: wellText.text;
-    property real padding_vertical: theme.padding_base_vertical;
-    property real padding_horizontal: theme.padding_base_horizontal;
-    property real font_size: theme.font_size_base;
-    implicitWidth: parent.width;
-    implicitHeight: wellRectangle.height;
+    property alias properties: properties;
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias text: text.text;
 
-    onStyleChanged: {
-        var items = parseStyle();
-        var i;
-        for(i=0; i < items.length; i++){
-            if( items[i] === "well-sm" ){
-                padding_vertical = theme.padding_small_vertical;
-                padding_horizontal = theme.padding_small_horizontal;
-            } else if( items[i] === "well-lg" ){
-                padding_vertical = theme.padding_large_vertical;
-                padding_horizontal = theme.padding_large_horizontal;
-            } else if( items[i] === "well-default" ){
-                padding_vertical = theme.padding_base_vertical;
-                padding_horizontal = theme.padding_base_horizontal;
+    implicitWidth: text.width;
+    implicitHeight: text.height;
+
+    SProperties {
+        id: properties;
+        type: "well";
+        backgroundColor: StratifyUI.well_bg;
+        borderColor: StratifyUI.well_border;
+        blockWidth: true;
+        fontVerticalAlignment: Text.AlignTop;
+        fontHorizontalAlignment: Text.AlignLeft;
+
+        onStyleChanged: {
+            var items = parseStyle();
+            var i;
+            for(i=0; i < items.length; i++){
+                if( items[i] === "well-sm" ){
+                    properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_small_vertical; });
+                    properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_small_horizontal; });
+                    properties.fontSize = Qt.binding( function(){ return StratifyUI.font_size_small; });
+                } else if( items[i] === "well-lg" ){
+                    properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_large_vertical; });
+                    properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_large_horizontal; });
+                    properties.fontSize = Qt.binding( function(){ return StratifyUI.font_size_large; });
+                } else if( items[i] === "well-default" ){
+                    properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_base_vertical; });
+                    properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_base_vertical; });
+                    properties.fontSize = Qt.binding( function(){ return StratifyUI.font_size_base; });
+                }
             }
         }
     }
 
-    Rectangle {
-        id: wellRectangle;
+    color: properties.backgroundColor;
+    border.color:  properties.borderColor;
+    border.width: properties.borderWidth;
+    radius: properties.borderRadius;
 
-        implicitWidth: parent.width;
-        implicitHeight: contents.height;
-
-        color: theme.well_bg;
-        border.color: theme.well_border;
-        border.width: 1;
-        radius: theme.panel_border_radius;
-
-        SContainer {
-            id: contents;
-            paddingHorizontal: base.padding_horizontal;
-            paddingVertical: base.padding_vertical;
-            Text {
-                id: wellText;
-                anchors.top: parent.top;
-                anchors.horizontalCenter: parent.horizontalCenter;
-                width: parent.width-2;
-                text: "";
-                color: textColor;
-                wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-                font.pointSize: font_size;
-                font.family: textFont;
-                font.weight: Font.Light;
-            }
-        }
-
+    Text {
+        id: text;
+        rightPadding: properties.paddingHorizontal;
+        leftPadding: properties.paddingHorizontal;
+        topPadding: properties.paddingVertical;
+        bottomPadding: properties.paddingVertical;
+        width: parent.width;
+        color: properties.fontColor;
+        font.family: properties.fontText;
+        font.pixelSize: properties.fontSize;
+        wrapMode: Text.Wrap;
+        horizontalAlignment: properties.fontHorizontalAlignment;
+        verticalAlignment: properties.fontVerticalAlignment;
     }
 
 }

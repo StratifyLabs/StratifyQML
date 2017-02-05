@@ -15,95 +15,58 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
+import QtQuick.Controls 2.1
 import "Fa-4.5.0.js" as Fa
 import "."
 
-SBaseRectangle {
-    id: baseRectangleInput;
-    type: "input";
-    property alias text: input.text;
-    property string placeholder: "";
+TextField {
+    id: control;
 
-    blockWidth: true;
-    backgroundColor: theme.input_bg;
-    borderColor: theme.input_border;
-    radius: theme.input_border_radius;
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
+    property alias placeholder: control.placeholderText;
 
-    property bool showPlaceholder: false;
+    implicitWidth: childrenRect.width;
+    implicitHeight: properties.fontContainerHeight;
 
-    property alias inputObject: input;
-    property alias contents: input;
+    font.family: properties.fontText;
+    font.pixelSize: properties.fontSize;
+    color: enabled ? properties.fontColor : properties.fontColorMuted;
+    selectByMouse: true;
+    selectedTextColor: properties.fontColorSelected;
+    selectionColor: properties.backgroundColorSelection;
+    horizontalAlignment: properties.fontHorizontalAlignment;
+    verticalAlignment: properties.fontVerticalAlignment;
 
-    implicitHeight: fontContainerHeight;
-    width: parent.width;
+    background: Rectangle {
+        border.color: properties.borderColor;
+        border.width: properties.borderWidth;
+        color: properties.backgroundColor;
+        radius: properties.borderRadius;
 
-    signal editingFinished();
-    signal returnPressed();
-
-    onStyleChanged: {
-        var items = style.split(" ");
-        for(var i=0; i < items.length; i++){
-            if( items[i] === "text-left" ){
-                input.horizontalAlignment = Text.AlignLeft;
-            } else if( items[i] === "text-right" ){
-                input.horizontalAlignment = Text.AlignRight;
-            } else if( items[i] === "text-center" ){
-                input.horizontalAlignment = Text.AlignHCenter;
+        Text {
+            anchors.right: parent.right;
+            anchors.verticalCenter: parent.verticalCenter;
+            visible: control.text;
+            font.family: properties.fontIcon;
+            font.pixelSize: properties.fontSize * 1.2;
+            color: properties.fontColorMuted;
+            text: Fa.Icon.times;
+            rightPadding: properties.paddingHorizontal;
+            MouseArea {
+                anchors.fill: parent;
+                onClicked: control.text = "";
             }
         }
-    }
-
-    TextInput {
-        id: input;
-        color: showPlaceholder ? Qt.lighter(textColor, 2.0) : textColor;
-        width: parent.width - clearIcon.width*1.25;
-        leftPadding: paddingHorizontal;
-        rightPadding: paddingHorizontal;
-        bottomPadding: paddingVertical;
-        topPadding: paddingVertical;
-        font.pointSize: fontSize;
-        font.family: textFont;
-        horizontalAlignment: TextEdit.AlignLeft;
-        verticalAlignment: TextEdit.AlignVCenter;
-        selectByMouse: true;
-        selectionColor: Qt.lighter(textColor, 3.0);
-        selectedTextColor: textColor;
-        clip: true;
-
-        onEditingFinished: {
-            baseRectangleInput.editingFinished();
-        }
-
-        Keys.onReturnPressed: {
-            baseRectangleInput.editingFinished();
-            returnPressed();
-        }
-
 
     }
 
-    Text {
-        id: clearIcon;
-        color: theme.gray_light;
-        text: Fa.Icon.times_circle;
-        font.pointSize: fontSize;
-        anchors.right: parent.right;
-        font.family: iconFont;
-        rightPadding: paddingHorizontal;
-        font.weight: Font.Light;
-        horizontalAlignment: Text.AlignHCenter;
-        verticalAlignment: Text.AlignVCenter;
-        height: parent.height;
-        visible: input.text !== "";
-
-
-        MouseArea {
-            anchors.fill: parent;
-            onClicked: {
-                input.text = "";
-                input.forceActiveFocus();
-            }
-        }
+    SProperties {
+        id: properties;
+        borderColor: StratifyUI.gray_light;
+        fontHorizontalAlignment: Text.AlignLeft;
+        blockWidth: true;
     }
 
 }

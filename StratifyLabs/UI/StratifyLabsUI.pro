@@ -26,7 +26,6 @@ DISTFILES = qmldir \
     SCheckbox.qml \
     SColumn.qml \
     SContainer.qml \
-    SCustomize.qml \
     SDropdown.qml \
     SDropdownMenu.qml \
     SGroup.qml \
@@ -73,7 +72,10 @@ DISTFILES = qmldir \
     OpenSans-ExtraBold.ttf \
     OpenSans-Light.ttf \
     OpenSans-Regular.ttf \
-    OpenSans-Semibold.ttf
+    OpenSans-Semibold.ttf \
+    StratifyUI.qml \
+    SProperties.qml \
+    SDropup.qml
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir

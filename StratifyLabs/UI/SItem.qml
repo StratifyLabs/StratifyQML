@@ -29,8 +29,8 @@ Item {
     property bool sm: false;
     property real alignment: Qt.AlignTop | Qt.AlignLeft;
 
-    property real tooltipDelay: theme.tooltip_delay;
-    property real popoverDelay: theme.popover_delay;
+    property real tooltipDelay: StratifyUI.tooltip_delay;
+    property real popoverDelay: StratifyUI.popover_delay;
 
     property bool blockWidth: false;
     property bool fillHeight: false;
@@ -43,21 +43,22 @@ Item {
 
     z: 0;
 
+
+
+    property string textFont: StratifyUI.font_family_base.name;
+    property string iconFont: StratifyUI.font_family_icon.name;
     //these names are not consistent -- need to user camelcase -- and add a prefix sItemPaddingVertical;
+
     property real pixelRatio: Screen.devicePixelRatio;
-    property real paddingVertical: theme.padding_base_vertical;
-    property real paddingHorizontal: theme.padding_base_horizontal;
-    property real fontSize: theme.font_size_base;
+    property real paddingVertical: StratifyUI.padding_base_vertical;
+    property real paddingHorizontal: StratifyUI.padding_base_horizontal;
+    property real fontSize: StratifyUI.font_size_base;
     property real fontContainerHeight: (fontSize + paddingVertical*3);
-    property color textColor: theme.text_color;
+    property color textColor: StratifyUI.text_color;
     property real textOpacity: 1.0;
     property color backgroundColor: "transparent";
-    property real radius: theme.btn_border_radius_base;
+    property real radius: StratifyUI.border_radius_base;
     property color borderColor: "transparent";
-
-    property string textFont: theme.font_family_base.name;
-    property string iconFont: theme.font_family_icon.name;
-
 
 
     visible: hideOnSm && sm ? false : true;

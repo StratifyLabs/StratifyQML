@@ -6,3 +6,5 @@ StratifyLabs/IO/build-*
 StratifyExample/StratifyLib/*
 
 build-*
+
+*.qmlc

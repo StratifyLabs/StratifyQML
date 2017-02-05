@@ -20,14 +20,14 @@ import "."
 SItem {
     id: panelRoot;
     default property alias data: contents.data;
-    property string headingBackgroundColor: theme.panel_default_heading_bg;
-    property real headingFontSize: theme.font_size_base;
+    property string headingBackgroundColor: StratifyUI.panel_default_heading_bg;
+    property real headingFontSize: StratifyUI.font_size_base;
     property string headingColor: textColor;
     property alias body: panelBodyText.text;
     property alias heading: panelHeadingText.text;
     property alias footer: panelFooterText.text;
     property alias contentsHeight: contentsContainer.height;
-    borderColor: theme.panel_default_border;
+    borderColor: StratifyUI.panel_default_border;
 
 
     implicitWidth: blockWidth ? parent.width : (panelHeading.width);
@@ -39,36 +39,36 @@ SItem {
         var i;
         for(i=0; i < items.length; i++){
             if( items[i] === "panel-primary" ){
-                headingBackgroundColor = theme.panel_primary_heading_bg;
-                borderColor = theme.panel_primary_border;
-                headingColor = theme.panel_primary_text;
+                headingBackgroundColor = StratifyUI.panel_primary_heading_bg;
+                borderColor = StratifyUI.panel_primary_border;
+                headingColor = StratifyUI.panel_primary_text;
             } else if( items[i] === "panel-success" ){
-                headingBackgroundColor = theme.panel_success_heading_bg;
-                borderColor = theme.panel_success_border;
-                headingColor = theme.panel_success_text;
+                headingBackgroundColor = StratifyUI.panel_success_heading_bg;
+                borderColor = StratifyUI.panel_success_border;
+                headingColor = StratifyUI.panel_success_text;
             } else if( items[i] === "panel-danger" ){
-                headingBackgroundColor = theme.panel_danger_heading_bg;
-                borderColor = theme.panel_danger_border;
-                headingColor = theme.panel_danger_text;
+                headingBackgroundColor = StratifyUI.panel_danger_heading_bg;
+                borderColor = StratifyUI.panel_danger_border;
+                headingColor = StratifyUI.panel_danger_text;
             } else if( items[i] === "panel-warning" ){
-                headingBackgroundColor = theme.panel_warning_heading_bg;
-                borderColor = theme.panel_warning_border;
-                headingColor = theme.panel_warning_text;
+                headingBackgroundColor = StratifyUI.panel_warning_heading_bg;
+                borderColor = StratifyUI.panel_warning_border;
+                headingColor = StratifyUI.panel_warning_text;
             } else if( items[i] === "panel-info" ){
-                headingBackgroundColor = theme.panel_info_heading_bg;
-                borderColor = theme.panel_info_border;
-                headingColor = theme.panel_info_text;
+                headingBackgroundColor = StratifyUI.panel_info_heading_bg;
+                borderColor = StratifyUI.panel_info_border;
+                headingColor = StratifyUI.panel_info_text;
             } else if( items[i] === "panel-default" ){
-                headingBackgroundColor = theme.panel_default_heading_bg;
-                borderColor = theme.panel_default_border;
-                headingColor = theme.panel_default_text;
+                headingBackgroundColor = StratifyUI.panel_default_heading_bg;
+                borderColor = StratifyUI.panel_default_border;
+                headingColor = StratifyUI.panel_default_text;
             }
         }
     }
 
     SRoundedRectangle {
         id: panelHeading;
-        topRadius: theme.panel_border_radius;
+        topRadius: StratifyUI.panel_border_radius;
         color: headingBackgroundColor;
         borderColor: panelRoot.borderColor;
         borderWidth: 1;
@@ -79,10 +79,10 @@ SItem {
 
         Text {
             id: panelHeadingText;
-            topPadding: theme.padding_base_vertical;
-            bottomPadding: theme.padding_base_vertical;
-            leftPadding: theme.padding_base_horizontal;
-            rightPadding: theme.padding_base_horizontal;
+            topPadding: StratifyUI.padding_base_vertical;
+            bottomPadding: StratifyUI.padding_base_vertical;
+            leftPadding: StratifyUI.padding_base_horizontal;
+            rightPadding: StratifyUI.padding_base_horizontal;
             text: "";
             color: headingColor;
             font.pointSize: headingFontSize;
@@ -96,9 +96,9 @@ SItem {
         id: panelBody;
         y: !panelHeading.visible ? 0 : panelHeading.height - 2*pixelRatio*panelHeading.borderWidth - borderWidth;
 
-        topRadius: panelHeading.visible ? 0 : theme.panel_border_radius;
-        bottomRadius: panelFooter.visible ? 0 : theme.panel_border_radius;
-        color: theme.body_bg;
+        topRadius: panelHeading.visible ? 0 : StratifyUI.panel_border_radius;
+        bottomRadius: panelFooter.visible ? 0 : StratifyUI.panel_border_radius;
+        color: StratifyUI.body_bg;
         borderColor: panelRoot.borderColor;
         borderWidth: 1;
         width: parent.width;
@@ -126,7 +126,7 @@ SItem {
         id: panelFooter;
         y: panelBody.y + panelBody.height - 2*pixelRatio*panelHeading.borderWidth;
         anchors.left: panelBody.left;
-        bottomRadius: theme.panel_border_radius;
+        bottomRadius: StratifyUI.panel_border_radius;
         color: headingBackgroundColor;
         borderColor: panelRoot.borderColor;
         borderWidth: 1;
@@ -137,10 +137,10 @@ SItem {
 
         Text {
             id: panelFooterText;
-            topPadding: theme.padding_base_vertical;
-            bottomPadding: theme.padding_base_vertical;
-            leftPadding: theme.padding_base_horizontal;
-            rightPadding: theme.padding_base_horizontal;
+            topPadding: StratifyUI.padding_base_vertical;
+            bottomPadding: StratifyUI.padding_base_vertical;
+            leftPadding: StratifyUI.padding_base_horizontal;
+            rightPadding: StratifyUI.padding_base_horizontal;
             text: "";
             color: headingColor;
             font.pointSize: headingFontSize;

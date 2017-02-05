@@ -14,17 +14,9 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.5
+import QtQuick 2.6
 import "."
 
-Row {
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
-
-    spacing: properties.paddingHorizontal;
-
-    SProperties {
-        id: properties;
-    }
+SDropdown {
+    icon: Fa.Icon.caret_up;
 }

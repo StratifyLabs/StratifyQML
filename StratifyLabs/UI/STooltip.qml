@@ -16,176 +16,36 @@ Copyright 2016 Tyler Gilbert
 
 import QtQuick 2.6
 import QtQuick.Window 2.2
+import QtQuick.Controls 2.1
 import "Fa-4.5.0.js" as Fa
 import "."
 
-SItem {
-    id: base;
-    property alias text: text.text;
-    property real pixelRatio: Screen.devicePixelRatio;
-    type: "tooltip";
-    visible: true;
-    z: Infinity;
+ToolTip {
+    id: control;
 
-    property var target: parent;
+    property string style;
+    delay: StratifyUI.tooltip_delay;
+    timeout: 2000;
+    //visible: parent ? parent.hovered : false;
 
-    opacity: 0.0;
-
-    property bool tooltipVisible: false;
-    onTooltipVisibleChanged: {
-        updateStyle();
-        if( currentStyle != style ){
-            canvas.requestPaint();
-        }
-        currentStyle = style;
+    enter: Transition {
+        NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: control.delay/5 }
     }
 
-    states: [
-        State { when: tooltipVisible;
-            PropertyChanges {   target: base; opacity: 1.0    }
-        },
-        State { when: !tooltipVisible;
-            PropertyChanges {   target: base; opacity: 0.0    }
-        }
-    ]
-
-    transitions: Transition {
-        NumberAnimation { property: "opacity"; duration: 250 }
+    exit: Transition {
+        NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: control.delay/5; }
     }
 
-    property string currentStyle;
-
-    implicitWidth: text.width + 2*theme.tooltip_arrow_width;
-    implicitHeight: text.height + 2*theme.tooltip_arrow_width;
-
-    property string position: "left";
-
-    fontSize: theme.font_size_small;
-    paddingVertical: theme.padding_small_vertical;
-    paddingHorizontal: theme.padding_small_horizontal;
-
-    function updateStyle(){
-        var items = parseStyle();
-        var i;
-        var parentContentItem;
-        if ("contents" in target) {
-            parentContentItem = target.contents;
-        } else {
-            parentContentItem = target;
-        }
-
-        for(i=0; i < items.length; i++){
-            if( items[i] === "left" ){
-                position = items[i];
-                x = parentContentItem.mapToItem(parent, 0, 0).x - width;
-                y = parentContentItem.mapToItem(parent, 0, 0).y + parentContentItem.height/2 - height/2;
-            } else if( items[i] === "right" ){
-                position = items[i];
-                x = parentContentItem.mapToItem(parent, 0, 0).x + parentContentItem.width;
-                y = parentContentItem.mapToItem(parent, 0, 0).y + parentContentItem.height/2 - height/2;
-            } else if( items[i] === "top" ){
-                position = items[i];
-                x = parentContentItem.mapToItem(parent, 0, 0).x + parentContentItem.width/2 - width/2;
-                y = parentContentItem.mapToItem(parent, 0, 0).y - height;
-            } else if( items[i] === "bottom" ){
-                position = items[i];
-                x = parentContentItem.mapToItem(parent, 0, 0).x + parentContentItem.width/2 - width/2;
-                y = parentContentItem.mapToItem(parent, 0, 0).y + parentContentItem.height;
-            }
-        }
+    background: Rectangle {
+        color: StratifyUI.tooltip_bg;
+        radius: StratifyUI.border_radius_base;
+        border.color: StratifyUI.tooltip_bg
     }
 
-    Rectangle {
-        id: rectangle;
-        x: theme.tooltip_arrow_width;
-        y: theme.tooltip_arrow_width;
-        color: theme.tooltip_bg;
-        width: text.width;
-        height: text.height;
-        radius: theme.btn_border_radius_small;
-        border.color: theme.tooltip_bg;
-        z: parent.z;
+    contentItem: Text {
+        text: control.text;
+        font.family: StratifyUI.font_family_base.name;
+        font.pixelSize: StratifyUI.font_size_small;
+        color: StratifyUI.tooltip_color;
     }
-
-
-    Canvas {
-        id: canvas;
-        antialiasing: true;
-        //double the height and scale down for retina displays
-        width: (parent.width)*pixelRatio;
-        height: parent.height*pixelRatio;
-        transform: Scale { xScale: 1.0/pixelRatio; yScale: 1.0/pixelRatio; }
-        z: parent.z;
-
-        onPaint: {
-            var ctx = getContext("2d");
-            var twidth;
-            var theight;
-
-            ctx.save();
-            ctx.clearRect(0,0,width,height);
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = theme.tooltip_bg;
-            ctx.fillStyle = ctx.strokeStyle;
-            ctx.globalAlpha = theme.tooltip_opacity;
-            ctx.lineJoin = "round";
-
-            ctx.beginPath();
-
-            if( (position === "left") || (position === "right") ){
-                twidth = theme.tooltip_arrow_width*2;
-                theight = theme.tooltip_arrow_width*4;
-            } else {
-                twidth = theme.tooltip_arrow_width*4;
-                theight = theme.tooltip_arrow_width*2;
-            }
-
-            if( position === "left" ){
-                // draw the triangle on the right
-                ctx.translate(width-twidth-1, height/2);
-                ctx.moveTo(0,-theight/2);
-                ctx.lineTo(twidth, 0);
-                ctx.lineTo(0,theight/2);
-            } else if( position === "right" ){
-                // draw the triangle on the left
-                ctx.moveTo(1,height/2);
-                ctx.lineTo(twidth, height/2-theight/2);
-                ctx.lineTo(twidth,height/2+theight/2);
-            } else if( position === "top" ){
-                // draw the triangle on the bottom
-                ctx.translate(width/2, height-theight);
-                ctx.moveTo(-twidth/2,0);
-                ctx.lineTo(0, theight);
-                ctx.lineTo(twidth/2,0);
-            } else if( position === "bottom" ){
-                // draw the triangle on the top
-                ctx.moveTo(width/2, 0);
-                ctx.lineTo(width/2-twidth/2, theight);
-                ctx.lineTo(width/2+twidth/2, theight);
-            }
-
-            ctx.closePath();
-            ctx.fill();
-
-            ctx.restore();
-        }
-    }
-
-    Text {
-        id: text;
-        x: theme.tooltip_arrow_width;
-        y: theme.tooltip_arrow_width;
-        topPadding: paddingVertical;
-        bottomPadding: paddingVertical;
-        leftPadding: paddingHorizontal;
-        rightPadding: paddingHorizontal;
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-        color: theme.tooltip_color;
-        font.pointSize: fontSize;
-        font.family: textFont;
-        font.weight: Font.Light;
-        width: implicitWidth > theme.tooltip_max_width ? theme.tooltip_max_width : implicitWidth;
-        z: parent.z;
-    }
-
 }

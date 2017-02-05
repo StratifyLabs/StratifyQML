@@ -18,63 +18,96 @@ import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import "."
 
-SItem {
-    id: row;
-    type: "row";
-    default property alias data: contents.data;
-    sm: width < theme.screen_sm;
+GridLayout {
+    id: control;
 
-    onSmChanged: {
-        for(var i = 0; i < contents.children.length; i++){
-            if( contents.children[i].type !== undefined ){
-                contents.children[i].sm = sm;
+    property alias properties: properties;
+    property alias style: properties.style;
+
+    width: parent ? parent.width : undefined;
+
+    SProperties {
+        id: properties;
+        blockWidth: true;
+        type: "row";
+        span: StratifyUI.grid_columns;
+    }
+
+    onVisibleChanged: adjustWidth();
+    rowSpacing: properties.paddingHorizontal;
+    columns: properties.span;
+
+    function alignChildren(){
+        for(var i = 0; i < children.length; i++){
+
+            if( children[i].properties !== undefined ){
+
+                if( children[i].properties.blockWidth === true ){
+                    children[i].Layout.fillWidth = true;
+                }
+
+                if( children[i].properties.fillHeight === true ){
+                    children[i].Layout.fillHeight = true;
+                }
+
+                var span = children[i].properties.span;
+                if( (span > columns) || (span < 1) ){
+                    span = columns;
+                }
+
+                children[i].Layout.columnSpan = span;
+                children[i].Layout.alignment = children[i].properties.alignment;
+
+            } else {
+                children[i].Layout.fillWidth = true;
             }
         }
     }
 
-    onVisibleChanged: contents.adjustWidth();
+    function adjustWidth(){
+        for(var i = 0; i < children.length; i++){
+            var w;
+            var spacingInRow;
+            var span;
+            if( children[i].properties !== undefined ){
+                if( children[i].properties.span < 1 ){
+                    span = columns;
+                } else {
+                    span = children[i].properties.span;
+                }
 
-    blockWidth: true;
+                if( span >= columns ){
+                    span = columns;
+                    spacingInRow = 0;
+                } else {
+                    spacingInRow = (columns / span - 1)*rowSpacing;
+                }
 
-    implicitWidth: blockWidth ? parent.width : contents.childrenRect.width;
-    implicitHeight: fillHeight ? parent.height : contents.childrenRect.height;
+                children[i].Layout.columnSpan = span;
 
-    GridLayout {
-        id: contents;
-        rowSpacing: paddingHorizontal;
-        rows: 1;
-        height: fillHeight ? parent.height : undefined;
-        width: blockWidth ? parent.width : undefined;
-
-        function alignChildren(){
-            for(var i = 0; i < children.length; i++){
-                if( children[i].alignment !== undefined ){
-                    children[i].Layout.alignment = children[i].alignment;
+                if( children[i].properties.blockWidth === true ){
+                    w = (width - spacingInRow) * span / columns;
+                    children[i].Layout.maximumWidth = w;
                 }
             }
         }
+    }
 
-        function adjustWidth(){
-            for(var i = 0; i < children.length; i++){
-                var w;
-                if( children[i].span !== undefined ){
-                    if( children[i].span > 0 ){
-                        w = (width - (children.length-1)*rowSpacing) * children[i].span / theme.grid_columns;
-                        children[i].Layout.preferredWidth = w;
-                    }
-                }
+    onWidthChanged: {
+        if( properties.type === "row" ){
+            if( width < StratifyUI.screen_sm ){
+                columns = StratifyUI.grid_columns_sm;
+            } else {
+                columns = StratifyUI.grid_columns;
             }
         }
-
-        onWidthChanged: {
-            adjustWidth();
-        }
+        adjustWidth();
+    }
 
 
-        Component.onCompleted: {
-            alignChildren();
-            adjustWidth();
-        }
+    Component.onCompleted: {
+        alignChildren();
+        adjustWidth();
     }
 
 }

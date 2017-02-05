@@ -15,206 +15,132 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.1
 import "."
-import "Fa-4.5.0.js" as Fa
 
-SBaseRectangle {
-    id: baseRectangleDropdown;
-    type: "dropdown";
+ComboBox {
+    id: control;
 
-    property alias menuParent: menu.parent;
-    property alias model: menu.model;
-    property string icon;
-    property string text;
-    property string dropdown: Fa.Icon.caret_down;
-    property alias textObject: baseRectangleDropdownText;
-    property bool hideTextOnSm: true;
-    property alias iconObject: rectangleIcon;
-    property alias activeText: menu.activeText;
-    property bool hideMenuCountZero: true;
+    property alias icon: indicator.text;
+    property alias properties: properties;
+    property alias style: properties.style;
+    property alias span: properties.span;
 
-    property alias minimumVisibleItems: menu.minVisible;
-    property alias maximumVisibleItems: menu.maxVisible;
-
-    signal clicked();
-    signal itemClicked();
-
-    blockWidth: true;
-
-    //size the rectangle based on the size of the text box
-    implicitHeight: fontContainerHeight;
-    implicitWidth: (blockWidth == true) ? parent.width : baseRectangleDropdownText.width;
-
-    onStyleChanged: {
-        updateStyle();
+    SProperties {
+        id: properties;
     }
-    function updateStyle(){
-        var items = style.split(" ");
-        for(var i=0; i < items.length; i++){
-            if( items[i] === "text-left" ){
-                baseRectangleDropdownText.anchors.centerIn = undefined;
-                baseRectangleDropdownText.anchors.left = baseRectangleDropdownText.parent.left;
-            } else if( items[i] === "text-right" ){
-                baseRectangleDropdownText.horizontalAlignment = Text.AlightRight;
-            } else if( items[i] === "text-center" ){
-                baseRectangleDropdownText.horizontalAlignment = Text.AlignHCenter;
-            } else if( items[i] === "bold" ){
-                baseRectangleDropdownText.font.weight = Font.Bold;
-            } else if( (items[i] === "primary") || (items[i] === "btn-primary") ){
-                backgroundColor = theme.btn_primary_bg;
-                textColor = theme.btn_primary_color;
-                borderColor = theme.btn_primary_border;
-            } else if( items[i] === "default" || (items[i] === "btn-default") ){
-                backgroundColor = theme.btn_default_bg;
-                textColor = theme.btn_default_color;
-                borderColor = theme.btn_default_border;
-            } else if( items[i] === "danger" || (items[i] === "btn-danger") ){
-                backgroundColor = theme.btn_danger_bg;
-                textColor = theme.btn_danger_color;
-                borderColor = theme.btn_danger_border;
-            } else if( items[i] === "success" || (items[i] === "btn-success") ){
-                backgroundColor = theme.btn_success_bg;
-                textColor = theme.btn_success_color;
-                borderColor = theme.btn_success_border;
-            } else if( items[i] === "info" || (items[i] === "btn-info") ){
-                backgroundColor = theme.btn_info_bg;
-                textColor = theme.btn_info_color;
-                borderColor = theme.btn_info_border;
-            } else if( items[i] === "warning" || (items[i] === "btn-warning") ){
-                backgroundColor = theme.btn_warning_bg;
-                textColor = theme.btn_warning_color;
-                borderColor = theme.btn_warning_border;
-            } else if( items[i] === "close" || (items[i] === "btn-close")){
-                backgroundColor = "transparent";
-                textColor = theme.text_muted;
-                borderColor = "transparent";
-            } else if( items[i] === "block" ){
-                blockWidth = true;
-            }
+
+    implicitWidth: contentItem.implicitWidth + properties.paddingHorizontal*2;
+    implicitHeight: properties.fontContainerHeight;
+
+    baselineOffset: contentItem.y + contentItem.baselineOffset
+
+    font.family: StratifyUI.font_family_icon.name;
+    font.pixelSize: StratifyUI.font_size_base;
+
+    spacing: 8
+    padding: 6
+    leftPadding: padding + 6
+    rightPadding: padding + 6
+
+    delegate: ItemDelegate {
+        id: delegate;
+        width: control.popup.width
+        text: control.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+
+        contentItem: Text {
+            leftPadding: control.mirrored ? (control.indicator ? control.indicator.width : 0) + control.spacing : 0
+            rightPadding: !control.mirrored ? (control.indicator ? control.indicator.width : 0) + control.spacing : 0
+
+            text: delegate.text
+            font: control.font;
+            color: delegate.highlighted ? StratifyUI.dropdown_active_color : (delegate.hovered ? StratifyUI.dropdown_hover_color :StratifyUI.text_color);
+            elide: Text.ElideRight
+            visible: delegate.text
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignVCenter
         }
 
 
-    }
+        highlighted: control.highlightedIndex == index;
+        hoverEnabled: control.hoverEnabled;
 
-    function updatePosition(){
-        var items = style.split(" ");
-        var i;
-        for(i=0; i < items.length; i++){
-            if( items[i] === "left" ){
-                dropdown = Fa.Icon.caret_left;
-                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x - width - paddingHorizontal});
-                menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y + height/2 - height/2});
-            } else if( items[i] === "right" ){
-                dropdown = Fa.Icon.caret_right;
-                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x + width + paddingHorizontal});
-                menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y + height/2 - height/2});
-            } else if( items[i] === "top" ){
-                dropdown = Fa.Icon.caret_up;
-                menu.x = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).x + width/2 - width/2});
-                menu.y = Qt.binding(function(){ return mapToItem(menu.parent, 0, 0).y - menu.height - paddingVertical});
-            } else if( items[i] === "bottom" ){
-                dropdown = Fa.Icon.caret_down;
-                menu.x = Qt.binding(function(){ return menu.parent.mapFromItem(menu.target, 0, 0).x });
-                menu.y = Qt.binding(function(){ return menu.parent.mapFromItem(menu.target, 0, 0).y + height + paddingVertical });
-            }
+        background: Rectangle {
+            color: delegate.highlighted ? StratifyUI.dropdown_active_bg : (delegate.hovered ? StratifyUI.dropdown_hover_bg :StratifyUI.dropdown_bg);
+            border.color: delegate.highlighted ? StratifyUI.dropdown_border : "transparent";
+            radius: 0;
         }
+
     }
 
-    Component.onCompleted: styleChanged();
-    onVisibleChanged: if( visible ) updatePosition();
-    onHeightChanged: updatePosition();
-    onWidthChanged: updatePosition();
+
+    indicator: Text {
+        id: indicator;
+        x: control.mirrored ? control.leftPadding : control.width - width - control.rightPadding
+        y: control.topPadding + (control.availableHeight - height) / 2
+        text: Fa.Icon.caret_down;
+        font.family: StratifyUI.font_family_icon.name;
+        font.pixelSize: StratifyUI.font_size_base;
+        color: StratifyUI.dropdown_caret_color;
+        opacity: enabled ? 1 : 0.3
+    }
 
 
-    RowLayout {
-        id: baseRectangleDropdownText;
-        width: parent.width;
-        spacing: theme.padding_base_horizontal;
+    contentItem: Text {
+        leftPadding: control.mirrored && control.indicator ? control.indicator.width + control.spacing : 0
+        rightPadding: !control.mirrored && control.indicator ? control.indicator.width + control.spacing : 0
 
-        clip: true;
+        text: control.displayText
+        font: control.font;
+        color: StratifyUI.text_color;
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        elide: Text.ElideRight
+        opacity: enabled ? 1 : 0.3
+    }
 
-        Row {
-            Layout.fillWidth: true;
-            leftPadding: paddingHorizontal;
-            topPadding: paddingVertical;
-            spacing: theme.padding_base_horizontal/4;
-            Text {
-                id: rectangleIcon;
-                color: textColor;
-                text: icon;
-                font.pointSize: fontSize*1.15;
-                font.family: iconFont;
-                font.weight: Font.Light;
-                horizontalAlignment: Text.AlignHCenter;
-                verticalAlignment: Text.AlignVCenter;
-                height: rectangleText.height;
+    background: Rectangle {
+        color: StratifyUI.dropdown_bg;
+        border.color: StratifyUI.dropdown_border;
+        border.width: StratifyUI.border_width;
+        visible: !control.flat || control.pressed
+        radius: StratifyUI.border_radius_base;
+    }
+
+
+    popup: Popup {
+        y: control.height - (control.visualFocus ? 0 : 1) + StratifyUI.padding_base_vertical;
+        width: control.width;
+        implicitHeight: contentItem.implicitHeight;
+        topMargin: 6
+        bottomMargin: 6
+
+        contentItem: ListView {
+            id: listview
+            clip: true
+            implicitHeight: contentHeight
+            model: control.popup.visible ? control.delegateModel : null
+            currentIndex: control.highlightedIndex
+            highlightRangeMode: ListView.ApplyRange
+            highlightMoveDuration: 0
+
+            Rectangle {
+                z: 10
+                parent: listview;
+                width: listview.width;
+                height: listview.height;
+                color: "transparent";
+                radius: StratifyUI.border_radius_base;
             }
 
-            Text {
-                id: rectangleText;
-                color: textColor;
-                text: baseRectangleDropdown.text;
-                font.pointSize: fontSize;
-                font.family: textFont;
-                font.weight: Font.Light;
-                horizontalAlignment: Text.AlignHCenter;
-                verticalAlignment: Text.AlignVCenter;
-                visible: (icon !== "") && (hideTextOnSm) ? !sm : true;
-            }
+            ScrollIndicator.vertical: ScrollIndicator { }
         }
 
-        Text {
-            topPadding: paddingVertical;
-            rightPadding: paddingHorizontal;
-            id: dropDownIcon;
-            color: textColor;
-            text: baseRectangleDropdown.dropdown;
-            font.pointSize: fontSize;
-            font.family: iconFont;
-            horizontalAlignment: Text.AlignHCenter;
-            verticalAlignment: Text.AlignVCenter;
-            height: rectangleText.height;
+        background: Rectangle {
+            color: StratifyUI.dropdown_bg;
+            radius: StratifyUI.border_radius_base;
+            border.color: StratifyUI.dropdown_border;
         }
     }
 
-
-    MouseArea {
-        anchors.fill: parent;
-        hoverEnabled: true;
-        onEntered: {
-            backgroundColor = Qt.darker(backgroundColor, 1.1);
-            startHover();
-        }
-
-        onExited: {
-            backgroundColor = Qt.lighter(backgroundColor, 1.1);
-            stopHover();
-        }
-
-        onClicked: {
-            if( menu.visible == false ){
-                if( (menu.model.count !== 0) || !hideMenuCountZero ){
-                    menu.visible = true;
-                }
-            } else {
-                menu.visible = false;
-            }
-
-            style = style;
-            baseRectangleDropdown.clicked();
-        }
-    }
-
-    SDropdownMenu {
-        id: menu;
-        target: baseRectangleDropdown;
-        visible: false;
-        width: target.width;
-
-        onClicked: {
-            itemClicked();
-        }
-
-    }
 }

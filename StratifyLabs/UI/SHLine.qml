@@ -20,13 +20,26 @@ import "."
 SItem {
     type: "hline";
 
-    implicitWidth: parent.width;
-    height: theme.padding_base_vertical*2 + 1;
+    property alias properties: properties;
+    property alias style: properties.style;
+    property alias span: properties.span;
+
+    SProperties {
+        id: properties;
+        backgroundColor: StratifyUI.panel_default_border;
+        borderColor: StratifyUI.panel_default_border;
+        borderWidth: 0;
+        blockWidth: true;
+    }
+
+    implicitHeight: properties.paddingVertical*2;
 
     Rectangle {
-        y: theme.padding_base_vertical;
+        y: properties.paddingVertical;
         width: parent.width;
         height: 1;
-        color: theme.btn_default_border;
+        color: properties.backgroundColor;
+        border.color: properties.borderColor;
+        border.width: properties.borderWidth;
     }
 }

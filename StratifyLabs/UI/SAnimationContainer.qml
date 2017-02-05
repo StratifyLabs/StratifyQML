@@ -17,12 +17,20 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "."
 
-SItem {
-    type: "animationcontainer";
+Item {
     id: root;
+
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
 
     property string screen;
     property var current;
+
+    SProperties {
+        id: properties;
+        type: "animationcontainer";
+    }
 
     onScreenChanged: {
         var target = resource(screen);

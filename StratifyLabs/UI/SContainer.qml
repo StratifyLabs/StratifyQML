@@ -17,23 +17,35 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "."
 
-SItem {
-    type: "container";
+Item {
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
+    property string name;
     default property alias data: contents.data;
-    blockWidth: true;
-    implicitWidth: blockWidth ? ((parent != null) ? parent.width : 0) : contents.childrenRect.width + paddingHorizontal*2;
-    implicitHeight: fillHeight ? ((parent != null) ? parent.height : 0) : contents.childrenRect.height + paddingVertical*2;
+
+    width: parent ? parent.width : undefined;
+
+    implicitWidth: contents.childrenRect.width + properties.paddingHorizontal*2;
+    implicitHeight: contents.childrenRect.height + properties.paddingVertical*2;
 
     Rectangle {
         anchors.fill: parent;
-        color: backgroundColor;
+        color: properties.backgroundColor;
     }
 
     Item {
         id: contents;
-        x: paddingHorizontal;
-        y: paddingVertical;
-        height: fillHeight ? parent.height - paddingVertical*2: undefined;
-        width: blockWidth ? parent.width - paddingHorizontal*2: undefined;
+        x: properties.paddingHorizontal;
+        y: properties.paddingVertical;
+        height: properties.fillHeight ? parent.height - properties.paddingVertical*2: undefined;
+        width: properties.blockWidth ? parent.width - properties.paddingHorizontal*2: undefined;
     }
+
+    SProperties {
+        id: properties;
+        type: "container";
+        blockWidth: true;
+    }
+
 }

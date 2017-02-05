@@ -18,15 +18,109 @@ import QtQuick 2.6
 import "Fa-4.5.0.js" as Fa
 import "."
 
-SItem {
-    id: base;
-    type: "alert";
+Rectangle {
+    id: control;
 
-    default property alias data: contents.data;
-    property alias text: alertText.text;
-
+    property alias properties: properties;
+    property alias style: properties.style;
+    property alias span: properties.span;
     property bool dismissible: true;
     property bool dismissed: false;
+    property alias text: text.text;
+
+    //implicitWidth: properties.blockWidth ? (parent ? parent.width : 0) : 0; //if not block width, width must be specified
+    implicitHeight: text.height;
+
+    color: properties.backgroundColor;
+    border.color:  properties.borderColor;
+    border.width: properties.borderWidth;
+    radius: properties.borderRadius;
+
+    Text {
+        id: text;
+        rightPadding: properties.paddingHorizontal;
+        leftPadding: properties.paddingHorizontal;
+        topPadding: properties.paddingVertical;
+        bottomPadding: properties.paddingVertical;
+        width: parent.width;
+        color: properties.fontColor;
+        font.family: properties.fontText;
+        font.pixelSize: properties.fontSize;
+        wrapMode: Text.Wrap;
+        horizontalAlignment: properties.fontHorizontalAlignment;
+        verticalAlignment: properties.fontVerticalAlignment;
+    }
+
+    SProperties {
+        id: properties;
+        borderRadius: StratifyUI.alert_border_radius;
+        borderWidth: StratifyUI.alert_border_width;
+        borderColor: StratifyUI.alert_info_border;
+        backgroundColor: StratifyUI.alert_info_bg;
+        fontColor: StratifyUI.alert_info_text;
+        blockWidth: true;
+
+        fontVerticalAlignment: Text.AlignTop;
+        fontHorizontalAlignment: Text.AlignLeft;
+
+        onStyleChanged: {
+            var items = parseStyle();
+            for(var i = 0; i < items.length; i++){
+                if( items[i] === "alert-danger" ){
+                    backgroundColor = Qt.binding( function(){ return StratifyUI.alert_danger_bg; });
+                    textColor = Qt.binding( function(){ return StratifyUI.alert_danger_text; });
+                    borderColor = Qt.binding( function(){ return StratifyUI.alert_danger_border; });
+                } else if( items[i] === "alert-success" ){
+                    backgroundColor = Qt.binding( function(){ return StratifyUI.alert_success_bg; });
+                    textColor = Qt.binding( function(){ return StratifyUI.alert_success_text; });
+                    borderColor = Qt.binding( function(){ return StratifyUI.alert_success_border; });
+                } else if( items[i] === "alert-info" ){
+                    backgroundColor = Qt.binding( function(){ return StratifyUI.alert_info_bg; });
+                    textColor = Qt.binding( function(){ return StratifyUI.alert_info_text; });
+                    borderColor = Qt.binding( function(){ return StratifyUI.alert_info_border; });
+                } else if( items[i] === "alert-warning" ){
+                    backgroundColor = Qt.binding( function(){ return StratifyUI.alert_warning_bg; });
+                    textColor = Qt.binding( function(){ return StratifyUI.alert_warning_text; });
+                    borderColor = Qt.binding( function(){ return StratifyUI.alert_warning_border; });
+                }
+            }
+        }
+    }
+
+    Text {
+        id: alertDismiss;
+        anchors.top: control.top;
+        anchors.right: control.right;
+        topPadding: properties.paddingVertical;
+        rightPadding: properties.paddingHorizontal;
+        text: Fa.Icon.times;
+        color: Qt.lighter(properties.textColor, 3.0);
+        wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
+        font.pointSize: properties.fontSize;
+        font.family: properties.fontIcon;
+        visible: dismissible;
+        verticalAlignment: Text.AlignVCenter;
+
+        MouseArea {
+            anchors.fill: parent;
+            hoverEnabled: true;
+            onClicked: {
+                //dismiss
+                dismissed = true;
+            }
+
+            onEntered: {
+                alertDismiss.color = properties.textColor;
+            }
+
+            onExited: {
+                alertDismiss.color = Qt.lighter(properties.textColor, 3.0);
+            }
+
+        }
+    }
+
+
 
     onOpacityChanged: {
         if( opacity < 0.01 ){
@@ -38,10 +132,10 @@ SItem {
 
     states: [
         State { when: dismissed;
-            PropertyChanges {   target: base; opacity: 0.0    }
+            PropertyChanges {   target: control; opacity: 0.0    }
         },
         State { when: !dismissed;
-            PropertyChanges {   target: base; opacity: 1.0    }
+            PropertyChanges {   target: control; opacity: 1.0    }
         }
     ]
 
@@ -50,93 +144,8 @@ SItem {
     }
 
 
-    implicitWidth: parent.width;
-    implicitHeight: alertRectangle.height;
 
-    onStyleChanged: {
-        var items = parseStyle();
-        for(var i = 0; i < items.length; i++){
-            if( items[i] === "alert-danger" ){
-                backgroundColor = theme.alert_danger_bg;
-                textColor = theme.alert_danger_text;
-                borderColor = theme.alert_danger_border;
-            } else if( items[i] === "alert-success" ){
-                backgroundColor = theme.alert_success_bg;
-                textColor = theme.alert_success_text;
-                borderColor = theme.alert_success_border;
-            } else if( items[i] === "alert-info" ){
-                backgroundColor = theme.alert_info_bg;
-                textColor = theme.alert_info_text;
-                borderColor = theme.alert_info_border;
-            } else if( items[i] === "alert-warning" ){
-                backgroundColor = theme.alert_warning_bg;
-                textColor = theme.alert_warning_text;
-                borderColor = theme.alert_warning_border;
-            }
-        }
-    }
 
-    Rectangle {
-        id: alertRectangle;
-        implicitWidth: parent.width;
-        implicitHeight: contents.height;
-        color: backgroundColor;
-        border.color: borderColor;
-        border.width: 1;
-        radius: theme.alert_border_radius;
 
-        SContainer {
-            id: contents;
-            Text {
-                id: alertText;
-                anchors.top: parent.top;
-                anchors.left: parent.left;
-                width: parent.width-2 - alertDismiss.width;
-                text: "";
-                color: textColor;
-                wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-                font.pointSize: fontSize;
-                font.family: textFont;
-                font.weight: Font.Light;
-                verticalAlignment: Text.AlignVCenter;
-            }
-
-        }
-
-        Text {
-            id: alertDismiss;
-            anchors.verticalCenter: parent.verticalCenter;
-            anchors.right: parent.right;
-            topPadding: paddingVertical;
-            bottomPadding: paddingVertical;
-            rightPadding: paddingHorizontal;
-            text: Fa.Icon.times;
-            color: Qt.lighter(textColor, 3.0);
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-            font.pointSize: fontSize;
-            font.family: iconFont;
-            visible: dismissible;
-            verticalAlignment: Text.AlignVCenter;
-
-            MouseArea {
-                anchors.fill: parent;
-                hoverEnabled: true;
-                onClicked: {
-                    //dismiss
-                    dismissed = true;
-                }
-
-                onEntered: {
-                    alertDismiss.color = textColor;
-                }
-
-                onExited: {
-                    alertDismiss.color = Qt.lighter(textColor, 3.0);
-                }
-
-            }
-        }
-
-    }
 
 }

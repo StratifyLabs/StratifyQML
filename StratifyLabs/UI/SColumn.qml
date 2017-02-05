@@ -18,51 +18,8 @@ import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import "."
 
-SItem {
-    id: column;
-    default property alias data: contents.data;
-    property alias contents: contents;
-    type: "column";
-
-    blockWidth: true;
-
-    implicitWidth: blockWidth ? parent.width : contents.childrenRect.width;
-    implicitHeight: fillHeight ? parent.height: contents.childrenRect.height;
-
-    GridLayout {
-        id: contents;
-        columns: 1;
-        width: blockWidth ? parent.width : undefined;
-        height: fillHeight ? parent.height : undefined;
-        rowSpacing: paddingVertical;
-
-        function alignChildren(){
-            for(var i = 0; i < children.length; i++){
-                if( children[i].alignment !== undefined ){
-                    children[i].Layout.alignment = children[i].alignment;
-                }
-
-                if( children[i].fillHeight === true ){
-                    children[i].Layout.fillHeight = true;
-                }
-            }
-        }
-
-        Component.onCompleted: {
-            alignChildren();
-        }
-
-        onWidthChanged:  {
-            var isSmall = width < theme.screen_sm;
-            for(var i = 0; i < children.length; i++){
-
-                children[i].Layout.preferredWidth = width;
-
-                if( children[i].type !== undefined ){
-                    children[i].sm = isSmall;
-                }
-            }
-        }
-    }
+SRow {
+    id: control;
+    properties.type: "column";
 }
 

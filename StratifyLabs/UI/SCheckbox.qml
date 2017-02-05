@@ -15,34 +15,70 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
+import QtQuick.Controls 2.1
 import "Fa-4.5.0.js" as Fa
 import "."
 
-SBaseRectangleText {
-    id: check;
-    property bool checked;
+CheckBox {
+    id: control;
 
-    type: "checkbox";
 
-    property string checkMark: Fa.Icon.check_square_o;
-    property string uncheckMark: Fa.Icon.square_o;
+    property alias properties: properties;
+    property alias span: properties.span;
+    property alias style: properties.style;
 
-    iconObject.width: fontSize;
-    icon: (checked ? checkMark : (uncheckMark)) + " ";
-    text: "Checkbox";
-    hideTextOnSm: false;
+    SProperties {
+        id: properties;
+        backgroundColor: StratifyUI.body_bg;
+        borderColor: StratifyUI.body_bg;
+        fontHorizontalAlignment: Text.AlignLeft;
+    }
 
-    signal clicked();
 
-    MouseArea {
-        anchors.fill: parent;
-        hoverEnabled: true;
-        onClicked: {
-            check.checked = !check.checked;
-            check.clicked();
-        }
-        onEntered: startHover();
-        onExited: stopHover();
+    implicitWidth: Math.max(background ? background.implicitWidth : 0,
+                            contentItem.implicitWidth + leftPadding*2 + rightPadding*2)
+    implicitHeight: Math.max(background ? background.implicitHeight : 0,
+                             Math.max(contentItem.implicitHeight,
+                                      indicator ? indicator.implicitHeight : 0) + topPadding + bottomPadding)
+    baselineOffset: contentItem.y + contentItem.baselineOffset
+
+    topPadding: properties.paddingVertical;
+    bottomPadding: properties.paddingVertical;
+    leftPadding: properties.paddingHorizontal;
+    rightPadding: properties.paddingHorizontal;
+    spacing: properties.paddingHorizontal/2;
+
+    indicator: Text {
+        x: text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
+        y: control.topPadding + (control.availableHeight - height) / 2
+        text: control.checked ? Fa.Icon.check_square_o : Fa.Icon.square_o;
+        font.family: properties.fontIcon;
+        font.pixelSize: properties.fontSize*1.4;
+        color: properties.fontColor;
+        opacity: enabled ? 1 : 0.3
+    }
+
+    contentItem: Text {
+        leftPadding: control.indicator && !control.mirrored ? properties.fontSize + control.spacing : 0
+        rightPadding: control.indicator && control.mirrored ? properties.fontSize + control.spacing : 0
+
+        text: control.text;
+        font.family: properties.fontText;
+        font.pixelSize: properties.fontSize;
+        color: properties.fontColor;
+        elide: Text.ElideRight
+        visible: true;
+        horizontalAlignment: properties.fontHorizontalAlignment;
+        verticalAlignment: properties.fontVerticalAlignment;
+        opacity: enabled ? 1 : 0.3
+    }
+
+
+    background: Rectangle {
+        color: properties.backgroundColor;
+        radius: properties.borderRadius;
+        border.color: properties.borderColor;
+        border.width: properties.borderWidth;
     }
 
 }

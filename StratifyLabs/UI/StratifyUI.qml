@@ -14,11 +14,13 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
+pragma Singleton
 import QtQuick 2.6
 
-Item {
+QtObject {
 
-    id: customize;
+    id: stratifyUI;
+
     property var fontFontAwesome: FontLoader { id: fontFontAwesomeInternal; source: "fontawesome-webfont.ttf"; }
     property var fontOpenSans: FontLoader { id: fontOpenSansInternal; source: "OpenSans-Regular.ttf"; }
     property var fontOpenSansBold: FontLoader { id: fontOpenSansBoldInternal; source: "OpenSans-ExtraBold.ttf"; }
@@ -42,12 +44,12 @@ Item {
     property color link_color: brand_primary;
     property color link_hover_color: darken(link_color, 15);
     property string link_hover_decoration: "underline";
-    property alias font_family_sans_serif: customize.fontOpenSans;
-    property alias font_family_serif: customize.fontOpenSans;
-    property alias font_family_monospace: customize.fontMonospace;
-    property alias font_family_base: customize.fontOpenSans;
-    property var font_family_bold: customize.fontOpenSansBold;
-    property var font_family_icon: customize.fontFontAwesome;
+    property alias font_family_sans_serif: stratifyUI.fontOpenSans;
+    property alias font_family_serif: stratifyUI.fontOpenSans;
+    property alias font_family_monospace: stratifyUI.fontMonospace;
+    property alias font_family_base: stratifyUI.fontOpenSans;
+    property var font_family_bold: stratifyUI.fontOpenSansBold;
+    property var font_family_icon: stratifyUI.fontFontAwesome;
     property real font_size_base: 18;
     property real font_size_large: Math.ceil((font_size_base * 1.25));
     property real font_size_small: Math.ceil((font_size_base * 0.75));
@@ -77,6 +79,7 @@ Item {
     property real border_radius_base: 4;
     property real border_radius_large: 6;
     property real border_radius_small: 3;
+    property real border_width: 1;
     property color component_active_color: "#fff";
     property color component_active_bg: brand_primary;
     property real caret_width_base: 4;
@@ -111,6 +114,7 @@ Item {
     property real btn_border_radius_base: border_radius_base;
     property real btn_border_radius_large: border_radius_large;
     property real btn_border_radius_small: border_radius_small;
+    property real btn_border_width: border_width;
     property color input_bg: "#fff";
     property color input_bg_disabled: gray_lighter;
     property color input_color: gray;
@@ -118,6 +122,7 @@ Item {
     property real input_border_radius: border_radius_base;
     property real input_border_radius_large: border_radius_large;
     property real input_border_radius_small: border_radius_small;
+    property real input_border_width: border_width;
     property color input_border_focus: "#66afe9";
     property color input_color_placeholder: "#999";
     property real input_height_base: (line_height_computed + (padding_base_vertical * 2) + 2);
@@ -133,6 +138,10 @@ Item {
     property color dropdown_border: Qt.rgba(0,0,0,.15);
     property color dropdown_fallback_border: "#ccc";
     property color dropdown_divider_bg: "#e5e5e5";
+    property color dropdown_active_color: "#fff";
+    property color dropdown_active_bg: brand_primary;
+    property color dropdown_hover_color: text_color;
+    property color dropdown_hover_bg: gray_lighter;
     property color dropdown_link_color: gray_dark;
     property color dropdown_link_hover_color: darken(gray_dark, 5);
     property color dropdown_link_hover_bg: "#f5f5f5";
@@ -157,6 +166,7 @@ Item {
     property real screen_sm_max: (screen_md_min - 1);
     property real screen_md_max: (screen_lg_min - 1);
     property real grid_columns: 12;
+    property real grid_columns_sm: 4;
     property real grid_gutter_width: 30;
     property real grid_float_breakpoint: screen_sm_min;
     property real grid_float_breakpoint_max: (grid_float_breakpoint - 1);
@@ -294,6 +304,7 @@ Item {
     property real modal_sm: 300;
     property real alert_padding: 15;
     property real alert_border_radius: border_radius_base;
+    property real alert_border_width: border_width;
     property string alert_link_font_weight: "bold";
     property color alert_success_bg: state_success_bg;
     property color alert_success_text: state_success_text;
@@ -310,6 +321,7 @@ Item {
     property color progress_bg: "#f5f5f5";
     property color progress_bar_color: "#fff";
     property real progress_border_radius: border_radius_base;
+    property real progress_border_width: border_width;
     property color progress_bar_bg: brand_primary;
     property color progress_bar_success_bg: brand_success;
     property color progress_bar_warning_bg: brand_warning;
@@ -334,6 +346,7 @@ Item {
     property real panel_heading_padding: 15;
     property real panel_footer_padding: 15;
     property real panel_border_radius: border_radius_base;
+    property real panel_border_width: border_width;
     property color panel_inner_border: "#ddd";
     property color panel_footer_bg: "#f5f5f5";
     property color panel_default_text: gray_dark;
@@ -370,6 +383,7 @@ Item {
     property string badge_font_weight: "bold";
     property real badge_line_height: 1;
     property real badge_border_radius: 10;
+    property real badge_border_width: border_width;
     property real breadcrumb_padding_vertical: 8;
     property real breadcrumb_padding_horizontal: 15;
     property color breadcrumb_bg: "#f5f5f5";

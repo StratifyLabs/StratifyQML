@@ -15,53 +15,76 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
+import QtQuick.Controls 2.1
+import QtQuick.Controls.impl 2.1
 import "."
 
-SBaseRectangle {
-    property real value: 50;
+ProgressBar {
+    id: control;
     //supports success, info, warning, danger, striped, active (animated), stacked
 
-    blockWidth: true;
-    backgroundColor: theme.progress_bg;
-    textColor: theme.progress_bar_color;
-    radius: theme.progress_border_radius;
-    borderColor: theme.progress_bg;
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
+    property color progressColor: StratifyUI.progress_bar_color;
 
-    height: theme.font_size_base;
-    width: parent.width;
+    SProperties {
+        id: properties;
+        blockWidth: true;
+        backgroundColor: StratifyUI.body_bg;
+        textColor: StratifyUI.progress_bar_color;
+        borderColor: StratifyUI.progress_bar_bg;
+        borderRadius: StratifyUI.progress_border_radius;
+        borderWidth: StratifyUI.progress_border_width;
+    }
+
+    implicitWidth: properties.blockWidth ? (parent ? parent.width : 0) : 0;
+    implicitHeight: properties.fillHeight ? (parent ? parent.height : 0) : properties.fontContainerHeight;
+
+    contentItem: Rectangle {
+        id: strip
+        x: control.x;
+        width: 100;
+        height: control.height;
+        scale: control.mirrored ? -1 : 1
+        color: properties.backgroundColor;
+        radius: properties.borderRadius;
+        border.color: properties.borderColor;
+
+        Rectangle {
+            color: progressColor;
+            width: parent.width * control.value;
+            height: parent.height;
+            radius: properties.borderRadius;
+        }
+
+    }
+
+    background: null;
+
 
     onStyleChanged: {
         var items = style.split(" ");
-        radius = theme.btn_border_radius_base;
         for(var i = 0; i < items.length; i++){
             if( items[i] === "progress-bar-primary" ){
-                progress.color = theme.progress_bar_bg;
+                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_bg; });
+                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_bg; });
             } else if( items[i] === "progress-bar-default" ){
-                progress.color = theme.progress_bar_bg;
+                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_bg; });
+                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_bg; });
             } else if( items[i] === "progress-bar-danger" ){
-                progress.color = theme.progress_bar_danger_bg;
+                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_danger_bg; });
+                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_danger_bg; });
             } else if( items[i] === "progress-bar-success" ){
-                progress.color = theme.progress_bar_success_bg;
+                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_success_bg; });
+                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_success_bg; });
             } else if( items[i] === "progress-bar-info" ){
-                progress.color = theme.progress_bar_info_bg;
+                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_info_bg; });
+                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_info_bg; });
             } else if( items[i] === "progress-bar-warning" ){
-                progress.color = theme.progress_bar_warning_bg;
+                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_warning_bg; });
+                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_warning_bg; });
             }
         }
     }
-
-
-    contents.data: [
-        //draw another rectangle in the background
-        Rectangle {
-            id: progress;
-            anchors.left: parent.left;
-            anchors.top: parent.top;
-            height: parent.height;
-            width: parent.width * value*1.0/100.0;
-            color: theme.progress_bar_bg;
-            radius: theme.progress_border_radius;
-        }
-    ]
-
 }
