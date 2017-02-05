@@ -41,6 +41,7 @@ QtObject {
 
     //Background and border
     property color backgroundColor: "transparent";
+    property color backgroundColorHover: "transparent";
     property color backgroundColorSelection: StratifyUI.gray_lighter;
     property color backgroundColorDisabled: StratifyUI.gray_lighter;
     property real borderRadius: StratifyUI.btn_border_radius_base;

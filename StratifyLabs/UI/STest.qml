@@ -41,6 +41,7 @@ SItem {
                 SRadioButton { span: 3; style: "text-hide-sm center"; text: "ButtonTest"; onPressed: tests.screen = text; }
                 SRadioButton { span: 3; style: "text-hide-sm center"; text: "LabelTest"; onPressed: tests.screen = text; }
                 SRadioButton { span: 3; style: "text-hide-sm center"; text: "InputTest"; onPressed: tests.screen = text; }
+                SRadioButton { span: 3; style: "text-hide-sm center"; text: "ListTest"; onPressed: tests.screen = text; }
             }
 
         }
@@ -214,19 +215,52 @@ SItem {
                                 span: 12; implicitHeight: 200;
                             }
                         }
-
-                        /*
+                    }
+                },
+                SContainer {
+                    name: "ListTest";
+                    SJsonListModel {
+                        id: jsonModel;
+                        json: List.data;
+                    }
+                    SRow {
                         SListgroup {
-                            name: "List";
-                            SJsonListModel {
-                                id: jsonModel;
-                                json: List.data;
-                            }
-
+                            span: 4;
+                            style: "left";
                             model: jsonModel.model;
                         }
-                        */
+
+                        SListgroup {
+                            span: 4;
+                            style: "center";
+                            model: jsonModel.model;
+                        }
+
+                        SListgroup {
+                            span: 4;
+                            style: "right";
+                            model: jsonModel.model;
+                        }
+
+                        SListgroup {
+                            span: 4;
+                            style: "block";
+                            model: jsonModel.model;
+                        }
+
+                        SListgroup {
+                            span: 4;
+                            style: "block";
+                            model: jsonModel.model;
+                        }
+
+                        SListgroup {
+                            span: 4;
+                            style: "block";
+                            model: jsonModel.model;
+                        }
                     }
+
                 }
 
             ]

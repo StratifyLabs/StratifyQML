@@ -20,13 +20,15 @@ import QtQuick.Window 2.2
 import "."
 
 SList {
-    id: base;
-    type: "listgroup";
+    id: control;
+    properties.type: "listgroup";
     delegate: listDelegate;
-    blockWidth: true;
 
-    implicitHeight: listViewObject.count * (fontSize + paddingVertical*5);
-    listViewObject.spacing: -2*Screen.devicePixelRatio;
+    implicitHeight: count * (properties.fontSize + properties.paddingVertical*5);
+    spacing: -2*Screen.devicePixelRatio;
+
+    properties.backgroundColorHover: StratifyUI.list_group_hover_bg;
+    properties.backgroundColor: StratifyUI.list_group_bg;
 
     property real active;
 
@@ -35,12 +37,12 @@ SList {
 
         SRoundedRectangle {
             id: base;
-            topRadius: index == 0 ? theme.list_group_border_radius : 0;
-            bottomRadius: index == (listViewObject.count-1) ? theme.list_group_border_radius : 0;
-            implicitWidth: parent.width;
-            implicitHeight: contents.height-pixelRatio;
-            color: theme.list_group_bg;
-            borderColor: theme.list_group_border;
+            topRadius: index == 0 ? properties.borderRadius : 0;
+            bottomRadius: index == (control.count-1) ? properties.borderRadius : 0;
+            implicitWidth: properties.blockWidth ? parent.width : (text.width + properties.paddingHorizontal*2);
+            implicitHeight: properties.fontContainerHeight + properties.paddingVertical*2;
+            color: StratifyUI.list_group_bg;
+            borderColor: StratifyUI.list_group_border;
             SContainer {
                 id: contents;
                 SText {
@@ -55,15 +57,14 @@ SList {
                 hoverEnabled: true;
 
                 onEntered: {
-                    color = theme.list_group_hover_bg;
+                    color = properties.backgroundColorHover;
                 }
 
                 onExited: {
-                    color = theme.list_group_bg;
+                    color = properties.backgroundColor;
                 }
 
             }
         }
-
     }
 }

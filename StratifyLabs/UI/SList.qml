@@ -17,34 +17,25 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "."
 
-SItem {
-    property alias listViewObject: contents;
-    property alias delegate: contents.delegate;
-    property alias model: contents.model;
+ListView {
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
 
-    implicitWidth: blockWidth ? ((parent != null) ? parent.width : 0) : contents.childrenRect.width + paddingHorizontal*2;
-    //implicitHeight: fillHeight ? ((parent != null) ? parent.height : 0) : contents.childrenRect.height + paddingVertical*2;
-
-    implicitHeight: fillHeight ? parent.height : undefined;
-
-    blockWidth:  true;
-
-    ListView {
-        id: contents;
-        anchors.fill: parent;
-
-        Rectangle {
-            id: listViewRect;
-            anchors.fill: parent;
-            color: backgroundColor;
-            border.color: borderColor;
-            border.width: 1;
-            radius: theme.panel_border_radius;
-        }
-
-        clip: true;
-        spacing: paddingVertical;
-
+    SProperties {
+        id: properties;
     }
 
+    implicitWidth: contentItem.childrenRect.width;
+    clip: true;
+    spacing: properties.paddingVertical;
+
+    Rectangle {
+        id: listViewRect;
+        anchors.fill: parent;
+        color: "transparent";
+        border.color: properties.borderColor;
+        border.width: properties.borderWidth;
+        radius: properties.borderRadius;
+    }
 }
