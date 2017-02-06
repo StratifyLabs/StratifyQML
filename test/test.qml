@@ -5,15 +5,17 @@ import StratifyLabs.UI 1.0
 
 
 Window {
-    id: window;
     visible: true
 
-    minimumWidth: 200;
-    minimumHeight: 500;
+      minimumWidth: 600;
+      minimumHeight: 500;
 
-    width: 600;
+      SCustomize {
+          id: theme;
+          screen_sm: 700;
+      }
 
-    STest {}
+      STest { anchors.fill: parent }
 
 
     /*
@@ -42,7 +44,7 @@ Window {
 
 
     onWidthChanged: {
-        StratifyUI.updateScreenSize(width);
+        //StratifyUI.updateScreenSize(width);
     }
 
     Component.onCompleted: {
