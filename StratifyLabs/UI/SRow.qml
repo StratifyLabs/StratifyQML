@@ -24,7 +24,8 @@ GridLayout {
     property alias properties: properties;
     property alias style: properties.style;
 
-    width: parent ? parent.width : undefined;
+    width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
 
     SProperties {
         id: properties;
@@ -34,7 +35,8 @@ GridLayout {
     }
 
     onVisibleChanged: adjustWidth();
-    rowSpacing: properties.paddingHorizontal;
+    rowSpacing: properties.paddingVertical;
+    columnSpacing: properties.paddingHorizontal;
     columns: properties.span;
 
     function alignChildren(){
@@ -44,14 +46,20 @@ GridLayout {
 
                 if( children[i].properties.blockWidth === true ){
                     children[i].Layout.fillWidth = true;
+                    children[i].Layout.minimumWidth = children[i].implicitWidth;
+                } else {
+                    children[i].Layout.fillWidth = false;
                 }
 
                 if( children[i].properties.fillHeight === true ){
                     children[i].Layout.fillHeight = true;
+                    children[i].Layout.minimumHeight = children[i].implicitHeight;
+                } else {
+                    children[i].Layout.fillHeight = false;
                 }
 
                 var span = children[i].properties.span;
-                if( (span > columns) || (span < 1) ){
+                if( (span > columns) || (span < 0) ){
                     span = columns;
                 }
 
@@ -70,17 +78,19 @@ GridLayout {
             var spacingInRow;
             var span;
             if( children[i].properties !== undefined ){
-                if( children[i].properties.span < 1 ){
+                if( children[i].properties.span < 0 ){
                     span = columns;
                 } else {
                     span = children[i].properties.span;
                 }
 
+                spacingInRow = 0;
                 if( span >= columns ){
                     span = columns;
-                    spacingInRow = 0;
                 } else {
-                    spacingInRow = (columns / span - 1)*rowSpacing;
+                    if( span > 0 ){
+                        spacingInRow = (columns / span - 1)*rowSpacing;
+                    }
                 }
 
                 children[i].Layout.columnSpan = span;
@@ -93,14 +103,20 @@ GridLayout {
         }
     }
 
-    onWidthChanged: {
-        if( properties.type === "row" ){
-            if( width < StratifyUI.screen_sm ){
-                columns = StratifyUI.grid_columns_sm;
-            } else {
-                columns = StratifyUI.grid_columns;
+    Connections {
+        target: StratifyUI;
+        onIsScreenSmChanged: {
+            if( control.properties.type == "row" ){
+                if( StratifyUI.isScreenSm === true ){
+                    columns = StratifyUI.grid_columns_sm;
+                } else {
+                    columns = StratifyUI.grid_columns;
+                }
             }
         }
+    }
+
+    onWidthChanged: {
         adjustWidth();
     }
 

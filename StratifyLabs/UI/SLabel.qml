@@ -38,7 +38,6 @@ Label {
     horizontalAlignment: properties.fontHorizontalAlignment;
     verticalAlignment: properties.fontVerticalAlignment;
 
-
     background: Rectangle {
         color: properties.backgroundColor;
         border.color: properties.borderColor;

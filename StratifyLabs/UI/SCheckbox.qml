@@ -36,7 +36,7 @@ CheckBox {
 
 
     implicitWidth: Math.max(background ? background.implicitWidth : 0,
-                            contentItem.implicitWidth + leftPadding*2 + rightPadding*2)
+                            contentItem.implicitWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(background ? background.implicitHeight : 0,
                              Math.max(contentItem.implicitHeight,
                                       indicator ? indicator.implicitHeight : 0) + topPadding + bottomPadding)
@@ -66,7 +66,6 @@ CheckBox {
         font.family: properties.fontText;
         font.pixelSize: properties.fontSize;
         color: properties.fontColor;
-        elide: Text.ElideRight
         visible: true;
         horizontalAlignment: properties.fontHorizontalAlignment;
         verticalAlignment: properties.fontVerticalAlignment;

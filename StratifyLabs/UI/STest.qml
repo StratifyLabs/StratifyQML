@@ -23,15 +23,13 @@ import "STestListText.js" as List;
 import "."
 
 
-SItem {
+Item {
     id: top;
 
-    style: "fill";
-
-
+    anchors.fill: parent;
 
     SColumn {
-
+        style: "block fill";
         SContainer {
             style: "block";
             properties.backgroundColor: StratifyUI.brand_danger;
@@ -60,10 +58,11 @@ SItem {
             resources: [
                 SContainer {
                     name: "AlertTest";
-
+                    style: "block fill";
                     SRow {
-                        SAlert { span: 6; style: "alert-success"; text: "<b>Alert!</b> Success"; }
-                        SAlert { span: 6; style: "alert-info"; text: "<b>Alert!</b> Info"; }
+                        style: "block fill";
+                        SAlert { span: 6; style: "fill alert-success"; text: "<b>Alert!</b> Success"; }
+                        SAlert { span: 6; style: "fill alert-info"; text: "<b>Alert!</b> Info"; }
                         SAlert { span: 6; style: "alert-warning"; text: "<b>Alert!</b> Warning"; }
                         SAlert { span: 6; style: "alert-danger"; text: "<b>Alert!</b> Danger"; }
                         SAlert { span: 6; style: "alert-info text-center"; text: "<b>Alert!</b> Center"; }
@@ -82,12 +81,18 @@ SItem {
                         SLabel { style: "left"; text: "Button Colors:"; }
 
                         SRow {
-                            SButton{ span: 6; style: "btn-default center"; text: "Default"; }
-                            SButton{ span: 6; style: "btn-primary center"; text: "Primary"; }
-                            SButton{ span: 6; style: "btn-info center"; text: "Info"; }
-                            SButton{ span: 6; style: "btn-success center"; text: "Success"; }
-                            SButton{ span: 6; style: "btn-warning center"; text: "Warning"; }
-                            SButton{ span: 6; style: "btn-danger center"; text: "Danger"; }
+                            SButton{ span: 4; style: "btn-primary center"; text: "Primary"; }
+                            SButton{ span: 4; style: "btn-outline-primary center"; text: "Outline Primary"; }
+                            SButton{ span: 4; style: "btn-secondary center"; text: "Secondary"; }
+                            SButton{ span: 4; style: "btn-outline-secondary center"; text: "Outline Secondary"; }
+                            SButton{ span: 4; style: "btn-info center"; text: "Info"; }
+                            SButton{ span: 4; style: "btn-outline-info center"; text: "Outline Info"; }
+                            SButton{ span: 4; style: "btn-success center"; text: "Success"; }
+                            SButton{ span: 4; style: "btn-outline-success center"; text: "Outline Success"; }
+                            SButton{ span: 4; style: "btn-warning center"; text: "Warning"; }
+                            SButton{ span: 4; style: "btn-outline-warning center"; text: "Outline Warning"; }
+                            SButton{ span: 4; style: "btn-danger center"; text: "Danger"; }
+                            SButton{ span: 4; style: "btn-outline-danger center"; text: "Outline Danger"; }
                         }
 
                         SHLine{}
@@ -101,9 +106,6 @@ SItem {
                             SButton{ span: 6; style: "btn-default btn-lg"; text: "Large"; }
                         }
 
-
-
-
                         SHLine{}
 
                         SLabel { style: "left"; text: "Button Icons:"; }
@@ -112,18 +114,14 @@ SItem {
                             SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.refresh; text: "Refresh"; }
                             SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.cog; text: "Working"; }
                             SButton{ span: 4; style: "btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.refresh; text: "Pulse"; }
-                        }
 
-                        SRow {
                             SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.spinner; text: "Refresh"; spin: true; }
                             SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.circle_o_notch; text: "Working"; spin: true; }
                             SButton{ span: 4; style: "btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.spinner; text: "Pulse";  pulse: true; }
-                        }
 
-                        SRow {
-                            SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.location_arrow; text: "Naked"; }
-                            SButton{ span: 4; style: "btn-lg center fa-pulse"; icon: Fa.Icon.repeat; text: "Naked"; }
-                            SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.safari; text: "Naked"; }
+                            SButton{ span: 4; style: "btn-lg center fa-spin btn-default"; icon: Fa.Icon.location_arrow; text: "Naked"; }
+                            SButton{ span: 4; style: "btn-lg center fa-pulse btn-default"; icon: Fa.Icon.repeat; text: "Naked"; }
+                            SButton{ span: 4; style: "btn-lg center fa-spin btn-default"; icon: Fa.Icon.safari; text: "Naked"; }
                         }
 
 
@@ -174,11 +172,13 @@ SItem {
 
                 SContainer {
                     name: "InputTest";
+                    style: "block fill";
                     SColumn {
+                        style: "block fill";
                         SRow {
-                            SCheckbox{ span: 4; style: "left"; text: "Checkbox 1"; }
-                            SCheckbox{ span: 4; style: "left"; text: "Checkbox 2"; }
-                            SCheckbox{ span: 4; style: "left"; text: "Checkbox 3"; }
+                            SCheckBox{ span: 4; style: "left"; text: "Checkbox 1"; }
+                            SCheckBox{ span: 4; style: "left"; text: "Checkbox 2"; }
+                            SCheckBox{ span: 4; style: "left"; text: "Checkbox 3"; }
                         }
 
                         SRow {
@@ -188,7 +188,7 @@ SItem {
                         }
 
                         SRow {
-                            SLabel { span: 3; style: "block text-left"; text: "Username"; }
+                            SLabel { span: 3; style: "block text-left hide-sm"; text: "Username"; }
                             SInput { span: 9; text: "StratifyLabs"; }
                         }
 
@@ -197,26 +197,17 @@ SItem {
                             SPassword { span: 9; text: "Password"; }
                         }
 
-                        SRow {
-                            SIcon { style: "left"; span: 1; icon: Fa.Icon.user; }
-                            SInput { span: 11; text: "StratifyLabs"; }
-                        }
-
-                        SRow {
-                            SIcon { id: password; style: "left"; span: 1; icon: Fa.Icon.lock; }
-                            SPassword { span: 11; text: "Password"; }
-                        }
-
                         SInput { placeholder: "username"; }
                         SPassword { placeholder: "password"; }
 
-                        SRow {
-                            STextBox {
-                                span: 12; implicitHeight: 200;
-                            }
+                        STextBox {
+                            style: "block fill";
+                            implicitHeight: 100;
                         }
+
                     }
                 },
+
                 SContainer {
                     name: "ListTest";
                     SJsonListModel {

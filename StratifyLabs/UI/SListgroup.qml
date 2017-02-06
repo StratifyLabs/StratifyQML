@@ -24,11 +24,12 @@ SList {
     properties.type: "listgroup";
     delegate: listDelegate;
 
-    implicitHeight: count * (properties.fontSize + properties.paddingVertical*5);
+    implicitHeight: count * (properties.fontContainerHeight);
     spacing: -2*Screen.devicePixelRatio;
 
     properties.backgroundColorHover: StratifyUI.list_group_hover_bg;
     properties.backgroundColor: StratifyUI.list_group_bg;
+    properties.borderColor: StratifyUI.list_group_border;
 
     property real active;
 
@@ -40,14 +41,14 @@ SList {
             topRadius: index == 0 ? properties.borderRadius : 0;
             bottomRadius: index == (control.count-1) ? properties.borderRadius : 0;
             implicitWidth: properties.blockWidth ? parent.width : (text.width + properties.paddingHorizontal*2);
-            implicitHeight: properties.fontContainerHeight + properties.paddingVertical*2;
-            color: StratifyUI.list_group_bg;
-            borderColor: StratifyUI.list_group_border;
+            implicitHeight: properties.fontContainerHeight;
+            color: properties.backgroundColor;
+            borderColor: properties.borderColor;
             SContainer {
                 id: contents;
                 SText {
                     id: text;
-                    blockWidth: true;
+                    properties.blockWidth: true;
                     text: model.text;
                 }
             }

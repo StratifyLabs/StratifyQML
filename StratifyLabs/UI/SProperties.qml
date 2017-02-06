@@ -6,15 +6,15 @@ QtObject {
     property string style;
     property string type;
 
-    //filling the width and height of the parent
-    property bool blockWidth: false;
+    //Grid and Spacing
+    property bool fillWidth: false;
     property bool fillHeight: false;
-
-    //these names are not consistent -- need to user camelcase -- and add a prefix sItemPaddingVertical;
+    property real span: StratifyUI.grid_columns;
     property real paddingVertical: StratifyUI.padding_base_vertical;
     property real paddingHorizontal: StratifyUI.padding_base_horizontal;
+    property real alignment: Qt.AlignHCenter | Qt.AlignVCenter;
 
-    property real span: StratifyUI.grid_columns;
+    property bool hideSm;
 
     //Text and font
     property string fontText: StratifyUI.font_family_base.name;
@@ -28,17 +28,6 @@ QtObject {
     property real fontHorizontalAlignment: Text.AlignHCenter;
     property real fontVerticalAlignment: Text.AlignVCenter;
 
-    property real alignment: Qt.AlignHCenter | Qt.AlignVCenter;
-
-
-    //1.0 legacy aliases
-    property alias textFont: object.fontText;
-    property alias textColor: object.fontColor
-    property alias textColorMuted: object.fontColorMuted;
-    property alias iconFont: object.fontIcon;
-    property real textOpacity: object.fontOpacity;
-
-
     //Background and border
     property color backgroundColor: "transparent";
     property color backgroundColorHover: "transparent";
@@ -48,6 +37,13 @@ QtObject {
     property color borderColor: "transparent";
     property real borderWidth: StratifyUI.border_width;
 
+    //1.0 legacy aliases
+    property alias textFont: object.fontText;
+    property alias textColor: object.fontColor
+    property alias textColorMuted: object.fontColorMuted;
+    property alias iconFont: object.fontIcon;
+    property real textOpacity: object.fontOpacity;
+    property alias blockWidth: object.fillWidth;
     property alias radius: object.borderRadius;
 
     function parseStyle(){ return style.split(" "); }
@@ -56,8 +52,12 @@ QtObject {
     onStyleChanged: {
         var items = parseStyle();
         for(var i=0; i < items.length; i++){
-            if( items[i] === "hide-sm" ){
-                hideOnSm = true;
+            if( items[i] === "default" ){
+                fillWidth = false;
+                fillHeight = false;
+                alignment = Qt.AlignHCenter | Qt.AlignVCenter;
+            } else if( items[i] === "hide-sm" ){
+                hideSm = true;
             } else if( items[i] === "fill" ){
                 fillHeight = true;
             } else if( items[i] === "block" ){
@@ -121,6 +121,4 @@ QtObject {
             }
         }
     }
-
-
 }

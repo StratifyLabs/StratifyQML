@@ -15,27 +15,151 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
+import QtQuick.Controls 2.1
+import "Fa-4.5.0.js" as Fa
 import "."
 
-SItem {
-    default property alias data: modalContents.data;
+Item {
+
+    id: modal;
     anchors.fill: parent;
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
+
+    property bool modalVisible: true;
+
+    property real duration: 300;
+
+    property string title;
+    property real standardButtons: Dialog.Ok | Dialog.Cancel;
+
+    default property alias data: dialogContents.data;
+
+    SProperties {
+        id: properties;
+    }
+
+    states: [
+        State {
+            name: "visible";
+            when: modalVisible;
+            PropertyChanges { target: background; opacity: StratifyUI.modal_backdrop_opacity; }
+            PropertyChanges { target: dialog; opacity: 1.0; }
+            PropertyChanges { target: dialog; y: 50; }
+        },
+        State {
+            name: "invisible";
+            when: !modalVisible;
+            PropertyChanges { target: background; opacity: 0.0; }
+            PropertyChanges { target: dialog; opacity: 0.0; }
+            PropertyChanges { target: dialog; y: 0; }
+        }
+    ]
+
+
+    transitions: [
+        Transition {
+            from: "visible";
+            to: "invisible";
+            NumberAnimation { target: background; properties: "opacity"; easing.type: Easing.InOutQuad; duration: modal.duration; }
+            NumberAnimation { target: dialog; properties: "y"; easing.type: Easing.Linear; duration: modal.duration;  }
+            NumberAnimation { target: dialog; properties: "opacity"; easing.type: Easing.InOutQuad; duration: modal.duration; onStopped: visible = false; }
+        },
+        Transition {
+            from: "invisible";
+            to: "visible";
+            NumberAnimation { target: background; properties: "opacity"; easing.type: Easing.InOutQuad; duration: modal.duration; }
+            NumberAnimation { target: dialog; properties: "opacity"; easing.type: Easing.InOutQuad; duration: modal.duration; }
+            NumberAnimation { target: dialog; properties: "y"; easing.type: Easing.Linear; duration: modal.duration; onStarted: visible = true; }
+        }
+    ]
+
+
+    signal accept();
+    signal reject();
+
+
 
     Rectangle {
-        anchors.fill: parent;
-        color: Qt.rgba(0,0,0,theme.modal_backdrop_opacity);
-        Rectangle {
-            anchors.centerIn: parent;
-            width: theme.modal_md > parent.width*0.75 ? parent.width*0.75 : theme.modal_md;
-            height: modalContents.height;
-            radius: theme.panel_border_radius;
-            border.color: theme.modal_header_border_color;
+        id: dialog;
+        //anchors.centerIn: parent;
+        anchors.horizontalCenter: parent.horizontalCenter;
 
-            SColumn {
-                y: paddingVertical;
-                id: modalContents;
-            }
+
+        width: StratifyUI.screen_md < modal.width/2 ? StratifyUI.screen_md : modal.width/2;
+        implicitHeight: childrenRect.height;
+
+        color: StratifyUI.body_bg;
+        radius: properties.borderRadius;
+        border.width: properties.borderWidth;
+        border.color: properties.borderColor;
+
+        function accept(){
+            modalVisible = false;
+            modal.accept();
+        }
+        function reject(){
+            modalVisible = false;
+            modal.reject();
         }
 
+        SColumn {
+            SRow {
+                visible: modal.title !== "";
+                SText {
+                    span: 11;
+                    style: "left";
+                    leftPadding: properties.paddingHorizontal;
+                    rightPadding: properties.paddingHorizontal;
+                    text: modal.title;
+                    wrapMode: Text.Wrap;
+                    font.weight: Font.Bold;
+                }
+                SButton {
+                    span: 1;
+                    style: "right close";
+                    icon: Fa.Icon.times;
+                    onClicked: dialog.reject();
+                }
+            }
+
+            SHLine { properties.paddingVertical: 0; visible: modal.title !== ""; }
+
+            SContainer { id: dialogContents; }
+
+            SHLine { properties.paddingVertical: 0; }
+            SContainer {
+                SRow {
+                    SGroup {
+                        style: "right"; span: 12;
+                        SButton {
+                            style: "block btn-danger";
+                            icon: Fa.Icon.times;
+                            onClicked: dialog.reject();
+                            visible: modal.standardButtons & Dialog.Cancel;
+                        }
+                        SButton {
+                            style: "block btn-success";
+                            icon: Fa.Icon.check;
+                            onClicked: dialog.accept();
+                            visible: modal.standardButtons & Dialog.Ok;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    Rectangle {
+        id: background;
+        anchors.fill: parent;
+        color: StratifyUI.modal_backdrop_bg;
+        opacity: StratifyUI.modal_backdrop_opacity;
+
+
+
+        z:-1;
     }
 }

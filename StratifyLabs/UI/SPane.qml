@@ -17,18 +17,29 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "."
 
-SItem {
-    default property alias data: contents.data;
+Flickable {
+    id: control;
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
 
-    implicitWidth: blockWidth ? ((parent != null) ? parent.width : 0) : contents.childrenRect.width + paddingHorizontal*2;
-    implicitHeight: fillHeight ? ((parent != null) ? parent.height : 0) : contents.childrenRect.height + paddingVertical*2;
-    blockWidth:  true;
+    SProperties { id: properties; }
 
-    Flickable {
-        id: contents;
-        anchors.fill: parent;
-        contentWidth: childrenRect.width;
-        contentHeight: childrenRect.height;
+    clip: true;
+
+    width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
+
+    implicitWidth: contentWidth;
+    implicitHeight: contentHeight;
+
+    //if child has "block" set, width will bind
+    contentWidth: ((contentItem.children[0].properties !== undefined) && (contentItem.children[0].properties.fillWidth === true)) ? control.width : contentItem.childrenRect.width;
+    contentHeight: (contentItem.children[0].properties !== undefined) && (contentItem.children[0].properties.fillHeight === true) ? control.height : contentItem.childrenRect.height;
+
+    onWidthChanged: {
+        console.log("Content Width is " + contentWidth + " " + control.width);
+        console.log("Content Height is " + contentHeight + " " + control.height);
     }
 
 }

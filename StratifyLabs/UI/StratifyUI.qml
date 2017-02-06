@@ -426,4 +426,16 @@ QtObject {
     property real popover_opacity: 1;
 
 
+    //QML Screen size adjustments
+    property bool isScreenSm: false;
+
+    function updateScreenSize(width){
+        if( width < screen_sm ){
+            isScreenSm = true;
+        } else {
+            isScreenSm = false;
+        }
+    }
+
+
 }

@@ -17,29 +17,27 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import "."
 
-Item {
+Rectangle {
     property alias style: properties.style;
     property alias span: properties.span;
     property alias properties: properties;
     property string name;
+
     default property alias data: contents.data;
 
-    width: parent ? parent.width : undefined;
+    width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
 
     implicitWidth: contents.childrenRect.width + properties.paddingHorizontal*2;
     implicitHeight: contents.childrenRect.height + properties.paddingVertical*2;
-
-    Rectangle {
-        anchors.fill: parent;
-        color: properties.backgroundColor;
-    }
+    color: properties.backgroundColor;
 
     Item {
         id: contents;
         x: properties.paddingHorizontal;
         y: properties.paddingVertical;
-        height: properties.fillHeight ? parent.height - properties.paddingVertical*2: undefined;
-        width: properties.blockWidth ? parent.width - properties.paddingHorizontal*2: undefined;
+        height: parent.height - properties.paddingVertical*2;
+        width: parent.width - properties.paddingHorizontal*2;
     }
 
     SProperties {

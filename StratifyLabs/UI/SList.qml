@@ -27,15 +27,9 @@ ListView {
     }
 
     implicitWidth: contentItem.childrenRect.width;
+    implicitHeight: contentItem.childrenRect.height;
+
     clip: true;
     spacing: properties.paddingVertical;
 
-    Rectangle {
-        id: listViewRect;
-        anchors.fill: parent;
-        color: "transparent";
-        border.color: properties.borderColor;
-        border.width: properties.borderWidth;
-        radius: properties.borderRadius;
-    }
 }

@@ -26,12 +26,13 @@ Button {
     property alias properties: properties;
     property string icon;
 
+
     property alias spin: icon.spin;
     property alias pulse: icon.pulse;
     property alias pulseSteps: icon.pulseSteps;
     property alias animationPeriod: icon.animationPeriod;
 
-    implicitWidth: contentItem.implicitWidth + properties.paddingHorizontal*4;
+    implicitWidth: contentItem.implicitWidth + properties.paddingHorizontal*2;
     implicitHeight: properties.fontContainerHeight;
     baselineOffset: contentItem.y + contentItem.baselineOffset;
 
@@ -44,21 +45,8 @@ Button {
         id: icon;
         icon: control.icon;
         label: control.text;
+        properties.style: control.properties.style;
     }
-
-    /*
-    contentItem: Text {
-        text: control.text
-        font: control.font
-        opacity: enabled || control.highlighted || control.checked ? 1 : 0.3
-        color: control.checked || control.highlighted ?
-            Default.textLightColor :
-            (control.visualFocus ? Default.focusColor : (control.down ? Default.textDarkColor : Default.textColor))
-        //horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        elide: Text.ElideRight
-    }
-    */
 
     background: Rectangle {
         color: {
@@ -95,9 +83,19 @@ Button {
                     icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_primary_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_primary_border; });
                     properties.textColorMuted = "#fff";
-                } else if( items[i] === "default" || (items[i] === "btn-default") ){
+                } else if( (items[i] === "outline-primary") || (items[i] === "btn-outline-primary") ){
+                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_primary_color; });
+                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_primary_bg; });
+                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_primary_border; });
+                    properties.textColorMuted = "#fff";
+                } else if( items[i] === "default" || (items[i] === "btn-default") || (items[i] === "btn-secondary") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_default_bg; });
                     icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_default_color; });
+                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_default_border; });
+                    properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });;
+                } else if( items[i] === "outline-default" || (items[i] === "btn-outline-default") || (items[i] === "btn-outline-secondary") ){
+                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_default_color; });
+                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_default_bg; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_default_border; });
                     properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });;
                 } else if( items[i] === "danger" || (items[i] === "btn-danger") ){
@@ -105,9 +103,19 @@ Button {
                     icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_danger_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_danger_border; });
                     properties.textColorMuted = "#fff";
+                } else if( items[i] === "outline-danger" || (items[i] === "btn-outline-danger") ){
+                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_danger_color; });
+                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_danger_bg; });
+                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_danger_border; });
+                    properties.textColorMuted = "#fff";
                 } else if( items[i] === "success" || (items[i] === "btn-success") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_success_bg; });
                     icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_success_color; });
+                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_success_border; });
+                    properties.textColorMuted = "#fff";
+                } else if( items[i] === "outline-success" || (items[i] === "btn-outline-success") ){
+                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_success_color; });
+                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_success_bg; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_success_border; });
                     properties.textColorMuted = "#fff";
                 } else if( items[i] === "info" || (items[i] === "btn-info") ){
@@ -115,16 +123,26 @@ Button {
                     icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_info_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_info_border; });
                     properties.textColorMuted = "#fff";
+                } else if( items[i] === "outline-info" || (items[i] === "btn-outline-info") ){
+                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_info_color; });
+                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_info_bg; });
+                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_info_border; });
+                    properties.textColorMuted = "#fff";
                 } else if( items[i] === "warning" || (items[i] === "btn-warning") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_warning_bg; });
                     icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_warning_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_warning_border; });
                     properties.textColorMuted = "#fff";
+                } else if( items[i] === "outline-warning" || (items[i] === "btn-outline-warning") ){
+                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_warning_color; });
+                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_warning_bg; });
+                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_warning_border; });
+                    properties.textColorMuted = "#fff";
                 } else if( items[i] === "close" || (items[i] === "btn-close")){
                     backgroundColor = "transparent";
-                    icon.textColor = StratifyUI.text_muted;
+                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.text_muted; });
                     borderColor = "transparent";
-                    properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });;
+                    properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });
                 } else if( items[i] === "lg" || (items[i] === "btn-lg")){
                     properties.radius = Qt.binding(function(){ return StratifyUI.btn_border_radius_large; });
                     fontSize = Qt.binding(function(){ return StratifyUI.font_size_large; });
@@ -145,8 +163,5 @@ Button {
                 }
             }
         }
-
     }
-
-
 }

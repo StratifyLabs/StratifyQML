@@ -14,100 +14,26 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
+
 import QtQuick 2.6
 import "."
 
-SBaseRectangle {
-    id: base;
-    property alias text: text.text;
-    property alias icon: text.text;
-    property alias textObject: text;
+Text {
+    id: control;
 
-    property bool spin: false;
-    property bool pulse: false;
-    property real pulseSteps: 8;
-    property real animationPeriod: 1200;
+    property alias label: control.text;
 
-    type: "text";
-    implicitWidth: text.width;
-    implicitHeight: fontContainerHeight;
+    property alias properties: properties;
+    property alias style: properties.style;
+    property alias span: properties.span;
 
-    onSpinChanged: {
-        if( spin == false ){
-            text.rotation = 0;
-        }
+    SProperties {
+        id: properties;
     }
 
-    signal clicked();
-
-    contents.color: "transparent";
-    contents.border.color: "transparent";
-    onStyleChanged: {
-        var items = parseStyle();
-        var i;
-        for(i=0; i < items.length; i++){
-            if( items[i] === "text-left" ){
-                text.horizontalAlignment = Text.AlignLeft;
-            } else if( items[i] === "text-right" ){
-                text.horizontalAlignment = Text.AlignCenter;
-            } else if( items[i] === "text-center" ){
-                text.horizontalAlignment = Text.AlignRight;
-            } else if( items[i] === "fa" ){
-                text.font.family = iconFont;
-                text.font.pointSize = fontSize + paddingVertical*2;
-            } else if( items[i] === "bold" ){
-                text.font.weight = Font.Bold;
-            } else if( items[i] === "fa-spin" ){
-                pulse = false;
-                spin = true;
-            } else if( items[i] === "fa-pulse" ){
-                spin = false;
-                pulse = true;
-            }
-        }
-    }
-
-    contents.data: [
-        Text {
-            id: text;
-            anchors.verticalCenter: parent.verticalCenter;
-            verticalAlignment: Text.AlignVCenter;
-            leftPadding: paddingHorizontal;
-            rightPadding: paddingHorizontal;
-            color: textColor;
-            font.pointSize: fontSize;
-            font.family: textFont;
-            font.weight: Font.Light;
-            opacity: textOpacity;
-
-
-            RotationAnimation on rotation {
-                loops: Animation.Infinite;
-                paused: !spin;
-                from: 0;
-                to: 360;
-                duration: animationPeriod;
-            }
-
-            Timer {
-                id: pulseTimer;
-                running: pulse;
-                repeat: true;
-                interval: animationPeriod/pulseSteps;
-                onTriggered: {
-                    rectangleIcon.rotation += 360/pulseSteps;
-                }
-            }
-
-        }
-    ]
-
-    MouseArea {
-        anchors.fill: parent;
-        hoverEnabled: true;
-        onEntered: startHover();
-        onExited: stopHover();
-        onClicked: base.clicked();
-    }
-
+    font.family: properties.fontText;
+    font.pointSize: properties.fontSize;
+    color: enabled ? properties.textColor : properties.textColorMuted;
+    verticalAlignment: properties.fontHorizontalAlignment;
+    horizontalAlignment: properties.fontVerticalAlignment;
 }
