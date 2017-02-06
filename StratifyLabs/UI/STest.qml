@@ -28,6 +28,46 @@ Item {
 
     anchors.fill: parent;
 
+    SDrawer {
+        id: drawer
+        width: 250;
+        height: parent.height;
+
+        style: "primary";
+
+
+        property string menuStyle: "left lg primary block text-left";
+
+        SContainer {
+            SColumn {
+                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "AlertTest"; onPressed: { tests.screen = text; drawer.close(); } }
+                SHLine{ properties.paddingVertical: 0; }
+                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "ButtonTest"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "LabelTest"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "InputTest"; onPressed: { tests.screen = text; drawer.close(); } }
+                SHLine{ properties.paddingVertical: 0; }
+                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "ListTest"; onPressed: { tests.screen = text; drawer.close(); } }
+            }
+        }
+    }
+
+    SModal {
+        id: aboutModal;
+        title: "About";
+        standardButtons: 0;
+        SContainer {
+            SColumn {
+                SText {
+                    style: "block";
+                    wrapMode: Text.Wrap;
+                    text: "StratifyUI 2.0 is a QML framework that works, looks, and feels much like the twitter bootstrap HTML framework";
+                }
+            }
+        }
+
+    }
+
+
     SColumn {
         style: "block fill";
         SContainer {
@@ -35,11 +75,18 @@ Item {
             properties.backgroundColor: StratifyUI.brand_danger;
 
             SRow {
-                SRadioButton { span: 3; style: "text-hide-sm center"; text: "AlertTest"; onPressed: tests.screen = text; }
-                SRadioButton { span: 3; style: "text-hide-sm center"; text: "ButtonTest"; onPressed: tests.screen = text; }
-                SRadioButton { span: 3; style: "text-hide-sm center"; text: "LabelTest"; onPressed: tests.screen = text; }
-                SRadioButton { span: 3; style: "text-hide-sm center"; text: "InputTest"; onPressed: tests.screen = text; }
-                SRadioButton { span: 3; style: "text-hide-sm center"; text: "ListTest"; onPressed: tests.screen = text; }
+                SButton {
+                    span: 6;
+                    style: "left";
+                    icon: Fa.Icon.bars;
+                    onClicked: drawer.open();
+                }
+                SButton {
+                    span: 6;
+                    style: "right";
+                    icon: Fa.Icon.info_circle;
+                    onClicked: aboutModal.open();
+                }
             }
 
         }
@@ -48,8 +95,9 @@ Item {
             id: tests;
             style: "block fill";
 
-            SAnimationHPush{ id: animation; }
+            SAnimationFade{ id: animation; }
             screen: "AlertTest";
+
 
             Component.onCompleted: {
                 showScreen(current);
@@ -119,9 +167,9 @@ Item {
                             SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.circle_o_notch; text: "Working"; spin: true; }
                             SButton{ span: 4; style: "btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.spinner; text: "Pulse";  pulse: true; }
 
-                            SButton{ span: 4; style: "btn-lg center fa-spin btn-default"; icon: Fa.Icon.location_arrow; text: "Naked"; }
-                            SButton{ span: 4; style: "btn-lg center fa-pulse btn-default"; icon: Fa.Icon.repeat; text: "Naked"; }
-                            SButton{ span: 4; style: "btn-lg center fa-spin btn-default"; icon: Fa.Icon.safari; text: "Naked"; }
+                            SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.location_arrow; text: "Naked"; }
+                            SButton{ span: 4; style: "btn-lg center fa-pulse"; icon: Fa.Icon.repeat; text: "Naked"; }
+                            SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.safari; text: "Naked"; }
                         }
 
 

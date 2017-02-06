@@ -26,15 +26,25 @@ Item {
     property alias style: properties.style;
     property alias span: properties.span;
     property alias properties: properties;
-
-    property bool modalVisible: true;
-
+    property bool modalVisible: false;
     property real duration: 300;
-
     property string title;
     property real standardButtons: Dialog.Ok | Dialog.Cancel;
 
+    //keep it on top
+    z:1;
     default property alias data: dialogContents.data;
+
+    signal accept();
+    signal reject();
+
+    function open(){
+        modalVisible = true;
+    }
+
+    function close(){
+        modalVisible = true;
+    }
 
     SProperties {
         id: properties;
@@ -74,10 +84,6 @@ Item {
             NumberAnimation { target: dialog; properties: "y"; easing.type: Easing.Linear; duration: modal.duration; onStarted: visible = true; }
         }
     ]
-
-
-    signal accept();
-    signal reject();
 
 
 
@@ -128,8 +134,9 @@ Item {
 
             SContainer { id: dialogContents; }
 
-            SHLine { properties.paddingVertical: 0; }
+            SHLine { properties.paddingVertical: 0; visible: modal.standardButtons; }
             SContainer {
+                visible: modal.standardButtons;
                 SRow {
                     SGroup {
                         style: "right"; span: 12;

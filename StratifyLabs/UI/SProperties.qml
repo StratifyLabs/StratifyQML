@@ -56,6 +56,13 @@ QtObject {
                 fillWidth = false;
                 fillHeight = false;
                 alignment = Qt.AlignHCenter | Qt.AlignVCenter;
+            } else if( items[i] === "primary" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_primary_color; });
+                backgroundColor = Qt.binding(function(){ return StratifyUI.btn_primary_bg; });
+                borderColor = Qt.binding(function(){ return StratifyUI.btn_primary_border; });
+                backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
+            } else if( items[i] === "text-primary" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_primary_color; });
             } else if( items[i] === "hide-sm" ){
                 hideSm = true;
             } else if( items[i] === "fill" ){

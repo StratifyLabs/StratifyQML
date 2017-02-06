@@ -43,14 +43,13 @@ SWell 1.0 SWell.qml
 SJsonListModel 1.0 SJsonListModel.qml
 STooltip 1.0 STooltip.qml
 SToolTip 1.0 STooltip.qml
-SModalFooter 1.0 SModalFooter.qml
 SPopover 1.0 SPopover.qml
 SListgroup 1.0 SListgroup.qml
 SRadioButton 1.0 SRadioButton.qml
 SGroup 1.0 SGroup.qml
 SHLine 1.0 SHLine.qml
-SModalHeader 1.0 SModalHeader.qml
 SModal 1.0 SModal.qml
+SDrawer 1.0 SDrawer.qml
 SDropdown 1.0 SDropdown.qml
 SDropup 1.0 SDropup.qml
 SIcon 1.0 SIcon.qml

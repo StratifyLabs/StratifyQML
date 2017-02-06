@@ -37,7 +37,7 @@ Item {
     property real horizontalAlignment: properties.fontVerticalAlignment;
 
     implicitWidth: icon.implicitWidth + label.implicitWidth + row.spacing;
-    implicitHeight: childrenRect.height;
+    implicitHeight: icon.implicitHeight + label.implicitHeight;
 
     SProperties {
         id: properties;
@@ -55,7 +55,7 @@ Item {
             text: control.icon;
             font.family: properties.fontIcon;
             font.pointSize: properties.fontSize*1.2;
-            color: enabled ? properties.textColor : properties.textColorMuted;
+            color: enabled ? properties.fontColor : properties.fontColorMuted;
 
             RotationAnimation on rotation {
                 loops: Animation.Infinite;
@@ -79,18 +79,12 @@ Item {
         Text {
             id: label;
             anchors.verticalCenter: parent.verticalCenter;
-            //anchors.left: icon.right;
-            //leftPadding: properties.paddingHorizontal/4;
             text: control.label;
             font.family: properties.fontText;
             font.pointSize: properties.fontSize;
-            color: enabled ? properties.textColor : properties.textColorMuted;
+            color: enabled ? properties.fontColor : properties.fontColorMuted;
         }
     }
-
-
-
-
 
 
 }

@@ -46,6 +46,9 @@ Button {
         icon: control.icon;
         label: control.text;
         properties.style: control.properties.style;
+        properties.fontColor: control.properties.fontColor;
+        properties.fontColorMuted: control.properties.fontColorMuted;
+        properties.fontSize: control.properties.fontSize;
     }
 
     background: Rectangle {
@@ -55,11 +58,11 @@ Button {
             }
 
             if( control.pressed ){
-                return Qt.darker(properties.backgroundColor, 1.3);
+                return Qt.darker(properties.backgroundColorHover, 1.3);
             }
 
             if( control.hovered ){
-                return Qt.darker(properties.backgroundColor, 1.1);
+                return properties.backgroundColorHover;
             }
 
             return properties.backgroundColor;
@@ -83,83 +86,95 @@ Button {
                     icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_primary_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_primary_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
                 } else if( (items[i] === "outline-primary") || (items[i] === "btn-outline-primary") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_primary_color; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_primary_bg; });
+                    properties.fontColor = Qt.binding(function(){ if( control.hovered || control.pressed ){ return StratifyUI.btn_primary_color; } return StratifyUI.btn_primary_bg; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_primary_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return StratifyUI.btn_primary_bg; });
                 } else if( items[i] === "default" || (items[i] === "btn-default") || (items[i] === "btn-secondary") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_default_bg; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_default_color; });
+                    properties.textColor = Qt.binding(function(){ return StratifyUI.btn_default_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_default_border; });
-                    properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });;
+                    properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });
+                    properties.backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
                 } else if( items[i] === "outline-default" || (items[i] === "btn-outline-default") || (items[i] === "btn-outline-secondary") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_default_color; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_default_bg; });
+                    properties.fontColor = Qt.binding(function(){ if( control.hovered || control.pressed ){ return StratifyUI.btn_default_color; } return StratifyUI.btn_default_bg; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_default_border; });
                     properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });;
+                    properties.backgroundColorHover = Qt.binding(function(){ return StratifyUI.btn_default_bg; });
                 } else if( items[i] === "danger" || (items[i] === "btn-danger") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_danger_bg; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_danger_color; });
+                    properties.textColor = Qt.binding(function(){ return StratifyUI.btn_danger_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_danger_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
                 } else if( items[i] === "outline-danger" || (items[i] === "btn-outline-danger") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_danger_color; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_danger_bg; });
+                    properties.fontColor = Qt.binding(function(){ if( control.hovered || control.pressed ){ return StratifyUI.btn_danger_color; } return StratifyUI.btn_danger_bg; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_danger_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return StratifyUI.btn_danger_bg; });
                 } else if( items[i] === "success" || (items[i] === "btn-success") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_success_bg; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_success_color; });
+                    properties.textColor = Qt.binding(function(){ return StratifyUI.btn_success_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_success_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
                 } else if( items[i] === "outline-success" || (items[i] === "btn-outline-success") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_success_color; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_success_bg; });
+                    properties.fontColor = Qt.binding(function(){ if( control.hovered || control.pressed ){ return StratifyUI.btn_success_color; } return StratifyUI.btn_success_bg; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_success_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return StratifyUI.btn_success_bg; });
                 } else if( items[i] === "info" || (items[i] === "btn-info") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_info_bg; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_info_color; });
+                    properties.textColor = Qt.binding(function(){ return StratifyUI.btn_info_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_info_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
                 } else if( items[i] === "outline-info" || (items[i] === "btn-outline-info") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_info_color; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_info_bg; });
+                    properties.fontColor = Qt.binding(function(){ if( control.hovered || control.pressed ){ return StratifyUI.btn_info_color; } return StratifyUI.btn_info_bg; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_info_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return StratifyUI.btn_info_bg; });
                 } else if( items[i] === "warning" || (items[i] === "btn-warning") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_warning_bg; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_warning_color; });
+                    properties.textColor = Qt.binding(function(){ return StratifyUI.btn_warning_color; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_warning_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
                 } else if( items[i] === "outline-warning" || (items[i] === "btn-outline-warning") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_warning_color; });
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.btn_warning_bg; });
+                    properties.fontColor = Qt.binding(function(){ if( control.hovered || control.pressed ){ return StratifyUI.btn_warning_color; } return StratifyUI.btn_warning_bg; });
                     properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_warning_border; });
                     properties.textColorMuted = "#fff";
+                    properties.backgroundColorHover = Qt.binding(function(){ return StratifyUI.btn_warning_bg; });
                 } else if( items[i] === "close" || (items[i] === "btn-close")){
-                    backgroundColor = "transparent";
-                    icon.properties.textColor = Qt.binding(function(){ return StratifyUI.text_muted; });
-                    borderColor = "transparent";
+                    properties.backgroundColor = "transparent";
+                    properties.textColor = Qt.binding(function(){ return StratifyUI.text_muted; });
+                    properties.borderColor = "transparent";
                     properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });
                 } else if( items[i] === "lg" || (items[i] === "btn-lg")){
                     properties.radius = Qt.binding(function(){ return StratifyUI.btn_border_radius_large; });
-                    fontSize = Qt.binding(function(){ return StratifyUI.font_size_large; });
+                    properties.fontSize = Qt.binding(function(){ return StratifyUI.font_size_large; });
                     properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_large_vertical; });
                     properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_large_horizontal; });
                 } else if( items[i] === "block" || (items[i] === "btn-block")){
-                    blockWidth = true;
+                    properties.blockWidth = true;
                 } else if( items[i] === "sm" || (items[i] === "btn-sm")){
                     properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_small_vertical; });
                     properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_small_horizontal; });
                     properties.radius = Qt.binding(function(){ return StratifyUI.btn_border_radius_small; });
-                    icon.properties.fontSize = Qt.binding(function(){ return StratifyUI.font_size_small; });
+                    properties.fontSize = Qt.binding(function(){ return StratifyUI.font_size_small; });
                 } else if( items[i] === "xs" || (items[i] === "btn-xs")){
                     properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_xs_vertical; });
                     properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_xs_horizontal; });
                     properties.radius = Qt.binding(function(){ return StratifyUI.btn_border_radius_small; });
-                    icon.properties.fontSize = Qt.binding(function(){ return StratifyUI.font_size_small; });
+                    properties.fontSize = Qt.binding(function(){ return StratifyUI.font_size_small; });
                 }
             }
         }

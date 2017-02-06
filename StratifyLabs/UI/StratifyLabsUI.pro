@@ -41,8 +41,6 @@ DISTFILES = qmldir \
     SListgroup.qml \
     SLoader.qml \
     SModal.qml \
-    SModalFooter.qml \
-    SModalHeader.qml \
     SNavbar.qml \
     SPane.qml \
     SPanel.qml \
@@ -75,7 +73,8 @@ DISTFILES = qmldir \
     OpenSans-Semibold.ttf \
     StratifyUI.qml \
     SProperties.qml \
-    SDropup.qml
+    SDropup.qml \
+    SDrawer.qml
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir

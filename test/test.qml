@@ -1,12 +1,8 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.1
-
 import StratifyLabs.UI 1.0
 
-
-
-//import "../UI"
 
 Window {
     id: window;
@@ -17,16 +13,17 @@ Window {
 
     width: 600;
 
-    //STest {}
+    STest {}
 
 
+    /*
     SContainer {
         style: "block fill";
         SColumn {
             style: "block fill";
             SRow {
                 style: "block";
-                SButton { span: 4; style: "btn-default top center"; text: "Hello"; onClicked: dialog.modalVisible = true; }
+                SButton { span: 4; style: "btn-default top center"; text: "Hello"; onClicked: drawer.open(); }
                 SButton { span: 4; style: "btn-default top center"; text: "Hello"; }
                 SButton { span: 4; style: "btn-default top center"; text: "Hello"; }
             }
@@ -40,27 +37,8 @@ Window {
                 style: "block fill";
             }
         }
-
-
     }
-
-    SModal {
-        id: dialog
-
-        visible: true;
-        //title: "Save?";
-
-
-        SButton {
-            style: "btn-default";
-            text: "hello";
-        }
-
-
-
-    }
-
-
+    */
 
 
     onWidthChanged: {

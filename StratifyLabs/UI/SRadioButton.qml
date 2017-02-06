@@ -26,10 +26,13 @@ RadioButton {
     property alias style: properties.style;
     property alias span: properties.span;
 
+    property string iconChecked: Fa.Icon.circle;
+    property string icon: Fa.Icon.circle_o;
+
     SProperties {
         id: properties;
-        backgroundColor: StratifyUI.body_bg;
-        borderColor: StratifyUI.body_bg;
+        //backgroundColor: StratifyUI.body_bg;
+        //borderColor: StratifyUI.body_bg;
         fontHorizontalAlignment: Text.AlignLeft;
     }
 
@@ -42,10 +45,10 @@ RadioButton {
     indicator: Text {
         x: text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
-        text: control.checked ? Fa.Icon.circle : Fa.Icon.circle_o;
-        font.family: StratifyUI.font_family_icon.name;
-        font.pixelSize: StratifyUI.font_size_base*1.5;
-        color: StratifyUI.text_color;
+        text: control.checked ? control.iconChecked : control.icon;
+        font.family: properties.fontIcon;
+        font.pixelSize: properties.fontSize*1.5;
+        color: properties.fontColor;
         opacity: enabled ? 1 : 0.3
     }
 
@@ -54,10 +57,9 @@ RadioButton {
         rightPadding: control.indicator && control.mirrored ? control.indicator.width + control.spacing : 0
 
         text: control.text
-        font.family: StratifyUI.font_family_base.name;
-        font.pixelSize: StratifyUI.font_size_base;
-        color: StratifyUI.text_color;
-        elide: Text.ElideRight
+        font.family: properties.fontText;
+        font.pixelSize: properties.fontSize;
+        color: properties.fontColor;
         visible: control.text
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter

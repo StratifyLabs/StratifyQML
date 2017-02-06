@@ -22,7 +22,6 @@ Text {
     id: control;
 
     property alias label: control.text;
-
     property alias properties: properties;
     property alias style: properties.style;
     property alias span: properties.span;

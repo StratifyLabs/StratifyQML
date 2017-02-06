@@ -21,16 +21,15 @@ import "."
 
 CheckBox {
     id: control;
-
-
     property alias properties: properties;
     property alias span: properties.span;
     property alias style: properties.style;
 
+    property string iconChecked: Fa.Icon.check_square_o;
+    property string icon: Fa.Icon.square_o;
+
     SProperties {
         id: properties;
-        backgroundColor: StratifyUI.body_bg;
-        borderColor: StratifyUI.body_bg;
         fontHorizontalAlignment: Text.AlignLeft;
     }
 
@@ -51,7 +50,7 @@ CheckBox {
     indicator: Text {
         x: text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
-        text: control.checked ? Fa.Icon.check_square_o : Fa.Icon.square_o;
+        text: control.checked ? control.iconChecked: control.icon;
         font.family: properties.fontIcon;
         font.pixelSize: properties.fontSize*1.4;
         color: properties.fontColor;
