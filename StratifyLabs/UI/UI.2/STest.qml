@@ -49,6 +49,8 @@ Item {
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Input"; onPressed: { tests.screen = text; drawer.close(); } }
                 SHLine{ properties.paddingVertical: 0; }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
             }
         }
     }
@@ -98,7 +100,6 @@ Item {
             SAnimationFade{ id: animation; }
             screen: "Alerts";
 
-
             Component.onCompleted: {
                 showScreen(current);
             }
@@ -115,64 +116,65 @@ Item {
                         SAlert { span: 6; style: "alert-danger"; text: "<b>Alert!</b> Danger"; }
                         SAlert { span: 6; style: "alert-info text-center"; text: "<b>Alert!</b> Center"; }
                         SAlert { span: 6; style: "alert-success text-right"; text: "<b>Alert!</b> Right (fix me)"; }
-                        SWell { span: 6; style: "well-lg"; text: "Large Well"; }
-                        SWell { span: 6; style: "well-sm"; text: "Small Well"; }
-                        SWell { span: 6; style: "well-default"; text: "Well"; }
                     }
-
-                    //SDropdown{ style: "btn-default"; text: "Hello"; }
                 },
 
                 SContainer {
                     name: "Buttons";
-                    SColumn {
-                        SLabel { style: "left"; text: "Button Colors:"; }
+                    style: "fill";
+                    SPane {
+                        style: "block fill";
 
-                        SRow {
-                            SButton{ span: 4; style: "btn-primary center"; text: "Primary"; }
-                            SButton{ span: 4; style: "btn-outline-primary center"; text: "Outline Primary"; }
-                            SButton{ span: 4; style: "btn-secondary center"; text: "Secondary"; }
-                            SButton{ span: 4; style: "btn-outline-secondary center"; text: "Outline Secondary"; }
-                            SButton{ span: 4; style: "btn-info center"; text: "Info"; }
-                            SButton{ span: 4; style: "btn-outline-info center"; text: "Outline Info"; }
-                            SButton{ span: 4; style: "btn-success center"; text: "Success"; }
-                            SButton{ span: 4; style: "btn-outline-success center"; text: "Outline Success"; }
-                            SButton{ span: 4; style: "btn-warning center"; text: "Warning"; }
-                            SButton{ span: 4; style: "btn-outline-warning center"; text: "Outline Warning"; }
-                            SButton{ span: 4; style: "btn-danger center"; text: "Danger"; }
-                            SButton{ span: 4; style: "btn-outline-danger center"; text: "Outline Danger"; }
+
+                        SColumn {
+                            SLabel { style: "left fill"; text: "Button Colors:"; }
+
+                            SRow {
+                                SButton{ span: 4; style: "btn-primary center"; text: "Primary"; }
+                                SButton{ span: 4; style: "btn-outline-primary center"; text: "Outline Primary"; }
+                                SButton{ span: 4; style: "btn-secondary center"; text: "Secondary"; }
+                                SButton{ span: 4; style: "btn-outline-secondary center"; text: "Outline Secondary"; }
+                                SButton{ span: 4; style: "btn-info center"; text: "Info"; }
+                                SButton{ span: 4; style: "btn-outline-info center"; text: "Outline Info"; }
+                                SButton{ span: 4; style: "btn-success center"; text: "Success"; }
+                                SButton{ span: 4; style: "btn-outline-success center"; text: "Outline Success"; }
+                                SButton{ span: 4; style: "btn-warning center"; text: "Warning"; }
+                                SButton{ span: 4; style: "btn-outline-warning center"; text: "Outline Warning"; }
+                                SButton{ span: 4; style: "btn-danger center"; text: "Danger"; }
+                                SButton{ span: 4; style: "btn-outline-danger center"; text: "Outline Danger"; }
+                            }
+
+                            SHLine{}
+
+                            SLabel { style: "left"; text: "Button Sizes:"; }
+
+                            SRow {
+                                SButton{ span: 6; style: "btn-default btn-xs"; text: "Extra Small"; }
+                                SButton{ span: 6; style: "btn-default btn-sm"; text: "Small"; }
+                                SButton{ span: 6; style: "btn-default"; text: "Default"; }
+                                SButton{ span: 6; style: "btn-default btn-lg"; text: "Large"; }
+                            }
+
+                            SHLine{}
+
+                            SLabel { style: "left"; text: "Button Icons:"; }
+
+                            SRow {
+                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center fa-spin"; icon: Fa.Icon.refresh; text: "Refresh"; }
+                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center fa-spin"; icon: Fa.Icon.cog; text: "Working"; }
+                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.refresh; text: "Pulse"; }
+
+                                SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.spinner; text: "Refresh"; spin: true; }
+                                SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.circle_o_notch; text: "Working"; spin: true; }
+                                SButton{ span: 4; style: "btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.spinner; text: "Pulse";  pulse: true; }
+
+                                SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.location_arrow; text: "Naked"; }
+                                SButton{ span: 4; style: "btn-lg center fa-pulse"; icon: Fa.Icon.repeat; text: "Naked"; }
+                                SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.safari; text: "Naked"; }
+                            }
+
+
                         }
-
-                        SHLine{}
-
-                        SLabel { style: "left"; text: "Button Sizes:"; }
-
-                        SRow {
-                            SButton{ span: 6; style: "btn-default btn-xs"; text: "Extra Small"; }
-                            SButton{ span: 6; style: "btn-default btn-sm"; text: "Small"; }
-                            SButton{ span: 6; style: "btn-default"; text: "Default"; }
-                            SButton{ span: 6; style: "btn-default btn-lg"; text: "Large"; }
-                        }
-
-                        SHLine{}
-
-                        SLabel { style: "left"; text: "Button Icons:"; }
-
-                        SRow {
-                            SButton{ span: 4; style: "btn-block btn-primary btn-lg center fa-spin"; icon: Fa.Icon.refresh; text: "Refresh"; }
-                            SButton{ span: 4; style: "btn-block btn-primary btn-lg center fa-spin"; icon: Fa.Icon.cog; text: "Working"; }
-                            SButton{ span: 4; style: "btn-block btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.refresh; text: "Pulse"; }
-
-                            SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.spinner; text: "Refresh"; spin: true; }
-                            SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.circle_o_notch; text: "Working"; spin: true; }
-                            SButton{ span: 4; style: "btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.spinner; text: "Pulse";  pulse: true; }
-
-                            SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.location_arrow; text: "Naked"; }
-                            SButton{ span: 4; style: "btn-lg center fa-pulse"; icon: Fa.Icon.repeat; text: "Naked"; }
-                            SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.safari; text: "Naked"; }
-                        }
-
-
                     }
                 },
 
@@ -226,21 +228,28 @@ Item {
                     style: "block fill";
                     SColumn {
                         style: "block fill";
-                        SRow {
-                            SCheckbox{ span: 4; style: "left"; text: "Checkbox 1"; }
-                            SCheckbox{ span: 4; style: "left"; text: "Checkbox 2"; }
-                            SCheckbox{ span: 4; style: "left"; text: "Checkbox 3"; }
-                        }
 
                         SRow {
-                            SRadioButton { span: 4; style: "left"; text: "RadioButton 1"; }
-                            SRadioButton { span: 4; style: "left"; text: "RadioButton 2"; }
-                            SRadioButton { span: 4; style: "left"; text: "RadioButton 3"; }
+                            SCheckbox{ span: 6; style: "center"; text: "Checkbox 1"; }
+                            SCheckbox{ span: 6; style: "center"; text: "Checkbox 2"; }
+
+                            SRadioButton { span: 6; style: "center"; text: "RadioButton 1"; }
+                            SRadioButton { span: 6; style: "center"; text: "RadioButton 2"; }
+                        }
+
+
+                        SRow {
+                            SLabel { span: 3; style: "block text-left hide-sm"; text: "Select"; }
+                            SDropdown {
+                                style: "block";
+                                span: 9;
+                                model: ["First", "Second", "Third", "Fourth"];
+                            }
                         }
 
                         SRow {
                             SLabel { span: 3; style: "block text-left hide-sm"; text: "Username"; }
-                            SInput { span: 9; text: "StratifyLabs"; }
+                            SInput { span: 9; style: "block"; text: "StratifyLabs"; }
                         }
 
                         SRow {
@@ -346,7 +355,121 @@ Item {
                         SWell { span: 6; style: "well-xs"; text: "Extra Small Well"; }
                     }
 
+                },
+
+                SContainer {
+                    style: "fill";
+                    name: "Tables";
+
+                    SColumn {
+                        style: "fill";
+
+
+                        ListModel {
+                            id: libraryModel;
+                            ListElement {
+                                title: "A Masterpiece"
+                                author: "Gabriel"
+                            }
+                            ListElement {
+                                title: "Brilliance"
+                                author: "Jens"
+                            }
+                            ListElement {
+                                title: "Outstanding"
+                                author: "Frederik"
+                            }
+                            ListElement {
+                                title: "A Masterpiece"
+                                author: "Gabriel"
+                            }
+                        }
+
+
+                        STable{
+                            model: libraryModel;
+                            style: "block table-striped";
+
+                            STableColumn {
+                                span: 6;
+                                role: "title";
+                                title: "Title";
+                            }
+
+                            STableColumn {
+                                span: 6;
+                                role: "author"
+                                title: "Author"
+                            }
+                        }
+
+                        STable{
+                            model: libraryModel;
+                            style: "block table-condensed";
+
+                            STableColumn {
+                                span: 6;
+                                role: "title";
+                                title: "Title";
+                            }
+
+                            STableColumn {
+                                span: 6;
+                                role: "author"
+                                title: "Author"
+                            }
+                        }
+
+                        STable{
+                            model: libraryModel;
+                            style: "block table-bordered";
+
+                            STableColumn {
+                                span: 6;
+                                role: "title";
+                                title: "Title";
+                            }
+
+                            STableColumn {
+                                span: 6;
+                                role: "author"
+                                title: "Author"
+                            }
+                        }
+
+                        STable{
+                            model: libraryModel;
+                            style: "fill block table-hover";
+
+                            STableColumn {
+                                span: 6;
+                                role: "title";
+                                title: "Title";
+                            }
+
+                            STableColumn {
+                                span: 6;
+                                role: "author"
+                                title: "Author"
+                            }
+                        }
+                    }
+                },
+
+                SContainer {
+                    name: "ToolTips";
+                    SRow {
+                        SButton {
+                            text: "Tooltip";
+                            style: "btn-default";
+                            span: 2;
+                            SToolTip {
+                                text: "This is a tooltip";
+                            }
+                        }
+                    }
                 }
+
             ]
         }
     }

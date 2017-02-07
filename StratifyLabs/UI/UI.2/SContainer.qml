@@ -18,12 +18,14 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 Rectangle {
+    id: control;
     property alias style: properties.style;
     property alias span: properties.span;
     property alias properties: properties;
     property string name;
 
     default property alias data: contents.data;
+    property alias backgroundColor: control.properties.backgroundColor;
 
     width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
     height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
@@ -36,8 +38,8 @@ Rectangle {
         id: contents;
         x: properties.paddingHorizontal;
         y: properties.paddingVertical;
-        height: parent.height - properties.paddingVertical*2;
-        width: parent.width - properties.paddingHorizontal*2;
+        height: parent.height !== undefined ? parent.height - properties.paddingVertical*2 : undefined;
+        width: parent.width !== undefined ? parent.width - properties.paddingHorizontal*2 : undefined;
     }
 
     SProperties {

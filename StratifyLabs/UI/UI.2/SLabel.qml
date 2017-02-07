@@ -26,7 +26,7 @@ Label {
     property alias span: properties.span;
 
     font.family: properties.textFont;
-    font.bold: true;
+    font.weight: properties.fontWeight;
     font.pixelSize: properties.fontSize;
     color: properties.textColor;
 
@@ -48,6 +48,7 @@ Label {
 
     SProperties {
         id: properties;
+        fontWeight: Font.Bold;
 
         onStyleChanged: {
             var items = parseStyle();

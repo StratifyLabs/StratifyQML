@@ -73,10 +73,10 @@ Rectangle {
         leftPadding: properties.paddingHorizontal;
         topPadding: properties.paddingVertical;
         bottomPadding: properties.paddingVertical;
-        width: parent.width;
         color: properties.fontColor;
         font.family: properties.fontText;
         font.pixelSize: properties.fontSize;
+        font.weight: properties.fontWeight;
         wrapMode: Text.Wrap;
         horizontalAlignment: properties.fontHorizontalAlignment;
         verticalAlignment: properties.fontVerticalAlignment;

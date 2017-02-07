@@ -20,7 +20,7 @@ import StratifyLabs.UI 2.0
 
 TableViewColumn {
     property real span: 0;
-    width: span ? (parent ? parent.width * span / theme.grid_columns : 100) : 100;
+    width: span ? (parent ? parent.width * span / StratifyUI.grid_columns : 100) : 100;
 }
 
 

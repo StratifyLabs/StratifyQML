@@ -26,11 +26,13 @@ Rectangle {
     property alias text: textArea.text;
     property alias placeholder: textArea.placeholderText;
     property alias textArea: textArea;
+    property alias textBox: control.textArea;
     property alias flickable: flickable;
 
     SProperties {
         id: properties;
         borderColor: StratifyUI.gray_light;
+        fillWidth: true;
     }
 
     implicitWidth: properties.blockWidth ? (parent.width) : 0;
@@ -53,6 +55,7 @@ Rectangle {
             color: properties.fontColor;
             font.pixelSize: properties.fontSize;
             font.family: properties.fontText;
+            font.weight: properties.fontWeight;
             selectedTextColor: properties.fontColorSelected;
             selectByMouse: true;
             selectByKeyboard: true;

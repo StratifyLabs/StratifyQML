@@ -27,6 +27,8 @@ QtObject {
     property color fontColorSelected: StratifyUI.text_muted;
     property real fontHorizontalAlignment: Text.AlignHCenter;
     property real fontVerticalAlignment: Text.AlignVCenter;
+    property real fontWeight: Font.Normal;
+    property bool fontHideSm: false;
 
     //Background and border
     property color backgroundColor: "transparent";
@@ -61,10 +63,42 @@ QtObject {
                 backgroundColor = Qt.binding(function(){ return StratifyUI.btn_primary_bg; });
                 borderColor = Qt.binding(function(){ return StratifyUI.btn_primary_border; });
                 backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
+            } else if( items[i] === "warning" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_warning_color; });
+                backgroundColor = Qt.binding(function(){ return StratifyUI.btn_warning_bg; });
+                borderColor = Qt.binding(function(){ return StratifyUI.btn_warning_border; });
+                backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
+            } else if( items[i] === "danger" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_danger_color; });
+                backgroundColor = Qt.binding(function(){ return StratifyUI.btn_danger_bg; });
+                borderColor = Qt.binding(function(){ return StratifyUI.btn_danger_border; });
+                backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
+            } else if( items[i] === "success" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_success_color; });
+                backgroundColor = Qt.binding(function(){ return StratifyUI.btn_success_bg; });
+                borderColor = Qt.binding(function(){ return StratifyUI.btn_success_border; });
+                backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
+            } else if( items[i] === "info" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_info_color; });
+                backgroundColor = Qt.binding(function(){ return StratifyUI.btn_info_bg; });
+                borderColor = Qt.binding(function(){ return StratifyUI.btn_info_border; });
+                backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
             } else if( items[i] === "text-primary" ){
                 fontColor = Qt.binding(function(){ return StratifyUI.btn_primary_color; });
+            } else if( items[i] === "text-warning" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_warning_color; });
+            } else if( items[i] === "text-success" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_success_color; });
+            } else if( items[i] === "text-info" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_info_color; });
+            } else if( items[i] === "text-danger" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_danger_color; });
+            } else if( items[i] === "text-default" ){
+                fontColor = Qt.binding(function(){ return StratifyUI.btn_default_color; });
             } else if( items[i] === "hide-sm" ){
                 hideSm = true;
+            } else if( items[i] === "text-hide-sm" ){
+                fontHideSm = true;
             } else if( items[i] === "fill" ){
                 fillHeight = true;
             } else if( items[i] === "block" ){
@@ -99,32 +133,48 @@ QtObject {
                 fontVerticalAlignment = Text.AlignVCenter;
             } else if( items[i] === "text-bottom" ){
                 fontVerticalAlignment = Text.AlignBottom;
+            } else if( items[i] === "font-bold" ){
+                fontWeight = Font.Bold;
+            } else if( items[i] === "font-light" ){
+                fontWeight = Font.Light;
+            } else if( items[i] === "font-demi-bold" ){
+                fontWeight = Font.DemiBold;
+            } else if( items[i] === "font-extra-bold" ){
+                fontWeight = Font.ExtraBold;
+            } else if( items[i] === "font-extra-light" ){
+                fontWeight = Font.ExtraLight;
+            } else if( items[i] === "font-normal" ){
+                fontWeight = Font.Normal;
             } else if( items[i] === "h1" ){
-                fontSize = StratifyUI.font_size_h1;
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_h1; });
             } else if( items[i] === "h2" ){
-                fontSize = StratifyUI.font_size_h2;
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_h2; });
             } else if( items[i] === "h3" ){
-                fontSize = StratifyUI.font_size_h3;
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_h3; });
             } else if( items[i] === "h4" ){
-                fontSize = StratifyUI.font_size_h4;
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_h4; });
             } else if( items[i] === "h5" ){
-                fontSize = StratifyUI.font_size_h5;
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_h5; });
             } else if( items[i] === "h6" ){
-                fontSize = StratifyUI.font_size_h6;
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_h6; });
             } else if( items[i] === "lg" ){
-                fontSize = StratifyUI.font_size_large;
-                paddingVertical = StratifyUI.padding_large_vertical;
-                paddingHorizontal = StratifyUI.padding_large_horizontal;
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_large; });
+                paddingVertical = Qt.binding( function() { return StratifyUI.padding_large_vertical; });
+                paddingHorizontal = Qt.binding( function() { return StratifyUI.padding_large_horizontal; });
             } else if( items[i] === "sm" ){
-                fontSize = StratifyUI.font_size_small;
-                paddingVertical = StratifyUI.padding_small_vertical;
-                paddingHorizontal = StratifyUI.padding_small_horizontal;
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_small; });
+                paddingVertical = Qt.binding( function() { return StratifyUI.padding_small_vertical; });
+                paddingHorizontal = Qt.binding( function() { return StratifyUI.padding_small_horizontal; });
             } else if( items[i] === "xs" ){
-                fontSize = StratifyUI.font_size_small;
-                paddingVertical = StratifyUI.padding_xs_vertical;
-                paddingHorizontal = StratifyUI.padding_xs_horizontal;
-            } else if( items[i] === "bold" ){
-                textFont = StratifyUI.font_family_bold.name;
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_small; });
+                paddingVertical = Qt.binding( function() { return StratifyUI.padding_xs_vertical; });
+                paddingHorizontal = Qt.binding( function() { return StratifyUI.padding_xs_horizontal; });
+            } else if( items[i] === "condensed" ){
+                paddingVertical = Qt.binding( function() { return StratifyUI.padding_small_vertical; });
+                paddingHorizontal = Qt.binding( function() { return StratifyUI.padding_small_horizontal; });
+            } else if( items[i] === "padding-zero" ){
+                paddingVertical = 0;
+                paddingHorizontal = 0;
             }
         }
     }

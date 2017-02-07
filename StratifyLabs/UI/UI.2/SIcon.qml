@@ -36,7 +36,7 @@ Item {
     property real verticalAlignment: properties.fontHorizontalAlignment;
     property real horizontalAlignment: properties.fontVerticalAlignment;
 
-    implicitWidth: icon.implicitWidth + label.implicitWidth + row.spacing;
+    implicitWidth: icon.implicitWidth + (label.implicitWidth*label.visible) + row.spacing;
     implicitHeight: icon.implicitHeight + label.implicitHeight;
 
     SProperties {
@@ -55,6 +55,7 @@ Item {
             text: control.icon;
             font.family: properties.fontIcon;
             font.pointSize: properties.fontSize*1.2;
+            font.weight: properties.fontWeight;
             color: enabled ? properties.fontColor : properties.fontColorMuted;
 
             RotationAnimation on rotation {
@@ -82,7 +83,9 @@ Item {
             text: control.label;
             font.family: properties.fontText;
             font.pointSize: properties.fontSize;
+            font.weight: properties.fontWeight;
             color: enabled ? properties.fontColor : properties.fontColorMuted;
+            visible: !(StratifyUI.isScreenSm && properties.fontHideSm);
         }
     }
 

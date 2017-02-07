@@ -26,22 +26,32 @@ ComboBox {
     property alias style: properties.style;
     property alias span: properties.span;
 
+    //Legacy 1.0 interfacing
+    property alias text: control.currentText;
+    signal clicked();
+    signal itemClicked();
+    onHighlighted: itemClicked();
+    onActivated: clicked();
+
     SProperties {
         id: properties;
+        blockWidth: true;
     }
 
     implicitWidth: contentItem.implicitWidth + properties.paddingHorizontal*2;
     implicitHeight: properties.fontContainerHeight;
 
-    baselineOffset: contentItem.y + contentItem.baselineOffset
+    baselineOffset: contentItem.y + contentItem.baselineOffset;
 
-    font.family: StratifyUI.font_family_icon.name;
-    font.pixelSize: StratifyUI.font_size_base;
+    font.family: properties.fontText;
+    font.pixelSize: properties.fontSize;
+    font.weight: properties.fontWeight;
 
     spacing: 8
-    padding: 6
-    leftPadding: padding + 6
-    rightPadding: padding + 6
+    topPadding: properties.paddingVertical;
+    bottomPadding: properties.paddingVertical;
+    leftPadding: properties.paddingHorizontal;
+    rightPadding: properties.paddingHorizontal;
 
     delegate: ItemDelegate {
         id: delegate;
@@ -57,8 +67,8 @@ ComboBox {
             color: delegate.highlighted ? StratifyUI.dropdown_active_color : (delegate.hovered ? StratifyUI.dropdown_hover_color :StratifyUI.text_color);
             elide: Text.ElideRight
             visible: delegate.text
-            horizontalAlignment: Text.AlignLeft
-            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: properties.fontHorizontalAlignment;
+            verticalAlignment: properties.fontVerticalAlignment;
         }
 
 
@@ -79,7 +89,7 @@ ComboBox {
         x: control.mirrored ? control.leftPadding : control.width - width - control.rightPadding
         y: control.topPadding + (control.availableHeight - height) / 2
         text: Fa.Icon.caret_down;
-        font.family: StratifyUI.font_family_icon.name;
+        font.family: properties.fontIcon;
         font.pixelSize: StratifyUI.font_size_base;
         color: StratifyUI.dropdown_caret_color;
         opacity: enabled ? 1 : 0.3
@@ -92,9 +102,9 @@ ComboBox {
 
         text: control.displayText
         font: control.font;
-        color: StratifyUI.text_color;
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
+        color: properties.fontColor;
+        horizontalAlignment: properties.fontHorizontalAlignment;
+        verticalAlignment: properties.fontVerticalAlignment;
         elide: Text.ElideRight
         opacity: enabled ? 1 : 0.3
     }
@@ -109,16 +119,16 @@ ComboBox {
 
 
     popup: Popup {
-        y: control.height - (control.visualFocus ? 0 : 1) + StratifyUI.padding_base_vertical;
+        y: control.height - (control.visualFocus ? 0 : 1) + properties.paddingVertical;
         width: control.width;
-        implicitHeight: contentItem.implicitHeight;
-        topMargin: 6
-        bottomMargin: 6
+        implicitHeight: (count < 5 ? (contentItem.implicitHeight*count) : contentItem.implicitHeight*5) + properties.paddingVertical*2;
+        topMargin: properties.paddingVertical;
+        bottomMargin: properties.paddingVertical
 
         contentItem: ListView {
             id: listview
             clip: true
-            implicitHeight: contentHeight
+            implicitHeight: properties.fontContainerHeight;
             model: control.popup.visible ? control.delegateModel : null
             currentIndex: control.highlightedIndex
             highlightRangeMode: ListView.ApplyRange
@@ -130,7 +140,7 @@ ComboBox {
                 width: listview.width;
                 height: listview.height;
                 color: "transparent";
-                radius: StratifyUI.border_radius_base;
+                radius: properties.borderRadius;
             }
 
             ScrollIndicator.vertical: ScrollIndicator { }
@@ -138,7 +148,7 @@ ComboBox {
 
         background: Rectangle {
             color: StratifyUI.dropdown_bg;
-            radius: StratifyUI.border_radius_base;
+            radius: properties.borderRadius;
             border.color: StratifyUI.dropdown_border;
         }
     }

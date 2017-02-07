@@ -167,6 +167,7 @@ QtObject {
     property real screen_md_max: (screen_lg_min - 1);
     property real grid_columns: 12;
     property real grid_columns_sm: 4;
+    property real grid_columns_md: 6;
     property real grid_gutter_width: 30;
     property real grid_float_breakpoint: screen_sm_min;
     property real grid_float_breakpoint_max: (grid_float_breakpoint - 1);

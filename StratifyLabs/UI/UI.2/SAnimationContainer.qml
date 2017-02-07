@@ -30,6 +30,7 @@ Item {
     SProperties {
         id: properties;
         type: "animationcontainer";
+        blockWidth: true;
     }
 
     onScreenChanged: {

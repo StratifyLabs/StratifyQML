@@ -8,3 +8,7 @@ StratifyExample/StratifyLib/*
 build-*
 
 *.qmlc
+
+*.jsc
+
+*.jsc

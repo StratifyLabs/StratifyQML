@@ -26,11 +26,12 @@ TextField {
     property alias properties: properties;
     property alias placeholder: control.placeholderText;
 
-    implicitWidth: childrenRect.width;
+    implicitWidth: contentItem.implicitWidth + properties.paddingHorizontal*2;
     implicitHeight: properties.fontContainerHeight;
 
     font.family: properties.fontText;
     font.pixelSize: properties.fontSize;
+    font.weight: properties.fontWeight;
     color: enabled ? properties.fontColor : properties.fontColorMuted;
     selectByMouse: true;
     selectedTextColor: properties.fontColorSelected;

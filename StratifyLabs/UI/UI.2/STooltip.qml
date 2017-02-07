@@ -22,10 +22,22 @@ import StratifyLabs.UI 2.0
 ToolTip {
     id: control;
 
-    property string style;
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
+
     delay: StratifyUI.tooltip_delay;
     timeout: 2000;
-    //visible: parent ? parent.hovered : false;
+    visible: parent ? parent.hovered : false;
+
+    SProperties {
+        id: properties;
+        fontSize: StratifyUI.font_size_small;
+        fontColor: StratifyUI.tooltip_color;
+        backgroundColor: StratifyUI.tooltip_bg;
+        borderRadius: StratifyUI.border_radius_base;
+        borderColor: StratifyUI.tooltip_bg;
+    }
 
     enter: Transition {
         NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: control.delay/5 }
@@ -36,15 +48,17 @@ ToolTip {
     }
 
     background: Rectangle {
-        color: StratifyUI.tooltip_bg;
-        radius: StratifyUI.border_radius_base;
-        border.color: StratifyUI.tooltip_bg
+        color: properties.backgroundColor;
+        radius: properties.borderRadius;
+        border.color: properties.backgroundColor;
+        border.width: properties.borderWidth;
     }
 
     contentItem: Text {
         text: control.text;
-        font.family: StratifyUI.font_family_base.name;
-        font.pixelSize: StratifyUI.font_size_small;
-        color: StratifyUI.tooltip_color;
+        font.family: properties.fontText;
+        font.pixelSize: properties.fontSize;
+        font.weight: properties.fontWeight;
+        color: properties.fontColor;
     }
 }

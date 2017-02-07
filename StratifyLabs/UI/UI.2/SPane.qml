@@ -23,10 +23,13 @@ Flickable {
     property alias span: properties.span;
     property alias properties: properties;
 
-    SProperties { id: properties; }
+    SProperties {
+        id: properties;
+        fillWidth: true;
+        fillHeight: true;
+    }
 
     clip: true;
-
     width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
     height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
 
@@ -36,10 +39,5 @@ Flickable {
     //if child has "block" set, width will bind
     contentWidth: ((contentItem.children[0].properties !== undefined) && (contentItem.children[0].properties.fillWidth === true)) ? control.width : contentItem.childrenRect.width;
     contentHeight: (contentItem.children[0].properties !== undefined) && (contentItem.children[0].properties.fillHeight === true) ? control.height : contentItem.childrenRect.height;
-
-    onWidthChanged: {
-        console.log("Content Width is " + contentWidth + " " + control.width);
-        console.log("Content Height is " + contentHeight + " " + control.height);
-    }
 
 }

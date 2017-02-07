@@ -32,6 +32,7 @@ Text {
 
     font.family: properties.fontText;
     font.pointSize: properties.fontSize;
+    font.weight: properties.fontWeight;
     color: enabled ? properties.textColor : properties.textColorMuted;
     verticalAlignment: properties.fontHorizontalAlignment;
     horizontalAlignment: properties.fontVerticalAlignment;

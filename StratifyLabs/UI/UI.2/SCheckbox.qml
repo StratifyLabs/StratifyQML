@@ -52,6 +52,7 @@ CheckBox {
         text: control.checked ? control.iconChecked: control.icon;
         font.family: properties.fontIcon;
         font.pixelSize: properties.fontSize*1.4;
+        font.weight: properties.fontWeight;
         color: properties.fontColor;
         opacity: enabled ? 1 : 0.3
     }
@@ -63,6 +64,7 @@ CheckBox {
         text: control.text;
         font.family: properties.fontText;
         font.pixelSize: properties.fontSize;
+        font.weight: properties.fontWeight;
         color: properties.fontColor;
         visible: true;
         horizontalAlignment: properties.fontHorizontalAlignment;

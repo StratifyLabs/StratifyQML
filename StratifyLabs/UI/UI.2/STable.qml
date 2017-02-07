@@ -19,34 +19,43 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import StratifyLabs.UI 2.0
 
-SItem {
-    id: base;
-    type: "table";
+TableView {
+    id: control;
 
-    default property alias data: tableViewObject.data;
-    property alias table_object: tableViewObject;
-    property alias contents: tableViewObject;
-    property alias model: tableViewObject.model;
-    property alias striped: tableViewObject.alternatingRowColors;
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
+
+    property alias striped: control.alternatingRowColors;
     property bool hover: false;
     property bool bordered: false;
-    property color borderColor: Qt.darker(theme.body_bg, 1.1);
     property bool highlightSelectedRow: false;
     property bool highlightSelectedItem: false;
 
     signal rowClicked();
 
-    onStyleChanged: {
-        var items = parseStyle();
-        for(var i = 0; i < items.length; i++){
-            if( items[i] === "table-striped" ){
-                striped = true;
-            } else if( items[i] === "table-condensed" ){
-                paddingVertical = theme.padding_small_vertical;
-            } else if( items[i] === "table-hover" ){
-                hover = true;
-            } else if( items[i] === "table-bordered" ){
-                bordered = true;
+    //verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff;
+    //horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+
+    SProperties {
+        id: properties;
+        type: "table";
+
+        borderColor: Qt.darker(StratifyUI.body_bg, 1.1);
+        blockWidth:  true;
+
+        onStyleChanged: {
+            var items = parseStyle();
+            for(var i = 0; i < items.length; i++){
+                if( items[i] === "table-striped" ){
+                    striped = true;
+                } else if( items[i] === "table-condensed" ){
+                    paddingVertical = Qt.binding( function(){ return StratifyUI.padding_small_vertical; } );
+                } else if( items[i] === "table-hover" ){
+                    hover = true;
+                } else if( items[i] === "table-bordered" ){
+                    bordered = true;
+                }
             }
         }
     }
@@ -54,134 +63,122 @@ SItem {
     // \todo need to apply contextual shading to rows
     // \todo need to replace scroll bars with the scroll bar in STextBox
 
-    implicitHeight: fillHeight ? parent.height: tableViewObject.childrenRect.height;
-    width: parent.width;
-    blockWidth:  true;
-    TableView {
-        id: tableViewObject;
-
-        width: parent.width;
-        height: fillHeight ? parent.height : undefined;
-
-        alternatingRowColors: false;
-        backgroundVisible: false;
-
-        style: TableViewStyle {
-
-            backgroundColor: "transparent";
-            frame: Rectangle {
-                color: "transparent";
-                border.color: borderColor;
-                border.width: bordered ? 1 : 0;
-            }
+    //implicitHeight: childrenRect.height;
 
 
-            scrollBarBackground: Rectangle {
-                implicitWidth: 8
-                color: "transparent";
-            }
+    alternatingRowColors: false;
+    backgroundVisible: false;
 
-            decrementControl: Item{}
-            incrementControl: Item{}
-            handleOverlap: 0;
+    style: TableViewStyle {
 
-            handle: Rectangle {
-                implicitWidth: 8;
-                color: theme.gray_lighter;
-                radius: width/2;
-            }
+        backgroundColor: properties.backgroundColor;
+        frame: Item {}
 
+
+        scrollBarBackground: Item{}
+        corner: Item{}
+
+
+        decrementControl: Item{}
+        incrementControl: Item{}
+        handleOverlap: 0;
+
+        handle: Rectangle {
+            implicitWidth: 8;
+            color: StratifyUI.gray_lighter;
+            radius: width/2;
         }
 
-        clip: true;
-
-        itemDelegate: Text {
-            verticalAlignment: Text.AlignVCenter;
-            leftPadding: paddingHorizontal;
-            rightPadding: paddingHorizontal;
-            topPadding: paddingVertical;
-            bottomPadding: paddingVertical;
-            color: textColor;
-            font.pointSize: fontSize;
-            font.family: textFont;
-            font.weight: Font.Light;
-            text: styleData.value;
-            Rectangle {
-                color: "transparent";
-                anchors.fill: parent;
-                border.width: bordered ? 1 : 0;
-                border.color: borderColor;
-            }
-        }
-
-        headerDelegate: Text {
-            verticalAlignment: Text.AlignVCenter;
-            leftPadding: paddingHorizontal;
-            rightPadding: paddingHorizontal;
-            topPadding: paddingVertical;
-            bottomPadding: paddingVertical;
-            color: theme.gray_base;
-            font.pointSize: fontSize;
-            font.family: textFont;
-            font.weight: Font.Bold;
-            text: styleData.value;
-
-            Rectangle {
-                anchors.fill: parent;
-                color: theme.body_bg;
-                z: -1;
-            }
-
-            Rectangle {
-                color: "transparent";
-                anchors.fill: parent;
-                border.width: bordered ? 1 : 0;
-                border.color: borderColor;
-            }
-
-            Rectangle {
-                width: parent.width;
-                height: 2;
-                color: borderColor;
-                border.color: borderColor;
-                anchors.bottom: parent.bottom;
-            }
-        }
-
-        rowDelegate: Rectangle {
-
-            property bool hovered;
-            color: styleData.alternate ? Qt.darker(theme.body_bg, 1.02 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08) : Qt.darker(theme.body_bg, 1.0 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08);
-
-            height: fontSize + paddingVertical*3;
-
-            Rectangle {
-                width: parent.width;
-                height: 1;
-                color: borderColor;
-                border.color: borderColor;
-                anchors.bottom: parent.bottom;
-                visible: styleData.row !== (tableViewObject.rowCount -1);
-            }
-
-            MouseArea {
-                anchors.fill: parent;
-                hoverEnabled: true;
-                onEntered: {
-                    hovered = true && base.hover;
-                }
-                onExited: hovered = false;
-                onClicked: {
-                    tableViewObject.selection.clear();
-                    tableViewObject.selection.select(styleData.row, styleData.row);
-                    tableViewObject.currentRow = styleData.row;
-                    base.rowClicked();
-                }
-            }
-        }
+        textColor: properties.fontColor;
 
     }
 
+    clip: true;
+
+    itemDelegate: Text {
+        verticalAlignment: properties.fontVerticalAlignment;
+        leftPadding: properties.paddingHorizontal;
+        rightPadding: properties.paddingHorizontal;
+        topPadding: properties.paddingVertical;
+        bottomPadding: properties.paddingVertical;
+        color: properties.fontColor;
+        font.pointSize: properties.fontSize;
+        font.family: properties.fontText;
+        font.weight: Font.Light;
+        text: styleData.value;
+        Rectangle {
+            color: "transparent";
+            anchors.fill: parent;
+            border.width: bordered ? 1 : 0;
+            border.color: properties.borderColor;
+        }
+    }
+
+    headerDelegate: Text {
+        verticalAlignment: properties.fontVerticalAlignment;
+        leftPadding: properties.paddingHorizontal;
+        rightPadding: properties.paddingHorizontal;
+        topPadding: properties.paddingVertical;
+        bottomPadding: properties.paddingVertical;
+        color: StratifyUI.gray_base;
+        font.pointSize: properties.fontSize;
+        font.family: properties.fontText;
+        font.weight: Font.Bold;
+        text: styleData.value;
+
+        Rectangle {
+            anchors.fill: parent;
+            color: StratifyUI.body_bg;
+            z: -1;
+        }
+
+        Rectangle {
+            color: "transparent";
+            anchors.fill: parent;
+            border.width: bordered ? 1 : 0;
+            border.color: properties.borderColor;
+        }
+
+        Rectangle {
+            width: parent.width;
+            height: 2;
+            color: properties.borderColor;
+            border.color: properties.borderColor;
+            anchors.bottom: parent.bottom;
+        }
+    }
+
+    rowDelegate: Rectangle {
+
+        property bool hovered;
+        color: styleData.alternate ? Qt.darker(StratifyUI.body_bg, 1.02 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08) : Qt.darker(StratifyUI.body_bg, 1.0 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08);
+
+        height: properties.fontContainerHeight;
+
+        Rectangle {
+            width: parent.width;
+            height: 1;
+            color: properties.borderColor;
+            border.color: properties.borderColor;
+            anchors.bottom: parent.bottom;
+            visible: styleData.row !== (control.rowCount - 1);
+        }
+
+        MouseArea {
+            anchors.fill: parent;
+            hoverEnabled: true;
+            onEntered: {
+                hovered = true && control.hover;
+            }
+            onExited: hovered = false;
+            onClicked: {
+                control.selection.clear();
+                control.selection.select(styleData.row, styleData.row);
+                control.currentRow = styleData.row;
+                control.rowClicked();
+            }
+        }
+    }
 }
 
 

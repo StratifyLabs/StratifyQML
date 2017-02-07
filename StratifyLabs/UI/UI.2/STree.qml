@@ -19,215 +19,210 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import StratifyLabs.UI 2.0
 
-SItem {
-    id: base;
-    type: "table";
+TreeView {
+    id: control;
 
-    default property alias data: treeViewObject.data;
-    property alias table_object: treeViewObject;
-    property alias contents: treeViewObject;
-    property alias model: treeViewObject.model;
-    property alias striped: treeViewObject.alternatingRowColors;
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
+
+    property alias striped: control.alternatingRowColors;
     property bool hover: false;
     property bool bordered: false;
 
-    property color borderColor: Qt.darker(theme.body_bg, 1.1);
+    SProperties {
+        id: properties;
+        blockWidth:  true;
+        type: "tree";
+        fontWeight: Font.Light;
 
-    onStyleChanged: {
-        var items = parseStyle();
-        for(var i = 0; i < items.length; i++){
-            if( items[i] === "tree-striped" ){
-                striped = true;
-            } else if( items[i] === "tree-condensed" ){
-                paddingVertical = theme.padding_small_vertical;
-            } else if( items[i] === "tree-bordered" ){
-                bordered = true;
+        onStyleChanged: {
+            var items = parseStyle();
+            for(var i = 0; i < items.length; i++){
+                if( items[i] === "tree-striped" ){
+                    striped = true;
+                } else if( items[i] === "tree-condensed" ){
+                    properties.paddingVertical = StratifyUI.padding_small_vertical;
+                } else if( items[i] === "tree-bordered" ){
+                    bordered = true;
+                }
             }
         }
+
     }
 
     // \todo need to apply contextual shading to rows
     // \todo need to replace scroll bars with the scroll bar in STextBox
 
-    implicitHeight: fillHeight ? parent.height: treeViewObject.childrenRect.height;
+    implicitHeight: childrenRect.height;
     width: parent.width;
-    blockWidth:  true;
-    TreeView {
-        id: treeViewObject;
 
-        property real selected: -1;
-        property var currentIndex;
+    property real selected: -1;
+    property var currentIndex;
 
-        width: parent.width;
-        height: fillHeight ? parent.height : undefined;
-
-        alternatingRowColors: false;
-        backgroundVisible: false;
+    alternatingRowColors: false;
+    backgroundVisible: false;
 
 
-        style: TreeViewStyle {
+    style: TreeViewStyle {
 
-            backgroundColor: "transparent";
-            frame: Rectangle {
-                color: "transparent";
-                border.color: borderColor;
-                border.width: bordered ? 1 : 0;
-            }
-
-
-            scrollBarBackground: Rectangle {
-                implicitWidth: 8
-                color: "transparent";
-            }
+        backgroundColor: "transparent";
+        frame: Rectangle {
+            color: "transparent";
+            border.color: properties.borderColor;
+            border.width: bordered ? 1 : 0;
+        }
 
 
-            branchDelegate: Item{
-                anchors.centerIn: parent;
-                width: fontSize + paddingHorizontal*3;
-                height: fontSize + paddingVertical*3;
+        scrollBarBackground: Rectangle {
+            implicitWidth: 8
+            color: "transparent";
+        }
 
 
-                Text {
-                    id: branchText;
-                    anchors.right: parent.right;
-                    anchors.verticalCenter: parent.verticalCenter;
-                    color: theme.text_color;
-                    font.family: iconFont;
-                    text: Fa.Icon.chevron_right;
-                    rotation: styleData.isExpanded ? 90 : 0;
-                    state: styleData.isExpanded ? "expanded" : "collapsed";
-                    states: [
-                        State {
+        branchDelegate: Item{
+            anchors.centerIn: parent;
+            width: properties.fontSize + properties.paddingHorizontal*3;
+            height: properties.fontSize + properties.paddingVertical*3;
+
+            Text {
+                id: branchText;
+                anchors.right: parent.right;
+                anchors.verticalCenter: parent.verticalCenter;
+                color: properties.fontColor;
+                font.family: properties.fontIcon;
+                text: Fa.Icon.chevron_right;
+                rotation: styleData.isExpanded ? 90 : 0;
+                state: styleData.isExpanded ? "expanded" : "collapsed";
+                states: [
+                    State {
                         name: "expanded";
                         PropertyChanges { target: branchText; rotation: 90; }
 
                     },
-                        State {
+                    State {
                         name: "collapsed";
                         PropertyChanges { target: branchText; rotation: 0; }
                     }
-                    ]
+                ]
 
 
-                    transitions: Transition {
-                        RotationAnimation { duration: 200; direction: RotationAnimation.Shortest; }
-                    }
-
-                }
-
-                MouseArea {
-                    anchors.fill: parent;
-                    onClicked: {
-                        if( styleData.isExpanded ){
-                            treeViewObject.collapse(styleData.index);
-                            branchText.state = "collapsed";
-                        } else {
-                            treeViewObject.expand(styleData.index);
-                            branchText.state = "expanded";
-                        }
-                    }
+                transitions: Transition {
+                    RotationAnimation { duration: 200; direction: RotationAnimation.Shortest; }
                 }
 
             }
-            decrementControl: Item{}
-            incrementControl: Item{}
-            handleOverlap: 0;
 
-            handle: Rectangle {
-                implicitWidth: 8;
-                color: theme.gray_lighter;
-                radius: width/2;
+            MouseArea {
+                anchors.fill: parent;
+                onClicked: {
+                    if( styleData.isExpanded ){
+                        control.collapse(styleData.index);
+                        branchText.state = "collapsed";
+                    } else {
+                        control.expand(styleData.index);
+                        branchText.state = "expanded";
+                    }
+                }
             }
 
         }
+        decrementControl: Item{}
+        incrementControl: Item{}
+        handleOverlap: 0;
 
-        clip: true;
-
-        itemDelegate: Text {
-            verticalAlignment: Text.AlignVCenter;
-            leftPadding: paddingHorizontal;
-            rightPadding: paddingHorizontal;
-            topPadding: paddingVertical;
-            bottomPadding: paddingVertical;
-            color: textColor;
-            font.pointSize: fontSize;
-            font.family: textFont;
-            font.weight: Font.Light;
-            text: styleData.value;
-            Rectangle {
-                color: "transparent";
-                anchors.fill: parent;
-                border.width: bordered ? 1 : 0;
-                border.color: borderColor;
-            }
+        handle: Rectangle {
+            implicitWidth: 8;
+            color: StratifyUI.gray_lighter;
+            radius: width/2;
         }
 
-        headerDelegate: Text {
-            verticalAlignment: Text.AlignVCenter;
-            leftPadding: paddingHorizontal;
-            rightPadding: paddingHorizontal;
-            topPadding: paddingVertical;
-            bottomPadding: paddingVertical;
-            color: theme.gray_base;
-            font.pointSize: fontSize;
-            font.family: textFont;
-            font.weight: Font.Bold;
-            text: styleData.value;
+    }
 
-            Rectangle {
-                anchors.fill: parent;
-                color: theme.body_bg;
-                z: -1;
-            }
+    clip: true;
 
-            Rectangle {
-                color: "transparent";
-                anchors.fill: parent;
-                border.width: bordered ? 1 : 0;
-                border.color: borderColor;
-            }
+    itemDelegate: Text {
+        verticalAlignment: Text.AlignVCenter;
+        leftPadding: properties.paddingHorizontal;
+        rightPadding: properties.paddingHorizontal;
+        topPadding: properties.paddingVertical;
+        bottomPadding: properties.paddingVertical;
+        color: properties.fontColor;
+        font.pointSize: properties.fontSize;
+        font.family: properties.fontText;
+        font.weight: properties.fontWeight;
+        text: styleData.value;
+        Rectangle {
+            color: "transparent";
+            anchors.fill: parent;
+            border.width: bordered ? 1 : 0;
+            border.color: properties.borderColor;
+        }
+    }
 
-            Rectangle {
-                width: parent.width;
-                height: 2;
-                color: borderColor;
-                border.color: borderColor;
-                anchors.bottom: parent.bottom;
-            }
+    headerDelegate: Text {
+        verticalAlignment: properties.fontVerticalAlignment;
+        leftPadding: properties.paddingHorizontal;
+        rightPadding: properties.paddingHorizontal;
+        topPadding: properties.paddingVertical;
+        bottomPadding: properties.paddingVertical;
+        color: StratifyUI.gray_base;
+        font.pointSize: properties.fontSize;
+        font.family: properties.fontText;
+        font.weight: Font.Bold;
+        text: styleData.value;
+
+        Rectangle {
+            anchors.fill: parent;
+            color: StratifyUI.body_bg;
+            z: -1;
         }
 
-        rowDelegate: Rectangle {
-            property bool hovered;
-            color: (styleData.selected) ? Qt.darker(theme.body_bg, 1.02 + hovered*0.05) : Qt.darker(theme.body_bg, 1.0 + hovered*0.05);
+        Rectangle {
+            color: "transparent";
+            anchors.fill: parent;
+            border.width: bordered ? 1 : 0;
+            border.color: properties.borderColor;
+        }
 
-            height: fontSize + paddingVertical*3;
+        Rectangle {
+            width: parent.width;
+            height: 2;
+            color: properties.borderColor;
+            border.color: properties.borderColor;
+            anchors.bottom: parent.bottom;
+        }
+    }
 
-            Rectangle {
-                width: parent.width;
-                height: 1;
-                color: borderColor;
-                border.color: borderColor;
-                anchors.bottom: parent.bottom;
-                visible: styleData.row !== (treeViewObject.rowCount -1);
-            }
+    rowDelegate: Rectangle {
+        property bool hovered;
+        color: (styleData.selected) ? Qt.darker(StratifyUI.body_bg, 1.02 + hovered*0.05) : Qt.darker(StratifyUI.body_bg, 1.0 + hovered*0.05);
 
-            /*
+        height: properties.fontSize + properties.paddingVertical*3;
+
+        Rectangle {
+            width: parent.width;
+            height: 1;
+            color: properties.borderColor;
+            border.color: properties.borderColor;
+            anchors.bottom: parent.bottom;
+            visible: styleData.row !== (control.rowCount -1);
+        }
+
+        /*
             MouseArea {
                 anchors.fill: parent;
                 hoverEnabled: true;
                 onEntered: {
-                    hovered = true && base.hover;
+                    hovered = true && control.hover;
                 }
                 onExited: hovered = false;
                 onClicked: {
-                    base.rowClicked();
-                    treeViewObject.selected = styleData.row;
+                    control.rowClicked();
+                    control.selected = styleData.row;
                 }
             }
             */
-
-        }
-
 
     }
 

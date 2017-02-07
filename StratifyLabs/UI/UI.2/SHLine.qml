@@ -28,15 +28,13 @@ Rectangle {
         type: "hline";
         backgroundColor: StratifyUI.panel_default_border;
         borderColor: StratifyUI.panel_default_border;
-        borderWidth: 0;
+        borderWidth: 1;
         blockWidth: true;
     }
 
-    implicitHeight: properties.paddingVertical*2;
-
-    y: properties.paddingVertical;
+    //y: properties.paddingVertical;
     width: parent.width;
-    height: 1;
+    height: properties.borderWidth;
     color: properties.backgroundColor;
     border.color: properties.borderColor;
     border.width: properties.borderWidth;

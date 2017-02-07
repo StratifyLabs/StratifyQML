@@ -72,11 +72,12 @@ GridLayout {
         }
     }
 
-    function adjustWidth(){
+    function adjustWidth(){        
         for(var i = 0; i < children.length; i++){
             var w;
             var spacingInRow;
             var span;
+
             if( children[i].properties !== undefined ){
                 if( children[i].properties.span < 0 ){
                     span = columns;
@@ -89,7 +90,7 @@ GridLayout {
                     span = columns;
                 } else {
                     if( span > 0 ){
-                        spacingInRow = (columns / span - 1)*rowSpacing;
+                        //spacingInRow = (siblings - 1)*rowSpacing;
                     }
                 }
 
@@ -97,7 +98,9 @@ GridLayout {
 
                 if( children[i].properties.blockWidth === true ){
                     w = (width - spacingInRow) * span / columns;
-                    children[i].Layout.maximumWidth = w;
+                    if( w > children[i].Layout.minimumWidth ){
+                        children[i].Layout.maximumWidth = w;
+                    }
                 }
             }
         }
