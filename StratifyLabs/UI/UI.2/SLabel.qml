@@ -25,7 +25,7 @@ Label {
     property alias properties: properties;
     property alias span: properties.span;
 
-    font.family: properties.textFont;
+    font.family: properties.fontText;
     font.weight: properties.fontWeight;
     font.pixelSize: properties.fontSize;
     color: properties.textColor;
@@ -57,39 +57,42 @@ Label {
                 if( items[i] === "label-primary" ){
                     backgroundColor = Qt.binding( function(){ return StratifyUI.label_primary_bg; });
                     borderColor = Qt.binding( function(){ return StratifyUI.label_primary_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.label_color; });
+                    fontColor = Qt.binding( function(){ return StratifyUI.label_color; });
                 } else if( items[i] === "label-default" ){
                     backgroundColor = Qt.binding( function(){ return StratifyUI.label_default_bg; });
                     borderColor = Qt.binding( function(){ return StratifyUI.label_default_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.label_color; });
+                    fontColor = Qt.binding( function(){ return StratifyUI.label_color; });
                 } else if( items[i] === "label-danger" ){
                     backgroundColor = Qt.binding( function(){ return StratifyUI.label_danger_bg; });
                     borderColor = Qt.binding( function(){ return StratifyUI.label_danger_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.label_color; });
+                    fontColor = Qt.binding( function(){ return StratifyUI.label_color; });
                 } else if( items[i] === "label-success" ){
                     backgroundColor = Qt.binding( function(){ return StratifyUI.label_success_bg; });
                     borderColor = Qt.binding( function(){ return StratifyUI.label_success_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.label_color; });
+                    fontColor = Qt.binding( function(){ return StratifyUI.label_color; });
                 } else if( items[i] === "label-info" ){
                     backgroundColor = Qt.binding( function(){ return StratifyUI.label_info_bg; });
                     borderColor = Qt.binding( function(){ return StratifyUI.label_info_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.label_color; });
+                    fontColor = Qt.binding( function(){ return StratifyUI.label_color; });
                 } else if( items[i] === "label-warning" ){
                     backgroundColor = Qt.binding( function(){ return StratifyUI.label_warning_bg; });
                     borderColor = Qt.binding( function(){ return StratifyUI.label_warning_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.label_color; });
+                    fontColor = Qt.binding( function(){ return StratifyUI.label_color; });
                 } else if( items[i] === "label-lg" ){
                     fontSize = Qt.binding( function(){ return StratifyUI.font_size_large; });
-                    properties.radius = Qt.binding( function(){ return StratifyUI.btn_border_radius_large; });
-                    textColor = Qt.binding( function(){ return StratifyUI.label_color; });
-                    properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_large_vertical; });
-                    properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_large_horizontal; });
+                    borderRadius = Qt.binding( function(){ return StratifyUI.border_radius_large; });
+                    paddingVertical = Qt.binding( function(){ return StratifyUI.padding_large_vertical; });
+                    paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_large_horizontal; });
                 } else if( items[i] === "label-sm" ){
-                    properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_small_vertical; });
-                    properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_small_horizontal; });
+                    paddingVertical = Qt.binding( function(){ return StratifyUI.padding_small_vertical; });
+                    paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_small_horizontal; });
                     fontSize = Qt.binding( function(){ return StratifyUI.font_size_small; });
-                    properties.radius = Qt.binding( function(){ return StratifyUI.btn_border_radius_small; });
-                    textColor = Qt.binding( function(){ return StratifyUI.label_color; });
+                    borderRadius = Qt.binding( function(){ return StratifyUI.border_radius_small; });
+                } else if( items[i] === "label-xs" ){
+                    paddingVertical = Qt.binding( function(){ return StratifyUI.padding_xs_vertical; });
+                    paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_xs_horizontal; });
+                    fontSize = Qt.binding( function(){ return StratifyUI.font_size_small; });
+                    borderRadius = Qt.binding( function(){ return StratifyUI.border_radius_small; });
                 }
             }
         }

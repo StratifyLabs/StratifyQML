@@ -98,9 +98,7 @@ GridLayout {
 
                 if( children[i].properties.blockWidth === true ){
                     w = (width - spacingInRow) * span / columns;
-                    if( w > children[i].Layout.minimumWidth ){
-                        children[i].Layout.maximumWidth = w;
-                    }
+                    children[i].Layout.maximumWidth = w;
                 }
             }
         }
