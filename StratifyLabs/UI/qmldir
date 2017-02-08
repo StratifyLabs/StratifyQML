@@ -5,7 +5,6 @@ Fa 1.0 assets/Fa-4.5.0.js
 
 singleton StratifyUI 1.0 UI.2/StratifyUI.qml
 
-
 SAlert 1.0 UI.1/SAlert.qml
 SAnimationContainer 1.0 UI.1/SAnimationContainer.qml
 SAnimationFade 1.0 UI.1/SAnimationFade.qml
@@ -118,6 +117,5 @@ SToolTip 2.0 UI.2/STooltip.qml
 SPopover 2.0 UI.2/SPopover.qml
 SRadioButton 2.0 UI.2/SRadioButton.qml
 Fa 2.0 assets/Fa-4.7.0.js
-JSONPath 2.0 assets/jsonpath-0.8.5.js
 
 typeinfo StratifyLabsUI.qmltypes

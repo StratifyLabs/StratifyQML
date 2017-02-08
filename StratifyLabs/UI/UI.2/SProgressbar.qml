@@ -38,18 +38,18 @@ ProgressBar {
         borderWidth: StratifyUI.progress_border_width;
     }
 
-    implicitWidth: properties.blockWidth ? (parent ? parent.width : 0) : 0;
-    implicitHeight: properties.fillHeight ? (parent ? parent.height : 0) : properties.fontContainerHeight;
+    implicitWidth: 0;
+    implicitHeight: properties.fontContainerHeight;
 
     contentItem: Rectangle {
         id: strip
         x: control.x;
-        width: 100;
+        implicitWidth: 10;
         height: control.height;
         scale: control.mirrored ? -1 : 1
         color: properties.backgroundColor;
         radius: properties.borderRadius;
-        border.color: properties.borderColor;
+        border.color: properties.backgroundColor;
 
         Rectangle {
             color: progressColor;

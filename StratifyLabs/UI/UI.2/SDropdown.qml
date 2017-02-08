@@ -28,10 +28,10 @@ ComboBox {
 
     //Legacy 1.0 interfacing
     property alias text: control.currentText;
+    property alias activeText: control.currentText;
     signal clicked();
     signal itemClicked();
-    onHighlighted: itemClicked();
-    onActivated: clicked();
+    onActivated: itemClicked();
 
     SProperties {
         id: properties;
@@ -47,7 +47,7 @@ ComboBox {
     font.pixelSize: properties.fontSize;
     font.weight: properties.fontWeight;
 
-    spacing: 8
+    spacing: properties.paddingVertical;
     topPadding: properties.paddingVertical;
     bottomPadding: properties.paddingVertical;
     leftPadding: properties.paddingHorizontal;
@@ -107,6 +107,15 @@ ComboBox {
         verticalAlignment: properties.fontVerticalAlignment;
         elide: Text.ElideRight
         opacity: enabled ? 1 : 0.3
+
+        MouseArea {
+            anchors.fill: parent;
+            onClicked: {
+                popup.visible = !popup.visible;
+                control.clicked();
+            }
+        }
+
     }
 
     background: Rectangle {
@@ -121,7 +130,7 @@ ComboBox {
     popup: Popup {
         y: control.height - (control.visualFocus ? 0 : 1) + properties.paddingVertical;
         width: control.width;
-        implicitHeight: (count < 5 ? (contentItem.implicitHeight*count) : contentItem.implicitHeight*5) + properties.paddingVertical*2;
+        implicitHeight: ((count < 4 ? (contentItem.implicitHeight*(count ? count : 1) + properties.paddingVertical*2) : contentItem.implicitHeight*4)) + properties.paddingVertical*2;
         topMargin: properties.paddingVertical;
         bottomMargin: properties.paddingVertical
 

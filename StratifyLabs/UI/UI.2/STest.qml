@@ -245,6 +245,18 @@ Item {
                                 span: 9;
                                 model: ["First", "Second", "Third", "Fourth"];
                             }
+                            SLabel { span: 3; style: "block text-left hide-sm"; text: "Select"; }
+                            SDropdown {
+                                style: "block";
+                                span: 9;
+                                model: ["First"];
+                            }
+                            SLabel { span: 3; style: "block text-left hide-sm"; text: "Select"; }
+                            SDropdown {
+                                style: "block";
+                                span: 9;
+                                model: ["First", "Second"];
+                            }
                         }
 
                         SRow {
@@ -403,6 +415,7 @@ Item {
                             }
                         }
 
+
                         STable{
                             model: libraryModel;
                             style: "block table-condensed";
@@ -453,6 +466,7 @@ Item {
                                 title: "Author"
                             }
                         }
+
                     }
                 },
 
