@@ -62,8 +62,7 @@ Item {
         standardButtons: 0;
         SColumn {
             SText {
-                //style: "block";
-                wrapMode: Text.Wrap;
+                style: "block";
                 text: "StratifyUI 2.0 is a QML framework that works, looks, and feels much like the twitter bootstrap HTML framework";
             }
         }

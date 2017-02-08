@@ -34,15 +34,16 @@ Item {
     z:1;
     default property alias data: dialogContents.data;
 
-    signal accept();
-    signal reject();
+    signal accepted();
+    signal rejected();
+    signal cancelled();
 
     function open(){
         modalVisible = true;
     }
 
     function close(){
-        modalVisible = true;
+        modalVisible = false;
     }
 
     SProperties {
@@ -84,6 +85,18 @@ Item {
         }
     ]
 
+    Rectangle {
+        id: background;
+        anchors.fill: parent;
+        color: StratifyUI.modal_backdrop_bg;
+        opacity: StratifyUI.modal_backdrop_opacity;
+        z:-1;
+        MouseArea {
+            anchors.fill: parent;
+            enabled: modalVisible;
+        }
+    }
+
 
 
     Rectangle {
@@ -102,11 +115,11 @@ Item {
 
         function accept(){
             modalVisible = false;
-            modal.accept();
+            modal.accepted();
         }
         function reject(){
             modalVisible = false;
-            modal.reject();
+            modal.rejected();
         }
 
         SColumn {
@@ -155,14 +168,5 @@ Item {
                 }
             }
         }
-    }
-
-
-    Rectangle {
-        id: background;
-        anchors.fill: parent;
-        color: StratifyUI.modal_backdrop_bg;
-        opacity: StratifyUI.modal_backdrop_opacity;
-        z:-1;
     }
 }
