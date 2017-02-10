@@ -38,6 +38,16 @@ Item {
     signal rejected();
     signal cancelled();
 
+    function accept(){
+        modalVisible = false;
+        modal.accepted();
+    }
+
+    function reject(){
+        modalVisible = false;
+        modal.rejected();
+    }
+
     function open(){
         modalVisible = true;
     }
@@ -104,23 +114,13 @@ Item {
         //anchors.centerIn: parent;
         anchors.horizontalCenter: parent.horizontalCenter;
 
-
-        width: StratifyUI.screen_md < modal.width/2 ? StratifyUI.screen_md : modal.width/2;
+        width: StratifyUI.screen_md < modal.width*3/4 ? StratifyUI.screen_md : modal.width*3/4;
         implicitHeight: childrenRect.height;
 
         color: StratifyUI.body_bg;
         radius: properties.borderRadius;
         border.width: properties.borderWidth;
         border.color: properties.borderColor;
-
-        function accept(){
-            modalVisible = false;
-            modal.accepted();
-        }
-        function reject(){
-            modalVisible = false;
-            modal.rejected();
-        }
 
         SColumn {
             SRow {
@@ -138,7 +138,7 @@ Item {
                     span: 1;
                     style: "right close";
                     icon: Fa.Icon.times;
-                    onClicked: dialog.reject();
+                    onClicked: modal.reject();
                 }
             }
 
@@ -155,13 +155,13 @@ Item {
                         SButton {
                             style: "block btn-danger";
                             icon: Fa.Icon.times;
-                            onClicked: dialog.reject();
+                            onClicked: modal.reject();
                             visible: modal.standardButtons & Dialog.Cancel;
                         }
                         SButton {
                             style: "block btn-success";
                             icon: Fa.Icon.check;
-                            onClicked: dialog.accept();
+                            onClicked: modal.accept();
                             visible: modal.standardButtons & Dialog.Ok;
                         }
                     }

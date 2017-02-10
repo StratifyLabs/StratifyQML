@@ -35,6 +35,7 @@ QtObject {
     property color gray_light: lighten(gray_base, 250);
     property color gray_lighter: lighten(gray_base, 350);
     property color brand_primary: darken("#1D7DC5", 6.5);
+    property color brand_secondary: "#333";
     property color brand_success: "#5cb85c";
     property color brand_info: "#1D7DC5";
     property color brand_warning: "#f0ad4e";
@@ -98,6 +99,9 @@ QtObject {
     property color btn_primary_color: "#fff";
     property color btn_primary_bg: brand_primary;
     property color btn_primary_border: darken(btn_primary_bg, 5);
+    property color btn_secondary_color: "#fff";
+    property color btn_secondary_bg: brand_secondary;
+    property color btn_secondary_border: darken(btn_secondary_bg, 5);
     property color btn_success_color: "#fff";
     property color btn_success_bg: brand_success;
     property color btn_success_border: darken(btn_success_bg, 5);
@@ -284,6 +288,7 @@ QtObject {
     property color popover_arrow_outer_fallback_color: darken(popover_fallback_border_color, 20);
     property color label_default_bg: gray_light;
     property color label_primary_bg: brand_primary;
+    property color label_secondary_bg: brand_secondary;
     property color label_success_bg: brand_success;
     property color label_info_bg: brand_info;
     property color label_warning_bg: brand_warning;
@@ -324,6 +329,8 @@ QtObject {
     property real progress_border_radius: border_radius_base;
     property real progress_border_width: border_width;
     property color progress_bar_bg: brand_primary;
+    property color progress_bar_primary_bg: brand_primary;
+    property color progress_bar_secondary_bg: brand_secondary;
     property color progress_bar_success_bg: brand_success;
     property color progress_bar_warning_bg: brand_warning;
     property color progress_bar_danger_bg: brand_danger;
@@ -356,6 +363,8 @@ QtObject {
     property color panel_primary_text: "#fff";
     property color panel_primary_border: brand_primary;
     property color panel_primary_heading_bg: brand_primary;
+    property color panel_secondary_border: brand_secondary;
+    property color panel_secondary_heading_bg: brand_secondary;
     property color panel_success_text: state_success_text;
     property color panel_success_border: state_success_border;
     property color panel_success_heading_bg: state_success_bg;

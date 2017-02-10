@@ -95,17 +95,17 @@ Button {
                     properties.textColorMuted = "#fff";
                     properties.backgroundColorHover = Qt.binding(function(){ return StratifyUI.btn_primary_bg; });
                 } else if( (items[i] === "btn-default") || (items[i] === "btn-secondary") ){
-                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_default_bg; });
-                    properties.textColor = Qt.binding(function(){ return StratifyUI.btn_default_color; });
-                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_default_border; });
+                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_secondary_bg; });
+                    properties.textColor = Qt.binding(function(){ return StratifyUI.btn_secondary_color; });
+                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_secondary_border; });
                     properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });
                     properties.backgroundColorHover = Qt.binding(function(){ return Qt.darker(properties.backgroundColor, 1.1); });
                 } else if( (items[i] === "btn-outline-default") || (items[i] === "btn-outline-secondary") ){
-                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_default_color; });
-                    properties.fontColor = Qt.binding(function(){ if( control.hovered || control.pressed ){ return StratifyUI.btn_default_color; } return StratifyUI.btn_default_bg; });
-                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_default_border; });
+                    properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_secondary_color; });
+                    properties.fontColor = Qt.binding(function(){ if( control.hovered || control.pressed ){ return StratifyUI.btn_secondary_color; } return StratifyUI.btn_secondary_bg; });
+                    properties.borderColor = Qt.binding(function(){ return StratifyUI.btn_secondary_border; });
                     properties.textColorMuted = Qt.binding(function(){ return StratifyUI.text_muted; });;
-                    properties.backgroundColorHover = Qt.binding(function(){ return StratifyUI.btn_default_bg; });
+                    properties.backgroundColorHover = Qt.binding(function(){ return StratifyUI.btn_secondary_bg; });
                 } else if( (items[i] === "btn-danger") ){
                     properties.backgroundColor = Qt.binding(function(){ return StratifyUI.btn_danger_bg; });
                     properties.textColor = Qt.binding(function(){ return StratifyUI.btn_danger_color; });

@@ -27,7 +27,7 @@ ListView {
     }
 
     implicitWidth: contentItem.childrenRect.width;
-    implicitHeight: contentItem.childrenRect.height;
+    implicitHeight: contentItem.childrenRect.height + spacing;
 
     clip: true;
     spacing: properties.paddingVertical;

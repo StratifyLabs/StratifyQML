@@ -51,6 +51,7 @@ Item {
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Progress"; onPressed: { tests.screen = text; drawer.close(); } }
             }
         }
     }
@@ -478,6 +479,40 @@ Item {
                             span: 2;
                             SToolTip {
                                 text: "This is a tooltip";
+                            }
+                        }
+                    }
+                },
+
+                SContainer {
+                    name: "Progress";
+                    SColumn {
+                        SProgressBar {
+                            style: "progress-bar-primary";
+                            value: 0.75;
+                        }
+                        SProgressBar {
+                            style: "progress-bar-warning condensed";
+                            value: 0.25;
+                        }
+                        SProgressBar {
+                            style: "progress-bar-danger";
+                            value: 0.5;
+                        }
+                        SProgressBar {
+                            style: "progress-bar-success";
+                            value: 1.0;
+                        }
+
+                        SProgressCircle {
+                            //style: "primary";
+                            value: 0.25;
+                            SColumn {
+                                style: "fill";
+                                SIcon {
+                                    style: "h3";
+                                    icon: Fa.Icon.cloud;
+                                }
                             }
                         }
                     }

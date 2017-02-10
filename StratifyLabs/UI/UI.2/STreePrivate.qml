@@ -33,6 +33,7 @@ TreeView {
         blockWidth:  true;
         type: "tree";
         fontWeight: Font.Light;
+        borderColor: Qt.darker(StratifyUI.body_bg, 1.1);
 
         onStyleChanged: {
             var items = parseStyle();

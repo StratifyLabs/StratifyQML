@@ -24,7 +24,7 @@ STablePrivate {
     property string style;
     property real span: StratifyUI.grid_columns;
 
-    properties.style: root.style;
+    properties.style: style;
     properties.span: span;
 }
 

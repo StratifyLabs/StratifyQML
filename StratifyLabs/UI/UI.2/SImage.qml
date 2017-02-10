@@ -17,49 +17,17 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
-SItem {
+Image {
 
-    default property alias data: contents.data;
-    property alias source: image.source;
-    property alias cache: image.cache;
+    property alias style: properties.style;
+    property alias span: properties.span;
+    property alias properties: properties;
 
-    implicitWidth: parent.width;
-    implicitHeight: contents.height;
-    blockWidth: true;
+    width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
 
-    onStyleChanged: {
-        var items = parseStyle();
-        var i;
-        for(i=0; i < items.length; i++){
-            if( items[i] === "img-rounded" ){
-                contents.radius = theme.border_radius_large;
-            } else if( items[i] === "img-circle" ){
-                contents.radius = Qt.binding(function(){ return contents.width/2 });
-            } else if( items[i] === "img-thumbnail" ){
+    SProperties {
+        id: properties;
 
-            }
-        }
     }
-
-
-    Rectangle {
-        id: contents;
-        // \todo This doesn't mask the corners off -- may have to use OpacityMask and generate the rounded image
-        radius: 0;
-        color: theme.body_bg;
-        border.color: borderColor;
-        border.width: 1;
-
-        implicitWidth: parent.width;
-        implicitHeight: image.height + 2*paddingVertical;
-        clip: true;
-
-        Image {
-            id: image;
-            x: paddingHorizontal;
-            y: paddingVertical;
-        }
-    }
-
-
 }

@@ -31,9 +31,6 @@ TableView {
 
     signal rowClicked();
 
-    //verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff;
-    //horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
-
 
     SProperties {
         id: properties;
