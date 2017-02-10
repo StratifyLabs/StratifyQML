@@ -162,6 +162,10 @@ QtObject {
                 fontWeight = Font.ExtraLight;
             } else if( items[i] === "font-normal" ){
                 fontWeight = Font.Normal;
+            } else if( items[i] === "font-lg" ){
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_large; });
+            } else if( items[i] === "font-sm" ){
+                fontSize = Qt.binding( function() { return StratifyUI.font_size_small; });
             } else if( items[i] === "h1" ){
                 fontSize = Qt.binding( function() { return StratifyUI.font_size_h1; });
             } else if( items[i] === "h2" ){
