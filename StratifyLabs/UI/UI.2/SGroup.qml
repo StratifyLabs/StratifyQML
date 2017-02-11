@@ -18,12 +18,12 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 Row {
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
-    spacing: properties.paddingHorizontal;
-    SProperties {
-        id: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
+    spacing: attr.paddingHorizontal;
+    SAttributes {
+        id: attr;
         type: "group";
     }
 }

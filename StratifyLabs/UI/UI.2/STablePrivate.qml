@@ -22,7 +22,7 @@ import StratifyLabs.UI 2.0
 TableView {
     id: root;
 
-    property alias properties: properties;
+    property alias attr: attr;
     property alias striped: root.alternatingRowColors;
     property bool hover: false;
     property bool bordered: false;
@@ -32,11 +32,11 @@ TableView {
     signal rowClicked();
 
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         type: "table";
 
-        borderColor: Qt.darker(StratifyUI.body_bg, 1.1);
+        borderColor: Qt.darker(STheme.body_bg, 1.1);
         blockWidth:  true;
 
         onStyleChanged: {
@@ -45,7 +45,7 @@ TableView {
                 if( items[i] === "table-striped" ){
                     striped = true;
                 } else if( items[i] === "table-condensed" ){
-                    paddingVertical = Qt.binding( function(){ return StratifyUI.padding_small_vertical; } );
+                    paddingVertical = Qt.binding( function(){ return STheme.padding_small_vertical; } );
                 } else if( items[i] === "table-hover" ){
                     hover = true;
                 } else if( items[i] === "table-bordered" ){
@@ -62,7 +62,7 @@ TableView {
     backgroundVisible: false;
 
     style: TableViewStyle {
-        backgroundColor: properties.backgroundColor;
+        backgroundColor: attr.backgroundColor;
         frame: Item{}
         scrollBarBackground: Item{}
         corner: Item{}
@@ -71,49 +71,49 @@ TableView {
         handleOverlap: 0;
         handle: Rectangle {
             implicitWidth: 8;
-            color: StratifyUI.gray_lighter;
+            color: STheme.gray_lighter;
             radius: width/2;
         }
-        textColor: properties.fontColor;
+        textColor: attr.fontColor;
     }
 
 
     clip: true;
 
     itemDelegate: Text {
-        verticalAlignment: properties.fontVerticalAlignment;
-        leftPadding: properties.paddingHorizontal;
-        rightPadding: properties.paddingHorizontal;
-        topPadding: properties.paddingVertical;
-        bottomPadding: properties.paddingVertical;
-        color: properties.fontColor;
-        font.pointSize: properties.fontSize;
-        font.family: properties.fontText;
+        verticalAlignment: attr.fontVerticalAlignment;
+        leftPadding: attr.paddingHorizontal;
+        rightPadding: attr.paddingHorizontal;
+        topPadding: attr.paddingVertical;
+        bottomPadding: attr.paddingVertical;
+        color: attr.fontColor;
+        font.pointSize: attr.fontSize;
+        font.family: attr.fontText;
         font.weight: Font.Light;
         text: styleData.value;
         Rectangle {
             color: "transparent";
             anchors.fill: parent;
             border.width: bordered ? 1 : 0;
-            border.color: properties.borderColor;
+            border.color: attr.borderColor;
         }
     }
 
     headerDelegate: Text {
-        verticalAlignment: properties.fontVerticalAlignment;
-        leftPadding: properties.paddingHorizontal;
-        rightPadding: properties.paddingHorizontal;
-        topPadding: properties.paddingVertical;
-        bottomPadding: properties.paddingVertical;
-        color: StratifyUI.gray_base;
-        font.pointSize: properties.fontSize;
-        font.family: properties.fontText;
+        verticalAlignment: attr.fontVerticalAlignment;
+        leftPadding: attr.paddingHorizontal;
+        rightPadding: attr.paddingHorizontal;
+        topPadding: attr.paddingVertical;
+        bottomPadding: attr.paddingVertical;
+        color: STheme.gray_base;
+        font.pointSize: attr.fontSize;
+        font.family: attr.fontText;
         font.weight: Font.Bold;
         text: styleData.value;
 
         Rectangle {
             anchors.fill: parent;
-            color: StratifyUI.body_bg;
+            color: STheme.body_bg;
             z: -1;
         }
 
@@ -121,14 +121,14 @@ TableView {
             color: "transparent";
             anchors.fill: parent;
             border.width: bordered ? 1 : 0;
-            border.color: properties.borderColor;
+            border.color: attr.borderColor;
         }
 
         Rectangle {
             width: parent.width;
             height: 2;
-            color: properties.borderColor;
-            border.color: properties.borderColor;
+            color: attr.borderColor;
+            border.color: attr.borderColor;
             anchors.bottom: parent.bottom;
         }
     }
@@ -136,15 +136,15 @@ TableView {
     rowDelegate: Rectangle {
 
         property bool hovered;
-        color: styleData.alternate ? Qt.darker(StratifyUI.body_bg, 1.02 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08) : Qt.darker(StratifyUI.body_bg, 1.0 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08);
+        color: styleData.alternate ? Qt.darker(STheme.body_bg, 1.02 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08) : Qt.darker(STheme.body_bg, 1.0 + hovered*0.05 + (styleData.selected && highlightSelectedRow)*0.08);
 
-        height: properties.fontContainerHeight;
+        height: attr.fontContainerHeight;
 
         Rectangle {
             width: parent.width;
             height: 1;
-            color: properties.borderColor;
-            border.color: properties.borderColor;
+            color: attr.borderColor;
+            border.color: attr.borderColor;
             anchors.bottom: parent.bottom;
             visible: styleData.row !== (root.rowCount - 1);
         }

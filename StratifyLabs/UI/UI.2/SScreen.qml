@@ -19,7 +19,7 @@ import StratifyLabs.UI 2.0
 
 SContainer {
     id: screen;
-    properties.type: "screen";
+    attr.type: "screen";
     anchors.fill: parent;
     property var backScreen;
     property string name: "Screen";

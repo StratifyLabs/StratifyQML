@@ -19,25 +19,25 @@ import StratifyLabs.UI 2.0
 
 Flickable {
     id: control;
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         fillWidth: true;
         fillHeight: true;
     }
 
     clip: true;
-    width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
-    height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
+    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
     implicitWidth: contentWidth;
     implicitHeight: contentHeight;
 
     //if child has "block" set, width will bind
-    contentWidth: ((contentItem.children[0].properties !== undefined) && (contentItem.children[0].properties.fillWidth === true)) ? control.width : contentItem.childrenRect.width;
-    contentHeight: (contentItem.children[0].properties !== undefined) && (contentItem.children[0].properties.fillHeight === true) ? control.height : contentItem.childrenRect.height;
+    contentWidth: ((contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillWidth === true)) ? control.width : contentItem.childrenRect.width;
+    contentHeight: (contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillHeight === true) ? control.height : contentItem.childrenRect.height;
 
 }

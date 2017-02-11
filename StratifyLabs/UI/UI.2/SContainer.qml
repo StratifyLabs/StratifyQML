@@ -19,31 +19,31 @@ import StratifyLabs.UI 2.0
 
 Rectangle {
     id: control;
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
     property string name;
 
     default property alias data: contents.data;
-    property alias backgroundColor: control.properties.backgroundColor;
+    property alias backgroundColor: control.attr.backgroundColor;
 
-    width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
-    height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
+    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
-    implicitWidth: contents.childrenRect.width + properties.paddingHorizontal*2;
-    implicitHeight: contents.childrenRect.height + properties.paddingVertical*2;
-    color: properties.backgroundColor;
+    implicitWidth: contents.childrenRect.width + attr.paddingHorizontal*2;
+    implicitHeight: contents.childrenRect.height + attr.paddingVertical*2;
+    color: attr.backgroundColor;
 
     Item {
         id: contents;
-        x: properties.paddingHorizontal;
-        y: properties.paddingVertical;
-        height: parent.height !== undefined ? parent.height - properties.paddingVertical*2 : undefined;
-        width: parent.width !== undefined ? parent.width - properties.paddingHorizontal*2 : undefined;
+        x: attr.paddingHorizontal;
+        y: attr.paddingVertical;
+        height: parent.height !== undefined ? parent.height - attr.paddingVertical*2 : undefined;
+        width: parent.width !== undefined ? parent.width - attr.paddingHorizontal*2 : undefined;
     }
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         type: "container";
         blockWidth: true;
     }

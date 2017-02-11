@@ -20,28 +20,28 @@ import StratifyLabs.UI 2.0
 
 Rectangle {
     id: control;
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
     property alias text: textArea.text;
     property alias placeholder: textArea.placeholderText;
     property alias textArea: textArea;
     property alias textBox: control.textArea;
     property alias flickable: flickable;
 
-    SProperties {
-        id: properties;
-        borderColor: StratifyUI.gray_light;
+    SAttributes {
+        id: attr;
+        borderColor: STheme.gray_light;
         fillWidth: true;
     }
 
-    implicitWidth: properties.blockWidth ? (parent.width) : 0;
-    implicitHeight: properties.fillHeight ? (parent.height) : 0;
+    implicitWidth: attr.blockWidth ? (parent.width) : 0;
+    implicitHeight: attr.fillHeight ? (parent.height) : 0;
 
-    border.width: properties.borderWidth;
-    radius: properties.borderRadius;
-    border.color: properties.borderColor;
-    color: properties.backgroundColor;
+    border.width: attr.borderWidth;
+    radius: attr.borderRadius;
+    border.color: attr.borderColor;
+    color: attr.backgroundColor;
 
     Flickable {
         id: flickable;
@@ -52,14 +52,14 @@ Rectangle {
         TextArea.flickable: TextArea {
             id: textArea;
             wrapMode: TextArea.Wrap;
-            color: properties.fontColor;
-            font.pixelSize: properties.fontSize;
-            font.family: properties.fontText;
-            font.weight: properties.fontWeight;
-            selectedTextColor: properties.fontColorSelected;
+            color: attr.fontColor;
+            font.pixelSize: attr.fontSize;
+            font.family: attr.fontText;
+            font.weight: attr.fontWeight;
+            selectedTextColor: attr.fontColorSelected;
             selectByMouse: true;
             selectByKeyboard: true;
-            selectionColor: properties.backgroundColorSelection;
+            selectionColor: attr.backgroundColorFontSelection;
         }
 
         ScrollBar.vertical: ScrollBar { }

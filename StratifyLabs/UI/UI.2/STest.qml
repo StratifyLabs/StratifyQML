@@ -39,15 +39,15 @@ Item {
         SContainer {
             SColumn {
                 SText { style: "left text-primary"; text: "Menu"; }
-                SHLine{ properties.paddingVertical: 0; }
+                SHLine{ attr.paddingVertical: 0; }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Alerts"; onPressed: { tests.screen = text; drawer.close(); } }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Panels"; onPressed: { tests.screen = text; drawer.close(); } }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Wells"; onPressed: { tests.screen = text; drawer.close(); } }
-                SHLine{ properties.paddingVertical: 0; }
+                SHLine{ attr.paddingVertical: 0; }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Buttons"; onPressed: { tests.screen = text; drawer.close(); } }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Labels"; onPressed: { tests.screen = text; drawer.close(); } }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Input"; onPressed: { tests.screen = text; drawer.close(); } }
-                SHLine{ properties.paddingVertical: 0; }
+                SHLine{ attr.paddingVertical: 0; }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
                 SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
@@ -64,7 +64,7 @@ Item {
         SColumn {
             SText {
                 style: "block";
-                text: "StratifyUI 2.0 is a QML framework that works, looks, and feels much like the twitter bootstrap HTML framework";
+                text: "STheme 2.0 is a QML framework that works, looks, and feels much like the twitter bootstrap HTML framework";
             }
         }
     }
@@ -74,7 +74,7 @@ Item {
     SColumn {
         style: "block fill";
         SContainer {
-            color: StratifyUI.brand_danger;
+            color: STheme.brand_danger;
 
             SRow {
                 SButton {
@@ -500,6 +500,11 @@ Item {
                             value: 0.5;
                         }
                         SProgressBar {
+                            style: "progress-bar-success";
+                            value: 1.0;
+                        }
+
+                        SSlider {
                             style: "progress-bar-success";
                             value: 1.0;
                         }

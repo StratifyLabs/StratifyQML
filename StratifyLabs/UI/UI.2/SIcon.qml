@@ -24,55 +24,69 @@ Item {
     property string icon;
     property string label;
 
-    property alias properties: properties;
-    property alias style: properties.style;
-    property alias span: properties.span;
+    property alias attr: attr;
+    property alias style: attr.style;
+    property alias span: attr.span;
 
-    property bool spin: false;
-    property bool pulse: false;
-    property real pulseSteps: 8;
-    property real animationPeriod: 1200;
-
-    property real verticalAlignment: properties.fontHorizontalAlignment;
-    property real horizontalAlignment: properties.fontVerticalAlignment;
+    property real verticalAlignment: attr.fontHorizontalAlignment;
+    property real horizontalAlignment: attr.fontVerticalAlignment;
 
     implicitWidth: icon.implicitWidth + (label.implicitWidth*label.visible) + row.spacing;
     implicitHeight: icon.implicitHeight + label.implicitHeight;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
+
+        property bool spin: false;
+        property bool pulse: false;
+        property real pulseSteps: 8;
+        property real animationPeriod: 1200;
+
+        onStyleChanged:{
+            onStyleChanged: {
+                var items = parseStyle();
+                attr.radius = STheme.btn_border_radius_base;
+                for(var i = 0; i < items.length; i++){
+                    if( (items[i] === "icon-spin") || (items[i] === "fa-spin") ){
+                        spin = true;
+                    } else if( (items[i] === "icon-pulse") || (items[i] === "fa-pulse") ){
+                        pulse = true;
+                    }
+                }
+            }
+        }
     }
 
     Row {
         id: row;
         anchors.verticalCenter: parent.verticalCenter;
         anchors.horizontalCenter: parent.horizontalCenter;
-        spacing: properties.paddingHorizontal/4;
+        spacing: attr.paddingHorizontal/4;
 
         Text {
             id: icon;
             anchors.verticalCenter: parent.verticalCenter;
             text: control.icon;
-            font.family: properties.fontIcon;
-            font.pointSize: properties.fontSize*1.2;
-            font.weight: properties.fontWeight;
-            color: enabled ? properties.fontColor : properties.fontColorMuted;
+            font.family: attr.fontIcon;
+            font.pointSize: attr.fontSize*1.2;
+            font.weight: attr.fontWeight;
+            color: enabled ? attr.fontColor : attr.fontColorMuted;
 
             RotationAnimation on rotation {
                 loops: Animation.Infinite;
-                paused: !spin;
+                paused: !attr.spin;
                 from: 0;
                 to: 360;
-                duration: animationPeriod;
+                duration: attr.animationPeriod;
             }
 
             Timer {
                 id: pulseTimer;
-                running: pulse;
+                running: attr.pulse;
                 repeat: true;
-                interval: animationPeriod/pulseSteps;
+                interval: attr.animationPeriod/attr.pulseSteps;
                 onTriggered: {
-                    icon.rotation += 360/pulseSteps;
+                    icon.rotation += 360/attr.pulseSteps;
                 }
             }
         }
@@ -81,11 +95,11 @@ Item {
             id: label;
             anchors.verticalCenter: parent.verticalCenter;
             text: control.label;
-            font.family: properties.fontText;
-            font.pointSize: properties.fontSize;
-            font.weight: properties.fontWeight;
-            color: enabled ? properties.fontColor : properties.fontColorMuted;
-            visible: !(StratifyUI.isScreenSm && properties.fontHideSm);
+            font.family: attr.fontText;
+            font.pointSize: attr.fontSize;
+            font.weight: attr.fontWeight;
+            color: enabled ? attr.fontColor : attr.fontColorMuted;
+            visible: !(STheme.isScreenSm && attr.fontHideSm);
         }
     }
 

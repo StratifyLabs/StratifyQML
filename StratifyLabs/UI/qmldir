@@ -3,7 +3,7 @@ module StratifyLabs.UI
 JSONPath 1.0 assets/jsonpath-0.8.5.js
 Fa 1.0 assets/Fa-4.5.0.js
 
-singleton StratifyUI 1.0 UI.2/StratifyUI.qml
+singleton STheme 1.0 UI.2/STheme.qml
 
 SAlert 1.0 UI.1/SAlert.qml
 SAnimationContainer 1.0 UI.1/SAnimationContainer.qml
@@ -63,7 +63,7 @@ STree 1.0 UI.1/STree.qml
 STreeColumn 1.0 UI.1/STreeColumn.qml
 SWell 1.0 UI.1/SWell.qml
 
-singleton StratifyUI 2.0 UI.2/StratifyUI.qml
+singleton STheme 2.0 UI.2/STheme.qml
 SAlert 2.0 UI.2/SAlert.qml
 SAnimationContainer 2.0 UI.2/SAnimationContainer.qml
 SAnimationFade 2.0 UI.2/SAnimationFade.qml
@@ -100,7 +100,7 @@ SProgressbar 2.0 UI.2/SProgressbar.qml
 SProgressBar 2.0 UI.2/SProgressbar.qml
 SProgresscircle 2.0 UI.2/SProgresscircle.qml
 SProgressCircle 2.0 UI.2/SProgresscircle.qml
-SProperties 2.0 UI.2/SProperties.qml
+SAttributes 2.0 UI.2/SAttributes.qml
 SRoundedRectangle 2.0 UI.1/SRoundedRectangle.qml
 SRow 2.0 UI.2/SRow.qml
 SScreen 2.0 UI.2/SScreen.qml

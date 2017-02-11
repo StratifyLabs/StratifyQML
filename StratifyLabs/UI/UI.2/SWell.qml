@@ -20,19 +20,19 @@ import StratifyLabs.UI 2.0
 Rectangle {
     id: base;
 
-    property alias properties: properties;
-    property alias style: properties.style;
-    property alias span: properties.span;
+    property alias attr: attr;
+    property alias style: attr.style;
+    property alias span: attr.span;
     property alias text: text.text;
 
     implicitWidth: text.width;
     implicitHeight: text.height;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         type: "well";
-        backgroundColor: StratifyUI.well_bg;
-        borderColor: StratifyUI.well_border;
+        backgroundColor: STheme.well_bg;
+        borderColor: STheme.well_border;
         blockWidth: true;
         fontVerticalAlignment: Text.AlignTop;
         fontHorizontalAlignment: Text.AlignLeft;
@@ -42,44 +42,44 @@ Rectangle {
             var i;
             for(i=0; i < items.length; i++){
                 if( items[i] === "well-sm" ){
-                    properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_small_vertical; });
-                    properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_small_horizontal; });
-                    properties.fontSize = Qt.binding( function(){ return StratifyUI.font_size_small; });
+                    attr.paddingVertical = Qt.binding( function(){ return STheme.padding_small_vertical; });
+                    attr.paddingHorizontal = Qt.binding( function(){ return STheme.padding_small_horizontal; });
+                    attr.fontSize = Qt.binding( function(){ return STheme.font_size_small; });
                 } else if( items[i] === "well-lg" ){
-                    properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_large_vertical; });
-                    properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_large_horizontal; });
-                    properties.fontSize = Qt.binding( function(){ return StratifyUI.font_size_large; });
+                    attr.paddingVertical = Qt.binding( function(){ return STheme.padding_large_vertical; });
+                    attr.paddingHorizontal = Qt.binding( function(){ return STheme.padding_large_horizontal; });
+                    attr.fontSize = Qt.binding( function(){ return STheme.font_size_large; });
                 } else if( items[i] === "well-xs" ){
-                    properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_xs_vertical; });
-                    properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_xs_horizontal; });
-                    properties.fontSize = Qt.binding( function(){ return StratifyUI.font_size_small; });
+                    attr.paddingVertical = Qt.binding( function(){ return STheme.padding_xs_vertical; });
+                    attr.paddingHorizontal = Qt.binding( function(){ return STheme.padding_xs_horizontal; });
+                    attr.fontSize = Qt.binding( function(){ return STheme.font_size_small; });
                 } else if( items[i] === "well-default" ){
-                    properties.paddingVertical = Qt.binding( function(){ return StratifyUI.padding_base_vertical; });
-                    properties.paddingHorizontal = Qt.binding( function(){ return StratifyUI.padding_base_vertical; });
-                    properties.fontSize = Qt.binding( function(){ return StratifyUI.font_size_base; });
+                    attr.paddingVertical = Qt.binding( function(){ return STheme.padding_base_vertical; });
+                    attr.paddingHorizontal = Qt.binding( function(){ return STheme.padding_base_vertical; });
+                    attr.fontSize = Qt.binding( function(){ return STheme.font_size_base; });
                 }
             }
         }
     }
 
-    color: properties.backgroundColor;
-    border.color:  properties.borderColor;
-    border.width: properties.borderWidth;
-    radius: properties.borderRadius;
+    color: attr.backgroundColor;
+    border.color:  attr.borderColor;
+    border.width: attr.borderWidth;
+    radius: attr.borderRadius;
 
     Text {
         id: text;
-        rightPadding: properties.paddingHorizontal;
-        leftPadding: properties.paddingHorizontal;
-        topPadding: properties.paddingVertical;
-        bottomPadding: properties.paddingVertical;
-        color: properties.fontColor;
-        font.family: properties.fontText;
-        font.pixelSize: properties.fontSize;
-        font.weight: properties.fontWeight;
+        rightPadding: attr.paddingHorizontal;
+        leftPadding: attr.paddingHorizontal;
+        topPadding: attr.paddingVertical;
+        bottomPadding: attr.paddingVertical;
+        color: attr.fontColor;
+        font.family: attr.fontText;
+        font.pixelSize: attr.fontSize;
+        font.weight: attr.fontWeight;
         wrapMode: Text.Wrap;
-        horizontalAlignment: properties.fontHorizontalAlignment;
-        verticalAlignment: properties.fontVerticalAlignment;
+        horizontalAlignment: attr.fontHorizontalAlignment;
+        verticalAlignment: attr.fontVerticalAlignment;
     }
 
 }

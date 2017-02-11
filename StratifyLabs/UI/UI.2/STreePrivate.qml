@@ -22,18 +22,18 @@ import StratifyLabs.UI 2.0
 TreeView {
     id: root;
 
-    property alias properties: properties;
+    property alias attr: attr;
 
     property alias striped: root.alternatingRowColors;
     property bool hover: false;
     property bool bordered: false;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         blockWidth:  true;
         type: "tree";
         fontWeight: Font.Light;
-        borderColor: Qt.darker(StratifyUI.body_bg, 1.1);
+        borderColor: Qt.darker(STheme.body_bg, 1.1);
 
         onStyleChanged: {
             var items = parseStyle();
@@ -41,7 +41,7 @@ TreeView {
                 if( items[i] === "tree-striped" ){
                     striped = true;
                 } else if( items[i] === "tree-condensed" ){
-                    properties.paddingVertical = StratifyUI.padding_small_vertical;
+                    attr.paddingVertical = STheme.padding_small_vertical;
                 } else if( items[i] === "tree-bordered" ){
                     bordered = true;
                 }
@@ -68,7 +68,7 @@ TreeView {
         backgroundColor: "transparent";
         frame: Rectangle {
             color: "transparent";
-            border.color: properties.borderColor;
+            border.color: attr.borderColor;
             border.width: bordered ? 1 : 0;
         }
 
@@ -81,15 +81,15 @@ TreeView {
 
         branchDelegate: Item{
             anchors.centerIn: parent;
-            width: properties.fontSize + properties.paddingHorizontal*3;
-            height: properties.fontSize + properties.paddingVertical*3;
+            width: attr.fontSize + attr.paddingHorizontal*3;
+            height: attr.fontSize + attr.paddingVertical*3;
 
             Text {
                 id: branchText;
                 anchors.right: parent.right;
                 anchors.verticalCenter: parent.verticalCenter;
-                color: properties.fontColor;
-                font.family: properties.fontIcon;
+                color: attr.fontColor;
+                font.family: attr.fontIcon;
                 text: Fa.Icon.chevron_right;
                 rotation: styleData.isExpanded ? 90 : 0;
                 state: styleData.isExpanded ? "expanded" : "collapsed";
@@ -132,7 +132,7 @@ TreeView {
 
         handle: Rectangle {
             implicitWidth: 8;
-            color: StratifyUI.gray_lighter;
+            color: STheme.gray_lighter;
             radius: width > height ? height/2 : width/2;
         }
 
@@ -142,38 +142,38 @@ TreeView {
 
     itemDelegate: Text {
         verticalAlignment: Text.AlignVCenter;
-        leftPadding: properties.paddingHorizontal;
-        rightPadding: properties.paddingHorizontal;
-        topPadding: properties.paddingVertical;
-        bottomPadding: properties.paddingVertical;
-        color: properties.fontColor;
-        font.pointSize: properties.fontSize;
-        font.family: properties.fontText;
-        font.weight: properties.fontWeight;
+        leftPadding: attr.paddingHorizontal;
+        rightPadding: attr.paddingHorizontal;
+        topPadding: attr.paddingVertical;
+        bottomPadding: attr.paddingVertical;
+        color: attr.fontColor;
+        font.pointSize: attr.fontSize;
+        font.family: attr.fontText;
+        font.weight: attr.fontWeight;
         text: styleData.value;
         Rectangle {
             color: "transparent";
             anchors.fill: parent;
             border.width: bordered ? 1 : 0;
-            border.color: properties.borderColor;
+            border.color: attr.borderColor;
         }
     }
 
     headerDelegate: Text {
-        verticalAlignment: properties.fontVerticalAlignment;
-        leftPadding: properties.paddingHorizontal;
-        rightPadding: properties.paddingHorizontal;
-        topPadding: properties.paddingVertical;
-        bottomPadding: properties.paddingVertical;
-        color: StratifyUI.gray_base;
-        font.pointSize: properties.fontSize;
-        font.family: properties.fontText;
+        verticalAlignment: attr.fontVerticalAlignment;
+        leftPadding: attr.paddingHorizontal;
+        rightPadding: attr.paddingHorizontal;
+        topPadding: attr.paddingVertical;
+        bottomPadding: attr.paddingVertical;
+        color: STheme.gray_base;
+        font.pointSize: attr.fontSize;
+        font.family: attr.fontText;
         font.weight: Font.Bold;
         text: styleData.value;
 
         Rectangle {
             anchors.fill: parent;
-            color: StratifyUI.body_bg;
+            color: STheme.body_bg;
             z: -1;
         }
 
@@ -181,29 +181,29 @@ TreeView {
             color: "transparent";
             anchors.fill: parent;
             border.width: bordered ? 1 : 0;
-            border.color: properties.borderColor;
+            border.color: attr.borderColor;
         }
 
         Rectangle {
             width: parent.width;
             height: 2;
-            color: properties.borderColor;
-            border.color: properties.borderColor;
+            color: attr.borderColor;
+            border.color: attr.borderColor;
             anchors.bottom: parent.bottom;
         }
     }
 
     rowDelegate: Rectangle {
         property bool hovered;
-        color: (styleData.selected) ? Qt.darker(StratifyUI.body_bg, 1.02 + hovered*0.05) : Qt.darker(StratifyUI.body_bg, 1.0 + hovered*0.05);
+        color: (styleData.selected) ? Qt.darker(STheme.body_bg, 1.02 + hovered*0.05) : Qt.darker(STheme.body_bg, 1.0 + hovered*0.05);
 
-        height: properties.fontSize + properties.paddingVertical*3;
+        height: attr.fontSize + attr.paddingVertical*3;
 
         Rectangle {
             width: parent.width;
             height: 1;
-            color: properties.borderColor;
-            border.color: properties.borderColor;
+            color: attr.borderColor;
+            border.color: attr.borderColor;
             anchors.bottom: parent.bottom;
             visible: styleData.row !== (root.rowCount -1);
         }

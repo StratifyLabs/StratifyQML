@@ -22,10 +22,10 @@ import StratifyLabs.UI 2.0
 STreePrivate {
     id: root;
     property string style;
-    property real span: StratifyUI.grid_columns;
+    property real span: STheme.grid_columns;
 
-    properties.style: root.style;
-    properties.span: span;
+    attr.style: root.style;
+    attr.span: span;
 
 }
 

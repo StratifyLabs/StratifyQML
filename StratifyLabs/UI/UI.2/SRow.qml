@@ -21,50 +21,50 @@ import StratifyLabs.UI 2.0
 GridLayout {
     id: control;
 
-    property alias properties: properties;
-    property alias style: properties.style;
+    property alias attr: attr;
+    property alias style: attr.style;
 
-    width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
-    height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
+    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         blockWidth: true;
         type: "row";
-        span: StratifyUI.grid_columns;
+        span: STheme.grid_columns;
     }
 
     onVisibleChanged: adjustWidth();
-    rowSpacing: properties.paddingVertical;
-    columnSpacing: properties.paddingHorizontal;
-    columns: properties.span;
+    rowSpacing: attr.paddingVertical;
+    columnSpacing: attr.paddingHorizontal;
+    columns: attr.span;
 
     function alignChildren(){
         for(var i = 0; i < children.length; i++){
 
-            if( children[i].properties !== undefined ){
+            if( children[i].attr !== undefined ){
 
-                if( children[i].properties.blockWidth === true ){
+                if( children[i].attr.blockWidth === true ){
                     children[i].Layout.fillWidth = true;
                     children[i].Layout.minimumWidth = children[i].implicitWidth;
                 } else {
                     children[i].Layout.fillWidth = false;
                 }
 
-                if( children[i].properties.fillHeight === true ){
+                if( children[i].attr.fillHeight === true ){
                     children[i].Layout.fillHeight = true;
                     children[i].Layout.minimumHeight = children[i].implicitHeight;
                 } else {
                     children[i].Layout.fillHeight = false;
                 }
 
-                var span = children[i].properties.span;
+                var span = children[i].attr.span;
                 if( (span > columns) || (span < 0) ){
                     span = columns;
                 }
 
                 children[i].Layout.columnSpan = span;
-                children[i].Layout.alignment = children[i].properties.alignment;
+                children[i].Layout.alignment = children[i].attr.alignment;
 
             } else {
                 children[i].Layout.fillWidth = true;
@@ -78,11 +78,11 @@ GridLayout {
             var spacingInRow;
             var span;
 
-            if( children[i].properties !== undefined ){
-                if( children[i].properties.span < 0 ){
+            if( children[i].attr !== undefined ){
+                if( children[i].attr.span < 0 ){
                     span = columns;
                 } else {
-                    span = children[i].properties.span;
+                    span = children[i].attr.span;
                 }
 
                 spacingInRow = 0;
@@ -96,7 +96,7 @@ GridLayout {
 
                 children[i].Layout.columnSpan = span;
 
-                if( children[i].properties.blockWidth === true ){
+                if( children[i].attr.blockWidth === true ){
                     w = (width - spacingInRow) * span / columns;
                     children[i].Layout.maximumWidth = w;
                 }
@@ -105,13 +105,13 @@ GridLayout {
     }
 
     Connections {
-        target: StratifyUI;
+        target: STheme;
         onIsScreenSmChanged: {
-            if( control.properties.type == "row" ){
-                if( StratifyUI.isScreenSm === true ){
-                    columns = StratifyUI.grid_columns_sm;
+            if( control.attr.type == "row" ){
+                if( STheme.isScreenSm === true ){
+                    columns = STheme.grid_columns_sm;
                 } else {
-                    columns = StratifyUI.grid_columns;
+                    columns = STheme.grid_columns;
                 }
             }
         }

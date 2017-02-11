@@ -21,17 +21,17 @@ import StratifyLabs.UI 2.0
 RadioButton {
     id: control;
 
-    property alias properties: properties;
-    property alias style: properties.style;
-    property alias span: properties.span;
+    property alias attr: attr;
+    property alias style: attr.style;
+    property alias span: attr.span;
 
     property string iconChecked: Fa.Icon.circle;
     property string icon: Fa.Icon.circle_o;
 
-    SProperties {
-        id: properties;
-        //backgroundColor: StratifyUI.body_bg;
-        //borderColor: StratifyUI.body_bg;
+    SAttributes {
+        id: attr;
+        //color: STheme.body_bg;
+        //borderColor: STheme.body_bg;
         fontHorizontalAlignment: Text.AlignLeft;
     }
 
@@ -45,9 +45,9 @@ RadioButton {
         x: text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
         text: control.checked ? control.iconChecked : control.icon;
-        font.family: properties.fontIcon;
-        font.pixelSize: properties.fontSize*1.5;
-        color: properties.fontColor;
+        font.family: attr.fontIcon;
+        font.pixelSize: attr.fontSize*1.5;
+        color: attr.fontColor;
         opacity: enabled ? 1 : 0.3
     }
 
@@ -56,9 +56,9 @@ RadioButton {
         rightPadding: control.indicator && control.mirrored ? control.indicator.width + control.spacing : 0
 
         text: control.text
-        font.family: properties.fontText;
-        font.pixelSize: properties.fontSize;
-        color: properties.fontColor;
+        font.family: attr.fontText;
+        font.pixelSize: attr.fontSize;
+        color: attr.fontColor;
         visible: control.text
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -66,10 +66,10 @@ RadioButton {
     }
 
     background: Rectangle {
-        color: properties.backgroundColor;
-        radius: properties.borderRadius;
-        border.color: properties.borderColor;
-        border.width: properties.borderWidth;
+        color: attr.color;
+        radius: attr.borderRadius;
+        border.color: attr.borderColor;
+        border.width: attr.borderWidth;
     }
 
 }

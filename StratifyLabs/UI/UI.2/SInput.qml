@@ -21,39 +21,39 @@ import StratifyLabs.UI 2.0
 TextField {
     id: control;
 
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
     property alias placeholder: control.placeholderText;
 
-    implicitWidth: contentItem.implicitWidth + properties.paddingHorizontal*2;
-    implicitHeight: properties.fontContainerHeight;
+    implicitWidth: contentItem.implicitWidth + attr.paddingHorizontal*2;
+    implicitHeight: attr.fontContainerHeight;
 
-    font.family: properties.fontText;
-    font.pixelSize: properties.fontSize;
-    font.weight: properties.fontWeight;
-    color: enabled ? properties.fontColor : properties.fontColorMuted;
+    font.family: attr.fontText;
+    font.pixelSize: attr.fontSize;
+    font.weight: attr.fontWeight;
+    color: enabled ? attr.fontColor : attr.fontColorMuted;
     selectByMouse: true;
-    selectedTextColor: properties.fontColorSelected;
-    selectionColor: properties.backgroundColorSelection;
-    horizontalAlignment: properties.fontHorizontalAlignment;
-    verticalAlignment: properties.fontVerticalAlignment;
+    selectedTextColor: attr.fontColorSelected;
+    selectionColor: attr.backgroundColorFontSelection;
+    horizontalAlignment: attr.fontHorizontalAlignment;
+    verticalAlignment: attr.fontVerticalAlignment;
 
     background: Rectangle {
-        border.color: properties.borderColor;
-        border.width: properties.borderWidth;
-        color: properties.backgroundColor;
-        radius: properties.borderRadius;
+        border.color: attr.borderColor;
+        border.width: attr.borderWidth;
+        color: attr.backgroundColor;
+        radius: attr.borderRadius;
 
         Text {
             anchors.right: parent.right;
             anchors.verticalCenter: parent.verticalCenter;
             visible: control.text;
-            font.family: properties.fontIcon;
-            font.pixelSize: properties.fontSize * 1.2;
-            color: properties.fontColorMuted;
+            font.family: attr.fontIcon;
+            font.pixelSize: attr.fontSize * 1.2;
+            color: attr.fontColorMuted;
             text: Fa.Icon.times;
-            rightPadding: properties.paddingHorizontal;
+            rightPadding: attr.paddingHorizontal;
             MouseArea {
                 anchors.fill: parent;
                 onClicked: control.text = "";
@@ -62,9 +62,9 @@ TextField {
 
     }
 
-    SProperties {
-        id: properties;
-        borderColor: StratifyUI.gray_light;
+    SAttributes {
+        id: attr;
+        borderColor: STheme.gray_light;
         fontHorizontalAlignment: Text.AlignLeft;
         blockWidth: true;
     }

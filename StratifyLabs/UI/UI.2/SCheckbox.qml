@@ -20,15 +20,15 @@ import StratifyLabs.UI 2.0
 
 CheckBox {
     id: control;
-    property alias properties: properties;
-    property alias span: properties.span;
-    property alias style: properties.style;
+    property alias attr: attr;
+    property alias span: attr.span;
+    property alias style: attr.style;
 
     property string iconChecked: Fa.Icon.check_square_o;
     property string icon: Fa.Icon.square_o;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         fontHorizontalAlignment: Text.AlignLeft;
     }
 
@@ -40,44 +40,44 @@ CheckBox {
                                       indicator ? indicator.implicitHeight : 0) + topPadding + bottomPadding)
     baselineOffset: contentItem.y + contentItem.baselineOffset
 
-    topPadding: properties.paddingVertical;
-    bottomPadding: properties.paddingVertical;
-    leftPadding: properties.paddingHorizontal;
-    rightPadding: properties.paddingHorizontal;
-    spacing: properties.paddingHorizontal/2;
+    topPadding: attr.paddingVertical;
+    bottomPadding: attr.paddingVertical;
+    leftPadding: attr.paddingHorizontal;
+    rightPadding: attr.paddingHorizontal;
+    spacing: attr.paddingHorizontal/2;
 
     indicator: Text {
         x: text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
         text: control.checked ? control.iconChecked: control.icon;
-        font.family: properties.fontIcon;
-        font.pixelSize: properties.fontSize*1.4;
-        font.weight: properties.fontWeight;
-        color: properties.fontColor;
+        font.family: attr.fontIcon;
+        font.pixelSize: attr.fontSize*1.4;
+        font.weight: attr.fontWeight;
+        color: attr.fontColor;
         opacity: enabled ? 1 : 0.3
     }
 
     contentItem: Text {
-        leftPadding: control.indicator && !control.mirrored ? properties.fontSize + control.spacing : 0
-        rightPadding: control.indicator && control.mirrored ? properties.fontSize + control.spacing : 0
+        leftPadding: control.indicator && !control.mirrored ? attr.fontSize + control.spacing : 0
+        rightPadding: control.indicator && control.mirrored ? attr.fontSize + control.spacing : 0
 
         text: control.text;
-        font.family: properties.fontText;
-        font.pixelSize: properties.fontSize;
-        font.weight: properties.fontWeight;
-        color: properties.fontColor;
+        font.family: attr.fontText;
+        font.pixelSize: attr.fontSize;
+        font.weight: attr.fontWeight;
+        color: attr.fontColor;
         visible: true;
-        horizontalAlignment: properties.fontHorizontalAlignment;
-        verticalAlignment: properties.fontVerticalAlignment;
+        horizontalAlignment: attr.fontHorizontalAlignment;
+        verticalAlignment: attr.fontVerticalAlignment;
         opacity: enabled ? 1 : 0.3
     }
 
 
     background: Rectangle {
-        color: properties.backgroundColor;
-        radius: properties.borderRadius;
-        border.color: properties.borderColor;
-        border.width: properties.borderWidth;
+        color: attr.color;
+        radius: attr.borderRadius;
+        border.color: attr.borderColor;
+        border.width: attr.borderWidth;
     }
 
 }

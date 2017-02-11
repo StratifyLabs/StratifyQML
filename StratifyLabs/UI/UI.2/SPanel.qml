@@ -20,57 +20,56 @@ import StratifyLabs.UI 2.0
 Item {
     id: panelRoot;
 
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
 
-    SProperties {
-        id: properties;
-        borderWidth: StratifyUI.panel_border_width;
+    default property alias data: contents.data;
+    property alias heading: panelHeadingText.text;
+    property alias footer: panelFooterText.text;
+
+    SAttributes {
+        id: attr;
+        borderWidth: STheme.panel_border_width;
         blockWidth: true;
-        borderColor: StratifyUI.panel_default_border;
-        backgroundColor: StratifyUI.panel_default_heading_bg;
+        borderColor: STheme.panel_default_border;
+        color: STheme.panel_default_heading_bg;
+
+        property real headingFontSize: STheme.font_size_base;
+        property real footerFontSize: STheme.font_size_base;
 
         onStyleChanged: {
             var items = parseStyle();
             var i;
             for(i=0; i < items.length; i++){
                 if( items[i] === "panel-primary" ){
-                    headingBackgroundColor = StratifyUI.panel_primary_heading_bg;
-                    properties.borderColor = StratifyUI.panel_primary_border;
-                    headingColor = StratifyUI.panel_primary_text;
+                    attr.color = Qt.binding(function(){ return STheme.panel_primary_heading_bg; });
+                    attr.borderColor = Qt.binding(function(){ return STheme.panel_primary_border; });
+                    fontColor = Qt.binding(function(){ return STheme.panel_primary_text; });
                 } else if( items[i] === "panel-success" ){
-                    headingBackgroundColor = StratifyUI.panel_success_heading_bg;
-                    properties.borderColor = StratifyUI.panel_success_border;
-                    headingColor = StratifyUI.panel_success_text;
+                    attr.color = Qt.binding(function(){ return STheme.panel_success_heading_bg; });
+                    attr.borderColor = Qt.binding(function(){ return STheme.panel_success_border; });
+                    fontColor = Qt.binding(function(){ return STheme.panel_success_text; });
                 } else if( items[i] === "panel-danger" ){
-                    headingBackgroundColor = StratifyUI.panel_danger_heading_bg;
-                    properties.borderColor = StratifyUI.panel_danger_border;
-                    headingColor = StratifyUI.panel_danger_text;
+                    attr.color = Qt.binding(function(){ return STheme.panel_danger_heading_bg; });
+                    attr.borderColor = Qt.binding(function(){ return STheme.panel_danger_border; });
+                    fontColor = Qt.binding(function(){ return STheme.panel_danger_text; });
                 } else if( items[i] === "panel-warning" ){
-                    headingBackgroundColor = StratifyUI.panel_warning_heading_bg;
-                    properties.borderColor = StratifyUI.panel_warning_border;
-                    headingColor = StratifyUI.panel_warning_text;
+                    attr.color = Qt.binding(function(){ return STheme.panel_warning_heading_bg; });
+                    attr.borderColor = Qt.binding(function(){ return STheme.panel_warning_border; });
+                    fontColor = Qt.binding(function(){ return STheme.panel_warning_text; });
                 } else if( items[i] === "panel-info" ){
-                    headingBackgroundColor = StratifyUI.panel_info_heading_bg;
-                    properties.borderColor = StratifyUI.panel_info_border;
-                    headingColor = StratifyUI.panel_info_text;
+                    attr.color = Qt.binding(function(){ return STheme.panel_info_heading_bg; });
+                    attr.borderColor = Qt.binding(function(){ return STheme.panel_info_border; });
+                    fontColor = Qt.binding(function(){ return STheme.panel_info_text; });
                 } else if( items[i] === "panel-default" ){
-                    headingBackgroundColor = StratifyUI.panel_default_heading_bg;
-                    properties.borderColor = StratifyUI.panel_default_border;
-                    headingColor = StratifyUI.panel_default_text;
+                    attr.color = Qt.binding(function(){ return STheme.panel_default_heading_bg; });
+                    attr.borderColor = Qt.binding(function(){ return STheme.panel_default_border; });
+                    fontColor = Qt.binding(function(){ return STheme.panel_default_text; });
                 }
             }
         }
     }
-
-    default property alias data: contents.data;
-    property alias headingBackgroundColor: properties.backgroundColor;
-    property real headingFontSize: StratifyUI.font_size_base;
-    property alias headingColor: properties.fontColor;
-    property alias heading: panelHeadingText.text;
-    property alias footer: panelFooterText.text;
-    property alias contentsHeight: contents.height;
 
 
     //implicitWidth: blockWidth ? parent.width : (panelHeading.width);
@@ -79,10 +78,10 @@ Item {
     //Panel Heading
     SRoundedRectangle {
         id: panelHeading;
-        topRadius: StratifyUI.panel_border_radius;
-        color: headingBackgroundColor;
-        borderColor: properties.borderColor;
-        borderWidth: properties.borderWidth;
+        topRadius: STheme.panel_border_radius;
+        color: attr.color;
+        borderColor: attr.borderColor;
+        borderWidth: attr.borderWidth;
         visible: panelHeadingText.text != "";
         width: parent.width;
         implicitWidth: panelHeadingText.width;
@@ -90,14 +89,14 @@ Item {
 
         Text {
             id: panelHeadingText;
-            topPadding: properties.paddingVertical;
-            bottomPadding: properties.paddingVertical;
-            leftPadding: properties.paddingHorizontal;
-            rightPadding: properties.paddingHorizontal;
+            topPadding: attr.paddingVertical;
+            bottomPadding: attr.paddingVertical;
+            leftPadding: attr.paddingHorizontal;
+            rightPadding: attr.paddingHorizontal;
             text: "";
-            color: headingColor;
-            font.pointSize: headingFontSize;
-            font.family: properties.fontText;
+            color: attr.fontColor;
+            font.pointSize: attr.headingFontSize;
+            font.family: attr.fontText;
             font.weight: Font.Light;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
         }
@@ -107,11 +106,11 @@ Item {
         id: panelBody;
         y: !panelHeading.visible ? 0 : panelHeading.height - 2*pixelRatio*panelHeading.borderWidth - borderWidth;
 
-        topRadius: panelHeading.visible ? 0 : StratifyUI.panel_border_radius;
-        bottomRadius: panelFooter.visible ? 0 : StratifyUI.panel_border_radius;
-        color: StratifyUI.body_bg;
-        borderColor: properties.borderColor;
-        borderWidth: properties.borderWidth;
+        topRadius: panelHeading.visible ? 0 : STheme.panel_border_radius;
+        bottomRadius: panelFooter.visible ? 0 : STheme.panel_border_radius;
+        color: STheme.body_bg;
+        borderColor: attr.borderColor;
+        borderWidth: attr.borderWidth;
 
         width: parent.width;
         implicitHeight: contents.height;
@@ -125,10 +124,10 @@ Item {
         id: panelFooter;
         y: panelBody.y + panelBody.height - 2*pixelRatio*panelHeading.borderWidth;
         anchors.left: panelBody.left;
-        bottomRadius: properties.borderRadius;
-        color: headingBackgroundColor;
-        borderColor: properties.borderColor;
-        borderWidth: properties.borderWidth;
+        bottomRadius: attr.borderRadius;
+        color: attr.color;
+        borderColor: attr.borderColor;
+        borderWidth: attr.borderWidth;
         visible: panelFooterText.text != "";
 
         width: parent.width;
@@ -136,14 +135,14 @@ Item {
 
         Text {
             id: panelFooterText;
-            topPadding: properties.paddingVertical;
-            bottomPadding: properties.paddingVertical;
-            leftPadding: properties.paddingHorizontal;
-            rightPadding: properties.paddingHorizontal;
+            topPadding: attr.paddingVertical;
+            bottomPadding: attr.paddingVertical;
+            leftPadding: attr.paddingHorizontal;
+            rightPadding: attr.paddingHorizontal;
             text: "";
-            color: headingColor;
-            font.pointSize: headingFontSize;
-            font.family: properties.fontText;
+            color: attr.fontColor;
+            font.pointSize: attr.footerFontSize;
+            font.family: attr.fontText;
             font.weight: Font.Light;
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
         }

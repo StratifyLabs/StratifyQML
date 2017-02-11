@@ -47,7 +47,7 @@ SItem {
         id: outAnimation;
         duration: root.duration;
         easing.type: Easing.InQuad;
-        properties: "opacity";
+        attr: "opacity";
         from: 1.0;
         to: 0.0;
 
@@ -61,7 +61,7 @@ SItem {
         id: inAnimation;
         duration: root.duration;
         easing.type: Easing.InQuad;
-        properties: "opacity";
+        attr: "opacity";
         from: 0.0;
         to: 1.0;
         onStopped: {

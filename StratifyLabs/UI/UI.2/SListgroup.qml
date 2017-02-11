@@ -20,15 +20,15 @@ import StratifyLabs.UI 2.0
 
 SList {
     id: control;
-    properties.type: "listgroup";
+    attr.type: "listgroup";
     delegate: listDelegate;
 
-    implicitHeight: count * (properties.fontContainerHeight);
+    implicitHeight: count * (attr.fontContainerHeight);
     spacing: -2*Screen.devicePixelRatio;
 
-    properties.backgroundColorHover: StratifyUI.list_group_hover_bg;
-    properties.backgroundColor: StratifyUI.list_group_bg;
-    properties.borderColor: StratifyUI.list_group_border;
+    attr.colorHovered: STheme.list_group_hover_bg;
+    attr.color: STheme.list_group_bg;
+    attr.borderColor: STheme.list_group_border;
 
     property real active;
 
@@ -37,17 +37,17 @@ SList {
 
         SRoundedRectangle {
             id: base;
-            topRadius: index == 0 ? properties.borderRadius : 0;
-            bottomRadius: index == (control.count-1) ? properties.borderRadius : 0;
-            implicitWidth: properties.blockWidth ? parent.width : (text.width + properties.paddingHorizontal*2);
-            implicitHeight: properties.fontContainerHeight;
-            color: properties.backgroundColor;
-            borderColor: properties.borderColor;
+            topRadius: index == 0 ? attr.borderRadius : 0;
+            bottomRadius: index == (control.count-1) ? attr.borderRadius : 0;
+            implicitWidth: attr.blockWidth ? parent.width : (text.width + attr.paddingHorizontal*2);
+            implicitHeight: attr.fontContainerHeight;
+            color: attr.color;
+            borderColor: attr.borderColor;
             SContainer {
                 id: contents;
                 SText {
                     id: text;
-                    properties.blockWidth: true;
+                    attr.blockWidth: true;
                     text: model.text;
                 }
             }
@@ -57,11 +57,11 @@ SList {
                 hoverEnabled: true;
 
                 onEntered: {
-                    color = properties.backgroundColorHover;
+                    color = attr.colorHovered;
                 }
 
                 onExited: {
-                    color = properties.backgroundColor;
+                    color = attr.color;
                 }
 
             }

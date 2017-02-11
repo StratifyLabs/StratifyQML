@@ -20,6 +20,6 @@ import StratifyLabs.UI 2.0
 
 SRow {
     id: control;
-    properties.type: "column";
+    attr.type: "column";
 }
 

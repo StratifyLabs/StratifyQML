@@ -22,21 +22,21 @@ import StratifyLabs.UI 2.0
 ToolTip {
     id: control;
 
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
 
-    delay: StratifyUI.tooltip_delay;
+    delay: STheme.tooltip_delay;
     timeout: 2000;
     visible: parent ? parent.hovered : false;
 
-    SProperties {
-        id: properties;
-        fontSize: StratifyUI.font_size_small;
-        fontColor: StratifyUI.tooltip_color;
-        backgroundColor: StratifyUI.tooltip_bg;
-        borderRadius: StratifyUI.border_radius_base;
-        borderColor: StratifyUI.tooltip_bg;
+    SAttributes {
+        id: attr;
+        fontSize: STheme.font_size_small;
+        fontColor: STheme.tooltip_color;
+        color: STheme.tooltip_bg;
+        borderRadius: STheme.border_radius_base;
+        borderColor: STheme.tooltip_bg;
     }
 
     enter: Transition {
@@ -48,17 +48,17 @@ ToolTip {
     }
 
     background: Rectangle {
-        color: properties.backgroundColor;
-        radius: properties.borderRadius;
-        border.color: properties.backgroundColor;
-        border.width: properties.borderWidth;
+        color: attr.color;
+        radius: attr.borderRadius;
+        border.color: attr.color;
+        border.width: attr.borderWidth;
     }
 
     contentItem: Text {
         text: control.text;
-        font.family: properties.fontText;
-        font.pixelSize: properties.fontSize;
-        font.weight: properties.fontWeight;
-        color: properties.fontColor;
+        font.family: attr.fontText;
+        font.pixelSize: attr.fontSize;
+        font.weight: attr.fontWeight;
+        color: attr.fontColor;
     }
 }

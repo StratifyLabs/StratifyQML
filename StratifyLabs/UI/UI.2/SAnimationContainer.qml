@@ -20,15 +20,15 @@ import StratifyLabs.UI 2.0
 Item {
     id: root;
 
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
 
     property string screen;
     property var current;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         type: "animationcontainer";
         blockWidth: true;
     }

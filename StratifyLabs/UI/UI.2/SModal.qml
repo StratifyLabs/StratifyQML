@@ -22,9 +22,9 @@ Item {
 
     id: modal;
     anchors.fill: parent;
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
     property bool modalVisible: false;
     property real duration: 300;
     property string title;
@@ -56,15 +56,15 @@ Item {
         modalVisible = false;
     }
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
     }
 
     states: [
         State {
             name: "visible";
             when: modalVisible;
-            PropertyChanges { target: background; opacity: StratifyUI.modal_backdrop_opacity; }
+            PropertyChanges { target: background; opacity: STheme.modal_backdrop_opacity; }
             PropertyChanges { target: dialog; opacity: 1.0; }
             PropertyChanges { target: dialog; y: 50; }
         },
@@ -98,8 +98,8 @@ Item {
     Rectangle {
         id: background;
         anchors.fill: parent;
-        color: StratifyUI.modal_backdrop_bg;
-        opacity: StratifyUI.modal_backdrop_opacity;
+        color: STheme.modal_backdrop_bg;
+        opacity: STheme.modal_backdrop_opacity;
         z:-1;
         MouseArea {
             anchors.fill: parent;
@@ -114,13 +114,13 @@ Item {
         //anchors.centerIn: parent;
         anchors.horizontalCenter: parent.horizontalCenter;
 
-        width: StratifyUI.screen_md < modal.width*3/4 ? StratifyUI.screen_md : modal.width*3/4;
+        width: STheme.screen_md < modal.width*3/4 ? STheme.screen_md : modal.width*3/4;
         implicitHeight: childrenRect.height;
 
-        color: StratifyUI.body_bg;
-        radius: properties.borderRadius;
-        border.width: properties.borderWidth;
-        border.color: properties.borderColor;
+        color: STheme.body_bg;
+        radius: attr.borderRadius;
+        border.width: attr.borderWidth;
+        border.color: attr.borderColor;
 
         SColumn {
             SRow {
@@ -128,25 +128,25 @@ Item {
                 SText {
                     span: 11;
                     style: "left";
-                    leftPadding: properties.paddingHorizontal;
-                    rightPadding: properties.paddingHorizontal;
+                    leftPadding: attr.paddingHorizontal;
+                    rightPadding: attr.paddingHorizontal;
                     text: modal.title;
                     wrapMode: Text.Wrap;
                     font.weight: Font.Bold;
                 }
                 SButton {
                     span: 1;
-                    style: "right close";
+                    style: "right btn-close";
                     icon: Fa.Icon.times;
                     onClicked: modal.reject();
                 }
             }
 
-            SHLine { properties.paddingVertical: 0; visible: modal.title !== ""; }
+            SHLine { attr.paddingVertical: 0; visible: modal.title !== ""; }
 
             SContainer { id: dialogContents; }
 
-            SHLine { properties.paddingVertical: 0; visible: modal.standardButtons; }
+            SHLine { attr.paddingVertical: 0; visible: modal.standardButtons; }
             SContainer {
                 visible: modal.standardButtons;
                 SRow {

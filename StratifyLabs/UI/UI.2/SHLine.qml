@@ -19,24 +19,24 @@ import StratifyLabs.UI 2.0
 
 Rectangle {
 
-    property alias properties: properties;
-    property alias style: properties.style;
-    property alias span: properties.span;
+    property alias attr: attr;
+    property alias style: attr.style;
+    property alias span: attr.span;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         type: "hline";
-        backgroundColor: StratifyUI.panel_default_border;
-        borderColor: StratifyUI.panel_default_border;
+        backgroundColor: STheme.panel_default_border;
+        borderColor: STheme.panel_default_border;
         borderWidth: 1;
         blockWidth: true;
     }
 
-    //y: properties.paddingVertical;
+    //y: attr.paddingVertical;
     width: parent.width;
-    height: properties.borderWidth;
-    color: properties.backgroundColor;
-    border.color: properties.borderColor;
-    border.width: properties.borderWidth;
+    height: attr.borderWidth;
+    color: attr.backgroundColor;
+    border.color: attr.borderColor;
+    border.width: attr.borderWidth;
 
 }

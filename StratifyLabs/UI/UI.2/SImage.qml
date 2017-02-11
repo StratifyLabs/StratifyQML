@@ -19,15 +19,15 @@ import StratifyLabs.UI 2.0
 
 Image {
 
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
 
-    width: parent ? (properties.fillWidth ? parent.width : undefined) : undefined;
-    height: parent ? (properties.fillHeight ? parent.height : undefined) : undefined;
+    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
 
     }
 }

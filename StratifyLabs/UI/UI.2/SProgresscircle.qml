@@ -21,25 +21,26 @@ import StratifyLabs.UI 2.0
 Item {
     id: root;
 
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
 
     property real value: 0.1;
     property real pixelRatio: Screen.devicePixelRatio;
     //property alias iconVisible: icon.visible;
     //property alias textVisible: text.visible;
 
-    SProperties {
-        id: properties;
-        backgroundColor: StratifyUI.gray_lighter;
-        borderColor: StratifyUI.progress_bar_bg;
-        borderRadius: StratifyUI.progress_border_radius;
-        borderWidth: StratifyUI.progress_border_width*20;
+    SAttributes {
+        id: attr;
+        backgroundColor: STheme.gray_lighter;
+        color: STheme.progress_bar_bg;
+        borderColor: STheme.progress_bar_bg;
+        borderRadius: STheme.progress_border_radius;
+        borderWidth: STheme.progress_border_width*20;
     }
 
-    implicitWidth: properties.fontContainerHeight*4;
-    implicitHeight: properties.fontContainerHeight*4;
+    implicitWidth: attr.fontContainerHeight*4;
+    implicitHeight: attr.fontContainerHeight*4;
 
     onValueChanged: canvas.requestPaint();
 
@@ -66,14 +67,14 @@ Item {
             ctx.clearRect(0, 0, width+1, height+1);
 
             ctx.beginPath();
-            ctx.fillStyle = properties.backgroundColor;
+            ctx.fillStyle = attr.backgroundColor;
             ctx.moveTo(x, y);
-            ctx.arc(x, y, width/2-properties.borderWidth*pixelRatio/5, 0, Math.PI*2, false);
+            ctx.arc(x, y, width/2-attr.borderWidth*pixelRatio/5, 0, Math.PI*2, false);
             ctx.closePath();
             ctx.fill();
 
             ctx.beginPath();
-            ctx.fillStyle = properties.borderColor;
+            ctx.fillStyle = attr.color;
             ctx.moveTo(x, y);
             ctx.arc(x, y, width/2, Math.PI*3/2, Math.PI*3/2 + prog*Math.PI*2, false);
             //ctx.arc(x, y, width/2, Math.PI*3/2, Math.PI*3/2 + Math.PI*2, false);
@@ -83,7 +84,7 @@ Item {
             ctx.beginPath();
             ctx.fillStyle = "#fff";
             ctx.moveTo(x, y);
-            ctx.arc(x, y, width/2 - properties.borderWidth*pixelRatio, 0, Math.PI*2, false);
+            ctx.arc(x, y, width/2 - attr.borderWidth*pixelRatio, 0, Math.PI*2, false);
             ctx.closePath();
             ctx.fill();
         }

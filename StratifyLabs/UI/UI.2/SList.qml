@@ -18,18 +18,18 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 ListView {
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
     }
 
     implicitWidth: contentItem.childrenRect.width;
     implicitHeight: contentItem.childrenRect.height + spacing;
 
     clip: true;
-    spacing: properties.paddingVertical;
+    spacing: attr.paddingVertical;
 
 }

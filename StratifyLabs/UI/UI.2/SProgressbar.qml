@@ -23,23 +23,22 @@ ProgressBar {
     id: control;
     //supports success, info, warning, danger, striped, active (animated), stacked
 
-    property alias style: properties.style;
-    property alias span: properties.span;
-    property alias properties: properties;
-    property color progressColor: StratifyUI.progress_bar_color;
+    property alias style: attr.style;
+    property alias span: attr.span;
+    property alias attr: attr;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
         blockWidth: true;
-        backgroundColor: StratifyUI.body_bg;
-        textColor: StratifyUI.progress_bar_color;
-        borderColor: StratifyUI.progress_bar_bg;
-        borderRadius: StratifyUI.progress_border_radius;
-        borderWidth: StratifyUI.progress_border_width;
+        backgroundColor: STheme.gray_lighter;
+        color: STheme.progress_bar_color;
+        borderColor: STheme.progress_bar_bg;
+        borderRadius: STheme.progress_border_radius;
+        borderWidth: STheme.progress_border_width;
     }
 
     implicitWidth: 0;
-    implicitHeight: properties.fontContainerHeight;
+    implicitHeight: attr.fontContainerHeight;
 
     contentItem: Rectangle {
         id: strip
@@ -47,15 +46,15 @@ ProgressBar {
         implicitWidth: 10;
         height: control.height;
         scale: control.mirrored ? -1 : 1
-        color: properties.backgroundColor;
-        radius: properties.borderRadius;
-        border.color: properties.backgroundColor;
+        color: attr.backgroundColor;
+        radius: attr.borderRadius;
+        border.color: attr.backgroundColor;
 
         Rectangle {
-            color: progressColor;
+            color: attr.color;
             width: parent.width * control.value;
             height: parent.height;
-            radius: properties.borderRadius;
+            radius: attr.borderRadius;
         }
 
     }
@@ -67,23 +66,23 @@ ProgressBar {
         var items = style.split(" ");
         for(var i = 0; i < items.length; i++){
             if( items[i] === "progress-bar-primary" ){
-                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_bg; });
-                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_bg; });
+                attr.color = Qt.binding( function(){ return STheme.progress_bar_bg; });
+                attr.borderColor = Qt.binding( function(){ return STheme.progress_bar_bg; });
             } else if( items[i] === "progress-bar-default" ){
-                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_bg; });
-                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_bg; });
+                attr.color = Qt.binding( function(){ return STheme.progress_bar_bg; });
+                attr.borderColor = Qt.binding( function(){ return STheme.progress_bar_bg; });
             } else if( items[i] === "progress-bar-danger" ){
-                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_danger_bg; });
-                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_danger_bg; });
+                attr.color = Qt.binding( function(){ return STheme.progress_bar_danger_bg; });
+                attr.borderColor = Qt.binding( function(){ return STheme.progress_bar_danger_bg; });
             } else if( items[i] === "progress-bar-success" ){
-                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_success_bg; });
-                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_success_bg; });
+                attr.color = Qt.binding( function(){ return STheme.progress_bar_success_bg; });
+                attr.borderColor = Qt.binding( function(){ return STheme.progress_bar_success_bg; });
             } else if( items[i] === "progress-bar-info" ){
-                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_info_bg; });
-                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_info_bg; });
+                attr.color = Qt.binding( function(){ return STheme.progress_bar_info_bg; });
+                attr.borderColor = Qt.binding( function(){ return STheme.progress_bar_info_bg; });
             } else if( items[i] === "progress-bar-warning" ){
-                progressColor = Qt.binding( function(){ return StratifyUI.progress_bar_warning_bg; });
-                properties.borderColor = Qt.binding( function(){ return StratifyUI.progress_bar_warning_bg; });
+                attr.color = Qt.binding( function(){ return STheme.progress_bar_warning_bg; });
+                attr.borderColor = Qt.binding( function(){ return STheme.progress_bar_warning_bg; });
             }
         }
     }

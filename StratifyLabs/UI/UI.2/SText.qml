@@ -22,19 +22,19 @@ Text {
     id: control;
 
     property alias label: control.text;
-    property alias properties: properties;
-    property alias style: properties.style;
-    property alias span: properties.span;
+    property alias attr: attr;
+    property alias style: attr.style;
+    property alias span: attr.span;
 
-    SProperties {
-        id: properties;
+    SAttributes {
+        id: attr;
     }
 
-    font.family: properties.fontText;
-    font.pointSize: properties.fontSize;
-    font.weight: properties.fontWeight;
-    color: enabled ? properties.textColor : properties.textColorMuted;
-    verticalAlignment: properties.fontHorizontalAlignment;
-    horizontalAlignment: properties.fontVerticalAlignment;
-    wrapMode: properties.blockWidth ? Text.Wrap : Text.NoWrap;
+    font.family: attr.fontText;
+    font.pointSize: attr.fontSize;
+    font.weight: attr.fontWeight;
+    color: enabled ? attr.textColor : attr.textColorMuted;
+    verticalAlignment: attr.fontHorizontalAlignment;
+    horizontalAlignment: attr.fontVerticalAlignment;
+    wrapMode: attr.blockWidth ? Text.Wrap : Text.NoWrap;
 }

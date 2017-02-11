@@ -20,44 +20,44 @@ import StratifyLabs.UI 2.0
 Rectangle {
     id: control;
 
-    property alias properties: properties;
-    property alias style: properties.style;
-    property alias span: properties.span;
+    property alias attr: attr;
+    property alias style: attr.style;
+    property alias span: attr.span;
     property bool dismissible: true;
     property bool dismissed: false;
     property alias text: text.text;
 
-    //implicitWidth: properties.blockWidth ? (parent ? parent.width : 0) : 0; //if not block width, width must be specified
+    //implicitWidth: attr.blockWidth ? (parent ? parent.width : 0) : 0; //if not block width, width must be specified
     implicitHeight: text.height;
 
-    color: properties.backgroundColor;
-    border.color:  properties.borderColor;
-    border.width: properties.borderWidth;
-    radius: properties.borderRadius;
+    color: attr.backgroundColor;
+    border.color:  attr.borderColor;
+    border.width: attr.borderWidth;
+    radius: attr.borderRadius;
 
     Text {
         id: text;
-        rightPadding: properties.paddingHorizontal;
-        leftPadding: properties.paddingHorizontal;
-        topPadding: properties.paddingVertical;
-        bottomPadding: properties.paddingVertical;
+        rightPadding: attr.paddingHorizontal;
+        leftPadding: attr.paddingHorizontal;
+        topPadding: attr.paddingVertical;
+        bottomPadding: attr.paddingVertical;
         width: parent.width;
-        color: properties.fontColor;
-        font.family: properties.fontText;
-        font.pixelSize: properties.fontSize;
-        font.weight: properties.fontWeight;
+        color: attr.fontColor;
+        font.family: attr.fontText;
+        font.pixelSize: attr.fontSize;
+        font.weight: attr.fontWeight;
         wrapMode: Text.Wrap;
-        horizontalAlignment: properties.fontHorizontalAlignment;
-        verticalAlignment: properties.fontVerticalAlignment;
+        horizontalAlignment: attr.fontHorizontalAlignment;
+        verticalAlignment: attr.fontVerticalAlignment;
     }
 
-    SProperties {
-        id: properties;
-        borderRadius: StratifyUI.alert_border_radius;
-        borderWidth: StratifyUI.alert_border_width;
-        borderColor: StratifyUI.alert_info_border;
-        backgroundColor: StratifyUI.alert_info_bg;
-        fontColor: StratifyUI.alert_info_text;
+    SAttributes {
+        id: attr;
+        borderRadius: STheme.alert_border_radius;
+        borderWidth: STheme.alert_border_width;
+        borderColor: STheme.alert_info_border;
+        backgroundColor: STheme.alert_info_bg;
+        fontColor: STheme.alert_info_text;
         blockWidth: true;
 
         fontVerticalAlignment: Text.AlignTop;
@@ -67,21 +67,21 @@ Rectangle {
             var items = parseStyle();
             for(var i = 0; i < items.length; i++){
                 if( items[i] === "alert-danger" ){
-                    backgroundColor = Qt.binding( function(){ return StratifyUI.alert_danger_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.alert_danger_text; });
-                    borderColor = Qt.binding( function(){ return StratifyUI.alert_danger_border; });
+                    backgroundColor = Qt.binding( function(){ return STheme.alert_danger_bg; });
+                    textColor = Qt.binding( function(){ return STheme.alert_danger_text; });
+                    borderColor = Qt.binding( function(){ return STheme.alert_danger_border; });
                 } else if( items[i] === "alert-success" ){
-                    backgroundColor = Qt.binding( function(){ return StratifyUI.alert_success_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.alert_success_text; });
-                    borderColor = Qt.binding( function(){ return StratifyUI.alert_success_border; });
+                    backgroundColor = Qt.binding( function(){ return STheme.alert_success_bg; });
+                    textColor = Qt.binding( function(){ return STheme.alert_success_text; });
+                    borderColor = Qt.binding( function(){ return STheme.alert_success_border; });
                 } else if( items[i] === "alert-info" ){
-                    backgroundColor = Qt.binding( function(){ return StratifyUI.alert_info_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.alert_info_text; });
-                    borderColor = Qt.binding( function(){ return StratifyUI.alert_info_border; });
+                    backgroundColor = Qt.binding( function(){ return STheme.alert_info_bg; });
+                    textColor = Qt.binding( function(){ return STheme.alert_info_text; });
+                    borderColor = Qt.binding( function(){ return STheme.alert_info_border; });
                 } else if( items[i] === "alert-warning" ){
-                    backgroundColor = Qt.binding( function(){ return StratifyUI.alert_warning_bg; });
-                    textColor = Qt.binding( function(){ return StratifyUI.alert_warning_text; });
-                    borderColor = Qt.binding( function(){ return StratifyUI.alert_warning_border; });
+                    backgroundColor = Qt.binding( function(){ return STheme.alert_warning_bg; });
+                    textColor = Qt.binding( function(){ return STheme.alert_warning_text; });
+                    borderColor = Qt.binding( function(){ return STheme.alert_warning_border; });
                 }
             }
         }
@@ -91,13 +91,13 @@ Rectangle {
         id: alertDismiss;
         anchors.top: control.top;
         anchors.right: control.right;
-        topPadding: properties.paddingVertical;
-        rightPadding: properties.paddingHorizontal;
+        topPadding: attr.paddingVertical;
+        rightPadding: attr.paddingHorizontal;
         text: Fa.Icon.times;
-        color: Qt.lighter(properties.textColor, 3.0);
+        color: Qt.lighter(attr.textColor, 3.0);
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
-        font.pointSize: properties.fontSize;
-        font.family: properties.fontIcon;
+        font.pointSize: attr.fontSize;
+        font.family: attr.fontIcon;
         visible: dismissible;
         verticalAlignment: Text.AlignVCenter;
 
@@ -110,11 +110,11 @@ Rectangle {
             }
 
             onEntered: {
-                alertDismiss.color = properties.textColor;
+                alertDismiss.color = attr.textColor;
             }
 
             onExited: {
-                alertDismiss.color = Qt.lighter(properties.textColor, 3.0);
+                alertDismiss.color = Qt.lighter(attr.textColor, 3.0);
             }
 
         }
