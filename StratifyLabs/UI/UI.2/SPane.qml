@@ -36,8 +36,10 @@ Flickable {
     implicitWidth: contentWidth;
     implicitHeight: contentHeight;
 
-    //if child has "block" set, width will bind
+    //if child has "fillWidth" set, width will bind
     contentWidth: ((contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillWidth === true)) ? control.width : contentItem.childrenRect.width;
+    //if child has "fillHeight" set, height will bind
+    //contentHeight: (contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillHeight === true) ? control.height : contentItem.childrenRect.height;
     contentHeight: (contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillHeight === true) ? control.height : contentItem.childrenRect.height;
 
 }

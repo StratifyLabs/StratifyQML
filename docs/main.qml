@@ -25,25 +25,54 @@ ApplicationWindow {
                 SColumn {
                     SText { style: "left text-on-primary"; text: "Menu"; }
                     SHLine{ attr.paddingVertical: 0; }
-                    SText { style: "left text-on-primary"; text: "Containers"; }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Alerts"; onPressed: { tests.screen = text; drawer.close(); } }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Panels"; onPressed: { tests.screen = text; drawer.close(); } }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Wells"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SRow {
+                        SText { span: 10; style: "left text-on-primary text-bold"; text: "Introduction"; }
+                        SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.smile_o; }
+                    }
                     SHLine{ attr.paddingVertical: 0; }
-                    SText { style: "left text-on-primary"; text: "Indicators"; }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Labels"; onPressed: { tests.screen = text; drawer.close(); } }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "ProgressBars"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SContainer {
+                        style: "padding-zero";
+                        SRow {
+                            SText { span: 10; style: drawer.menuStyle + " text-bold"; text: "Layouts"; }
+                            SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.object_group; }
+                        }
+                        MouseArea {
+                            anchors.fill: parent;
+                            onClicked: { animationContainer.screen = "Layouts"; drawer.close(); }
+                        }
+                    }
+                    SButton { style: drawer.menuStyle; text: "Rows"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Columns"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Containers"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "AnimationContainers"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SHLine{ attr.paddingVertical: 0; }
-                    SText { style: "left text-on-primary"; text: "Input"; }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Buttons"; onPressed: { tests.screen = text; drawer.close(); } }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Inputs"; onPressed: { tests.screen = text; drawer.close(); } }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Dropdowns"; onPressed: { tests.screen = text; drawer.close(); } }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Sliders"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SRow {
+                        SText { span: 10; style: "left text-on-primary text-bold"; text: "Indicators"; }
+                        SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.star; }
+                    }
+                    SButton { style: drawer.menuStyle; text: "Wells"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Panels"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Alerts"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Labels"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "ProgressBars"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SHLine{ attr.paddingVertical: 0; }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
-                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Progress"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SRow {
+                        SText { span: 10; style: "left text-on-primary text-bold"; text: "Input"; }
+                        SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.pencil; }
+                    }
+                    SButton { style: drawer.menuStyle; text: "Buttons"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Inputs"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Dropdowns"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Sliders"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SHLine{ attr.paddingVertical: 0; }
+                    SRow {
+                        SText { span: 10; style: "left text-on-primary text-bold"; text: "Models"; }
+                        SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.database; }
+                    }
+                    SButton { style: drawer.menuStyle; text: "Lists"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Tables"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "ToolTips"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Progress"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                 }
             }
         }
@@ -76,6 +105,12 @@ ApplicationWindow {
                     icon: Fa.Icon.bars;
                     onClicked: drawer.open();
                 }
+
+                SLabel {
+                    style: "text-on-primary";
+                    span: 1;
+                    text: animationContainer.screen;
+                }
                 SButton {
                     span: 1;
                     style: "right btn-naked text-on-primary";
@@ -87,7 +122,7 @@ ApplicationWindow {
         }
 
         SAnimationContainer {
-            id: tests;
+            id: animationContainer;
             style: "block fill";
 
             SAnimationFade{ id: animation; }
@@ -98,7 +133,9 @@ ApplicationWindow {
             }
 
             resources: [
+                Layouts {},
                 Buttons {},
+                Rows {},
                 Panels {},
                 Alerts {},
                 Inputs {},
@@ -117,6 +154,6 @@ ApplicationWindow {
 
     Component.onCompleted: {
         STheme.brand_primary = "#244E99";
-        STheme.brand_secondary = "#999";
+        STheme.brand_secondary = "#666";
     }
 }
