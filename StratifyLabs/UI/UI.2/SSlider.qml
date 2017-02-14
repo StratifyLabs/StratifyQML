@@ -40,8 +40,8 @@ Slider {
         id: attr;
         fillWidth: true;
         color: STheme.gray_light;
+        borderColor: STheme.gray_light;
         backgroundColor: STheme.gray_lighter;
-        borderColor: STheme.text_color;
     }
 
     from: 0.0;

@@ -19,26 +19,32 @@ ApplicationWindow {
         style: "secondary";
 
         property string menuStyle: "left btn-naked text-on-secondary";
-
-
-
         SContainer {
-            SColumn {
-                SText { style: "left text-on-primary"; text: "Menu"; }
-                SHLine{ attr.paddingVertical: 0; }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Alerts"; onPressed: { tests.screen = text; drawer.close(); } }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Panels"; onPressed: { tests.screen = text; drawer.close(); } }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Wells"; onPressed: { tests.screen = text; drawer.close(); } }
-                SHLine{ attr.paddingVertical: 0; }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Buttons"; onPressed: { tests.screen = text; drawer.close(); } }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Labels"; onPressed: { tests.screen = text; drawer.close(); } }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Inputs"; onPressed: { tests.screen = text; drawer.close(); } }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Dropdowns"; onPressed: { tests.screen = text; drawer.close(); } }
-                SHLine{ attr.paddingVertical: 0; }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
-                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Progress"; onPressed: { tests.screen = text; drawer.close(); } }
+            style: "fill";
+            SPane {
+                SColumn {
+                    SText { style: "left text-on-primary"; text: "Menu"; }
+                    SHLine{ attr.paddingVertical: 0; }
+                    SText { style: "left text-on-primary"; text: "Containers"; }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Alerts"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Panels"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Wells"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SHLine{ attr.paddingVertical: 0; }
+                    SText { style: "left text-on-primary"; text: "Indicators"; }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Labels"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "ProgressBars"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SHLine{ attr.paddingVertical: 0; }
+                    SText { style: "left text-on-primary"; text: "Input"; }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Buttons"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Inputs"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Dropdowns"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Sliders"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SHLine{ attr.paddingVertical: 0; }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
+                    SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Progress"; onPressed: { tests.screen = text; drawer.close(); } }
+                }
             }
         }
 
@@ -52,7 +58,7 @@ ApplicationWindow {
         SColumn {
             SText {
                 style: "block";
-                text: "STheme 2.0 is a QML framework that works, looks, and feels much like the twitter bootstrap HTML framework";
+                text: "StratifyLabs UI 2.0 is a QML framework that works, looks, and feels much like the twitter bootstrap HTML framework";
             }
         }
     }
@@ -96,7 +102,9 @@ ApplicationWindow {
                 Panels {},
                 Alerts {},
                 Inputs {},
+                ProgressBars{},
                 Dropdowns {},
+                Sliders {},
                 Labels {}
             ]
         }
