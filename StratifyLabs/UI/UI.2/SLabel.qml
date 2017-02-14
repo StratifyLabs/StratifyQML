@@ -58,9 +58,9 @@ Label {
                     color = Qt.binding( function(){ return STheme.label_primary_bg; });
                     borderColor = Qt.binding( function(){ return STheme.label_primary_bg; });
                     fontColor = Qt.binding( function(){ return STheme.label_color; });
-                } else if( items[i] === "label-default" ){
-                    color = Qt.binding( function(){ return STheme.label_default_bg; });
-                    borderColor = Qt.binding( function(){ return STheme.label_default_bg; });
+                } else if( items[i] === "label-secondary" ){
+                    color = Qt.binding( function(){ return STheme.label_secondary_bg; });
+                    borderColor = Qt.binding( function(){ return STheme.label_secondary_bg; });
                     fontColor = Qt.binding( function(){ return STheme.label_color; });
                 } else if( items[i] === "label-danger" ){
                     color = Qt.binding( function(){ return STheme.label_danger_bg; });
@@ -78,6 +78,12 @@ Label {
                     color = Qt.binding( function(){ return STheme.label_warning_bg; });
                     borderColor = Qt.binding( function(){ return STheme.label_warning_bg; });
                     fontColor = Qt.binding( function(){ return STheme.label_color; });
+                } else if( (items[i] === "label-naked") ){
+                    attr.color = "transparent";
+                    attr.fontColor = Qt.binding(function(){ return STheme.text_color; });
+                    attr.borderColor = attr.color;
+                    attr.textColorMuted = attr.fontColor;
+                    attr.colorHovered = attr.color;
                 } else if( items[i] === "label-lg" ){
                     fontSize = Qt.binding( function(){ return STheme.font_size_large; });
                     borderRadius = Qt.binding( function(){ return STheme.border_radius_large; });

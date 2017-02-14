@@ -1,9 +1,10 @@
 import QtQuick 2.6
+import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
 import StratifyLabs.UI 2.0
 
 
-Window {
+ApplicationWindow {
     minimumWidth: STheme.screen_xs;
     minimumHeight: STheme.screen_xs;
 
@@ -15,29 +16,32 @@ Window {
         width: 250;
         height: parent.height;
 
-        style: "primary";
+        style: "secondary";
+
+        property string menuStyle: "left btn-naked text-on-secondary";
 
 
-        property string menuStyle: "left lg primary block text-left";
 
         SContainer {
             SColumn {
-                SText { style: "left text-primary"; text: "Menu"; }
+                SText { style: "left text-on-primary"; text: "Menu"; }
                 SHLine{ attr.paddingVertical: 0; }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Alerts"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Panels"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Wells"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Alerts"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Panels"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Wells"; onPressed: { tests.screen = text; drawer.close(); } }
                 SHLine{ attr.paddingVertical: 0; }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Buttons"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Labels"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Input"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Buttons"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Labels"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Inputs"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Dropdowns"; onPressed: { tests.screen = text; drawer.close(); } }
                 SHLine{ attr.paddingVertical: 0; }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Progress"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
+                SButton { icon: Fa.Icon.chevron_right; style: drawer.menuStyle; text: "Progress"; onPressed: { tests.screen = text; drawer.close(); } }
             }
         }
+
     }
 
 
@@ -54,22 +58,21 @@ Window {
     }
 
 
-
     SColumn {
         style: "block fill";
         SContainer {
-            color: STheme.brand_danger;
+            color: STheme.brand_primary;
 
             SRow {
                 SButton {
                     span: 1;
-                    style: "left btn-naked";
+                    style: "left btn-naked text-on-primary";
                     icon: Fa.Icon.bars;
                     onClicked: drawer.open();
                 }
                 SButton {
                     span: 1;
-                    style: "right btn-naked";
+                    style: "right btn-naked text-on-primary";
                     icon: Fa.Icon.info_circle;
                     onClicked: aboutModal.open();
                 }
@@ -89,7 +92,12 @@ Window {
             }
 
             resources: [
-                Buttons {}
+                Buttons {},
+                Panels {},
+                Alerts {},
+                Inputs {},
+                Dropdowns {},
+                Labels {}
             ]
         }
     }
@@ -101,5 +109,6 @@ Window {
 
     Component.onCompleted: {
         STheme.brand_primary = "#244E99";
+        STheme.brand_secondary = "#999";
     }
 }

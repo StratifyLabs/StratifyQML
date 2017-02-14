@@ -365,6 +365,7 @@ QtObject {
     property color panel_primary_heading_bg: brand_primary;
     property color panel_secondary_border: brand_secondary;
     property color panel_secondary_heading_bg: brand_secondary;
+    property color panel_secondary_text: "#fff";
     property color panel_success_text: state_success_text;
     property color panel_success_border: state_success_border;
     property color panel_success_heading_bg: state_success_bg;

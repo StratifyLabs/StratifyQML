@@ -23,9 +23,18 @@ Rectangle {
     property alias attr: attr;
     property alias style: attr.style;
     property alias span: attr.span;
-    property bool dismissible: true;
     property bool dismissed: false;
     property alias text: text.text;
+    property bool dismissible: true;
+
+
+    function open(){
+        dismissed = false;
+    }
+
+    function close(){
+        dismissed = true;
+    }
 
     //implicitWidth: attr.blockWidth ? (parent ? parent.width : 0) : 0; //if not block width, width must be specified
     implicitHeight: text.height;
@@ -53,6 +62,9 @@ Rectangle {
 
     SAttributes {
         id: attr;
+
+        property real animationPeriod: 300;
+
         borderRadius: STheme.alert_border_radius;
         borderWidth: STheme.alert_border_width;
         borderColor: STheme.alert_info_border;
@@ -140,7 +152,7 @@ Rectangle {
     ]
 
     transitions: Transition {
-        NumberAnimation { property: "opacity"; duration: 150 }
+        NumberAnimation { property: "opacity"; duration: attr.animationPeriod; }
     }
 
 

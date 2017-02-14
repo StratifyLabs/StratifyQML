@@ -46,6 +46,10 @@ Item {
                     attr.color = Qt.binding(function(){ return STheme.panel_primary_heading_bg; });
                     attr.borderColor = Qt.binding(function(){ return STheme.panel_primary_border; });
                     fontColor = Qt.binding(function(){ return STheme.panel_primary_text; });
+                } else if( items[i] === "panel-secondary" ){
+                    attr.color = Qt.binding(function(){ return STheme.panel_secondary_heading_bg; });
+                    attr.borderColor = Qt.binding(function(){ return STheme.panel_secondary_border; });
+                    fontColor = Qt.binding(function(){ return STheme.panel_secondary_text; });
                 } else if( items[i] === "panel-success" ){
                     attr.color = Qt.binding(function(){ return STheme.panel_success_heading_bg; });
                     attr.borderColor = Qt.binding(function(){ return STheme.panel_success_border; });
@@ -62,7 +66,7 @@ Item {
                     attr.color = Qt.binding(function(){ return STheme.panel_info_heading_bg; });
                     attr.borderColor = Qt.binding(function(){ return STheme.panel_info_border; });
                     fontColor = Qt.binding(function(){ return STheme.panel_info_text; });
-                } else if( items[i] === "panel-default" ){
+                } else if( (items[i] === "panel-naked") || (items[i] === "panel-default") ){
                     attr.color = Qt.binding(function(){ return STheme.panel_default_heading_bg; });
                     attr.borderColor = Qt.binding(function(){ return STheme.panel_default_border; });
                     fontColor = Qt.binding(function(){ return STheme.panel_default_text; });

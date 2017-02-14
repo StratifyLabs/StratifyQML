@@ -160,17 +160,17 @@ Item {
                             SLabel { style: "left"; text: "Button Icons:"; }
 
                             SRow {
-                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center fa-spin"; icon: Fa.Icon.refresh; text: "Refresh"; }
-                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center fa-spin"; icon: Fa.Icon.cog; text: "Working"; }
-                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.refresh; text: "Pulse"; }
+                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center icon-spin"; icon: Fa.Icon.refresh; text: "Refresh"; }
+                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center icon-spin"; icon: Fa.Icon.cog; text: "Working"; }
+                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center icon-pulse"; icon: Fa.Icon.refresh; text: "Pulse"; }
 
-                                SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.spinner; text: "Refresh"; spin: true; }
-                                SButton{ span: 4; style: "btn-primary btn-lg center fa-spin"; icon: Fa.Icon.circle_o_notch; text: "Working"; spin: true; }
-                                SButton{ span: 4; style: "btn-primary btn-lg center fa-pulse"; icon: Fa.Icon.spinner; text: "Pulse";  pulse: true; }
+                                SButton{ span: 4; style: "btn-primary btn-lg center icon-spin"; icon: Fa.Icon.spinner; text: "Refresh"; }
+                                SButton{ span: 4; style: "btn-primary btn-lg center icon-spin"; icon: Fa.Icon.circle_o_notch; text: "Working"; }
+                                SButton{ span: 4; style: "btn-primary btn-lg center icon-pulse"; icon: Fa.Icon.spinner; text: "Pulse";  }
 
-                                SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.location_arrow; text: "Naked"; }
-                                SButton{ span: 4; style: "btn-lg center fa-pulse"; icon: Fa.Icon.repeat; text: "Naked"; }
-                                SButton{ span: 4; style: "btn-lg center fa-spin"; icon: Fa.Icon.safari; text: "Naked"; }
+                                SButton{ span: 4; style: "btn-lg center icon-spin"; icon: Fa.Icon.location_arrow; text: "Naked"; }
+                                SButton{ span: 4; style: "btn-lg center icon-pulse"; icon: Fa.Icon.repeat; text: "Naked"; }
+                                SButton{ span: 4; style: "btn-lg center icon-spin"; icon: Fa.Icon.safari; text: "Naked"; }
                             }
 
 

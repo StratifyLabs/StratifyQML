@@ -36,6 +36,13 @@ ComboBox {
     SAttributes {
         id: attr;
         blockWidth: true;
+
+        fontColorSelected: STheme.dropdown_active_color;
+        fontColorHovered: STheme.dropdown_hover_color;
+        color: STheme.dropdown_active_bg;
+        colorHovered: STheme.dropdown_hover_bg;
+        backgroundColor: STheme.dropdown_bg;
+        borderWidth: STheme.border_width;
     }
 
     implicitWidth: contentItem.implicitWidth + attr.paddingHorizontal*2;
@@ -64,7 +71,7 @@ ComboBox {
 
             text: delegate.text
             font: control.font;
-            color: delegate.highlighted ? STheme.dropdown_active_color : (delegate.hovered ? STheme.dropdown_hover_color :STheme.text_color);
+            color: delegate.highlighted ? attr.fontColorSelected : (delegate.hovered ? attr.fontColorHovered : attr.fontColor);
             elide: Text.ElideRight
             visible: delegate.text
             horizontalAlignment: attr.fontHorizontalAlignment;
@@ -76,7 +83,7 @@ ComboBox {
         hoverEnabled: control.hoverEnabled;
 
         background: Rectangle {
-            color: delegate.highlighted ? STheme.dropdown_active_bg : (delegate.hovered ? STheme.dropdown_hover_bg :STheme.dropdown_bg);
+            color: delegate.highlighted ? attr.color : (delegate.hovered ? attr.colorHovered : attr.backgroundColor);
             border.color: delegate.highlighted ? STheme.dropdown_border : "transparent";
             radius: 0;
         }
@@ -119,7 +126,7 @@ ComboBox {
     }
 
     background: Rectangle {
-        color: STheme.dropdown_bg;
+        color: attr.backgroundColor;
         border.color: STheme.dropdown_border;
         border.width: STheme.border_width;
         visible: !control.flat || control.pressed

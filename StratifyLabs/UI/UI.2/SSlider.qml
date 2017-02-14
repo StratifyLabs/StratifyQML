@@ -39,10 +39,9 @@ Slider {
     SAttributes {
         id: attr;
         fillWidth: true;
-        color: STheme.text_color;
+        color: STheme.gray_light;
         backgroundColor: STheme.gray_lighter;
         borderColor: STheme.text_color;
-
     }
 
     from: 0.0;
@@ -52,8 +51,8 @@ Slider {
     handle: Rectangle {
         x: control.leftPadding + (horizontal ? control.visualPosition * (control.availableWidth - width) : (control.availableWidth - width) / 2)
         y: control.topPadding + (horizontal ? (control.availableHeight - height) / 2 : control.visualPosition * (control.availableHeight - height))
-        implicitWidth: attr.fontContainerHeight;
-        implicitHeight: attr.fontContainerHeight;
+        implicitWidth: attr.fontContainerHeight*4/5;
+        implicitHeight: attr.fontContainerHeight*4/5;
         radius: width / 2
         color: control.enabled ? (control.pressed
             ? (attr.colorPressed)

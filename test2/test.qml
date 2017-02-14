@@ -4,8 +4,8 @@ import StratifyLabs.UI 2.0
 
 
 Window {
-    minimumWidth: StratifyUI.screen_xs;
-    minimumHeight: StratifyUI.screen_xs;
+    minimumWidth: STheme.screen_xs;
+    minimumHeight: STheme.screen_xs;
 
     width: 400;
     height: 600;
@@ -13,10 +13,10 @@ Window {
     STest{}
 
     onWidthChanged: {
-        StratifyUI.updateScreenSize(width);
+        STheme.updateScreenSize(width);
     }
 
     Component.onCompleted: {
-        StratifyUI.brand_primary = "#244E99";
+        STheme.brand_primary = "#244E99";
     }
 }

@@ -104,6 +104,7 @@ SAttributes 2.0 UI.2/SAttributes.qml
 SRoundedRectangle 2.0 UI.1/SRoundedRectangle.qml
 SRow 2.0 UI.2/SRow.qml
 SScreen 2.0 UI.2/SScreen.qml
+SSlider 2.0 UI.2/SSlider.qml
 STable 2.0 UI.2/STable.qml
 STableColumn 2.0 UI.2/STableColumn.qml
 STest 2.0 UI.2/STest.qml

@@ -16,7 +16,7 @@ Drawer {
             var items = parseStyle();
             attr.radius = STheme.btn_border_radius_base;
             for(var i = 0; i < items.length; i++){
-                if( (items[i] === "primary") || (items[i] === "drawer-primary") ){
+                if( items[i] === "drawer-primary" ){
                     attr.color = Qt.binding(function(){ return STheme.btn_primary_bg; });
                     attr.textColor = Qt.binding(function(){ return STheme.btn_primary_color; });
                     attr.borderColor = Qt.binding(function(){ return STheme.btn_primary_border; });

@@ -144,7 +144,11 @@ Item {
 
             SHLine { attr.paddingVertical: 0; visible: modal.title !== ""; }
 
-            SContainer { id: dialogContents; }
+            SContainer {
+                width: undefined;
+                //attr.fillWidth: false;
+                id: dialogContents;
+            }
 
             SHLine { attr.paddingVertical: 0; visible: modal.standardButtons; }
             SContainer {

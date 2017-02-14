@@ -22,8 +22,8 @@ QtObject {
     property real fontSize: STheme.font_size_base;
     property real fontContainerHeight: (fontSize + paddingVertical*3);
     property color fontColor: STheme.text_color;
-
-    //color of the font when selected
+    property color fontColorHovered: fontColor;
+    property color fontColorPressed: fontColor;
     property color fontColorSelected: STheme.text_muted;
     property real fontOpacity: 1.0;
     property color fontColorMuted: STheme.text_muted;
@@ -71,57 +71,63 @@ QtObject {
                 alignment = Qt.AlignHCenter | Qt.AlignVCenter;
             } else if( items[i] === "primary" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_primary_color; });
-                backgroundColor = Qt.binding(function(){ return STheme.btn_primary_bg; });
+                color = Qt.binding(function(){ return STheme.btn_primary_bg; });
                 borderColor = Qt.binding(function(){ return STheme.btn_primary_border; });
-                colorHovered = Qt.binding(function(){ return Qt.darker(attr.backgroundColor, 1.1); });
+                colorHovered = Qt.binding(function(){ return Qt.darker(attr.color, 1.3); });
+                colorPressed = Qt.binding(function(){ return Qt.darker(attr.colorHovered, 1.3); });
             } else if( items[i] === "secondary" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_secondary_color; });
-                backgroundColor = Qt.binding(function(){ return STheme.btn_secondary_bg; });
+                color = Qt.binding(function(){ return STheme.btn_secondary_bg; });
                 borderColor = Qt.binding(function(){ return STheme.btn_secondary_border; });
-                colorHovered = Qt.binding(function(){ return Qt.darker(attr.backgroundColor, 1.1); });
+                colorHovered = Qt.binding(function(){ return Qt.darker(attr.color, 1.3); });
+                colorPressed = Qt.binding(function(){ return Qt.darker(attr.colorHovered, 1.3); });
             } else if( items[i] === "warning" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_warning_color; });
-                backgroundColor = Qt.binding(function(){ return STheme.btn_warning_bg; });
+                color = Qt.binding(function(){ return STheme.btn_warning_bg; });
                 borderColor = Qt.binding(function(){ return STheme.btn_warning_border; });
-                colorHovered = Qt.binding(function(){ return Qt.darker(attr.backgroundColor, 1.1); });
+                colorHovered = Qt.binding(function(){ return Qt.darker(attr.color, 1.3); });
+                colorPressed = Qt.binding(function(){ return Qt.darker(attr.colorHovered, 1.3); });
             } else if( items[i] === "danger" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_danger_color; });
-                backgroundColor = Qt.binding(function(){ return STheme.btn_danger_bg; });
+                color = Qt.binding(function(){ return STheme.btn_danger_bg; });
                 borderColor = Qt.binding(function(){ return STheme.btn_danger_border; });
-                colorHovered = Qt.binding(function(){ return Qt.darker(attr.backgroundColor, 1.1); });
+                colorHovered = Qt.binding(function(){ return Qt.darker(attr.color, 1.3); });
+                colorPressed = Qt.binding(function(){ return Qt.darker(attr.colorHovered, 1.3); });
             } else if( items[i] === "success" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_success_color; });
-                backgroundColor = Qt.binding(function(){ return STheme.btn_success_bg; });
+                color = Qt.binding(function(){ return STheme.btn_success_bg; });
                 borderColor = Qt.binding(function(){ return STheme.btn_success_border; });
-                colorHovered = Qt.binding(function(){ return Qt.darker(attr.backgroundColor, 1.1); });
+                colorHovered = Qt.binding(function(){ return Qt.darker(attr.color, 1.3); });
+                colorPressed = Qt.binding(function(){ return Qt.darker(attr.colorHovered, 1.3); });
             } else if( items[i] === "info" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_info_color; });
-                backgroundColor = Qt.binding(function(){ return STheme.btn_info_bg; });
+                color = Qt.binding(function(){ return STheme.btn_info_bg; });
                 borderColor = Qt.binding(function(){ return STheme.btn_info_border; });
-                colorHovered = Qt.binding(function(){ return Qt.darker(attr.backgroundColor, 1.1); });
-            } else if( items[i] === "text-primary" ){
+                colorHovered = Qt.binding(function(){ return Qt.darker(attr.color, 1.3); });
+                colorPressed = Qt.binding(function(){ return Qt.darker(attr.colorHovered, 1.3); });
+            } else if( items[i] === "text-on-primary" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_primary_color; });
-            } else if( items[i] === "text-secondary" ){
+            } else if( items[i] === "text-on-secondary" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_secondary_color; });
-            } else if( items[i] === "text-warning" ){
+            } else if( items[i] === "text-on-warning" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_warning_color; });
-            } else if( items[i] === "text-success" ){
+            } else if( items[i] === "text-on-success" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_success_color; });
-            } else if( items[i] === "text-info" ){
+            } else if( items[i] === "text-on-info" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_info_color; });
-            } else if( items[i] === "text-danger" ){
+            } else if( items[i] === "text-on-danger" ){
                 fontColor = Qt.binding(function(){ return STheme.btn_danger_color; });
-            } else if( items[i] === "text-outline-primary" ){
+            } else if( items[i] === "text-primary" ){
                 fontColor = Qt.binding(function(){ return STheme.brand_primary; });
-            } else if( items[i] === "text-outline-warning" ){
+            } else if( items[i] === "text-warning" ){
                 fontColor = Qt.binding(function(){ return STheme.brand_warning; });
-            } else if( items[i] === "text-outline-success" ){
+            } else if( items[i] === "text-success" ){
                 fontColor = Qt.binding(function(){ return STheme.brand_success; });
-            } else if( items[i] === "text-outline-info" ){
+            } else if( items[i] === "text-info" ){
                 fontColor = Qt.binding(function(){ return STheme.brand_info; });
-            } else if( items[i] === "text-outline-danger" ){
+            } else if( items[i] === "text-danger" ){
                 fontColor = Qt.binding(function(){ return STheme.brand_danger; });
-            } else if( items[i] === "text-outline-secondary" ){
+            } else if( items[i] === "text-secondary" ){
                 fontColor = Qt.binding(function(){ return STheme.brand_secondary; });
             } else if( items[i] === "hide-sm" ){
                 hideSm = true;
@@ -161,33 +167,33 @@ QtObject {
                 fontVerticalAlignment = Text.AlignVCenter;
             } else if( items[i] === "text-bottom" ){
                 fontVerticalAlignment = Text.AlignBottom;
-            } else if( items[i] === "font-bold" ){
+            } else if( items[i] === "text-bold" ){
                 fontWeight = Font.Bold;
-            } else if( items[i] === "font-light" ){
+            } else if( items[i] === "text-light" ){
                 fontWeight = Font.Light;
-            } else if( items[i] === "font-demi-bold" ){
+            } else if( items[i] === "text-demi-bold" ){
                 fontWeight = Font.DemiBold;
-            } else if( items[i] === "font-extra-bold" ){
+            } else if( items[i] === "text-extra-bold" ){
                 fontWeight = Font.ExtraBold;
-            } else if( items[i] === "font-extra-light" ){
+            } else if( items[i] === "text-extra-light" ){
                 fontWeight = Font.ExtraLight;
-            } else if( items[i] === "font-normal" ){
+            } else if( items[i] === "text-normal" ){
                 fontWeight = Font.Normal;
-            } else if( items[i] === "font-lg" ){
+            } else if( items[i] === "text-lg" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_large; });
-            } else if( items[i] === "font-sm" ){
+            } else if( items[i] === "text-sm" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_small; });
-            } else if( items[i] === "h1" ){
+            } else if( items[i] === "text-h1" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_h1; });
-            } else if( items[i] === "h2" ){
+            } else if( items[i] === "text-h2" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_h2; });
-            } else if( items[i] === "h3" ){
+            } else if( items[i] === "text-h3" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_h3; });
-            } else if( items[i] === "h4" ){
+            } else if( items[i] === "text-h4" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_h4; });
-            } else if( items[i] === "h5" ){
+            } else if( items[i] === "text-h5" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_h5; });
-            } else if( items[i] === "h6" ){
+            } else if( items[i] === "text-h6" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_h6; });
             } else if( items[i] === "lg" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_large; });
@@ -201,12 +207,18 @@ QtObject {
                 fontSize = Qt.binding( function() { return STheme.font_size_small; });
                 paddingVertical = Qt.binding( function() { return STheme.padding_xs_vertical; });
                 paddingHorizontal = Qt.binding( function() { return STheme.padding_xs_horizontal; });
-            } else if( items[i] === "condensed" ){
+            } else if( (items[i] === "condensed") || (items[i] === "padding-small") ){
                 paddingVertical = Qt.binding( function() { return STheme.padding_small_vertical; });
                 paddingHorizontal = Qt.binding( function() { return STheme.padding_small_horizontal; });
             } else if( items[i] === "padding-zero" ){
                 paddingVertical = 0;
                 paddingHorizontal = 0;
+            } else if( items[i] === "padding-lg" ){
+                paddingVertical = Qt.binding( function() { return STheme.padding_large_vertical; });
+                paddingHorizontal = Qt.binding( function() { return STheme.padding_large_horizontal; });
+            } else if( items[i] === "padding-xs" ){
+                paddingVertical = Qt.binding( function() { return STheme.padding_xs_vertical; });
+                paddingHorizontal = Qt.binding( function() { return STheme.padding_xs_horizontal; });
             }
         }
     }
