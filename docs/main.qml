@@ -25,10 +25,20 @@ ApplicationWindow {
                 SColumn {
                     SText { style: "left text-on-primary"; text: "Menu"; }
                     SHLine{ attr.paddingVertical: 0; }
-                    SRow {
-                        SText { span: 10; style: "left text-on-primary text-bold"; text: "Introduction"; }
-                        SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.smile_o; }
+                    SContainer {
+                        SRow {
+                            SText { span: 10; style: "left text-on-primary text-bold"; text: "Introduction"; }
+                            SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.smile_o; }
+                        }
+                        MouseArea {
+                            anchors.fill: parent;
+                            onClicked: { animationContainer.screen = "Introduction"; drawer.close(); }
+                        }
                     }
+                    SButton { style: drawer.menuStyle; text: "Theme"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Attributes"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Icons"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+
                     SHLine{ attr.paddingVertical: 0; }
                     SContainer {
                         style: "padding-zero";
@@ -134,9 +144,14 @@ ApplicationWindow {
             }
 
             resources: [
+                Introduction {},
+                Theme {},
+                Attributes {},
+                Icons {},
                 Layouts {},
-                Buttons {},
                 Rows {},
+                Columns {},
+                Buttons {},
                 Panels {},
                 Badges {},
                 Alerts {},

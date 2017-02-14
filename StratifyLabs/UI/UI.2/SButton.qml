@@ -167,23 +167,6 @@ Button {
                     attr.textColor = Qt.binding(function(){ return STheme.text_muted; });
                     attr.borderColor = "transparent";
                     attr.textColorMuted = Qt.binding(function(){ return STheme.text_muted; });
-                } else if( (items[i] === "btn-lg")){
-                    attr.radius = Qt.binding(function(){ return STheme.btn_border_radius_large; });
-                    attr.fontSize = Qt.binding(function(){ return STheme.font_size_large; });
-                    attr.paddingVertical = Qt.binding( function(){ return STheme.padding_large_vertical; });
-                    attr.paddingHorizontal = Qt.binding( function(){ return STheme.padding_large_horizontal; });
-                } else if( (items[i] === "btn-block")){
-                    attr.blockWidth = true;
-                } else if( (items[i] === "btn-sm")){
-                    attr.paddingVertical = Qt.binding( function(){ return STheme.padding_small_vertical; });
-                    attr.paddingHorizontal = Qt.binding( function(){ return STheme.padding_small_horizontal; });
-                    attr.radius = Qt.binding(function(){ return STheme.btn_border_radius_small; });
-                    attr.fontSize = Qt.binding(function(){ return STheme.font_size_small; });
-                } else if( (items[i] === "btn-xs")){
-                    attr.paddingVertical = Qt.binding( function(){ return STheme.padding_xs_vertical; });
-                    attr.paddingHorizontal = Qt.binding( function(){ return STheme.padding_xs_horizontal; });
-                    attr.radius = Qt.binding(function(){ return STheme.btn_border_radius_small; });
-                    attr.fontSize = Qt.binding(function(){ return STheme.font_size_small; });
                 }
             }
         }

@@ -19,7 +19,6 @@ an "ApplicationWindow") or it can be used inside an SRow or SColumn to provide p
 
             SText { style: "left text-bold"; text: "Row"; }
             SText { style: "left text-bold"; text: "Column"; }
-
         }
 
     }

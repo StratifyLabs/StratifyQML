@@ -155,14 +155,29 @@ SSizeAttributes {
                 fontSize = Qt.binding( function() { return STheme.font_size_large; });
                 paddingVertical = Qt.binding( function() { return STheme.padding_large_vertical; });
                 paddingHorizontal = Qt.binding( function() { return STheme.padding_large_horizontal; });
+                if( type === "button" ){
+                    radius = Qt.binding(function(){ return STheme.btn_border_radius_large; });
+                } else if(type !== "badge"){
+                    radius = Qt.binding(function(){ return STheme.border_radius_large; });
+                }
             } else if( items[i] === "sm" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_small; });
                 paddingVertical = Qt.binding( function() { return STheme.padding_small_vertical; });
                 paddingHorizontal = Qt.binding( function() { return STheme.padding_small_horizontal; });
+                if( type === "button" ){
+                    radius = Qt.binding(function(){ return STheme.btn_border_radius_small; });
+                } else if(type !== "badge"){
+                    radius = Qt.binding(function(){ return STheme.border_radius_small; });
+                }
             } else if( items[i] === "xs" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_small; });
                 paddingVertical = Qt.binding( function() { return STheme.padding_xs_vertical; });
                 paddingHorizontal = Qt.binding( function() { return STheme.padding_xs_horizontal; });
+                if( type === "button" ){
+                    radius = Qt.binding(function(){ return STheme.btn_border_radius_small; });
+                } else if(type !== "badge"){
+                    radius = Qt.binding(function(){ return STheme.border_radius_small; });
+                }
             }
         }
     }

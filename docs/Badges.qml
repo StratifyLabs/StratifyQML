@@ -38,17 +38,8 @@ SContainer {
 
             SLabel { style: "left"; text: "Button Sizes:"; }
 
-            ButtonExampleSizes{}
-            CodeExample { source: "ButtonExampleSizes"; }
-
-            SHLine{}
-
-
-            SLabel { style: "left"; text: "Naked Buttons:"; }
-
-            ButtonExampleNaked{}
-            CodeExample { source: "ButtonExampleNaked"; }
-
+            BadgeExampleSizes{}
+            CodeExample { source: "BadgeExampleSizes"; }
         }
     }
 }

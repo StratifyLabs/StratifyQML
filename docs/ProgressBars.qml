@@ -20,7 +20,7 @@ SContainer {
 
             SHLine{}
 
-            SLabel { style: "left"; text: "Slider Sizes:"; }
+            SLabel { style: "left"; text: "ProgressBar Sizes:"; }
             ProgressBarExampleSizes{}
             CodeExample { source: "ProgressBarExampleSizes"; }
 
