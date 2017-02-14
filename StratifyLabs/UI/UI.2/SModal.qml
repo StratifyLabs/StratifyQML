@@ -58,6 +58,7 @@ Item {
 
     SAttributes {
         id: attr;
+        backgroundColor: STheme.modal_backdrop_bg;
     }
 
     states: [
@@ -98,7 +99,7 @@ Item {
     Rectangle {
         id: background;
         anchors.fill: parent;
-        color: STheme.modal_backdrop_bg;
+        color: attr.backgroundColor;
         opacity: STheme.modal_backdrop_opacity;
         z:-1;
         MouseArea {

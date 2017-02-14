@@ -25,7 +25,6 @@ Rectangle {
     property alias span: attr.span;
     property bool dismissed: false;
     property alias text: text.text;
-    property bool dismissible: true;
 
 
     function open(){
@@ -60,10 +59,9 @@ Rectangle {
         verticalAlignment: attr.fontVerticalAlignment;
     }
 
-    SAttributes {
+    SAlertAttributes {
         id: attr;
-
-        property real animationPeriod: 300;
+        type: "alert";
 
         borderRadius: STheme.alert_border_radius;
         borderWidth: STheme.alert_border_width;
@@ -110,7 +108,7 @@ Rectangle {
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
         font.pointSize: attr.fontSize;
         font.family: attr.fontIcon;
-        visible: dismissible;
+        visible: attr.dismissible;
         verticalAlignment: Text.AlignVCenter;
 
         MouseArea {

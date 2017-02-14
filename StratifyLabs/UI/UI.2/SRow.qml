@@ -27,10 +27,10 @@ GridLayout {
     width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
     height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
-    SAttributes {
+    SSizeAttributes {
         id: attr;
-        blockWidth: true;
         type: "row";
+        fillWidth: true;
         span: STheme.grid_columns;
     }
 

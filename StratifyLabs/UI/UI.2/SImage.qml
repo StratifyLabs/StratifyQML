@@ -26,8 +26,7 @@ Image {
     width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
     height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
-    SAttributes {
+    SSizeAttributes {
         id: attr;
-
     }
 }

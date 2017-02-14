@@ -30,7 +30,7 @@ Item {
     SAttributes {
         id: attr;
         type: "animationcontainer";
-        blockWidth: true;
+        fillWidth: true;
     }
 
     onScreenChanged: {

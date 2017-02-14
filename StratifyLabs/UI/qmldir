@@ -83,6 +83,7 @@ SGroup 2.0 UI.2/SGroup.qml
 SHline 2.0 UI.2/SHline.qml
 SHLine 2.0 UI.2/SHLine.qml
 SIcon 2.0 UI.2/SIcon.qml
+SIconAttributes 2.0 UI.2/SIconAttributes.qml
 SImage 2.0 UI.2/SImage.qml
 SInput 2.0 UI.2/SInput.qml
 SJsonListModel 2.0 UI.1/SJsonListModel.qml
@@ -103,7 +104,7 @@ SProgressCircle 2.0 UI.2/SProgresscircle.qml
 SAttributes 2.0 UI.2/SAttributes.qml
 SRoundedRectangle 2.0 UI.1/SRoundedRectangle.qml
 SRow 2.0 UI.2/SRow.qml
-SScreen 2.0 UI.2/SScreen.qml
+SSizeAttributes 2.0 UI.2/SSizeAttributes.qml
 SSlider 2.0 UI.2/SSlider.qml
 STable 2.0 UI.2/STable.qml
 STableColumn 2.0 UI.2/STableColumn.qml

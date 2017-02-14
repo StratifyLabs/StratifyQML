@@ -23,7 +23,7 @@ Flickable {
     property alias span: attr.span;
     property alias attr: attr;
 
-    SAttributes {
+    SSizeAttributes {
         id: attr;
         fillWidth: true;
         fillHeight: true;

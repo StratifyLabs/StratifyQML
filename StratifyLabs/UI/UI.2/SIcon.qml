@@ -32,20 +32,13 @@ Item {
     property real horizontalAlignment: attr.fontVerticalAlignment;
 
     implicitWidth: icon.implicitWidth + (label.implicitWidth*label.visible) + row.spacing;
-    implicitHeight: icon.implicitHeight + label.implicitHeight;
+    implicitHeight: Math.max(icon.implicitHeight, label.implicitHeight);
 
-    SAttributes {
+    SIconAttributes {
         id: attr;
-
-        property bool spin: false;
-        property bool pulse: false;
-        property real pulseSteps: 8;
-        property real animationPeriod: 1200;
-
         onStyleChanged:{
             onStyleChanged: {
                 var items = parseStyle();
-                attr.radius = STheme.btn_border_radius_base;
                 for(var i = 0; i < items.length; i++){
                     if( (items[i] === "icon-spin") || (items[i] === "fa-spin") ){
                         spin = true;

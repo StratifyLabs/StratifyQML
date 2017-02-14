@@ -84,21 +84,6 @@ Label {
                     attr.borderColor = attr.color;
                     attr.textColorMuted = attr.fontColor;
                     attr.colorHovered = attr.color;
-                } else if( items[i] === "label-lg" ){
-                    fontSize = Qt.binding( function(){ return STheme.font_size_large; });
-                    borderRadius = Qt.binding( function(){ return STheme.border_radius_large; });
-                    paddingVertical = Qt.binding( function(){ return STheme.padding_large_vertical; });
-                    paddingHorizontal = Qt.binding( function(){ return STheme.padding_large_horizontal; });
-                } else if( items[i] === "label-sm" ){
-                    paddingVertical = Qt.binding( function(){ return STheme.padding_small_vertical; });
-                    paddingHorizontal = Qt.binding( function(){ return STheme.padding_small_horizontal; });
-                    fontSize = Qt.binding( function(){ return STheme.font_size_small; });
-                    borderRadius = Qt.binding( function(){ return STheme.border_radius_small; });
-                } else if( items[i] === "label-xs" ){
-                    paddingVertical = Qt.binding( function(){ return STheme.padding_xs_vertical; });
-                    paddingHorizontal = Qt.binding( function(){ return STheme.padding_xs_horizontal; });
-                    fontSize = Qt.binding( function(){ return STheme.font_size_small; });
-                    borderRadius = Qt.binding( function(){ return STheme.border_radius_small; });
                 }
             }
         }

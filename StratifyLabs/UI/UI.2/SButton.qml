@@ -24,8 +24,11 @@ Button {
     property alias style: attr.style;
     property alias span: attr.span;
     property alias attr: attr;
+
+    //additional properties
     property alias label: control.text;
     property string icon;
+    property alias iconItem: contentIcon;
 
     implicitWidth: contentItem.implicitWidth + attr.paddingHorizontal*2;
     implicitHeight: attr.fontContainerHeight;
@@ -71,9 +74,7 @@ Button {
 
     SAttributes {
         id: attr;
-        type: "btn";
-
-        property alias icon: contentIcon.attr;
+        type: "button";
 
         color: STheme.btn_primary_bg;
         borderColor: STheme.btn_primary_border;

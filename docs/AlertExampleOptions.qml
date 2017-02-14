@@ -12,12 +12,12 @@ SRow {
     SAlert {
         span: 6;
         text: "Non-dismissible alert";
-        dismissible: false;
+        attr.dismissible: false;
     }
     SAlert {
         id: dismissibleAlert;
         span: 6;
         text: "Dismissible alert (default)";
-        dismissible: true;
+        attr.dismissible: true;
     }
 }

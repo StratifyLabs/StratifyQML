@@ -26,7 +26,7 @@ Rectangle {
     SAttributes {
         id: attr;
         type: "hline";
-        backgroundColor: STheme.panel_default_border;
+        color: STheme.panel_default_border;
         borderColor: STheme.panel_default_border;
         borderWidth: 1;
         blockWidth: true;
@@ -35,7 +35,7 @@ Rectangle {
     //y: attr.paddingVertical;
     width: parent.width;
     height: attr.borderWidth;
-    color: attr.backgroundColor;
+    color: attr.color;
     border.color: attr.borderColor;
     border.width: attr.borderWidth;
 

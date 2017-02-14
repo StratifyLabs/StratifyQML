@@ -22,7 +22,7 @@ Row {
     property alias span: attr.span;
     property alias attr: attr;
     spacing: attr.paddingHorizontal;
-    SAttributes {
+    SSizeAttributes {
         id: attr;
         type: "group";
     }

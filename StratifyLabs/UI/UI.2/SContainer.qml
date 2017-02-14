@@ -25,14 +25,13 @@ Rectangle {
     property string name;
 
     default property alias data: contents.data;
-    property alias backgroundColor: control.attr.backgroundColor;
 
     width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
     height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
     implicitWidth: contents.childrenRect.width + attr.paddingHorizontal*2;
     implicitHeight: contents.childrenRect.height + attr.paddingVertical*2;
-    color: attr.backgroundColor;
+    color: "transparent";
 
     Item {
         id: contents;
@@ -42,7 +41,7 @@ Rectangle {
         width: parent.width !== undefined ? parent.width - attr.paddingHorizontal*2 : undefined;
     }
 
-    SAttributes {
+    SSizeAttributes {
         id: attr;
         type: "container";
         blockWidth: true;

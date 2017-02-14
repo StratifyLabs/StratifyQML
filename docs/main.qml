@@ -50,11 +50,12 @@ ApplicationWindow {
                         SText { span: 10; style: "left text-on-primary text-bold"; text: "Indicators"; }
                         SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.star; }
                     }
-                    SButton { style: drawer.menuStyle; text: "Wells"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Panels"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "Alerts"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Badges"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "Labels"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Panels"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "ProgressBars"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Wells"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SHLine{ attr.paddingVertical: 0; }
                     SRow {
                         SText { span: 10; style: "left text-on-primary text-bold"; text: "Input"; }
@@ -137,6 +138,7 @@ ApplicationWindow {
                 Buttons {},
                 Rows {},
                 Panels {},
+                Badges {},
                 Alerts {},
                 Inputs {},
                 ProgressBars{},
@@ -146,6 +148,7 @@ ApplicationWindow {
             ]
         }
     }
+
 
 
     onWidthChanged: {
