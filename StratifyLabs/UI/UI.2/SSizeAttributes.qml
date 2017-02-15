@@ -36,14 +36,14 @@ QtObject {
             } else if( items[i] === "block" ){
                 blockWidth = true;
             } else if( items[i] === "top" ){
-                alignment &= ~(Qt.AlignBottom | Qt.AlignCenter);
+                alignment &= ~(Qt.AlignBottom | Qt.AlignVCenter);
                 alignment |= Qt.AlignTop;
             } else if( items[i] === "bottom" ){
-                alignment &= ~(Qt.AlignTop | Qt.AlignCenter);
+                alignment &= ~(Qt.AlignTop | Qt.AlignVCenter);
                 alignment |= Qt.AlignBottom;
             } else if( items[i] === "middle" ){
                 alignment &= ~(Qt.AlignBottom | Qt.AlignTop);
-                alignment |= Qt.AlignCenter;
+                alignment |= Qt.AlignVCenter;
             } else if( items[i] === "left" ){
                 alignment &= ~(Qt.AlignRight | Qt.AlignHCenter);
                 alignment |= Qt.AlignLeft;

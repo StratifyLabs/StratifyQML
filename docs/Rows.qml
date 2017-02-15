@@ -15,7 +15,7 @@ SContainer {
                 defaultSize: "block";
             }
 
-            SText { style: "left text-bold"; text: "Introduction"; }
+            SText { style: "left text-bold"; text: "Description"; }
             SText { style: "block"; text: 'An SRow arranges items in a row. \
 If the items won\'t fit in the row, the items are arranged in a grid. Each row \
 can have a total span of STheme.grid_columns (which defaults to a value of ' + STheme.grid_columns + ').'; }
@@ -34,6 +34,9 @@ narrow than STheme.screen_sm."; }
 number of columns from STheme.grid_columns (' + STheme.grid_columns + ') to STheme.grid_columns_sm \
 (' + STheme.grid_columns_sm + ').'; }
 
+            SText { style: "left text-bold"; text: "Responsive Example"; }
+
+
             RowExampleResponsive{}
             CodeExample { source: "RowExampleResponsive"; }
 
@@ -47,8 +50,6 @@ object.'; }
         STheme.screen_sm = 600;
 }';
             }
-
-            SHLine{}
 
         }
     }

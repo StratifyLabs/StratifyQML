@@ -1,6 +1,5 @@
 import StratifyLabs.UI 2.0
 
-
 SRow {
     SIcon {
         span: 4;

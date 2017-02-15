@@ -32,36 +32,46 @@ has additional attibutes, the object will be S{Object}Attributes (such as SAlert
             SText { style: "left text-bold text-lg"; text: "Changing the Style"; }
             SText { style: "block"; text: 'When a new value is assigned to the "style" property, \
 the string is parsed and the styling is bound to the object.'; }
+            SText { style: "block text-bold"; text: 'SSizeAttributes'; }
             SText { style: "block"; text: 'SSizeAttributes (all objects) support the following style \
 options.'; }
 
             SContainer {
                 SColumn {
-                    SText { style: "left"; text: "Padding"; }
+                    SText { style: "left text-bold"; text: "Padding"; }
                     ElementBullet { text: "padding-zero"; }
                     ElementBullet { text: "padding-xs"; }
                     ElementBullet { text: "padding-lg"; }
 
-                    SText { style: "left"; text: "Horizontal Alignment"; }
+                    SHLine {}
+
+                    SText { style: "left text-bold"; text: "Horizontal Alignment"; }
                     ElementBullet { text: "left"; }
                     ElementBullet { text: "right"; }
                     ElementBullet { text: "center"; }
 
-                    AttributeExampleAlignment{}
-                    CodeExample { source: "AttributeExampleAlignment"; }
-
-                    SText { style: "left"; text: "Vertical Alignment"; }
+                    SText { style: "left text-bold"; text: "Vertical Alignment"; }
                     ElementBullet { text: "top"; }
                     ElementBullet { text: "bottom"; }
                     ElementBullet { text: "middle"; }
 
-                    SText { style: "left"; text: "Sizing"; }
+                    AttributeExampleAlignment{}
+                    CodeExample { source: "AttributeExampleAlignment"; }
+
+                    SHLine {}
+
+
+                    SText { style: "left text-bold"; text: "Sizing"; }
                     ElementBullet { text: "fill: fill height"; }
                     ElementBullet { text: "block: fill width"; }
                     ElementBullet { text: "default: align middle-center, implicit size"; }
+
+                    AttributeExampleSize{}
+                    CodeExample { source: "AttributeExampleSize"; }
                 }
             }
 
+            SText { style: "block text-bold"; text: 'SAttributes'; }
             SText { style: "block"; text: 'SAttributes (most objects) support the following style \
 options.'; }
 

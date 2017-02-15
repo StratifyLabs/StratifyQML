@@ -62,9 +62,13 @@ ApplicationWindow {
                     }
                     SButton { style: drawer.menuStyle; text: "Alerts"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "Badges"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Icons"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "Labels"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "Panels"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "ProgressBars"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "ProgressCircles"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Text"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "ToolTips"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "Wells"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SHLine{ attr.paddingVertical: 0; }
                     SRow {
@@ -72,9 +76,12 @@ ApplicationWindow {
                         SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.pencil; }
                     }
                     SButton { style: drawer.menuStyle; text: "Buttons"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Inputs"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "CheckBoxes"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "Dropdowns"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "Inputs"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "RadioButtons"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "Sliders"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    SButton { style: drawer.menuStyle; text: "TextBoxes"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SHLine{ attr.paddingVertical: 0; }
                     SRow {
                         SText { span: 10; style: "left text-on-primary text-bold"; text: "Models"; }
@@ -82,8 +89,6 @@ ApplicationWindow {
                     }
                     SButton { style: drawer.menuStyle; text: "Lists"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                     SButton { style: drawer.menuStyle; text: "Tables"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "ToolTips"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Progress"; onPressed: { animationContainer.screen = text; drawer.close(); } }
                 }
             }
         }
@@ -151,6 +156,8 @@ ApplicationWindow {
                 Layouts {},
                 Rows {},
                 Columns {},
+                Containers {},
+                AnimationContainers {},
                 Buttons {},
                 Panels {},
                 Badges {},

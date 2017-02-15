@@ -72,7 +72,7 @@ GridLayout {
         }
     }
 
-    function adjustWidth(){        
+    function adjustWidth(){
         for(var i = 0; i < children.length; i++){
             var w;
             var spacingInRow;
@@ -88,15 +88,11 @@ GridLayout {
                 spacingInRow = 0;
                 if( span >= columns ){
                     span = columns;
-                } else {
-                    if( span > 0 ){
-                        //spacingInRow = (siblings - 1)*rowSpacing;
-                    }
                 }
 
                 children[i].Layout.columnSpan = span;
 
-                if( children[i].attr.blockWidth === true ){
+                if( children[i].attr.fillWidth === true ){
                     w = (width - spacingInRow) * span / columns;
                     children[i].Layout.maximumWidth = w;
                 }

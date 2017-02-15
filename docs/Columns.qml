@@ -9,49 +9,19 @@ SContainer {
 
         SColumn {
             ElementHeading {
-                title: "Rows";
-                inherits: "GridLayout";
-                stratifyName: "SRow";
+                title: "Columns";
+                inherits: "SRow";
+                stratifyName: "SColumn";
                 defaultSize: "block";
             }
 
-            SText { style: "left text-bold"; text: "Introduction"; }
-            SText { style: "block"; text: 'An SRow arranges items in a row. \
-If the items won\'t fit in the row, the items are arranged in a grid. Each row \
-can have a total span of STheme.grid_columns (which defaults to a value of 12).
-'; }
+            SText { style: "left text-bold"; text: "Description"; }
+            SText { style: "block"; text: 'An SColumn is similar to an SRow but it assumes \
+all of its children span the entire width (which is the default value). SColumn does not \
+respond to changes in screen size like SRow does.'; }
 
-            ButtonExampleColors{}
-            CodeExample { source: "ButtonExampleColors"; }
-
-            SHLine{}
-
-            SLabel { style: "left"; text: "Button Outlines:"; }
-
-            ButtonExampleOutlineColors{}
-            CodeExample { source: "ButtonExampleOutlineColors"; }
-
-            SHLine{}
-
-            SLabel { style: "left"; text: "Icons:"; }
-
-            ButtonExampleIcons{}
-            CodeExample { source: "ButtonExampleIcons"; }
-
-            SHLine{}
-
-            SLabel { style: "left"; text: "Button Sizes:"; }
-
-            ButtonExampleSizes{}
-            CodeExample { source: "ButtonExampleSizes"; }
-
-            SHLine{}
-
-
-            SLabel { style: "left"; text: "Naked Buttons:"; }
-
-            ButtonExampleNaked{}
-            CodeExample { source: "ButtonExampleNaked"; }
+            ColumnExample{}
+            CodeExample { source: "ColumnExample"; }
 
         }
     }
