@@ -79,10 +79,10 @@ Button {
         color: STheme.btn_primary_bg;
         borderColor: STheme.btn_primary_border;
         fontColor: STheme.btn_primary_color;
+        radius: STheme.btn_border_radius_base;
 
         onStyleChanged: {
             var items = parseStyle();
-            attr.radius = STheme.btn_border_radius_base;
             for(var i = 0; i < items.length; i++){
                 if( (items[i] === "btn-primary") ){
                     attr.color = Qt.binding(function(){ return STheme.btn_primary_bg; });

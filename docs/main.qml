@@ -137,7 +137,7 @@ ApplicationWindow {
             style: "block fill";
 
             SAnimationFade{ id: animation; }
-            screen: "Buttons";
+            screen: "Introduction";
 
             Component.onCompleted: {
                 showScreen(current);
