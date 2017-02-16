@@ -8,20 +8,15 @@ SContainer {
         style: "block fill";
 
         SColumn {
-
-            SLabel { style: "left"; text: "Text Input Options:"; }
-
             EHeading {
-                title: "Text Line Input";
-                inherits: "QtQuick.Controls 2.0 TextField";
-                stratifyName: "SInput";
+                title: "Icons";
+                inherits: "Item";
+                stratifyName: "SIcon";
                 defaultSize: "block";
             }
 
-            SLabel { style: "left"; text: "Input Examples:"; }
+            SLabel { style: "left"; text: "Icon Examples:"; }
 
-            InputExample{}
-            ECodeExample { source: "InputExample"; }
 
         }
     }

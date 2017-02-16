@@ -9,45 +9,14 @@ SContainer {
 
         SColumn {
             EHeading {
-                title: "Buttons";
-                inherits: "QtQuick.Controls 2.0 Button";
-                stratifyName: "SButton";
-                specialAttibutes: "icon";
+                title: "Tables";
+                inherits: "QtQuick.Controls 1.4 TableView";
+                stratifyName: "STable";
+                defaultSize: "block";
             }
 
-            SLabel { style: "left"; text: "Button Colors:"; }
+            SLabel { style: "left"; text: "Table Examples:"; }
 
-            ButtonExampleColors{}
-            ECodeExample { source: "ButtonExampleColors"; }
-
-            SHLine{}
-
-            SLabel { style: "left"; text: "Button Outlines:"; }
-
-            ButtonExampleOutlineColors{}
-            ECodeExample { source: "ButtonExampleOutlineColors"; }
-
-            SHLine{}
-
-            SLabel { style: "left"; text: "Icons:"; }
-
-            ButtonExampleIcons{}
-            ECodeExample { source: "ButtonExampleIcons"; }
-
-            SHLine{}
-
-            SLabel { style: "left"; text: "Button Sizes:"; }
-
-            ButtonExampleSizes{}
-            ECodeExample { source: "ButtonExampleSizes"; }
-
-            SHLine{}
-
-
-            SLabel { style: "left"; text: "Naked Buttons:"; }
-
-            ButtonExampleNaked{}
-            ECodeExample { source: "ButtonExampleNaked"; }
 
         }
     }

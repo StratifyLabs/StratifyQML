@@ -8,9 +8,6 @@ SContainer {
         style: "block fill";
 
         SColumn {
-
-            SLabel { style: "left"; text: "Text Input Options:"; }
-
             EHeading {
                 title: "Text Line Input";
                 inherits: "QtQuick.Controls 2.0 TextField";

@@ -27,10 +27,38 @@ Item {
     property string screen;
     property var current;
 
+    property var animation: SAnimationFade {
+        parent: root;
+    }
+
+    onAnimationChanged: {
+        animation.parent = root;
+    }
+
+
+
     SAttributes {
         id: attr;
         type: "animationcontainer";
         fillWidth: true;
+    }
+
+    function next(){
+        var i = resourceIndex(current);
+        i++;
+        if( i < resources.length ){
+            return resources[i].name;
+        }
+        return screen;
+    }
+
+    function previous(){
+        var i = resourceIndex(current);
+        i--;
+        if( i >= 0 ){
+            return resources[i].name;
+        }
+        return screen;
     }
 
     onScreenChanged: {

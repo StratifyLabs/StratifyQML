@@ -9,37 +9,13 @@ SContainer {
 
         SColumn {
             EHeading {
-                title: "Badges";
-                inherits: "Rectangle";
-                stratifyName: "SBadge";
-                specialAttibutes: "icon";
+                title: "Json Models";
+                inherits: "Item";
+                stratifyName: "SJsonModel";
             }
 
-            SLabel { style: "left"; text: "Badge Colors:"; }
+            SLabel { style: "left"; text: "Description"; }
 
-            BadgeExampleColors{}
-            ECodeExample { source: "BadgeExampleColors"; }
-
-            SHLine{}
-
-            SLabel { style: "left"; text: "Badge Outlines:"; }
-
-            BadgeExampleOutlineColors{}
-            ECodeExample { source: "BadgeExampleOutlineColors"; }
-
-            SHLine{}
-
-            SLabel { style: "left"; text: "Icons:"; }
-
-            BadgeExampleIcons{}
-            ECodeExample { source: "BadgeExampleIcons"; }
-
-            SHLine{}
-
-            SLabel { style: "left"; text: "Button Sizes:"; }
-
-            BadgeExampleSizes{}
-            ECodeExample { source: "BadgeExampleSizes"; }
         }
     }
 }

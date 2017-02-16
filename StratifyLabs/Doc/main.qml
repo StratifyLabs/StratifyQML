@@ -13,6 +13,24 @@ ApplicationWindow {
 
     property alias screen: animationContainer.screen;
 
+    onScreenChanged: {
+        var n = animationContainer.next();
+        var p = animationContainer.previous();
+        if( (n !== undefined) && (n !== animationContainer.screen) ){
+            nextScreen.text = n;
+            nextGroup.visible = true;
+        } else {
+            nextGroup.visible = false;
+        }
+
+        if( (p !== undefined) && (p !== animationContainer.screen) ){
+            previousScreen.text = p;
+            previousGroup.visible = true;
+        } else {
+            previousGroup.visible = false;
+        }
+    }
+
     SDrawer {
         id: drawer
         width: 250;
@@ -37,7 +55,7 @@ ApplicationWindow {
             attr.paddingHorizontal: 0;
             SPane {
                 SColumn {
-                        id: menuItems;
+                    id: menuItems;
                     EDrawerHeading { label: "Menu"; }
                     SHLine{ attr.paddingVertical: 0; }
                     EDrawerHeading { label: "Getting Started"; icon: Fa.Icon.smile_o; }
@@ -129,9 +147,6 @@ ApplicationWindow {
             id: animationContainer;
             style: "block fill";
 
-            SAnimationFade{ id: animation; }
-            screen: "Introduction";
-
             Component.onCompleted: {
                 showScreen(current);
             }
@@ -140,7 +155,7 @@ ApplicationWindow {
                 Introduction {},
                 Theme {},
                 Attributes {},
-                Icons {},
+                FontAwesome {},
 
                 Layouts {},
                 Rows {},
@@ -150,6 +165,7 @@ ApplicationWindow {
 
                 Alerts {},
                 Badges {},
+                Icons {},
                 Labels {},
                 Panels {},
                 ProgressBars{},
@@ -169,11 +185,43 @@ ApplicationWindow {
                 JsonModels{},
                 Lists{},
                 Tables{}
-
             ]
         }
-    }
 
+        SContainer {
+            SRow {
+                SGroup {
+                    id: previousGroup;
+                    style: "left";
+                    span: 2;
+                    SButton {
+                        id: previousButton;
+                        icon: Fa.Icon.chevron_left;
+                        onClicked: screen = animationContainer.previous();
+                    }
+                    SText {
+                        anchors.verticalCenter: previousButton.verticalCenter;
+                        id: previousScreen;
+                    }
+                }
+                SGroup {
+                    id: nextGroup;
+                    style: "right";
+                    span: 2;
+                    SText {
+                        anchors.verticalCenter: nextButton.verticalCenter;
+                        id: nextScreen;
+                    }
+                    SButton {
+                        id: nextButton;
+                        style: "right";
+                        icon: Fa.Icon.chevron_right;
+                        onClicked: screen = animationContainer.next();
+                    }
+                }
+            }
+        }
+    }
 
 
     onWidthChanged: {
@@ -182,6 +230,7 @@ ApplicationWindow {
 
     Component.onCompleted: {
         STheme.brand_primary = "#244E99";
-        STheme.brand_secondary = "#666";
+        STheme.brand_secondary = "#383838";
+        screen = "Introduction";
     }
 }

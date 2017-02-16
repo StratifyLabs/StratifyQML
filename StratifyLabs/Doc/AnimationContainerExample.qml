@@ -31,7 +31,7 @@ SColumn {
         id: animationContainer;
         implicitHeight: 300;
 
-        SAnimationHPush{ id: animation; }
+        animation: SAnimationHPush{ }
         screen: "Screen1";
 
         resources: [
