@@ -4,22 +4,22 @@ SRow {
     SPanel {
         span: 4;
         SColumn {
-            SText { style: "block"; text: "Panel with no heading and no footer"; }
+            SText { style: "block"; text: "Panel with no EHeading and no footer"; }
         }
     }
     SPanel {
         span: 4;
         footer: "Panel Footer";
         SColumn {
-            SText { style: "block"; text: "Panel with footer and no heading"; }
+            SText { style: "block"; text: "Panel with footer and no EHeading"; }
         }
     }
     SPanel {
         span: 4;
-        heading: "Panel Heading";
+        heading: "Panel EHeading";
         footer: "Panel Footer";
         SColumn {
-            SText { style: "block"; text: "Panel with heading and footer"; }
+            SText { style: "block"; text: "Panel with Heading and footer"; }
         }
     }
 }

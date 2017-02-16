@@ -86,7 +86,8 @@ SIcon 2.0 UI.2/SIcon.qml
 SIconAttributes 2.0 UI.2/SIconAttributes.qml
 SImage 2.0 UI.2/SImage.qml
 SInput 2.0 UI.2/SInput.qml
-SJsonListModel 2.0 UI.1/SJsonListModel.qml
+SJsonListModel 2.0 UI.2/SJsonModel.qml
+SJsonModel 2.0 UI.2/SJsonModel.qml
 SLabel 2.0 UI.2/SLabel.qml
 SList 2.0 UI.2/SList.qml
 SListGroup 2.0 UI.2/SListgroup.qml

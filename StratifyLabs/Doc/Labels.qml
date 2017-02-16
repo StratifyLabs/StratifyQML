@@ -8,7 +8,7 @@ SContainer {
         style: "block fill";
 
         SColumn {
-            ElementHeading {
+            EHeading {
                 title: "Labels";
                 inherits: "QtQuick.Controls 2.0 Label";
                 stratifyName: "SLabel";
@@ -17,14 +17,14 @@ SContainer {
             SLabel { style: "left"; text: "Label Colors:"; }
 
             LabelExampleColors{}
-            CodeExample { source: "LabelExampleColors"; }
+            ECodeExample { source: "LabelExampleColors"; }
 
             SHLine{}
 
             SLabel { style: "left"; text: "Label Sizes:"; }
 
             LabelExampleSizes{}
-            CodeExample { source: "LabelExampleSizes"; }
+            ECodeExample { source: "LabelExampleSizes"; }
 
 
             SHLine{}
@@ -33,7 +33,7 @@ SContainer {
             SLabel { style: "left"; text: "Naked Labels:"; }
 
             LabelExampleNaked{}
-            CodeExample { source: "LabelExampleNaked"; }
+            ECodeExample { source: "LabelExampleNaked"; }
 
         }
     }

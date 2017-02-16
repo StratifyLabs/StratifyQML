@@ -11,84 +11,72 @@ ApplicationWindow {
     width: 400;
     height: 600;
 
+    property alias screen: animationContainer.screen;
+
     SDrawer {
         id: drawer
         width: 250;
         height: parent.height;
+
+        function shut(item){
+            //other items active are false
+            for(var i = 0; i < menuItems.children.length; i++){
+                if( menuItems.children[i].active !== undefined ){
+                    menuItems.children[i].active = false;
+                }
+            }
+            item.active = true;
+            drawer.close();
+        }
 
         style: "secondary";
 
         property string menuStyle: "left btn-naked text-on-secondary";
         SContainer {
             style: "fill";
+            attr.paddingHorizontal: 0;
             SPane {
                 SColumn {
-                    SText { style: "left text-on-primary"; text: "Menu"; }
+                        id: menuItems;
+                    EDrawerHeading { label: "Menu"; }
                     SHLine{ attr.paddingVertical: 0; }
-                    SContainer {
-                        SRow {
-                            SText { span: 10; style: "left text-on-primary text-bold"; text: "Introduction"; }
-                            SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.smile_o; }
-                        }
-                        MouseArea {
-                            anchors.fill: parent;
-                            onClicked: { animationContainer.screen = "Introduction"; drawer.close(); }
-                        }
-                    }
-                    SButton { style: drawer.menuStyle; text: "Theme"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Attributes"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Icons"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-
+                    EDrawerHeading { label: "Getting Started"; icon: Fa.Icon.smile_o; }
+                    EDrawerItem { label: "Introduction"; }
+                    EDrawerItem { label: "Theme"; }
+                    EDrawerItem { label: "Attributes"; }
+                    EDrawerItem { label: "FontAwesome"; }
                     SHLine{ attr.paddingVertical: 0; }
-                    SContainer {
-                        style: "padding-zero";
-                        SRow {
-                            SText { span: 10; style: drawer.menuStyle + " text-bold"; text: "Layouts"; }
-                            SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.object_group; }
-                        }
-                        MouseArea {
-                            anchors.fill: parent;
-                            onClicked: { animationContainer.screen = "Layouts"; drawer.close(); }
-                        }
-                    }
-                    SButton { style: drawer.menuStyle; text: "Rows"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Columns"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Containers"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "AnimationContainers"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    EDrawerHeading { label: "Layouts"; icon: Fa.Icon.object_group; }
+                    EDrawerItem { label: "Rows"; }
+                    EDrawerItem { label: "Columns"; }
+                    EDrawerItem { label: "Containers"; }
+                    EDrawerItem { label: "AnimationContainers"; }
                     SHLine{ attr.paddingVertical: 0; }
-                    SRow {
-                        SText { span: 10; style: "left text-on-primary text-bold"; text: "Indicators"; }
-                        SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.star; }
-                    }
-                    SButton { style: drawer.menuStyle; text: "Alerts"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Badges"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Icons"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Labels"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Panels"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "ProgressBars"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "ProgressCircles"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Text"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "ToolTips"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Wells"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    EDrawerHeading { label: "Indicators"; icon: Fa.Icon.star; }
+                    EDrawerItem { label: "Alerts"; }
+                    EDrawerItem { label: "Badges"; }
+                    EDrawerItem { label: "Icons"; }
+                    EDrawerItem { label: "Labels"; }
+                    EDrawerItem { label: "Panels"; }
+                    EDrawerItem { label: "ProgressBars"; }
+                    EDrawerItem { label: "ProgressCircles"; }
+                    EDrawerItem { label: "Texts"; }
+                    EDrawerItem { label: "ToolTips"; }
+                    EDrawerItem { label: "Wells"; }
                     SHLine{ attr.paddingVertical: 0; }
-                    SRow {
-                        SText { span: 10; style: "left text-on-primary text-bold"; text: "Input"; }
-                        SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.pencil; }
-                    }
-                    SButton { style: drawer.menuStyle; text: "Buttons"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "CheckBoxes"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Dropdowns"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Inputs"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "RadioButtons"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Sliders"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "TextBoxes"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    EDrawerHeading { label: "Input"; icon: Fa.Icon.pencil; }
+                    EDrawerItem { label: "Buttons"; }
+                    EDrawerItem { label: "CheckBoxes"; }
+                    EDrawerItem { label: "Dropdowns"; }
+                    EDrawerItem { label: "Inputs"; }
+                    EDrawerItem { label: "RadioButtons"; }
+                    EDrawerItem { label: "Sliders"; }
+                    EDrawerItem { label: "TextBoxes"; }
                     SHLine{ attr.paddingVertical: 0; }
-                    SRow {
-                        SText { span: 10; style: "left text-on-primary text-bold"; text: "Models"; }
-                        SIcon { span: 2; style: "right text-on-primary"; icon: Fa.Icon.database; }
-                    }
-                    SButton { style: drawer.menuStyle; text: "Lists"; onPressed: { animationContainer.screen = text; drawer.close(); } }
-                    SButton { style: drawer.menuStyle; text: "Tables"; onPressed: { animationContainer.screen = text; drawer.close(); } }
+                    EDrawerHeading { label: "Models"; icon: Fa.Icon.database; }
+                    EDrawerItem { label: "JsonModels"; }
+                    EDrawerItem { label: "Lists"; }
+                    EDrawerItem { label: "Tables"; }
                 }
             }
         }
@@ -153,20 +141,35 @@ ApplicationWindow {
                 Theme {},
                 Attributes {},
                 Icons {},
+
                 Layouts {},
                 Rows {},
                 Columns {},
                 Containers {},
                 AnimationContainers {},
-                Buttons {},
-                Panels {},
-                Badges {},
+
                 Alerts {},
-                Inputs {},
+                Badges {},
+                Labels {},
+                Panels {},
                 ProgressBars{},
+                ProgressCircles{},
+                Texts{},
+                ToolTips{},
+                Wells{},
+
+                Buttons {},
+                CheckBoxes {},
                 Dropdowns {},
+                Inputs {},
+                RadioButtons {},
                 Sliders {},
-                Labels {}
+                TextBoxes {},
+
+                JsonModels{},
+                Lists{},
+                Tables{}
+
             ]
         }
     }

@@ -2,7 +2,7 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 SContainer {
-    name: "Lists";
+    name: "ToolTips";
     style: "fill";
     SPane {
         style: "block fill";

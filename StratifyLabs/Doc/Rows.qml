@@ -8,7 +8,7 @@ SContainer {
         style: "block fill";
 
         SColumn {
-            ElementHeading {
+            EHeading {
                 title: "Rows";
                 inherits: "GridLayout";
                 stratifyName: "SRow";
@@ -38,7 +38,7 @@ number of columns from STheme.grid_columns (' + STheme.grid_columns + ') to SThe
 
 
             RowExampleResponsive{}
-            CodeExample { source: "RowExampleResponsive"; }
+            ECodeExample { source: "RowExampleResponsive"; }
 
             SText { style: "block"; text: 'You can customize when the change is triggered \
 as well as the number of columns in each mode by adding the code below to the main "ApplicationWindow" \

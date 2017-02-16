@@ -8,7 +8,7 @@ SContainer {
         style: "block fill";
 
         SColumn {
-            ElementHeading {
+            EHeading {
                 title: "Alerts";
                 inherits: "QtQuick.Controls 2.0 Rectangle";
                 stratifyName: "SAlert";
@@ -17,13 +17,13 @@ SContainer {
 
             SLabel { style: "left"; text: "Alert Colors:"; }
             AlertExampleColors{}
-            CodeExample { source: "AlertExampleColors"; }
+            ECodeExample { source: "AlertExampleColors"; }
 
             SHLine{}
 
             SLabel { style: "left"; text: "Alert Options:"; }
             AlertExampleOptions{}
-            CodeExample { source: "AlertExampleOptions"; }
+            ECodeExample { source: "AlertExampleOptions"; }
         }
     }
 }

@@ -8,7 +8,7 @@ SContainer {
         style: "block fill";
 
         SColumn {
-            ElementHeading {
+            EHeading {
                 title: "Animation Containers";
                 inherits: "Item";
                 stratifyName: "SAnimationContainer";
@@ -23,7 +23,7 @@ type (e.g. SAnimationFade or SAnimationHPush) should be included in the containe
             SText { style: "left text-bold"; text: "Simple Example"; }
 
             AnimationContainerExample{}
-            CodeExample { source: "AnimationContainerExample"; }
+            ECodeExample { source: "AnimationContainerExample"; }
         }
     }
 }

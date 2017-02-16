@@ -8,25 +8,25 @@ SContainer {
         style: "block fill";
 
         SColumn {
-            ElementHeading {
+            EHeading {
                 title: "Panels";
                 inherits: "Item";
                 stratifyName: "SPanel";
-                //specialAttibutes: "heading";
+                //specialAttibutes: "EHeading";
             }
 
             SLabel { style: "left"; text: "Panel Colors:"; }
 
 
             PanelExampleColors{}
-            CodeExample { source: "PanelExampleColors"; }
+            ECodeExample { source: "PanelExampleColors"; }
 
             SHLine {}
 
-            SLabel { style: "left"; text: "Panel Headings and Footers:"; }
+            SLabel { style: "left"; text: "Panel EHeadings and Footers:"; }
 
             PanelExampleHeadingFooter{}
-            CodeExample { source: "PanelExampleHeadingFooter"; }
+            ECodeExample { source: "PanelExampleHeadingFooter"; }
 
         }
     }

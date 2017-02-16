@@ -39,35 +39,35 @@ options.'; }
             SContainer {
                 SColumn {
                     SText { style: "left text-bold"; text: "Padding"; }
-                    ElementBullet { text: "padding-zero"; }
-                    ElementBullet { text: "padding-xs"; }
-                    ElementBullet { text: "padding-lg"; }
+                    EBullet { text: "padding-zero"; }
+                    EBullet { text: "padding-xs"; }
+                    EBullet { text: "padding-lg"; }
 
                     SHLine {}
 
                     SText { style: "left text-bold"; text: "Horizontal Alignment"; }
-                    ElementBullet { text: "left"; }
-                    ElementBullet { text: "right"; }
-                    ElementBullet { text: "center"; }
+                    EBullet { text: "left"; }
+                    EBullet { text: "right"; }
+                    EBullet { text: "center"; }
 
                     SText { style: "left text-bold"; text: "Vertical Alignment"; }
-                    ElementBullet { text: "top"; }
-                    ElementBullet { text: "bottom"; }
-                    ElementBullet { text: "middle"; }
+                    EBullet { text: "top"; }
+                    EBullet { text: "bottom"; }
+                    EBullet { text: "middle"; }
 
                     AttributeExampleAlignment{}
-                    CodeExample { source: "AttributeExampleAlignment"; }
+                    ECodeExample { source: "AttributeExampleAlignment"; }
 
                     SHLine {}
 
 
                     SText { style: "left text-bold"; text: "Sizing"; }
-                    ElementBullet { text: "fill: fill height"; }
-                    ElementBullet { text: "block: fill width"; }
-                    ElementBullet { text: "default: align middle-center, implicit size"; }
+                    EBullet { text: "fill: fill height"; }
+                    EBullet { text: "block: fill width"; }
+                    EBullet { text: "default: align middle-center, implicit size"; }
 
                     AttributeExampleSize{}
-                    CodeExample { source: "AttributeExampleSize"; }
+                    ECodeExample { source: "AttributeExampleSize"; }
                 }
             }
 
@@ -79,47 +79,47 @@ options.'; }
                 SColumn {
                     SText { style: "left text-bold"; text: "Size"; }
                     SText { style: "left text-sm"; text: "Changes text size and padding"; }
-                    ElementBullet { text: "xs"; }
-                    ElementBullet { text: "sm"; }
-                    ElementBullet { text: "lg"; }
+                    EBullet { text: "xs"; }
+                    EBullet { text: "sm"; }
+                    EBullet { text: "lg"; }
 
                     SHLine {}
 
                     SText { style: "left text-bold"; text: "Text Sizes"; }
-                    ElementBullet { text: "text-h1"; }
-                    ElementBullet { text: "text-h2"; }
-                    ElementBullet { text: "text-h3"; }
-                    ElementBullet { text: "text-h4"; }
-                    ElementBullet { text: "text-h5"; }
-                    ElementBullet { text: "text-h6"; }
-                    ElementBullet { text: "text-sm"; }
-                    ElementBullet { text: "text-lg"; }
+                    EBullet { text: "text-h1"; }
+                    EBullet { text: "text-h2"; }
+                    EBullet { text: "text-h3"; }
+                    EBullet { text: "text-h4"; }
+                    EBullet { text: "text-h5"; }
+                    EBullet { text: "text-h6"; }
+                    EBullet { text: "text-sm"; }
+                    EBullet { text: "text-lg"; }
 
                     AttributeExampleTextSize{}
-                    CodeExample { source: "AttributeExampleTextSize"; }
+                    ECodeExample { source: "AttributeExampleTextSize"; }
 
                     SHLine {}
 
                     SText { style: "left text-bold"; text: "Text Alignment"; }
 
-                    ElementBullet { text: "text-right"; }
-                    ElementBullet { text: "text-left"; }
-                    ElementBullet { text: "text-center"; }
-                    ElementBullet { text: "text-top"; }
-                    ElementBullet { text: "text-bottom"; }
-                    ElementBullet { text: "text-middle"; }
+                    EBullet { text: "text-right"; }
+                    EBullet { text: "text-left"; }
+                    EBullet { text: "text-center"; }
+                    EBullet { text: "text-top"; }
+                    EBullet { text: "text-bottom"; }
+                    EBullet { text: "text-middle"; }
 
                     AttributeExampleTextAlignment{}
-                    CodeExample { source: "AttributeExampleTextAlignment"; }
+                    ECodeExample { source: "AttributeExampleTextAlignment"; }
 
                     SHLine {}
 
                     SText { style: "left text-bold"; text: "Text Weight"; }
-                    ElementBullet { text: "text-bold"; }
-                    ElementBullet { text: "text-light"; }
-                    ElementBullet { text: "text-demi-bold"; }
-                    ElementBullet { text: "text-extra-bold"; }
-                    ElementBullet { text: "text-extra-light"; }
+                    EBullet { text: "text-bold"; }
+                    EBullet { text: "text-light"; }
+                    EBullet { text: "text-demi-bold"; }
+                    EBullet { text: "text-extra-bold"; }
+                    EBullet { text: "text-extra-light"; }
                     SRow {
                         SText { span: 4; style: "text-bold"; text: "Text Bold"; }
                         SText { span: 4; style: "text-light"; text: "Text Light"; }
@@ -132,30 +132,30 @@ options.'; }
                     SHLine {}
                     SText { style: "left text-bold"; text: "Text Color"; }
 
-                    ElementBullet { text: "text-on-primary: color when on primary"; }
-                    ElementBullet { text: "text-on-secondary: color when on secondary"; }
-                    ElementBullet { text: "text-on-info: color when on info"; }
-                    ElementBullet { text: "text-on-warning: color when on warning"; }
-                    ElementBullet { text: "text-on-danger: color when on danger"; }
-                    ElementBullet { text: "text-on-success: color when on success"; }
-                    ElementBullet { text: "text-primary: set text color to primary"; }
-                    ElementBullet { text: "text-secondary: set text color to secondary"; }
-                    ElementBullet { text: "text-info: set text color to info"; }
-                    ElementBullet { text: "text-warning: set text color to warning"; }
-                    ElementBullet { text: "text-danger: set text color to danger"; }
-                    ElementBullet { text: "text-success: set text color to success"; }
+                    EBullet { text: "text-on-primary: color when on primary"; }
+                    EBullet { text: "text-on-secondary: color when on secondary"; }
+                    EBullet { text: "text-on-info: color when on info"; }
+                    EBullet { text: "text-on-warning: color when on warning"; }
+                    EBullet { text: "text-on-danger: color when on danger"; }
+                    EBullet { text: "text-on-success: color when on success"; }
+                    EBullet { text: "text-primary: set text color to primary"; }
+                    EBullet { text: "text-secondary: set text color to secondary"; }
+                    EBullet { text: "text-info: set text color to info"; }
+                    EBullet { text: "text-warning: set text color to warning"; }
+                    EBullet { text: "text-danger: set text color to danger"; }
+                    EBullet { text: "text-success: set text color to success"; }
 
 
                     SHLine {}
 
                     SText { style: "left text-bold"; text: "Color Schemes"; }
                     SText { style: "left text-sm"; text: "Change font, object, and border colors"; }
-                    ElementBullet { text: "primary"; }
-                    ElementBullet { text: "secondary"; }
-                    ElementBullet { text: "info"; }
-                    ElementBullet { text: "warning"; }
-                    ElementBullet { text: "danger"; }
-                    ElementBullet { text: "success"; }
+                    EBullet { text: "primary"; }
+                    EBullet { text: "secondary"; }
+                    EBullet { text: "info"; }
+                    EBullet { text: "warning"; }
+                    EBullet { text: "danger"; }
+                    EBullet { text: "success"; }
                 }
             }
 
@@ -170,7 +170,7 @@ you can directly access an item\'s attributes using the "attr" property. This is
 to bind to specific attributes. The following example binds the icon "spin" attribute to a variable.'; }
 
             AttributeExampleCustomAttributes{}
-            CodeExample { source: "AttributeExampleCustomAttributes"; }
+            ECodeExample { source: "AttributeExampleCustomAttributes"; }
         }
 
     }

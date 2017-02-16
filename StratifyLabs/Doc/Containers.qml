@@ -8,7 +8,7 @@ SContainer {
         style: "block fill";
 
         SColumn {
-            ElementHeading {
+            EHeading {
                 title: "Containers";
                 inherits: "Rectangle";
                 stratifyName: "SContainer";
@@ -22,14 +22,14 @@ for a group of S{Objects}. An SContainer may be used on its own or within an SRo
             SText { style: "left text-bold"; text: "Background Colors"; }
 
             ContainerExample{}
-            CodeExample { source: "ContainerExample"; }
+            ECodeExample { source: "ContainerExample"; }
 
             SHLine{}
 
             SText { style: "left text-bold"; text: "Mouse Example"; }
 
             ContainerExampleMouse{}
-            CodeExample { source: "ContainerExampleMouse"; }
+            ECodeExample { source: "ContainerExampleMouse"; }
         }
     }
 }

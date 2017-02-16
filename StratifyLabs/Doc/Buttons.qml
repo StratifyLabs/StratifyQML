@@ -8,7 +8,7 @@ SContainer {
         style: "block fill";
 
         SColumn {
-            ElementHeading {
+            EHeading {
                 title: "Buttons";
                 inherits: "QtQuick.Controls 2.0 Button";
                 stratifyName: "SButton";
@@ -18,28 +18,28 @@ SContainer {
             SLabel { style: "left"; text: "Button Colors:"; }
 
             ButtonExampleColors{}
-            CodeExample { source: "ButtonExampleColors"; }
+            ECodeExample { source: "ButtonExampleColors"; }
 
             SHLine{}
 
             SLabel { style: "left"; text: "Button Outlines:"; }
 
             ButtonExampleOutlineColors{}
-            CodeExample { source: "ButtonExampleOutlineColors"; }
+            ECodeExample { source: "ButtonExampleOutlineColors"; }
 
             SHLine{}
 
             SLabel { style: "left"; text: "Icons:"; }
 
             ButtonExampleIcons{}
-            CodeExample { source: "ButtonExampleIcons"; }
+            ECodeExample { source: "ButtonExampleIcons"; }
 
             SHLine{}
 
             SLabel { style: "left"; text: "Button Sizes:"; }
 
             ButtonExampleSizes{}
-            CodeExample { source: "ButtonExampleSizes"; }
+            ECodeExample { source: "ButtonExampleSizes"; }
 
             SHLine{}
 
@@ -47,7 +47,7 @@ SContainer {
             SLabel { style: "left"; text: "Naked Buttons:"; }
 
             ButtonExampleNaked{}
-            CodeExample { source: "ButtonExampleNaked"; }
+            ECodeExample { source: "ButtonExampleNaked"; }
 
         }
     }

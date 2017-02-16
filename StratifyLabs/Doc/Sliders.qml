@@ -8,7 +8,7 @@ SContainer {
         style: "block fill";
 
         SColumn {
-            ElementHeading {
+            EHeading {
                 title: "Sliders";
                 inherits: "QtQuick.Controls 2.0 Slider";
                 stratifyName: "SSlider";
@@ -16,13 +16,13 @@ SContainer {
 
             SLabel { style: "left"; text: "Slider Colors:"; }
             SliderExampleColors{}
-            CodeExample { source: "SliderExampleColors"; }
+            ECodeExample { source: "SliderExampleColors"; }
 
             SHLine{}
 
             SLabel { style: "left"; text: "Slider Sizes:"; }
             SliderExampleSizes{}
-            CodeExample { source: "SliderExampleSizes"; }
+            ECodeExample { source: "SliderExampleSizes"; }
 
         }
     }

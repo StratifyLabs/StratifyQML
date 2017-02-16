@@ -11,7 +11,7 @@ SContainer {
 
             SLabel { style: "left"; text: "Text Input Options:"; }
 
-            ElementHeading {
+            EHeading {
                 title: "Text Line Input";
                 inherits: "QtQuick.Controls 2.0 TextField";
                 stratifyName: "SInput";
@@ -21,7 +21,7 @@ SContainer {
             SLabel { style: "left"; text: "Input Examples:"; }
 
             InputExample{}
-            CodeExample { source: "InputExample"; }
+            ECodeExample { source: "InputExample"; }
 
         }
     }

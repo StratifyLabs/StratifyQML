@@ -8,7 +8,7 @@ SContainer {
         style: "block fill";
 
         SColumn {
-            ElementHeading {
+            EHeading {
                 title: "Columns";
                 inherits: "SRow";
                 stratifyName: "SColumn";
@@ -21,7 +21,7 @@ all of its children span the entire width (which is the default value). SColumn 
 respond to changes in screen size like SRow does.'; }
 
             ColumnExample{}
-            CodeExample { source: "ColumnExample"; }
+            ECodeExample { source: "ColumnExample"; }
 
         }
     }

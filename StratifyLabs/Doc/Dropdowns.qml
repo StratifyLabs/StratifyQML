@@ -11,7 +11,7 @@ SContainer {
 
             SLabel { style: "left"; text: "Text Input Options:"; }
 
-            ElementHeading {
+            EHeading {
                 title: "Text Line Input";
                 inherits: "QtQuick.Controls 2.0 ComboBox";
                 stratifyName: "SDropdown or SDropup";
@@ -21,7 +21,7 @@ SContainer {
             SLabel { style: "left"; text: "Dropdown Examples:"; }
 
             DropdownExample{}
-            CodeExample { source: "DropdownExample"; }
+            ECodeExample { source: "DropdownExample"; }
 
             SHLine{}
 
@@ -32,7 +32,7 @@ SContainer {
                 text: 'You can use "SDropup" if the combo box is at the bottom of the window.'
             }
 
-            CodeExample { source: "DropupExample"; }
+            ECodeExample { source: "DropupExample"; }
             DropupExample{}
         }
     }
