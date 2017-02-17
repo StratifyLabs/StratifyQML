@@ -281,12 +281,9 @@ SItem {
 
                         SListgroup {
                             name: "List";
-                            SJsonListModel {
-                                id: jsonModel;
+                            model: SJsonModel {
                                 json: List.data;
                             }
-
-                            model: jsonModel.model;
                         }
                     }
                 },

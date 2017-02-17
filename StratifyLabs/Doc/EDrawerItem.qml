@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 SContainer {
@@ -17,6 +17,9 @@ SContainer {
         id: mouseArea;
         enabled: true;
         anchors.fill: parent;
-        onClicked: { screen = root.label; drawer.shut(root); }
+        onClicked: {
+            drawer.shut(root);
+            screen = root.label;
+        }
     }
 }

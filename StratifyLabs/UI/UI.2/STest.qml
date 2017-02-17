@@ -282,7 +282,7 @@ Item {
 
                 SContainer {
                     name: "Lists";
-                    SJsonListModel {
+                    SJsonModel {
                         id: jsonModel;
                         json: List.data;
                     }
@@ -290,37 +290,37 @@ Item {
                         SListgroup {
                             span: 4;
                             style: "left";
-                            model: jsonModel.model;
+                            model: jsonModel;
                         }
 
                         SListgroup {
                             span: 4;
                             style: "center";
-                            model: jsonModel.model;
+                            model: jsonModel;
                         }
 
                         SListgroup {
                             span: 4;
                             style: "right";
-                            model: jsonModel.model;
+                            model: jsonModel;
                         }
 
                         SListgroup {
                             span: 4;
                             style: "block";
-                            model: jsonModel.model;
+                            model: jsonModel;
                         }
 
                         SListgroup {
                             span: 4;
                             style: "block";
-                            model: jsonModel.model;
+                            model: jsonModel;
                         }
 
                         SListgroup {
                             span: 4;
                             style: "block";
-                            model: jsonModel.model;
+                            model: jsonModel;
                         }
                     }
 

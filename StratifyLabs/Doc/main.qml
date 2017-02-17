@@ -5,15 +5,19 @@ import StratifyLabs.UI 2.0
 
 
 ApplicationWindow {
+    id: window;
     minimumWidth: STheme.screen_xs;
     minimumHeight: STheme.screen_xs;
 
     width: 400;
     height: 600;
 
+    property bool doPush: false;
+
     property alias screen: animationContainer.screen;
 
     onScreenChanged: {
+        doPush = true;
         var n = animationContainer.next();
         var p = animationContainer.previous();
         if( (n !== undefined) && (n !== animationContainer.screen) ){
@@ -43,6 +47,7 @@ ApplicationWindow {
                     menuItems.children[i].active = false;
                 }
             }
+            doPush = false;
             item.active = true;
             drawer.close();
         }

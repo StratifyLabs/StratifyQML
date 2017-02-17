@@ -17,6 +17,8 @@ SContainer {
 
             SLabel { style: "left"; text: "Table Examples:"; }
 
+            TableExample{}
+            ECodeExample { source: "TableExample"; }
 
         }
     }
