@@ -29,22 +29,29 @@ Rectangle {
     width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
     height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
-    implicitWidth: contents.childrenRect.width + attr.paddingHorizontal*2;
-    implicitHeight: contents.childrenRect.height + attr.paddingVertical*2;
+    implicitWidth: contents.implicitWidth + attr.paddingHorizontal*2;
+    implicitHeight: contents.implicitHeight + attr.paddingVertical*2;
     color: "transparent";
+
 
     Item {
         id: contents;
         x: attr.paddingHorizontal;
         y: attr.paddingVertical;
-        height: parent.height !== undefined ? parent.height - attr.paddingVertical*2 : undefined;
-        width: parent.width !== undefined ? parent.width - attr.paddingHorizontal*2 : undefined;
+        parent: control;
+
+        height: parent.height === undefined ? undefined : parent.height - attr.paddingVertical*2;
+        width: parent.width === undefined ? undefined : parent.width - attr.paddingHorizontal*2;
+
+        implicitWidth: childrenRect.width;
+        implicitHeight: childrenRect.height;
     }
+
 
     SSizeAttributes {
         id: attr;
         type: "container";
-        blockWidth: true;
+        fillWidth: true;
     }
 
 }

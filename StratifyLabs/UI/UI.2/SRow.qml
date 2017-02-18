@@ -24,8 +24,8 @@ GridLayout {
     property alias attr: attr;
     property alias style: attr.style;
 
-    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
-    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
+    width: parent !== undefined ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent !== undefined ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
     SSizeAttributes {
         id: attr;

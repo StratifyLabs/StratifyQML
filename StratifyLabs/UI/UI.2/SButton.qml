@@ -39,6 +39,12 @@ Button {
     leftPadding: attr.paddingHorizontal;
     rightPadding: attr.paddingHorizontal;
 
+
+
+    property real nakedOpacity: 1.0;
+    property real hoveredOpacity: 1.0;
+    property real pressedOpacity: 1.0;
+
     contentItem:  SIcon {
         id: contentIcon;
         icon: control.icon;
@@ -69,6 +75,17 @@ Button {
         border.color: enabled ? attr.borderColor : attr.colorDisabled;
         border.width: attr.borderWidth;
         radius: attr.radius;
+        opacity: {
+            if( control.pressed ){
+                return control.pressedOpacity;
+            }
+
+            if( control.hovered ){
+                return control.hoveredOpacity;
+            }
+
+            return control.nakedOpacity;
+        }
     }
 
 
@@ -83,6 +100,9 @@ Button {
 
         onStyleChanged: {
             var items = parseStyle();
+            control.pressedOpacity = 1.0;
+            control.hoveredOpacity = 1.0;
+            control.opacity = 1.0;
             for(var i = 0; i < items.length; i++){
                 if( (items[i] === "btn-primary") ){
                     attr.color = Qt.binding(function(){ return STheme.btn_primary_bg; });
@@ -157,7 +177,10 @@ Button {
                     attr.textColorMuted = "#fff";
                     attr.colorHovered = Qt.binding(function(){ return STheme.btn_warning_bg; });
                 } else if( (items[i] === "btn-naked") ){
-                    attr.color = "transparent";
+                    control.pressedOpacity = 0.25;
+                    control.hoveredOpacity = 0.1;
+                    control.nakedOpacity = 0.0;
+                    attr.color = "#000";
                     attr.fontColor = Qt.binding(function(){ return STheme.text_color; });
                     attr.borderColor = attr.color;
                     attr.textColorMuted = attr.fontColor;

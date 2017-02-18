@@ -14,7 +14,7 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.6
+import QtQuick 2.7
 import StratifyLabs.UI 2.0
 
 Flickable {
@@ -30,16 +30,13 @@ Flickable {
     }
 
     clip: true;
-    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
-    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
-
-    implicitWidth: contentWidth;
-    implicitHeight: contentHeight;
+    width: parent !== undefined ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent !== undefined ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
     //if child has "fillWidth" set, width will bind
     contentWidth: ((contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillWidth === true)) ? control.width : contentItem.childrenRect.width;
     //if child has "fillHeight" set, height will bind
-    //contentHeight: (contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillHeight === true) ? control.height : contentItem.childrenRect.height;
     contentHeight: (contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillHeight === true) ? control.height : contentItem.childrenRect.height;
+
 
 }

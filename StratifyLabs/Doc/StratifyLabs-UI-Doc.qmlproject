@@ -7,7 +7,7 @@ Project {
 
     /* Include .qml, .js, and image files from current directory and subdirectories */
     QmlFiles {
-        directory: "."
+        directory: [".", "../../StratifyLabs/UI"]
     }
     JavaScriptFiles {
         directory: "."
@@ -16,9 +16,9 @@ Project {
         directory: "."
     }
     OtherFiles {
-        directories: ["../UI/qmldir"]
+        directories: ["../../StratifyLabs/UI/qmldir"]
     }
 
     /* List of plugin directories passed to QML runtime */
-     importPaths: [ ".." ]
+    importPaths: [ "." ]
 }

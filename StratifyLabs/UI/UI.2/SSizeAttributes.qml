@@ -25,7 +25,7 @@ QtObject {
     onStyleChanged: {
         var items = parseStyle();
         for(var i=0; i < items.length; i++){
-            if( items[i] === "default" ){
+            if( (items[i] === "implicit-size") || (items[i] === "default") ){
                 fillWidth = false;
                 fillHeight = false;
                 alignment = Qt.AlignHCenter | Qt.AlignVCenter;

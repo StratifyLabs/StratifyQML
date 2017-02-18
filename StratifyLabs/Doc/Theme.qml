@@ -1,37 +1,28 @@
 import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
-SContainer {
+EPane {
     name: "Theme";
-    style: "fill";
-    SPane {
-        style: "block fill";
-        SColumn {
-            SText { style: "left text-bold"; text: "Introduction"; }
-            SText { style: "block"; text: 'StratifyLabs UI themes are based on the singleton \
+    SText { style: "left text-bold"; text: "Introduction"; }
+    SText { style: "block"; text: 'StratifyLabs UI themes are based on the singleton \
 STheme object which defines colors, fonts, spacing, and shapes for the application.'; }
-            SText { style: "left text-bold"; text: "Customization"; }
-            SText { style: "block"; text: 'The following example shows how to change the primary and \
+    SText { style: "left text-bold"; text: "Customization"; }
+    SText { style: "block"; text: 'The following example shows how to change the primary and \
 secondary brand colors. This code typically goes in the main "ApplicationWindow".'; }
-            SWell {
-                text: 'Component.onCompleted: {
+    SWell {
+        text: 'Component.onCompleted: {
         STheme.brand_primary = "#244E99";
         STheme.brand_secondary = "#666";
 }';
-            }
+    }
 
-            SText { style: "left text-bold"; text: "Reference"; }
-            SText { style: "block"; text: 'See the STheme.qml file for a full list of variables.'; }
+    SText { style: "left text-bold"; text: "Reference"; }
+    SText { style: "block"; text: 'See the STheme.qml file for a full list of variables.'; }
 
-            SButton {
-                style: "btn-outline-info block";
-                text: "View STheme.qml on Github";
-                icon: Fa.Icon.external_link;
-                onClicked: Qt.openUrlExternally("https://github.com/StratifyLabs/StratifyQML");
-            }
-
-
-        }
-
+    SButton {
+        style: "btn-outline-info block";
+        text: "View STheme.qml on Github";
+        icon: Fa.Icon.external_link;
+        onClicked: Qt.openUrlExternally("https://github.com/StratifyLabs/StratifyQML");
     }
 }

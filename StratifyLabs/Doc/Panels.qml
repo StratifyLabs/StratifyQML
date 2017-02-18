@@ -1,33 +1,25 @@
 import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
-SContainer {
+EPane {
     name: "Panels";
-    style: "fill";
-    SPane {
-        style: "block fill";
-
-        SColumn {
-            EHeading {
-                title: "Panels";
-                inherits: "Item";
-                stratifyName: "SPanel";
-                //specialAttibutes: "EHeading";
-            }
-
-            SLabel { style: "left"; text: "Panel Colors:"; }
-
-
-            PanelExampleColors{}
-            ECodeExample { source: "PanelExampleColors"; }
-
-            SHLine {}
-
-            SLabel { style: "left"; text: "Panel EHeadings and Footers:"; }
-
-            PanelExampleHeadingFooter{}
-            ECodeExample { source: "PanelExampleHeadingFooter"; }
-
-        }
+    EHeading {
+        title: "Panels";
+        inherits: "Item";
+        stratifyName: "SPanel";
+        //specialAttibutes: "EHeading";
     }
+
+    SLabel { style: "left"; text: "Panel Colors:"; }
+
+
+    PanelExampleColors{}
+    ECodeExample { source: "PanelExampleColors"; }
+
+    SHLine {}
+
+    SLabel { style: "left"; text: "Panel EHeadings and Footers:"; }
+
+    PanelExampleHeadingFooter{}
+    ECodeExample { source: "PanelExampleHeadingFooter"; }
 }

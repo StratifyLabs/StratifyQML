@@ -1,31 +1,23 @@
 import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
-SContainer {
+EPane {
     name: "JsonModels";
-    style: "fill";
-    SPane {
-        style: "block fill";
+    EHeading {
+        title: "Json Models";
+        inherits: "Item";
+        stratifyName: "SJsonModel";
+    }
 
-        SColumn {
-            EHeading {
-                title: "Json Models";
-                inherits: "Item";
-                stratifyName: "SJsonModel";
-            }
+    SLabel { style: "left"; text: "Description"; }
 
-            SLabel { style: "left"; text: "Description"; }
-
-            SListGroup {
-                model: SJsonModel {
-                    id: model;
-                    json: "{ \"data\": [{ \"text\": \"List Item 1\" },
+    SListGroup {
+        model: SJsonModel {
+            id: model;
+            json: "{ \"data\": [{ \"text\": \"List Item 1\" },
                     { \"text\": \"List Item 2\" },
                     { \"text\": \"List Item 3\" },
                     { \"text\": \"List Item 4\" } ] }";
-                }
-            }
-
         }
     }
 }

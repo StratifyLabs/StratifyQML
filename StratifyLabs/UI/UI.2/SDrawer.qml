@@ -8,9 +8,13 @@ Drawer {
     property alias span: attr.span;
     property alias attr: attr;
 
+    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
+
     SAttributes {
         id: attr;
         color: STheme.body_bg;
+        fillHeight: true;
 
         onStyleChanged: {
             var items = parseStyle();

@@ -59,6 +59,7 @@ ApplicationWindow {
             style: "fill";
             attr.paddingHorizontal: 0;
             SPane {
+                style: "block";
                 SColumn {
                     id: menuItems;
                     EDrawerHeading { label: "Menu"; }
@@ -103,7 +104,6 @@ ApplicationWindow {
                 }
             }
         }
-
     }
 
 
@@ -122,9 +122,10 @@ ApplicationWindow {
 
     SColumn {
         style: "block fill";
+        attr.paddingVertical: 0;
         SContainer {
             color: STheme.brand_primary;
-
+            z:1;
             SRow {
                 SButton {
                     span: 1;
@@ -194,39 +195,54 @@ ApplicationWindow {
         }
 
         SContainer {
-            SRow {
-                SGroup {
-                    id: previousGroup;
-                    style: "left";
-                    span: 2;
-                    SButton {
-                        id: previousButton;
-                        icon: Fa.Icon.chevron_left;
-                        onClicked: screen = animationContainer.previous();
+            style: "padding-zero";
+            anchors.bottom: parent.bottom;
+            Rectangle {
+                anchors.fill: parent;
+                color: STheme.gray_dark;
+                opacity: 0.80;
+            }
+            SContainer {
+                SRow {
+                    SGroup {
+                        id: previousGroup;
+                        style: "left text-on-primary";
+                        span: 2;
+                        SButton {
+                            id: previousButton;
+                            style: "left btn-naked text-on-primary";
+                            icon: Fa.Icon.chevron_left;
+                            onClicked: screen = animationContainer.previous();
+                        }
+                        SText {
+                            style: "text-on-primary";
+                            anchors.verticalCenter: previousButton.verticalCenter;
+                            id: previousScreen;
+                        }
                     }
-                    SText {
-                        anchors.verticalCenter: previousButton.verticalCenter;
-                        id: previousScreen;
+                    SGroup {
+                        id: nextGroup;
+                        style: "right text-on-primary";
+                        span: 2;
+                        SText {
+                            style: "text-on-primary";
+                            anchors.verticalCenter: nextButton.verticalCenter;
+                            id: nextScreen;
+                        }
+                        SButton {
+                            id: nextButton;
+                            style: "right btn-naked text-on-primary";
+                            icon: Fa.Icon.chevron_right;
+                            onClicked: screen = animationContainer.next();
+                        }
                     }
                 }
-                SGroup {
-                    id: nextGroup;
-                    style: "right";
-                    span: 2;
-                    SText {
-                        anchors.verticalCenter: nextButton.verticalCenter;
-                        id: nextScreen;
-                    }
-                    SButton {
-                        id: nextButton;
-                        style: "right";
-                        icon: Fa.Icon.chevron_right;
-                        onClicked: screen = animationContainer.next();
-                    }
-                }
+
             }
         }
     }
+
+
 
 
     onWidthChanged: {
