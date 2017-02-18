@@ -34,9 +34,15 @@ Flickable {
     height: parent !== undefined ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
     //if child has "fillWidth" set, width will bind
-    contentWidth: ((contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillWidth === true)) ? control.width : contentItem.childrenRect.width;
     //if child has "fillHeight" set, height will bind
-    contentHeight: (contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillHeight === true) ? control.height : contentItem.childrenRect.height;
+    function updateContentRect() {
+        contentHeight = ((contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillHeight === true)) ? control.height : contentItem.childrenRect.height;
+        contentWidth = ((contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillWidth === true)) ? control.width : contentItem.childrenRect.width;
+    }
 
+    //This approach is used as opposed to direct binding in order to avoid binding loops
+    onWidthChanged: updateContentRect();
+    onHeightChanged: updateContentRect();
+    Component.onCompleted: updateContentRect();
 
 }
