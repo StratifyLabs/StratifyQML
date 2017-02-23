@@ -41,3 +41,9 @@ assets.path = $$installPath/assets
 
 INSTALLS += target qmldir ui1 ui2 assets
 
+HEADERS += \
+    UI.h
+
+SOURCES += \
+    UI.cpp
+

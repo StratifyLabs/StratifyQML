@@ -7,7 +7,7 @@ SContainer {
     property alias icon: icon.icon;
 
     SRow {
-        SText { id: label; span: 10; style: "left text-on-secondary text-bold"; }
-        SIcon { id: icon; span: 2; style: "right text-on-secondary"; }
+        SText { id: label; span: 1; style: "left text-on-secondary text-bold"; }
+        SIcon { id: icon; span: 1; style: "right text-on-secondary"; }
     }
 }
