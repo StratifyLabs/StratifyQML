@@ -2,6 +2,7 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 STable{
+    style: "table-hover";
 
     model: ListModel {
         id: libraryModel;
@@ -22,8 +23,6 @@ STable{
             author: "Gabriel"
         }
     }
-
-    style: "fill block table-hover";
 
     STableColumn {
         span: 6;

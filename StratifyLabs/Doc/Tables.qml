@@ -10,9 +10,15 @@ EPane {
         defaultSize: "block";
     }
 
-    SLabel { style: "left"; text: "Table Examples:"; }
+    SLabel { style: "left"; text: "Simple Table Example:"; }
 
     TableExample{}
     ECodeExample { source: "TableExample"; }
+
+    SLabel { style: "left"; text: "Table Options:"; }
+
+
+    TableExampleOptions{}
+    ECodeExample { source: "TableExampleOptions"; }
 
 }

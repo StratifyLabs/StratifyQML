@@ -52,9 +52,9 @@ ApplicationWindow {
             drawer.close();
         }
 
-        style: "secondary";
+        style: "info";
 
-        property string menuStyle: "left btn-naked text-on-secondary";
+        property string menuStyle: "left btn-naked text-on-info";
         SContainer {
             style: "fill";
             attr.paddingHorizontal: 0;

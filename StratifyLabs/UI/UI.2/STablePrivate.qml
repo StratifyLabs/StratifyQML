@@ -31,13 +31,18 @@ TableView {
 
     signal rowClicked();
 
+    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
+    implicitHeight: contentItem.contentHeight;
+    implicitWidth: contentItem.contentWidth;
+
 
     SAttributes {
         id: attr;
         type: "table";
 
         borderColor: Qt.darker(STheme.body_bg, 1.1);
-        blockWidth:  true;
+        fillWidth:  true;
 
         onStyleChanged: {
             var items = parseStyle();

@@ -8,10 +8,10 @@ SContainer {
     property bool active: false;
     property alias clickable: mouseArea.enabled;
 
-    color: active ? Qt.darker(STheme.brand_secondary, 1.3) : "transparent";
+    color: active ? Qt.darker(STheme.brand_info, 1.3) : "transparent";
 
     SRow {
-        SText { id: label; span: 12; style: "left text-on-primary"; }
+        SText { id: label; span: 12; style: "left text-on-info"; }
     }
     MouseArea {
         id: mouseArea;
