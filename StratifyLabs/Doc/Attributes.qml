@@ -4,11 +4,18 @@ import StratifyLabs.UI 2.0
 EPane {
     name: "Attributes";
     SText { style: "left text-bold text-lg"; text: "Introduction"; }
-    SText { style: "block"; text: 'StratifyLabs UI allows you to quickly layout and style QML applications. It \
-does this by attaching an "SAttributes" object to each item that defines the size and color scheme of each object. \
-There are two ways to change an objects attributes: 1) using "style" 2) directly using "attr".'; }
-    SText { style: "block"; text: 'Additionally, each item has quick access to "span" which \
-defines the width of an S{Object} in an SRow. The code looks like this:'; }
+    SText { style: "block"; text: '\
+Stratify Labs UI allows you to quickly layout and style \
+QML applications. It does this by attaching an "SAttributes" \
+object to each item that defines the size and color scheme of \
+each object. There are two ways to change an objects attributes: \
+1) using "style" 2) using "attr" directly.';
+    }
+    SText { style: "block"; text: '\
+Additionally, each item has quick access to "span" which \
+defines the width of an S{Object} in an SRow. The code looks \
+like this:';
+    }
 
     SWell {
         text: 'property alias style: attr.style;
@@ -21,16 +28,23 @@ SAttributes {
 ';
     }
 
-    SText { style: "block"; text: 'Most S{Objects} use SAttributes as the "attr" object. \
-S{Objects} that don\'t have any color (e.g. SPane) use SSizeAttributes (which SAttributes inherits). If an object \
-has additional attibutes, the object will be S{Object}Attributes (such as SAlertAttributes).'; }
+    SText { style: "block"; text: '\
+Most S{Objects} use SAttributes as the "attr" object. \
+S{Objects} that don\'t have any color (e.g. SPane) use \
+SSizeAttributes (which SAttributes inherits). If an object \
+has additional attibutes, the object will be S{Object}Attributes \
+(such as SAlertAttributes).'; }
 
     SText { style: "left text-bold text-lg"; text: "Changing the Style"; }
-    SText { style: "block"; text: 'When a new value is assigned to the "style" property, \
-the string is parsed and the styling is bound to the object.'; }
+    SText { style: "block"; text: '\
+When a new value is assigned to the "style" property, \
+the string is parsed and the styling is bound to the object.';
+    }
     SText { style: "block text-bold"; text: 'SSizeAttributes'; }
-    SText { style: "block"; text: 'SSizeAttributes (all objects) support the following style \
-options.'; }
+    SText { style: "block"; text: '\
+SSizeAttributes (all objects) support the following style \
+options.';
+    }
 
     SContainer {
         SColumn {
@@ -155,15 +169,21 @@ options.'; }
         }
     }
 
-    SText { style: "block"; text: 'Each S{Object} may add additional styling options. For example \
-SButton uses "btn-outline-primary" for setting the color.'; }
+    SText { style: "block"; text: '\
+Each S{Object} may add additional styling options. For example \
+SButton uses "btn-outline-primary" for setting the color.';
+    }
 
 
     SText { style: "left text-bold text-lg"; text: "Further Customization"; }
 
-    SText { style: "block"; text: 'If the styling options above don\'t meet your needs, \
-you can directly access an item\'s attributes using the "attr" property. This is useful if you want \
-to bind to specific attributes. The following example binds the icon "spin" attribute to a variable.'; }
+    SText { style: "block"; text: '\
+If the styling options above don\'t meet your needs, \
+you can directly access an item\'s attributes using the \
+"attr" property. This is useful if you want to bind to \
+specific attributes. The following example binds the icon "spin" \
+attribute to a variable.';
+    }
 
     AttributeExampleCustomAttributes{}
     ECodeExample { source: "AttributeExampleCustomAttributes"; }

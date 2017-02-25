@@ -88,6 +88,7 @@ Item {
             id: label;
             anchors.verticalCenter: parent.verticalCenter;
             text: control.label;
+            font.italic: attr.fontItalic;
             font.family: attr.fontText;
             font.pointSize: attr.fontSize;
             font.weight: attr.fontWeight;

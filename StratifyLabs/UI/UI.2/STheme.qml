@@ -23,7 +23,10 @@ QtObject {
 
     property var fontFontAwesome: FontLoader { id: fontFontAwesomeInternal; source: "../assets/fontawesome-4.7.0-webfont.ttf"; }
     property var fontOpenSans: FontLoader { id: fontOpenSansInternal; source: "../assets/OpenSans-Regular.ttf"; }
-    property var fontOpenSansBold: FontLoader { id: fontOpenSansBoldInternal; source: "../assets/OpenSans-ExtraBold.ttf"; }
+    property var fontOpenSansLight: FontLoader { id: fontOpenSansLightInternal; source: "../assets/OpenSans-Light.ttf"; }
+    property var fontOpenSansBold: FontLoader { id: fontOpenSansBoldInternal; source: "../assets/OpenSans-Bold.ttf"; }
+    property var fontOpenSansExtraBold: FontLoader { id: fontOpenSansExtraBoldInternal; source: "../assets/OpenSans-ExtraBold.ttf"; }
+    property var fontOpenSansSemiBold: FontLoader { id: fontOpenSansSemiBoldInternal; source: "../assets/OpenSans-SemiBold.ttf"; }
     property var fontMonospace: FontLoader { id: fontMonospace; source: "../assets/RobotoMono-Regular.ttf"; }
 
     function lighten(col,amt){ return Qt.lighter(col, 1 + amt/100); }
@@ -50,6 +53,9 @@ QtObject {
     property alias font_family_monospace: stratifyUI.fontMonospace;
     property alias font_family_base: stratifyUI.fontOpenSans;
     property var font_family_bold: stratifyUI.fontOpenSansBold;
+    property var font_family_extra_bold: stratifyUI.fontOpenSansExtraBold;
+    property var font_family_semi_bold: stratifyUI.fontOpenSansSemiBold;
+    property var font_family_light: stratifyUI.fontOpenSansLight;
     property var font_family_icon: stratifyUI.fontFontAwesome;
     property real font_size_base: 18;
     property real font_size_large: Math.ceil((font_size_base * 1.25));

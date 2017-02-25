@@ -50,6 +50,7 @@ CheckBox {
         x: text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
         text: control.checked ? control.iconChecked: control.icon;
+        font.italic: attr.fontItalic;
         font.family: attr.fontIcon;
         font.pixelSize: attr.fontSize*1.4;
         font.weight: attr.fontWeight;

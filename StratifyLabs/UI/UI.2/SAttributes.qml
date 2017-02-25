@@ -18,6 +18,7 @@ SSizeAttributes {
     property real fontHorizontalAlignment: Text.AlignHCenter;
     property real fontVerticalAlignment: Text.AlignVCenter;
     property real fontWeight: Font.Normal;
+    property bool fontItalic: false;
     property bool fontHideSm: false;
 
     //Color -- color of buttons, labels, panels, etc
@@ -127,14 +128,18 @@ SSizeAttributes {
                 fontWeight = Font.Bold;
             } else if( items[i] === "text-light" ){
                 fontWeight = Font.Light;
-            } else if( items[i] === "text-demi-bold" ){
+            } else if( (items[i] === "text-semi-bold") || items[i] === "text-demi-bold" ){
                 fontWeight = Font.DemiBold;
             } else if( items[i] === "text-extra-bold" ){
                 fontWeight = Font.ExtraBold;
             } else if( items[i] === "text-extra-light" ){
                 fontWeight = Font.ExtraLight;
             } else if( items[i] === "text-normal" ){
+                fontText = Qt.binding(function(){ return STheme.font_family_base.name; });
                 fontWeight = Font.Normal;
+                fontItalic = false;
+            } else if( items[i] === "text-italic" ){
+                fontItalic = true;
             } else if( items[i] === "text-lg" ){
                 fontSize = Qt.binding( function() { return STheme.font_size_large; });
             } else if( items[i] === "text-sm" ){

@@ -7,7 +7,7 @@ EPane {
         title: "Panels";
         inherits: "Item";
         stratifyName: "SPanel";
-        //specialAttibutes: "EHeading";
+        //specialAttibutes: "Heading";
     }
 
     SLabel { style: "left"; text: "Panel Colors:"; }
@@ -18,7 +18,7 @@ EPane {
 
     SHLine {}
 
-    SLabel { style: "left"; text: "Panel EHeadings and Footers:"; }
+    SLabel { style: "left"; text: "Panel Headings and Footers:"; }
 
     PanelExampleHeadingFooter{}
     ECodeExample { source: "PanelExampleHeadingFooter"; }

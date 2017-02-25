@@ -4,11 +4,16 @@ import StratifyLabs.UI 2.0
 EPane {
     name: "Theme";
     SText { style: "left text-bold"; text: "Introduction"; }
-    SText { style: "block"; text: 'StratifyLabs UI themes are based on the singleton \
-STheme object which defines colors, fonts, spacing, and shapes for the application.'; }
+    SText { style: "block"; text: '\
+Stratify Labs UI themes are based on the singleton object STheme \
+which defines colors, fonts, spacing, and shapes for the application.';
+    }
     SText { style: "left text-bold"; text: "Customization"; }
-    SText { style: "block"; text: 'The following example shows how to change the primary and \
-secondary brand colors. This code typically goes in the main "ApplicationWindow".'; }
+    SText { style: "block"; text: '\
+The following example shows how to change the primary and \
+secondary brand colors. This code typically goes in the \
+main "ApplicationWindow".';
+    }
     SWell {
         text: 'Component.onCompleted: {
         STheme.brand_primary = "#244E99";

@@ -28,13 +28,15 @@ Text {
 
     SAttributes {
         id: attr;
+        fontHorizontalAlignment: Text.AlignLeft;
     }
 
+    font.italic: attr.fontItalic;
     font.family: attr.fontText;
     font.pointSize: attr.fontSize;
     font.weight: attr.fontWeight;
-    color: enabled ? attr.textColor : attr.textColorMuted;
-    verticalAlignment: attr.fontHorizontalAlignment;
-    horizontalAlignment: attr.fontVerticalAlignment;
+    color: enabled ? attr.fontColor : attr.fontColorMuted;
+    verticalAlignment: attr.fontVerticalAlignment;
+    horizontalAlignment: attr.fontHorizontalAlignment;
     wrapMode: attr.blockWidth ? Text.Wrap : Text.NoWrap;
 }

@@ -25,6 +25,7 @@ Label {
     property alias attr: attr;
     property alias span: attr.span;
 
+    font.italic: attr.fontItalic;
     font.family: attr.fontText;
     font.weight: attr.fontWeight;
     font.pixelSize: attr.fontSize;

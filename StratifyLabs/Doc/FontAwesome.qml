@@ -8,8 +8,8 @@ EPane {
 The icons can be used using SIcon, SButton, and SBadge. You can also set the font.family of any text to "STheme.fontFontAwesome.name" \
 to use the font in other objects.'; }
 
-    IconExampleObjects{}
-    ECodeExample { source: "IconExampleObjects"; }
+    FontAwesomeExampleObjects{}
+    ECodeExample { source: "FontAwesomeExampleObjects"; }
 
     SText { style: "left text-bold"; text: "The Icons"; }
 

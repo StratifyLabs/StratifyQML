@@ -11,4 +11,10 @@ EPane {
     }
 
     SLabel { style: "left"; text: "Icon Examples:"; }
+    IconExampleObjects{}
+    ECodeExample { source: "IconExampleObjects"; }
+
+    SLabel { style: "left"; text: "Other Icon Objects:"; }
+    IconExampleOther{}
+    ECodeExample { source: "IconExampleOther"; }
 }

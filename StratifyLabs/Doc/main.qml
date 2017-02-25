@@ -163,7 +163,6 @@ ApplicationWindow {
                 Attributes {},
                 FontAwesome {},
 
-                Layouts {},
                 Rows {},
                 Columns {},
                 Containers {},

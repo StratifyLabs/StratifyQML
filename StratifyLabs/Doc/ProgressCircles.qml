@@ -10,12 +10,12 @@ EPane {
     }
 
     SLabel { style: "left"; text: "ProgressCircle Colors"; }
-    ProgressBarExampleColors{}
-    ECodeExample { source: "ProgressBarExampleColors"; }
+    ProgressCircleExampleColors{}
+    ECodeExample { source: "ProgressCircleExampleColors"; }
 
     SHLine{}
 
-    SLabel { style: "left"; text: "Other Examples"; }
-    ProgressBarExampleSizes{}
-    ECodeExample { source: "ProgressBarExampleSizes"; }
+    SLabel { style: "left"; text: "Progress Circle with Icon"; }
+    ProgressCircleExample{}
+    ECodeExample { source: "ProgressCircleExample"; }
 }
