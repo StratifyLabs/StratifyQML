@@ -3,7 +3,7 @@ import StratifyLabs.UI 2.0
 SColumn {
 
     SContainer {
-        implicitHeight: 200;
+        implicitHeight: 400;
         color: STheme.brand_secondary;
         SRow {
             /* The parent needs to have a height that is larger than

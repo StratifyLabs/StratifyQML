@@ -9,38 +9,27 @@ EPane {
         stratifyName: "SButton";
         specialAttibutes: "icon";
     }
+    ESectionTitle { text: "Description"; }
 
-    SLabel { style: "left"; text: "Button Colors:"; }
+    SHLine{}
 
+    ESectionTitle { text: "Colors"; }
     ButtonExampleColors{}
     ECodeExample { source: "ButtonExampleColors"; }
 
-    SHLine{}
-
-    SLabel { style: "left"; text: "Button Outlines:"; }
-
+    ESectionTitle { text: "Outlines"; }
     ButtonExampleOutlineColors{}
     ECodeExample { source: "ButtonExampleOutlineColors"; }
 
-    SHLine{}
-
-    SLabel { style: "left"; text: "Icons:"; }
-
+    ESectionTitle { text: "Icons"; }
     ButtonExampleIcons{}
     ECodeExample { source: "ButtonExampleIcons"; }
 
-    SHLine{}
-
-    SLabel { style: "left"; text: "Button Sizes:"; }
-
+    ESectionTitle { text: "Sizes"; }
     ButtonExampleSizes{}
     ECodeExample { source: "ButtonExampleSizes"; }
 
-    SHLine{}
-
-
-    SLabel { style: "left"; text: "Naked Buttons:"; }
-
+    ESectionTitle { text: "Naked"; }
     ButtonExampleNaked{}
     ECodeExample { source: "ButtonExampleNaked"; }
 

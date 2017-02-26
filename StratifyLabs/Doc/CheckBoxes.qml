@@ -4,44 +4,19 @@ import StratifyLabs.UI 2.0
 EPane {
     name: "CheckBoxes";
     EHeading {
-        title: "Buttons";
-        inherits: "QtQuick.Controls 2.0 Button";
-        stratifyName: "SButton";
-        specialAttibutes: "icon";
+        title: "Check Boxes";
+        inherits: "QtQuick.Controls 2.0 CheckBox";
+        stratifyName: "SCheckBox";
     }
-
-    SLabel { style: "left"; text: "Button Colors:"; }
-
-    ButtonExampleColors{}
-    ECodeExample { source: "ButtonExampleColors"; }
+    ESectionTitle { text: "Description"; }
 
     SHLine{}
 
-    SLabel { style: "left"; text: "Button Outlines:"; }
+    ESectionTitle { text: "Example"; }
+    CheckBoxExample{}
+    ECodeExample { source: "CheckBoxExample"; }
 
-    ButtonExampleOutlineColors{}
-    ECodeExample { source: "ButtonExampleOutlineColors"; }
-
-    SHLine{}
-
-    SLabel { style: "left"; text: "Icons:"; }
-
-    ButtonExampleIcons{}
-    ECodeExample { source: "ButtonExampleIcons"; }
-
-    SHLine{}
-
-    SLabel { style: "left"; text: "Button Sizes:"; }
-
-    ButtonExampleSizes{}
-    ECodeExample { source: "ButtonExampleSizes"; }
-
-    SHLine{}
-
-
-    SLabel { style: "left"; text: "Naked Buttons:"; }
-
-    ButtonExampleNaked{}
-    ECodeExample { source: "ButtonExampleNaked"; }
-
+    ESectionTitle { text: "Custom Icons"; }
+    CheckBoxExampleCustom{}
+    ECodeExample { source: "CheckBoxExampleCustom"; }
 }

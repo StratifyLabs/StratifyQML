@@ -4,14 +4,16 @@ import StratifyLabs.UI 2.0
 EPane {
     name: "ToolTips";
     EHeading {
-        title: "Buttons";
-        inherits: "QtQuick.Controls 2.0 Button";
-        stratifyName: "SButton";
-        specialAttibutes: "icon";
+        title: "Tool Tips";
+        inherits: "QtQuick.Controls 2.0 ToolTip";
+        stratifyName: "SToolTip";
     }
 
-    SLabel { style: "left"; text: "ToolTip Examples:"; }
+    ESectionTitle { text: "Description"; }
 
+    SHLine{}
+
+    ESectionTitle { text: "Example"; }
     ToolTipExample{}
     ECodeExample { source: "ToolTipExample"; }
 }

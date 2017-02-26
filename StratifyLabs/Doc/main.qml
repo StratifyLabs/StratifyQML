@@ -71,10 +71,10 @@ ApplicationWindow {
                     EDrawerItem { label: "FontAwesome"; }
                     SHLine{ attr.paddingVertical: 0; }
                     EDrawerHeading { label: "Layouts"; icon: Fa.Icon.object_group; }
-                    EDrawerItem { label: "Rows"; }
+                    EDrawerItem { label: "AnimationContainers"; }
                     EDrawerItem { label: "Columns"; }
                     EDrawerItem { label: "Containers"; }
-                    EDrawerItem { label: "AnimationContainers"; }
+                    EDrawerItem { label: "Rows"; }
                     SHLine{ attr.paddingVertical: 0; }
                     EDrawerHeading { label: "Indicators"; icon: Fa.Icon.star; }
                     EDrawerItem { label: "Alerts"; }
@@ -163,10 +163,10 @@ ApplicationWindow {
                 Attributes {},
                 FontAwesome {},
 
-                Rows {},
+                AnimationContainers {},
                 Columns {},
                 Containers {},
-                AnimationContainers {},
+                Rows {},
 
                 Alerts {},
                 Badges {},
@@ -252,5 +252,6 @@ ApplicationWindow {
         STheme.brand_primary = "#244E99";
         STheme.brand_secondary = "#383838";
         screen = "Introduction";
+        STheme.updateScreenSize(width);
     }
 }

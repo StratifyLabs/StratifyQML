@@ -4,18 +4,20 @@ import StratifyLabs.UI 2.0
 EPane {
     name: "ProgressBars";
     EHeading {
-        title: "ProgressBars";
+        title: "Progress Bars";
         inherits: "QtQuick.Controls 2.0 ProgressBar";
         stratifyName: "SProgressBar";
     }
 
-    SLabel { style: "left"; text: "ProgressBar Colors:"; }
-    ProgressBarExampleColors{}
-    ECodeExample { source: "ProgressBarExampleColors"; }
+    ESectionTitle { text: "Description"; }
 
     SHLine{}
 
-    SLabel { style: "left"; text: "ProgressBar Sizes:"; }
+    ESectionTitle { text: "Colors"; }
+    ProgressBarExampleColors{}
+    ECodeExample { source: "ProgressBarExampleColors"; }
+
+    ESectionTitle { text: "Sizes"; }
     ProgressBarExampleSizes{}
     ECodeExample { source: "ProgressBarExampleSizes"; }
 }

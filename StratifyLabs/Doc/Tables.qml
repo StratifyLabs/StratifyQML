@@ -10,15 +10,15 @@ EPane {
         defaultSize: "block";
     }
 
-    SLabel { style: "left"; text: "Simple Table Example:"; }
+    ESectionTitle { text: "Description"; }
 
+    SHLine{}
+
+    ESectionTitle { text: "Example"; }
     TableExample{}
     ECodeExample { source: "TableExample"; }
 
-    SLabel { style: "left"; text: "Table Options:"; }
-
-
+    ESectionTitle { text: "Options"; }
     TableExampleOptions{}
     ECodeExample { source: "TableExampleOptions"; }
-
 }

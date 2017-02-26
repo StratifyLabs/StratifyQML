@@ -3,7 +3,7 @@ import StratifyLabs.UI 2.0
 
 EPane {
     name: "Theme";
-    SText { style: "left text-bold"; text: "Introduction"; }
+    ESectionTitle { text: "Introduction"; }
     SText { style: "block"; text: '\
 Stratify Labs UI themes are based on the singleton object STheme \
 which defines colors, fonts, spacing, and shapes for the application.';

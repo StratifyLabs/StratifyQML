@@ -3,7 +3,7 @@ import StratifyLabs.UI 2.0
 
 EPane {
     name: "Attributes";
-    SText { style: "left text-bold text-lg"; text: "Introduction"; }
+    ESectionTitle { text: "Introduction"; }
     SText { style: "block"; text: '\
 Stratify Labs UI allows you to quickly layout and style \
 QML applications. It does this by attaching an "SAttributes" \
@@ -68,9 +68,6 @@ options.';
             AttributeExampleAlignment{}
             ECodeExample { source: "AttributeExampleAlignment"; }
 
-            SHLine {}
-
-
             SText { style: "left text-bold"; text: "Sizing"; }
             EBullet { text: "fill: fill height"; }
             EBullet { text: "block: fill width"; }
@@ -107,8 +104,6 @@ options.'; }
 
             AttributeExampleTextSize{}
             ECodeExample { source: "AttributeExampleTextSize"; }
-
-            SHLine {}
 
             SText { style: "left text-bold"; text: "Text Alignment"; }
 

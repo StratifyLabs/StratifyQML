@@ -3,13 +3,14 @@ import StratifyLabs.UI 2.0
 
 SPanel {
     id: panel;
-    property alias title: panel.heading;
+    property string title;
     property string inherits;
     property string stratifyName;
     property string specialAttibutes;
     property string defaultSize;
 
     style: "panel-info block";
+    heading: "<b>" + title + "</b>";
 
     SRow {
         SLabel { span: 6; style: "left"; text: "Name:"; }

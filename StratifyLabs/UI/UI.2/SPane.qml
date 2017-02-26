@@ -45,4 +45,7 @@ Flickable {
     onHeightChanged: updateContentRect();
     Component.onCompleted: updateContentRect();
 
+    flickableDirection: Flickable.AutoFlickIfNeeded;
+
+
 }

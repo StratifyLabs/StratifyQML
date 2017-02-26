@@ -33,6 +33,8 @@ Rectangle {
         id: attr;
         borderColor: STheme.gray_light;
         fillWidth: true;
+        fontHorizontalAlignment: Text.AlignLeft;
+        fontVerticalAlignment: Text.AlignTop;
     }
 
     implicitWidth: attr.blockWidth ? (parent.width) : 0;
@@ -47,7 +49,8 @@ Rectangle {
         id: flickable;
         clip: true;
         anchors.fill: parent;
-        flickableDirection: Flickable.VerticalFlick;
+        flickableDirection: Flickable.AutoFlickIfNeeded;
+
 
         TextArea.flickable: TextArea {
             id: textArea;
@@ -56,6 +59,8 @@ Rectangle {
             font.pixelSize: attr.fontSize;
             font.family: attr.fontText;
             font.weight: attr.fontWeight;
+            horizontalAlignment: attr.fontHorizontalAlignment;
+            verticalAlignment: attr.fontVerticalAlignment;
             selectedTextColor: attr.fontColorSelected;
             selectByMouse: true;
             selectByKeyboard: true;

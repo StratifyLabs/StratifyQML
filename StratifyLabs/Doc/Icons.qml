@@ -10,11 +10,15 @@ EPane {
         defaultSize: "block";
     }
 
-    SLabel { style: "left"; text: "Icon Examples:"; }
+    ESectionTitle { text: "Description"; }
+
+    SHLine{}
+
+    ESectionTitle { text: "Example"; }
     IconExampleObjects{}
     ECodeExample { source: "IconExampleObjects"; }
 
-    SLabel { style: "left"; text: "Other Icon Objects:"; }
+    ESectionTitle { text: "Other Objects"; }
     IconExampleOther{}
     ECodeExample { source: "IconExampleOther"; }
 }

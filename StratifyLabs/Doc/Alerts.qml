@@ -10,13 +10,15 @@ EPane {
         defaultSize: "block";
     }
 
-    SLabel { style: "left"; text: "Alert Colors:"; }
-    AlertExampleColors{}
-    ECodeExample { source: "AlertExampleColors"; }
+    ESectionTitle { text: "Description"; }
 
     SHLine{}
 
-    SLabel { style: "left"; text: "Alert Options:"; }
+    ESectionTitle { text: "Colors"; }
+    AlertExampleColors{}
+    ECodeExample { source: "AlertExampleColors"; }
+
+    ESectionTitle { text: "Options"; }
     AlertExampleOptions{}
     ECodeExample { source: "AlertExampleOptions"; }
 }

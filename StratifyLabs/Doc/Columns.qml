@@ -10,11 +10,14 @@ EPane {
         defaultSize: "block";
     }
 
-    SText { style: "left text-bold"; text: "Description"; }
+    ESectionTitle { text: "Description"; }
     SText { style: "block"; text: 'An SColumn is similar to an SRow but it assumes \
 all of its children span the entire width (which is the default value). SColumn does not \
 respond to changes in screen size like SRow does.'; }
 
+    SHLine{}
+
+    ESectionTitle { text: "Example"; }
     ColumnExample{}
     ECodeExample { source: "ColumnExample"; }
 }

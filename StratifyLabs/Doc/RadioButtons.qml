@@ -4,44 +4,21 @@ import StratifyLabs.UI 2.0
 EPane {
     name: "RadioButtons";
     EHeading {
-        title: "Buttons";
-        inherits: "QtQuick.Controls 2.0 Button";
-        stratifyName: "SButton";
-        specialAttibutes: "icon";
+        title: "Radio Button";
+        inherits: "QtQuick.Controls 2.0 RadioButton";
+        stratifyName: "SRadioButton";
+        specialAttibutes: "icon,iconChecked";
     }
 
-    SLabel { style: "left"; text: "Button Colors:"; }
-
-    ButtonExampleColors{}
-    ECodeExample { source: "ButtonExampleColors"; }
+    ESectionTitle { text: "Description"; }
 
     SHLine{}
 
-    SLabel { style: "left"; text: "Button Outlines:"; }
+    ESectionTitle { text: "Sizes"; }
+    RadioButtonExample{}
+    ECodeExample { source: "RadioButtonExample"; }
 
-    ButtonExampleOutlineColors{}
-    ECodeExample { source: "ButtonExampleOutlineColors"; }
-
-    SHLine{}
-
-    SLabel { style: "left"; text: "Icons:"; }
-
-    ButtonExampleIcons{}
-    ECodeExample { source: "ButtonExampleIcons"; }
-
-    SHLine{}
-
-    SLabel { style: "left"; text: "Button Sizes:"; }
-
-    ButtonExampleSizes{}
-    ECodeExample { source: "ButtonExampleSizes"; }
-
-    SHLine{}
-
-
-    SLabel { style: "left"; text: "Naked Buttons:"; }
-
-    ButtonExampleNaked{}
-    ECodeExample { source: "ButtonExampleNaked"; }
-
+    ESectionTitle { text: "Custom Icons"; }
+    RadioButtonExampleCustom{}
+    ECodeExample { source: "RadioButtonExampleCustom"; }
 }

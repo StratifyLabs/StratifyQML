@@ -10,29 +10,23 @@ EPane {
         specialAttibutes: "icon";
     }
 
-    SLabel { style: "left"; text: "Badge Colors:"; }
+    ESectionTitle { text: "Description"; }
 
+    SHLine{}
+
+    ESectionTitle { text: "Colors"; }
     BadgeExampleColors{}
     ECodeExample { source: "BadgeExampleColors"; }
 
-    SHLine{}
-
-    SLabel { style: "left"; text: "Badge Outlines:"; }
-
+    ESectionTitle { text: "Outlines"; }
     BadgeExampleOutlineColors{}
     ECodeExample { source: "BadgeExampleOutlineColors"; }
 
-    SHLine{}
-
-    SLabel { style: "left"; text: "Icons:"; }
-
+    ESectionTitle { text: "Icons"; }
     BadgeExampleIcons{}
     ECodeExample { source: "BadgeExampleIcons"; }
 
-    SHLine{}
-
-    SLabel { style: "left"; text: "Button Sizes:"; }
-
+    ESectionTitle { text: "Sizes"; }
     BadgeExampleSizes{}
     ECodeExample { source: "BadgeExampleSizes"; }
 }

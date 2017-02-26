@@ -10,8 +10,11 @@ EPane {
         defaultSize: "block";
     }
 
-    SLabel { style: "left"; text: "Input Examples:"; }
+    ESectionTitle { text: "Description"; }
 
+    SHLine{}
+
+    ESectionTitle { text: "Example"; }
     InputExample{}
     ECodeExample { source: "InputExample"; }
 

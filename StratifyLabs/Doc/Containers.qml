@@ -10,19 +10,17 @@ EPane {
         defaultSize: "block";
     }
 
-    SText { style: "left text-bold"; text: "Description"; }
+    ESectionTitle { text: "Description"; }
     SText { style: "block"; text: 'An SContainer provides a padded background \
 for a group of S{Objects}. An SContainer may be used on its own or within an SRow or SColumn layout.'; }
 
-    SText { style: "left text-bold"; text: "Background Colors"; }
+    SHLine{}
 
+    ESectionTitle { text: "Background Colors"; }
     ContainerExample{}
     ECodeExample { source: "ContainerExample"; }
 
-    SHLine{}
-
-    SText { style: "left text-bold"; text: "Mouse Example"; }
-
+    ESectionTitle { text: "Mouse Example"; }
     ContainerExampleMouse{}
     ECodeExample { source: "ContainerExampleMouse"; }
 }

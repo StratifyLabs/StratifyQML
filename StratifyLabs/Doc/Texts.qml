@@ -10,18 +10,19 @@ EPane {
         specialAttibutes: "icon";
     }
 
-    SLabel { style: "left"; text: "Text Blocks:"; }
+    ESectionTitle { text: "Description"; }
 
+    SHLine{}
+
+    ESectionTitle { text: "Blocks"; }
     TextExample{}
     ECodeExample { source: "TextExample"; }
 
-    SLabel { style: "left"; text: "Text Sizes:"; }
-
+    ESectionTitle { text: "Sizes"; }
     TextExampleSizes{}
     ECodeExample { source: "TextExampleSizes"; }
 
-    SLabel { style: "left"; text: "Text Styles:"; }
-
+    ESectionTitle { text: "Styles"; }
     TextExampleStyles{}
     ECodeExample { source: "TextExampleStyles"; }
 }

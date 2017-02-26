@@ -6,16 +6,18 @@ EPane {
     EHeading {
         title: "Progress Circles";
         inherits: "Item";
-        stratifyName: "SProgressBar";
+        stratifyName: "SProgressCircle";
     }
 
-    SLabel { style: "left"; text: "ProgressCircle Colors"; }
-    ProgressCircleExampleColors{}
-    ECodeExample { source: "ProgressCircleExampleColors"; }
+    ESectionTitle { text: "Description"; }
 
     SHLine{}
 
-    SLabel { style: "left"; text: "Progress Circle with Icon"; }
+    ESectionTitle { text: "Colors"; }
+    ProgressCircleExampleColors{}
+    ECodeExample { source: "ProgressCircleExampleColors"; }
+
+    ESectionTitle { text: "With an Icon"; }
     ProgressCircleExample{}
     ECodeExample { source: "ProgressCircleExample"; }
 }

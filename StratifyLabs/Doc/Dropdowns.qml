@@ -10,20 +10,19 @@ EPane {
         defaultSize: "block";
     }
 
-    SLabel { style: "left"; text: "Dropdown Examples:"; }
-
-    DropdownExample{}
-    ECodeExample { source: "DropdownExample"; }
+    ESectionTitle { text: "Description"; }
 
     SHLine{}
 
-    SLabel { style: "left"; text: "Dropup Example:"; }
+    ESectionTitle { text: "Example"; }
+    DropdownExample{}
+    ECodeExample { source: "DropdownExample"; }
 
+    ESectionTitle { text: "Dropup"; }
     SText {
         style: "block";
         text: 'You can use "SDropup" if the combo box is at the bottom of the window.'
     }
-
     ECodeExample { source: "DropupExample"; }
     DropupExample{}
 

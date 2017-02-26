@@ -10,37 +10,16 @@ EPane {
         specialAttibutes: "icon";
     }
 
-    SLabel { style: "left"; text: "Button Colors:"; }
-
-    ButtonExampleColors{}
-    ECodeExample { source: "ButtonExampleColors"; }
+    ESectionTitle { text: "Description"; }
 
     SHLine{}
 
-    SLabel { style: "left"; text: "Button Outlines:"; }
+    ESectionTitle { text: "Example"; }
+    ListExample{}
+    ECodeExample { source: "ListExample"; }
 
-    ButtonExampleOutlineColors{}
-    ECodeExample { source: "ButtonExampleOutlineColors"; }
+    ESectionTitle { text: "ListGroup"; }
+    ListExampleListGroup{}
+    ECodeExample { source: "ListExampleListGroup"; }
 
-    SHLine{}
-
-    SLabel { style: "left"; text: "Icons:"; }
-
-    ButtonExampleIcons{}
-    ECodeExample { source: "ButtonExampleIcons"; }
-
-    SHLine{}
-
-    SLabel { style: "left"; text: "Button Sizes:"; }
-
-    ButtonExampleSizes{}
-    ECodeExample { source: "ButtonExampleSizes"; }
-
-    SHLine{}
-
-
-    SLabel { style: "left"; text: "Naked Buttons:"; }
-
-    ButtonExampleNaked{}
-    ECodeExample { source: "ButtonExampleNaked"; }
 }

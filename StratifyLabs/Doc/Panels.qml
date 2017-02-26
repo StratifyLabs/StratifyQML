@@ -10,16 +10,15 @@ EPane {
         //specialAttibutes: "Heading";
     }
 
-    SLabel { style: "left"; text: "Panel Colors:"; }
+    ESectionTitle { text: "Description"; }
 
+    SHLine{}
 
+    ESectionTitle { text: "Colors"; }
     PanelExampleColors{}
     ECodeExample { source: "PanelExampleColors"; }
 
-    SHLine {}
-
-    SLabel { style: "left"; text: "Panel Headings and Footers:"; }
-
+    ESectionTitle { text: "Headings and Footers"; }
     PanelExampleHeadingFooter{}
     ECodeExample { source: "PanelExampleHeadingFooter"; }
 }

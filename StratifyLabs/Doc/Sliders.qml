@@ -10,13 +10,15 @@ EPane {
         stratifyName: "SSlider";
     }
 
-    SLabel { style: "left"; text: "Slider Colors:"; }
-    SliderExampleColors{}
-    ECodeExample { source: "SliderExampleColors"; }
+    ESectionTitle { text: "Description"; }
 
     SHLine{}
 
-    SLabel { style: "left"; text: "Slider Sizes:"; }
+    ESectionTitle { text: "Colors"; }
+    SliderExampleColors{}
+    ECodeExample { source: "SliderExampleColors"; }
+
+    ESectionTitle { text: "Sizes"; }
     SliderExampleSizes{}
     ECodeExample { source: "SliderExampleSizes"; }
 

@@ -14,7 +14,7 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.6
+import QtQuick 2.7
 import StratifyLabs.UI 2.0
 
 ListView {
@@ -31,5 +31,7 @@ ListView {
 
     clip: true;
     spacing: attr.paddingVertical;
+
+    flickableDirection: Flickable.AutoFlickIfNeeded;
 
 }

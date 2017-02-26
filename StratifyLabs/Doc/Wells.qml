@@ -8,5 +8,11 @@ EPane {
         inherits: "Rectangle";
         stratifyName: "SWell";
     }
-    SLabel { style: "left"; text: "Well Examples:"; }
+    ESectionTitle { text: "Description"; }
+
+    SHLine{}
+
+    ESectionTitle { text: "Example"; }
+    WellExample{}
+    ECodeExample { source: "WellExample"; }
 }

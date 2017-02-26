@@ -10,5 +10,7 @@ EPane {
         defaultSize: "block";
     }
 
-    SLabel { style: "left"; text: "Text Box Examples:"; }
+    SLabel { style: "left"; text: "Text Box Examples"; }
+    TextBoxExample{}
+    ECodeExample { source: "TextBoxExample"; }
 }

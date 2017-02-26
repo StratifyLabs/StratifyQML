@@ -4,23 +4,30 @@ SRow {
     SButton {
         span: 4;
         style: "btn-primary";
-        text: "Button with ToolTip";
+        text: "Button";
         SToolTip {
             text: "Button";
         }
     }
     SCheckBox {
         span: 4;
-        text: "Check Box with ToolTip";
+        text: "Check Box";
         SToolTip {
             text: "Check Box";
         }
     }
     SRadioButton {
         span: 4;
-        text: "Radio Button with ToolTip";
+        text: "Radio Button";
         SToolTip {
             text: "Radio Button";
+        }
+    }
+    SInput {
+        span: 12;
+        placeholder: "placeholder";
+        SToolTip {
+            text: "Input Box";
         }
     }
 }

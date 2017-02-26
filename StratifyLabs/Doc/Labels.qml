@@ -8,25 +8,19 @@ EPane {
         inherits: "QtQuick.Controls 2.0 Label";
         stratifyName: "SLabel";
     }
+    ESectionTitle { text: "Description"; }
 
-    SLabel { style: "left"; text: "Label Colors:"; }
+    SHLine{}
 
+    ESectionTitle { text: "Colors"; }
     LabelExampleColors{}
     ECodeExample { source: "LabelExampleColors"; }
 
-    SHLine{}
-
-    SLabel { style: "left"; text: "Label Sizes:"; }
-
+    ESectionTitle { text: "Sizes"; }
     LabelExampleSizes{}
     ECodeExample { source: "LabelExampleSizes"; }
 
-
-    SHLine{}
-
-
     SLabel { style: "left"; text: "Naked Labels:"; }
-
     LabelExampleNaked{}
     ECodeExample { source: "LabelExampleNaked"; }
 
