@@ -6,8 +6,10 @@ import StratifyLabs.UI 2.0
 
 ApplicationWindow {
     id: window;
-    minimumWidth: STheme.screen_xs;
-    minimumHeight: STheme.screen_xs;
+    visible: true;
+    minimumWidth: 400;
+    minimumHeight: 640;
+    title: "Stratify Labs UI";
 
     width: 400;
     height: 600;
@@ -202,6 +204,7 @@ ApplicationWindow {
                 opacity: 0.80;
             }
             SContainer {
+                style: "condensed";
                 SRow {
                     SGroup {
                         id: previousGroup;
@@ -214,6 +217,7 @@ ApplicationWindow {
                             onClicked: screen = animationContainer.previous();
                         }
                         SText {
+                            visible: !STheme.isScreenSm;
                             style: "text-on-primary";
                             anchors.verticalCenter: previousButton.verticalCenter;
                             id: previousScreen;
@@ -224,6 +228,7 @@ ApplicationWindow {
                         style: "right text-on-primary";
                         span: 2;
                         SText {
+                            visible: !STheme.isScreenSm;
                             style: "text-on-primary";
                             anchors.verticalCenter: nextButton.verticalCenter;
                             id: nextScreen;
@@ -241,9 +246,6 @@ ApplicationWindow {
         }
     }
 
-
-
-
     onWidthChanged: {
         STheme.updateScreenSize(width);
     }
@@ -254,4 +256,5 @@ ApplicationWindow {
         screen = "Introduction";
         STheme.updateScreenSize(width);
     }
+
 }

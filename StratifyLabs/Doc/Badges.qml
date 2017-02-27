@@ -12,6 +12,13 @@ EPane {
 
     ESectionTitle { text: "Description"; }
 
+    SText { style: "block"; text: '\
+An SBadge is used as a decorative object to \
+emphasize meaning to a small amount of information. \
+An SBadge is always circular. It is only useful in showing
+one or two digits or an icon.';
+        }
+
     SHLine{}
 
     ESectionTitle { text: "Colors"; }

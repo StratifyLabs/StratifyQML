@@ -3,6 +3,7 @@ import StratifyLabs.UI 2.0
 
 SWell {
     id: code;
+    style: "sm";
     property string source;
 
     Component.onCompleted: {

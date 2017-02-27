@@ -35,12 +35,12 @@ SSizeAttributes (which SAttributes inherits). If an object \
 has additional attibutes, the object will be S{Object}Attributes \
 (such as SAlertAttributes).'; }
 
-    SText { style: "left text-bold text-lg"; text: "Changing the Style"; }
+    ESectionTitle { text: "Changing the Style"; }
     SText { style: "block"; text: '\
 When a new value is assigned to the "style" property, \
 the string is parsed and the styling is bound to the object.';
     }
-    SText { style: "block text-bold"; text: 'SSizeAttributes'; }
+    ESubSectionTitle { text: 'SSizeAttributes'; }
     SText { style: "block"; text: '\
 SSizeAttributes (all objects) support the following style \
 options.';
@@ -48,19 +48,19 @@ options.';
 
     SContainer {
         SColumn {
-            SText { style: "left text-bold"; text: "Padding"; }
+            ESubSectionTitle { text: "Padding"; }
             EBullet { text: "padding-zero"; }
             EBullet { text: "padding-xs"; }
             EBullet { text: "padding-lg"; }
 
             SHLine {}
 
-            SText { style: "left text-bold"; text: "Horizontal Alignment"; }
+            ESubSectionTitle { text: "Horizontal Alignment"; }
             EBullet { text: "left"; }
             EBullet { text: "right"; }
             EBullet { text: "center"; }
 
-            SText { style: "left text-bold"; text: "Vertical Alignment"; }
+            ESubSectionTitle { text: "Vertical Alignment"; }
             EBullet { text: "top"; }
             EBullet { text: "bottom"; }
             EBullet { text: "middle"; }
@@ -68,7 +68,7 @@ options.';
             AttributeExampleAlignment{}
             ECodeExample { source: "AttributeExampleAlignment"; }
 
-            SText { style: "left text-bold"; text: "Sizing"; }
+            ESubSectionTitle { text: "Sizing"; }
             EBullet { text: "fill: fill height"; }
             EBullet { text: "block: fill width"; }
             EBullet { text: "default: align middle-center, implicit size"; }
@@ -84,7 +84,7 @@ options.'; }
 
     SContainer {
         SColumn {
-            SText { style: "left text-bold"; text: "Size"; }
+            ESubSectionTitle { text: "Size"; }
             SText { style: "left text-sm"; text: "Changes text size and padding"; }
             EBullet { text: "xs"; }
             EBullet { text: "sm"; }
@@ -92,7 +92,7 @@ options.'; }
 
             SHLine {}
 
-            SText { style: "left text-bold"; text: "Text Sizes"; }
+            ESubSectionTitle { text: "Text Sizes"; }
             EBullet { text: "text-h1"; }
             EBullet { text: "text-h2"; }
             EBullet { text: "text-h3"; }
@@ -105,7 +105,7 @@ options.'; }
             AttributeExampleTextSize{}
             ECodeExample { source: "AttributeExampleTextSize"; }
 
-            SText { style: "left text-bold"; text: "Text Alignment"; }
+            ESubSectionTitle { text: "Text Alignment"; }
 
             EBullet { text: "text-right"; }
             EBullet { text: "text-left"; }
@@ -119,7 +119,7 @@ options.'; }
 
             SHLine {}
 
-            SText { style: "left text-bold"; text: "Text Weight"; }
+            ESubSectionTitle { text: "Text Weight"; }
             EBullet { text: "text-bold"; }
             EBullet { text: "text-light"; }
             EBullet { text: "text-demi-bold"; }
@@ -135,8 +135,8 @@ options.'; }
             }
 
             SHLine {}
-            SText { style: "left text-bold"; text: "Text Color"; }
 
+            ESubSectionTitle { text: "Text Color"; }
             EBullet { text: "text-on-primary: color when on primary"; }
             EBullet { text: "text-on-secondary: color when on secondary"; }
             EBullet { text: "text-on-info: color when on info"; }
@@ -153,7 +153,7 @@ options.'; }
 
             SHLine {}
 
-            SText { style: "left text-bold"; text: "Color Schemes"; }
+            ESubSectionTitle { text: "Color Schemes"; }
             SText { style: "left text-sm"; text: "Change font, object, and border colors"; }
             EBullet { text: "primary"; }
             EBullet { text: "secondary"; }
@@ -170,7 +170,7 @@ SButton uses "btn-outline-primary" for setting the color.';
     }
 
 
-    SText { style: "left text-bold text-lg"; text: "Further Customization"; }
+    ESectionTitle { text: "Further Customization"; }
 
     SText { style: "block"; text: '\
 If the styling options above don\'t meet your needs, \

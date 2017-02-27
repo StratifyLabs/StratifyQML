@@ -8,7 +8,9 @@ SContainer {
     default property alias data: contents.data;
     SPane {
         clip: false;
-        ScrollBar.vertical: ScrollBar { }
+        ScrollBar.vertical: ScrollBar {
+            visible: !STheme.isScreenSm;
+        }
         SContainer {
             SColumn {
                 id: contents;

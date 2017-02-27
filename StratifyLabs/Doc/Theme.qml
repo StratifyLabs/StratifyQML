@@ -8,7 +8,7 @@ EPane {
 Stratify Labs UI themes are based on the singleton object STheme \
 which defines colors, fonts, spacing, and shapes for the application.';
     }
-    SText { style: "left text-bold"; text: "Customization"; }
+    ESectionTitle { text: "Customization"; }
     SText { style: "block"; text: '\
 The following example shows how to change the primary and \
 secondary brand colors. This code typically goes in the \
@@ -21,7 +21,7 @@ main "ApplicationWindow".';
 }';
     }
 
-    SText { style: "left text-bold"; text: "Reference"; }
+    ESectionTitle { text: "Reference"; }
     SText { style: "block"; text: 'See the STheme.qml file for a full list of variables.'; }
 
     SButton {

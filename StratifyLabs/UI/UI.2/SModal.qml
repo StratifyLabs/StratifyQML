@@ -127,7 +127,7 @@ Item {
             SRow {
                 visible: modal.title !== "";
                 SText {
-                    span: 11;
+                    span: 1;
                     style: "left";
                     leftPadding: attr.paddingHorizontal;
                     rightPadding: attr.paddingHorizontal;
