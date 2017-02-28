@@ -28,7 +28,6 @@ QtObject {
             if( (items[i] === "implicit-size") || (items[i] === "default") ){
                 fillWidth = false;
                 fillHeight = false;
-                alignment = Qt.AlignHCenter | Qt.AlignVCenter;
             } else if( items[i] === "hide-sm" ){
                 hideSm = true;
             } else if( items[i] === "fill" ){
@@ -65,6 +64,9 @@ QtObject {
             } else if( items[i] === "padding-xs" ){
                 paddingVertical = Qt.binding( function() { return STheme.padding_xs_vertical; });
                 paddingHorizontal = Qt.binding( function() { return STheme.padding_xs_horizontal; });
+            } else if( items[i] === "padding-normal" ){
+                paddingVertical = Qt.binding( function() { return STheme.padding_base_vertical; });
+                paddingHorizontal = Qt.binding( function() { return STheme.padding_base_horizontal; });
             }
         }
     }

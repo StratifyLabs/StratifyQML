@@ -24,6 +24,8 @@ Item {
     property alias span: attr.span;
     property alias attr: attr;
 
+    property bool busy: false;
+
     property string screen;
     property var current;
 
@@ -34,8 +36,6 @@ Item {
     onAnimationChanged: {
         animation.parent = root;
     }
-
-
 
     SAttributes {
         id: attr;
@@ -64,6 +64,12 @@ Item {
     onScreenChanged: {
         var target = resource(screen);
 
+        if( root.busy === true ){
+            //can't changed the screen while an animation is in progress
+            root.screen = current.name;
+            return;
+        }
+
         if( current !== undefined ){
 
             if( resourceIndex(current) < resourceIndex(target) ){
@@ -77,6 +83,17 @@ Item {
         } else {
             current = target;
             showScreen(current);
+        }
+    }
+
+    Connections {
+        target: animation;
+        onStarted: {
+            root.busy = true;
+        }
+
+        onStopped: {
+            root.busy = false;
         }
     }
 

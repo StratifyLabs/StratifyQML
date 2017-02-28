@@ -28,6 +28,7 @@ Item {
 
     property var targetParent: parent;
 
+    signal started();
     signal stopped();
 
 
@@ -41,6 +42,7 @@ Item {
 
         inAnimation.start();
         outAnimation.start();
+        root.started();
     }
 
     PathAnimation {

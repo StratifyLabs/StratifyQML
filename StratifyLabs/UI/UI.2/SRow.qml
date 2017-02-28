@@ -106,8 +106,10 @@ GridLayout {
             if( control.attr.type == "row" ){
                 if( STheme.isScreenSm === true ){
                     columns = STheme.grid_columns_sm;
+                    adjustWidth();
                 } else {
                     columns = STheme.grid_columns;
+                    adjustWidth();
                 }
             }
         }
