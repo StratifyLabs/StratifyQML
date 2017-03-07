@@ -2,6 +2,13 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 SRow {
+
+  SText {
+    span: 4;
+    style: "left top text-h3";
+    text: "Table";
+  }
+
   STable{
     span: 8;
     style: "center table-hover";

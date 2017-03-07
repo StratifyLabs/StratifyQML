@@ -23,17 +23,23 @@ SColumn {
     }
   }
 
+  SText {
+    span: 4;
+    style: "left top text-h3";
+    text: "Striped";
+  }
+
   SRow {
     SContainer {
       span: 8;
       height: 450;
-      style: "padding-zero center";
+      style: "padding-zero right";
       /* The following table will fill the container
           rather than simply taking up its
           implicitHeight. */
       STable{
         model: tableData;
-        style: "fill table-striped";
+        style: "fill table-striped top";
 
         STableColumn {
           span: 6;
@@ -50,11 +56,17 @@ SColumn {
     }
   }
 
+  SText {
+    span: 4;
+    style: "left top text-h3";
+    text: "Condensed";
+  }
+
   SRow {
     STable{
       span: 8;
       model: tableData;
-      style: "center table-condensed";
+      style: "right table-condensed top";
 
       STableColumn {
         span: 6;
@@ -70,11 +82,17 @@ SColumn {
     }
   }
 
+  SText {
+    span: 4;
+    style: "left top text-h3";
+    text: "Bordered";
+  }
+
   SRow {
     STable {
       span: 8;
       model: tableData;
-      style: "center table-bordered";
+      style: "right table-bordered top";
 
       STableColumn {
         span: 6;

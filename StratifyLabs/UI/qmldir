@@ -66,6 +66,7 @@ SWell 1.0 UI.1/SWell.qml
 singleton STheme 2.0 UI.2/STheme.qml
 SAlert 2.0 UI.2/SAlert.qml
 SAnimationContainer 2.0 UI.2/SAnimationContainer.qml
+SAnimator 2.0 UI.2/SAnimationContainer.qml
 SAnimationFade 2.0 UI.2/SAnimationFade.qml
 SAnimationHPush 2.0 UI.2/SAnimationHPush.qml
 SBadge 2.0 UI.2/SBadge.qml

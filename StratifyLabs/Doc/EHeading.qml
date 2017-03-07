@@ -17,10 +17,10 @@ SPanel {
     SText { span: 6; style: "right"; text: panel.stratifyName; }
     SLabel { span: 6; style: "left"; text: "Inherits:"; }
     SText { span: 6; style: "right"; text: panel.inherits; }
-    SLabel { span: 6; style: "left"; text: "Special Attributes:"; visible: panel.specialAttibutes !== ""; }
-    SText { span: 6; style: "right"; text: panel.specialAttibutes; visible: panel.specialAttibutes !== ""; }
-    SLabel { span: 6; style: "left"; text: "Default Size:"; visible: panel.defaultSize !== ""; }
-    SText { span: 6; style: "right"; text: panel.defaultSize; visible: panel.defaultSize !== ""; }
+    //SLabel { span: 6; style: "left"; text: "Special Attributes:"; visible: panel.specialAttibutes !== ""; }
+    //SText { span: 6; style: "right"; text: panel.specialAttibutes; visible: panel.specialAttibutes !== ""; }
+    //SLabel { span: 6; style: "left"; text: "Default Size:"; visible: panel.defaultSize !== ""; }
+    //SText { span: 6; style: "right"; text: panel.defaultSize; visible: panel.defaultSize !== ""; }
   }
 
 }

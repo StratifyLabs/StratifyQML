@@ -41,6 +41,7 @@ Flickable {
     }
 
     //This approach is used as opposed to direct binding in order to avoid binding loops
+    onVisibleChanged: updateContentRect();
     onWidthChanged: updateContentRect();
     onHeightChanged: updateContentRect();
     Component.onCompleted: updateContentRect();

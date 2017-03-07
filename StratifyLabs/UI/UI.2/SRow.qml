@@ -34,7 +34,6 @@ GridLayout {
         span: STheme.grid_columns;
     }
 
-    onVisibleChanged: adjustWidth();
     rowSpacing: attr.paddingVertical;
     columnSpacing: attr.paddingHorizontal;
     columns: attr.span;
@@ -113,6 +112,10 @@ GridLayout {
                 }
             }
         }
+    }
+
+    onVisibleChanged: {
+      adjustWidth();
     }
 
     onWidthChanged: {

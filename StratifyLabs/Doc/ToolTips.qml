@@ -10,10 +10,14 @@ EPane {
   }
 
   ESectionTitle { text: "Description"; }
+  EParagraph { text: 'An <i>SToolTip</i> can be added to clickable \
+objects and will display a tool tip when hovered. <i>SToopTip</i> is not \
+currently implemented on touch interfaces.';
+  }
 
   SHLine{}
 
   ESectionTitle { text: "Example"; }
   ToolTipExample{}
-  ECodeExample { source: "ToolTipExample"; }
+  ECodeButton { source: "ToolTipExample"; }
 }

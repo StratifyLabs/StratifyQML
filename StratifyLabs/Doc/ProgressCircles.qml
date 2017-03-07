@@ -10,7 +10,7 @@ EPane {
   }
 
   ESectionTitle { text: "Description"; }
-  EParagraph { text: 'An <i>SProgressCircle</i> show linear \
+  EParagraph { text: 'An <i>SProgressCircle</i> shows linear \
 progress but with a greater prominance to the user than an <i>SProgressBar</i>.'; }
 
   EReadMore {

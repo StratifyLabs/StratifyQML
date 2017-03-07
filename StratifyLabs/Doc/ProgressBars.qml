@@ -11,7 +11,7 @@ EPane {
 
   ESectionTitle { text: "Description"; }
   EParagraph { text: 'An <i>SProgressBar</i> can show \
-linear progress (not used for indeterminate progrss yet).'; }
+linear progress (not used for indeterminate progress yet).'; }
 
   SHLine{}
 

@@ -8,8 +8,8 @@ EPane {
 the latest release of Font Awesome. \
 The icons can be used using <i>SIcon</i>, \
 <i>SButton</i>, and <i>SBadge</i>. You can \
-also set the font.family of any text to <i>STheme.fontFontAwesome.name</i> \
-to use the font in other objects.'; }
+also set the <i>font.family</i> of any text to <i>STheme.fontFontAwesome.name</i> \
+to use the Font Awesome in other objects.'; }
 
   EReadMore {
     tags: "Badges:SBadge Buttons:SButton Icons:SIcon";
@@ -37,7 +37,7 @@ to use the font in other objects.'; }
 
 
   EParagraph { text: 'The current icon set is Font Awesome 4.7. The icons are available as \
-Fa.Icon.[name] where name is the name in the Font Awesome cheatsheet with "-" changed to "_".  Also, only \
+<i>Fa.Icon.[name]</i> where name is the name in the Font Awesome cheatsheet with "-" changed to "_".  Also, only \
 the original names are supported rather than the alias (e.g. use <i>Fa.Icon.times</i> rather than <i>Fa.Icon.remove</i>; see the link \
 below for more information).';
   }

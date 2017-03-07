@@ -9,7 +9,7 @@ EPane {
 Stratify Labs UI (SL.UI) 2.0 is a QML framework that works, looks, \
 and feels much like the twitter bootstrap HTML framework. The \
 colors and shapes of components can be customized using a theme \
-which uses familiar bootstrap. The UI also provides a responsive grid \
+which uses familiar bootstrap variables. The UI also provides a responsive grid \
 system that mimics bootstrap\'s ability to fit any screen.';
   }
   ESectionTitle { text: "Theme"; }
@@ -37,10 +37,15 @@ button that uses the <i>warning</i> color scheme.';
 
   EParagraph { text: '\
 SL.UI objects can be further customized by directly accessing \
-the "attr" property.'; }
+the <i>SAttributes</i> property via <i>attr</i>.'; }
+
+  EReadMore {
+    tags: "Attributes:SAttributes";
+  }
 
   IntroductionRoundButtonExample{}
   ECodeButton { source: "IntroductionRoundButtonExample"; }
+
 
   ESectionTitle { text: "Grid System"; }
   EParagraph { text: '\
@@ -65,28 +70,29 @@ onWidthChanged: {
   }
 
   EParagraph { text: '\
-The following code block shows how two columns can change \
+The following example shows how two columns can change \
 to one when the screen is narrow. You can change the width of \
 the window (desktop) or switch from portrait to landscape (mobile) \
-to see the change. Small screen mode is ' + STheme.isScreenSm + '.';
+to see the change.';
   }
+  EParagraph { text: 'Small screen mode is <b>' + STheme.isScreenSm + '</b>.'; }
 
 
-    IntroductionButtonExample{}
-    ECodeButton { source: "IntroductionButtonExample"; }
+  IntroductionButtonExample{}
+  ECodeButton { source: "IntroductionButtonExample"; }
 
-    ESectionTitle { text: "Icons"; }
-    EParagraph { text: '\
-FontAwesome 4.7 is integrated in the UI. Icons can be used \
+  ESectionTitle { text: "Icons"; }
+  EParagraph { text: '\
+SL.UI comes with FontAwesome 4.7 integrated. Icons can be used \
 in <i>SBadge</i>, <i>SButton</i> and <i>SIcon</i>. Here is a sample.';
-    }
-
-    EReadMore {
-      tags: "Badges:SBadge Buttons:SButton Icons:SIcon";
-    }
-
-    IntroductionIconExample{}
-    ECodeButton { source: "IntroductionIconExample"; }
-
   }
+
+  EReadMore {
+    tags: "Badges:SBadge Buttons:SButton Icons:SIcon";
+  }
+
+  IntroductionIconExample{}
+  ECodeButton { source: "IntroductionIconExample"; }
+
+}
 

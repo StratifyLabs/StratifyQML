@@ -12,7 +12,12 @@ EPane {
 
   ESectionTitle { text: "Description"; }
   EParagraph { text: 'An <i>SInput</i> is used
-to for a single line of text input.'; }
+to for a single line of text input. You multiple input lines, \
+use <i>STextBox</i>.'; }
+
+  EReadMore {
+    tags: "TextBoxes:STextBox";
+  }
 
   SHLine{}
 

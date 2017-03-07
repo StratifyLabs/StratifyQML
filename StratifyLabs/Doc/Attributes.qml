@@ -6,16 +6,20 @@ EPane {
   ESectionTitle { text: "Introduction"; }
   EParagraph { text: '\
 SL.UI allows you to quickly layout and style \
-QML applications. It does this by attaching an "SAttributes" \
+QML applications. It does this by including an <i>SAttributes</i> \
 object which then defines the size and color scheme. \
 There are two ways to change an object\'s attributes: \
-1) using "style" 2) using "attr" directly.';
+1) using <i>style</i> 2) using <i>attr</i> directly.';
   }
   EParagraph { text: '\
-Additionally, each item has quick access to "attr.span" through \
-the "span" property which \
+Additionally, each item has quick access to <i>attr.span</i> through \
+the <i>span</i> property which \
 defines the width of a SL.UI object in an <i>SRow</i>. Each SL.UI object \
 defines the properties listed below.';
+  }
+
+  EReadMore {
+    tags: "Rows:SRow";
   }
 
   ECodeBlockInline {
@@ -31,7 +35,7 @@ SAttributes {
   }
 
   EParagraph { text: '\
-Most SL.UI objects use SAttributes as the "attr" object. \
+Most SL.UI objects use <i>SAttributes</i> as the <i>attr</i> object. \
 SL.UI objects that don\'t have any color (e.g. <i>SPane</i>) use \
 <i>SSizeAttributes</i> (which <i>SAttributes</i> inherits). If an object \
 has additional attibutes, the object will be <i>S{Object}Attributes</i> \
@@ -41,7 +45,7 @@ of the object.'; }
 
   ESectionTitle { text: "Changing the Style"; }
   EParagraph { text: '\
-When a new value is assigned to the "style" property, \
+When a new value is assigned to the <i>style</i> property, \
 the string is parsed (left to right) and new colors and sizes are bound \
 to the object\'s attibutes.';
   }
@@ -85,8 +89,6 @@ options.';
 
   AttributeExampleSize{}
   ECodeButton { source: "AttributeExampleSize"; }
-
-
 
   SText { style: "block text-bold"; text: 'SAttributes'; }
   EParagraph { text: 'SAttributes (most objects) support the following style \
@@ -171,8 +173,8 @@ options.'; }
   EBullet { text: "success"; }
 
   EParagraph { text: '\
-Each S{Object} may add additional styling options. For example \
-SButton uses "btn-outline-primary" for setting the color.';
+Each SL.UI object may add additional styling options. For example \
+SButton uses "btn-outline-primary" for setting the button\'s color scheme.';
   }
 
 
@@ -181,8 +183,8 @@ SButton uses "btn-outline-primary" for setting the color.';
   EParagraph { text: '\
 If the styling options above don\'t meet your needs, \
 you can directly access an item\'s attributes using the \
-"attr" property. This is useful if you want to bind to \
-specific attributes. The following example binds the icon "spin" \
+<i>attr</i> property. This is useful if you want to bind to \
+specific attributes. The following example binds the icon <i>spin</i> \
 attribute to a variable.';
   }
 

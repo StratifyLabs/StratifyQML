@@ -2,10 +2,17 @@ import QtQuick 2.7
 import StratifyLabs.UI 2.0
 
 SRow {
+
+  SText {
+    span: 4;
+    style: "left text-h1 top";
+    text: "List";
+  }
+
   SList {
     id: list;
     span: 8;
-    style: "block center padding-zero";
+    style: "block right padding-zero";
     model: SJsonModel {
       id: model;
       json: "{ \"data\": [{ \"text\": \"List Item 1\" },

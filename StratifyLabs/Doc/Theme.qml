@@ -12,7 +12,7 @@ which defines colors, fonts, spacing, and shapes for the application.';
   EParagraph { text: '\
 The following example shows how to change the primary and \
 secondary brand colors. This code typically goes in the \
-main "ApplicationWindow".';
+main <i>ApplicationWindow</i>.';
   }
   ECodeBlockInline {
     text: '\
@@ -23,7 +23,7 @@ Component.onCompleted: {
   }
 
   ESectionTitle { text: "Reference"; }
-  EParagraph { text: 'See the STheme.qml file for a full list of variables.'; }
+  EParagraph { text: 'See the <i>STheme.qml</i> file for a full list of variables.'; }
 
   SButton {
     style: "btn-outline-info block";

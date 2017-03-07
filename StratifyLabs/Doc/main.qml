@@ -9,7 +9,9 @@ ApplicationWindow {
   visible: true;
   minimumWidth: 400;
   minimumHeight: 640;
-  title: "Stratify Labs UI";
+  title: "SL.UI";
+
+  property string version: "SL.UI 1.0 based on StratifyLabs.UI 2.0"
 
   width: 400;
   height: 600;
@@ -78,7 +80,7 @@ ApplicationWindow {
           EDrawerItem { label: "FontAwesome"; }
           SHLine{ attr.paddingVertical: 0; }
           EDrawerHeading { label: "Layouts"; icon: Fa.Icon.object_group; }
-          EDrawerItem { label: "AnimationContainers"; }
+          EDrawerItem { label: "Animators"; }
           EDrawerItem { label: "Columns"; }
           EDrawerItem { label: "Containers"; }
           EDrawerItem { label: "Rows"; }
@@ -116,12 +118,34 @@ ApplicationWindow {
 
   SModal {
     id: aboutModal;
-    title: "About";
+    title: "StratifyLabs UI";
     standardButtons: 0;
     SColumn {
+      SLabel {
+        style: "left padding-zero";
+        text: "Version";
+      }
+
+      SText {
+        style: "block";
+        text: version;
+      }
+
+      SLabel {
+        style: "left padding-zero";
+        text: "About";
+      }
+
       SText {
         style: "block";
         text: "StratifyLabs UI 2.0 is a QML framework that works, looks, and feels much like the twitter bootstrap HTML framework";
+      }
+
+      SButton {
+        style: "btn-outline-info";
+        icon: Fa.Icon.github;
+        text: "Fork on Github";
+        onClicked: Qt.openUrlExternally("https://github.com/StratifyLabs/StratifyQML");
       }
     }
   }
@@ -156,7 +180,7 @@ ApplicationWindow {
 
     }
 
-    SAnimationContainer {
+    SAnimator {
       id: animationContainer;
       style: "block fill";
 
@@ -174,7 +198,7 @@ ApplicationWindow {
         Attributes {},
         FontAwesome {},
 
-        AnimationContainers {},
+        Animators {},
         Columns {},
         Containers {},
         Rows {},
@@ -221,7 +245,7 @@ ApplicationWindow {
             span: 2;
             SButton {
               id: previousButton;
-              style: "left btn-naked text-on-primary";
+              style: "left btn-naked text-on-primary lg";
               icon: Fa.Icon.chevron_left;
               onClicked: screen = animationContainer.previous();
             }
@@ -244,13 +268,12 @@ ApplicationWindow {
             }
             SButton {
               id: nextButton;
-              style: "right btn-naked text-on-primary";
+              style: "right btn-naked text-on-primary lg";
               icon: Fa.Icon.chevron_right;
               onClicked: screen = animationContainer.next();
             }
           }
         }
-
       }
     }
   }

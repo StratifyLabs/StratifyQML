@@ -15,7 +15,7 @@ EPane {
     style: "block";
     text: 'An SRow arranges items in a row. \
 If the items won\'t fit in the row, the items are arranged in a grid. Each row \
-can have a total span of STheme.grid_columns (which defaults to a value of ' + STheme.grid_columns + ').';
+can have a total span of <i>STheme.grid_columns</i> (which defaults to a value of ' + STheme.grid_columns + ').';
   }
 
     SText {
@@ -31,8 +31,8 @@ narrow than STheme.screen_sm.";
 }';
     }
 
-    EParagraph { text: 'With that code, SRow will change the \
-number of columns from STheme.grid_columns (' + STheme.grid_columns + ') to STheme.grid_columns_sm \
+    EParagraph { text: 'With that code, <i>SRow</i> will change the \
+number of columns from <i>STheme.grid_columns</i> (' + STheme.grid_columns + ') to <i>STheme.grid_columns_sm</i> \
 (' + STheme.grid_columns_sm + ').'; }
 
       SHLine{}
@@ -45,10 +45,11 @@ number of columns from STheme.grid_columns (' + STheme.grid_columns + ') to SThe
 as well as the number of columns in each mode by adding the code below to the main "ApplicationWindow" \
 object.'; }
 
-      SWell {
-        text: 'Component.onCompleted: {
-        STheme.grid_columns_sm = 6;
-        STheme.screen_sm = 600;
+      ECodeBlockInline {
+        text: '\
+Component.onCompleted: {
+  STheme.grid_columns_sm = 6;
+  STheme.screen_sm = 600;
 }';
       }
 

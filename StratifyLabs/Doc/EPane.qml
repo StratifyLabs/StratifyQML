@@ -3,7 +3,7 @@ import QtQuick.Controls 2.1
 import StratifyLabs.UI 2.0
 
 
-SAnimationContainer {
+SAnimator {
   property string name;
   style: "block fill";
   default property alias data: contents.data;

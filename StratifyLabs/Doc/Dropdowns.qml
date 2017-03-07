@@ -16,7 +16,7 @@ the user to select from a list of items. It can be populated \
 using an <i>SJsonModel</i> object or simply a QML <i>ListModel</i>.'; }
 
   EReadMore {
-    tags: "Models:SJsonModel";
+    tags: "JsonModels:SJsonModel";
   }
 
   SHLine{}

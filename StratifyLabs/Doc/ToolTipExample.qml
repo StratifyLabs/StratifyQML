@@ -30,4 +30,17 @@ SRow {
       text: "Input Box";
     }
   }
+
+  SDropdown {
+    style: "block";
+    span: 12;
+    model:
+        ["First",
+      "Second",
+      "Third",
+      "Fourth"];
+    SToolTip {
+      text: "Dropdown";
+    }
+  }
 }

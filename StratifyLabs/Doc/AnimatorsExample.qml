@@ -28,7 +28,7 @@ SColumn {
     }
   }
 
-  SAnimationContainer {
+  SAnimator {
     id: animationContainer;
     implicitHeight: 300;
 
