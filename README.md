@@ -12,6 +12,8 @@ Version 1.0 got the ball rolling but version 2.0 is a huge improvement. Much of 
 
 ## Porting to 2.0
 
+If you have built some apps using the 1.0 release, I highly recommend porting to version 2.0. You will have to download the code and run the documentation app (see below for options). If you have any issues porting, please submit an issue on Github. Even though the API is the same, the porting process will take some effort but will be well worth it as the "legacy-1.0" branch will not be getting many updates but 2.0 will continue to see bug fixes and feature addtions withouth breaking any APIs.
+
 # Documentation
 
 To view the documentation, you have a couple of options:
