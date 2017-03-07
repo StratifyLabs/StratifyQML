@@ -1,6 +1,6 @@
 # StratifyLabs UI
 
-StratifyLabs UI is a QML UI framework inspired by Twitter Bootstrap.  The goal is to provide easy-to-use, customizable QML building blocks that follow the Twitter Bootstrap look and feel including responsive elements that look great on any screen.
+StratifyLabs UI (SL.UI for short) is a QML UI framework inspired by Twitter Bootstrap.  The goal is to provide easy-to-use, customizable QML building blocks that follow the Twitter Bootstrap look and feel including responsive elements that look great on any screen.
 
 ![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/development/img/sl.ui-buttons.png)
 
