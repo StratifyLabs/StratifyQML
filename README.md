@@ -2,6 +2,8 @@
 
 StratifyLabs UI is a QML UI framework inspired by Twitter Bootstrap.  The goal is to provide easy-to-use, customizable QML building blocks that follow the Twitter Bootstrap look and feel including responsive elements that look great on any screen.
 
+![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/development/img/sl.ui-buttons.png)
+
 # Contributors Welcome
 
 StratifyLabs UI is released under the ASL 2.0.  If you are willing to release contributions under this license and would like to contribute, please let me know.
