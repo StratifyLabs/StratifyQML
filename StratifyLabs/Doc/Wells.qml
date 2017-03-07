@@ -2,17 +2,17 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 EPane {
-    name: "Wells";
-    EHeading {
-        title: "Wells";
-        inherits: "Rectangle";
-        stratifyName: "SWell";
-    }
-    ESectionTitle { text: "Description"; }
+  name: "Wells";
+  EHeading {
+    title: "Wells";
+    inherits: "Rectangle";
+    stratifyName: "SWell";
+  }
+  ESectionTitle { text: "Description"; }
 
-    SHLine{}
+  SHLine{}
 
-    ESectionTitle { text: "Example"; }
-    WellExample{}
-    ECodeExample { source: "WellExample"; }
+  ESectionTitle { text: "Example"; }
+  WellExample{}
+  ECodeButton { source: "WellExample"; }
 }

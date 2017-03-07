@@ -2,186 +2,192 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 EPane {
-    name: "Attributes";
-    ESectionTitle { text: "Introduction"; }
-    SText { style: "block"; text: '\
-Stratify Labs UI allows you to quickly layout and style \
+  name: "Attributes";
+  ESectionTitle { text: "Introduction"; }
+  EParagraph { text: '\
+SL.UI allows you to quickly layout and style \
 QML applications. It does this by attaching an "SAttributes" \
-object to each item that defines the size and color scheme of \
-each object. There are two ways to change an objects attributes: \
+object which then defines the size and color scheme. \
+There are two ways to change an object\'s attributes: \
 1) using "style" 2) using "attr" directly.';
-    }
-    SText { style: "block"; text: '\
-Additionally, each item has quick access to "span" which \
-defines the width of an S{Object} in an SRow. The code looks \
-like this:';
-    }
+  }
+  EParagraph { text: '\
+Additionally, each item has quick access to "attr.span" through \
+the "span" property which \
+defines the width of a SL.UI object in an <i>SRow</i>. Each SL.UI object \
+defines the properties listed below.';
+  }
 
-    SWell {
-        text: 'property alias style: attr.style;
+  ECodeBlockInline {
+    text: '\
+property alias style: attr.style;
 property alias span: attr.span;
 property alias attr: attr;
 SAttributes {
-    id: attr;
-    type: "button";
+  id: attr;
+  type: "button";
 }
 ';
-    }
+  }
 
-    SText { style: "block"; text: '\
-Most S{Objects} use SAttributes as the "attr" object. \
-S{Objects} that don\'t have any color (e.g. SPane) use \
-SSizeAttributes (which SAttributes inherits). If an object \
-has additional attibutes, the object will be S{Object}Attributes \
-(such as SAlertAttributes).'; }
+  EParagraph { text: '\
+Most SL.UI objects use SAttributes as the "attr" object. \
+SL.UI objects that don\'t have any color (e.g. <i>SPane</i>) use \
+<i>SSizeAttributes</i> (which <i>SAttributes</i> inherits). If an object \
+has additional attibutes, the object will be <i>S{Object}Attributes</i> \
+(such as SAlertAttributes). <i>SAlertAttributes</i> adds the properties \
+"dismissible" and "animationPeriod" to allow easy customization \
+of the object.'; }
 
-    ESectionTitle { text: "Changing the Style"; }
-    SText { style: "block"; text: '\
+  ESectionTitle { text: "Changing the Style"; }
+  EParagraph { text: '\
 When a new value is assigned to the "style" property, \
-the string is parsed and the styling is bound to the object.';
-    }
-    ESubSectionTitle { text: 'SSizeAttributes'; }
-    SText { style: "block"; text: '\
-SSizeAttributes (all objects) support the following style \
+the string is parsed (left to right) and new colors and sizes are bound \
+to the object\'s attibutes.';
+  }
+  EParagraph { text: '\
+For example, <i>style: "padding-zero"</i> will cause \
+<i>paddingHorizontal</i> and <i>paddingVertical</i> to be \
+set to zero.';
+  }
+  ESubSectionTitle { text: 'SSizeAttributes'; }
+  EParagraph { text: '\
+<i>SSizeAttributes</i> (all objects) support the following style \
 options.';
-    }
+  }
 
-    SContainer {
-        SColumn {
-            ESubSectionTitle { text: "Padding"; }
-            EBullet { text: "padding-zero"; }
-            EBullet { text: "padding-xs"; }
-            EBullet { text: "padding-lg"; }
+  ESubSectionTitle { text: "Padding"; }
+  EBullet { text: "padding-zero"; }
+  EBullet { text: "padding-xs"; }
+  EBullet { text: "padding-sm"; }
+  EBullet { text: "padding-normal"; }
+  EBullet { text: "padding-lg"; }
 
-            SHLine {}
+  SHLine {}
 
-            ESubSectionTitle { text: "Horizontal Alignment"; }
-            EBullet { text: "left"; }
-            EBullet { text: "right"; }
-            EBullet { text: "center"; }
+  ESubSectionTitle { text: "Horizontal Alignment"; }
+  EBullet { text: "left"; }
+  EBullet { text: "right"; }
+  EBullet { text: "center"; }
 
-            ESubSectionTitle { text: "Vertical Alignment"; }
-            EBullet { text: "top"; }
-            EBullet { text: "bottom"; }
-            EBullet { text: "middle"; }
+  ESubSectionTitle { text: "Vertical Alignment"; }
+  EBullet { text: "top"; }
+  EBullet { text: "bottom"; }
+  EBullet { text: "middle"; }
 
-            AttributeExampleAlignment{}
-            ECodeExample { source: "AttributeExampleAlignment"; }
+  AttributeExampleAlignment{}
+  ECodeButton { source: "AttributeExampleAlignment"; }
 
-            ESubSectionTitle { text: "Sizing"; }
-            EBullet { text: "fill: fill height"; }
-            EBullet { text: "block: fill width"; }
-            EBullet { text: "default: align middle-center, implicit size"; }
+  ESubSectionTitle { text: "Sizing"; }
+  EBullet { text: "fill: fill height"; }
+  EBullet { text: "block: fill width"; }
+  EBullet { text: "implicit-size: no fill"; }
 
-            AttributeExampleSize{}
-            ECodeExample { source: "AttributeExampleSize"; }
-        }
-    }
+  AttributeExampleSize{}
+  ECodeButton { source: "AttributeExampleSize"; }
 
-    SText { style: "block text-bold"; text: 'SAttributes'; }
-    SText { style: "block"; text: 'SAttributes (most objects) support the following style \
+
+
+  SText { style: "block text-bold"; text: 'SAttributes'; }
+  EParagraph { text: 'SAttributes (most objects) support the following style \
 options.'; }
 
-    SContainer {
-        SColumn {
-            ESubSectionTitle { text: "Size"; }
-            SText { style: "left text-sm"; text: "Changes text size and padding"; }
-            EBullet { text: "xs"; }
-            EBullet { text: "sm"; }
-            EBullet { text: "lg"; }
+  ESubSectionTitle { text: "Size"; }
+  SText { style: "left text-sm"; text: "Changes text size and padding"; }
+  EBullet { text: "xs"; }
+  EBullet { text: "sm"; }
+  EBullet { text: "lg"; }
 
-            SHLine {}
+  SHLine {}
 
-            ESubSectionTitle { text: "Text Sizes"; }
-            EBullet { text: "text-h1"; }
-            EBullet { text: "text-h2"; }
-            EBullet { text: "text-h3"; }
-            EBullet { text: "text-h4"; }
-            EBullet { text: "text-h5"; }
-            EBullet { text: "text-h6"; }
-            EBullet { text: "text-sm"; }
-            EBullet { text: "text-lg"; }
+  ESubSectionTitle { text: "Text Sizes"; }
+  EBullet { text: "text-h1"; }
+  EBullet { text: "text-h2"; }
+  EBullet { text: "text-h3"; }
+  EBullet { text: "text-h4"; }
+  EBullet { text: "text-h5"; }
+  EBullet { text: "text-h6"; }
+  EBullet { text: "text-sm"; }
+  EBullet { text: "text-lg"; }
 
-            AttributeExampleTextSize{}
-            ECodeExample { source: "AttributeExampleTextSize"; }
+  AttributeExampleTextSize{}
+  ECodeButton { source: "AttributeExampleTextSize"; }
 
-            ESubSectionTitle { text: "Text Alignment"; }
+  ESubSectionTitle { text: "Text Alignment"; }
 
-            EBullet { text: "text-right"; }
-            EBullet { text: "text-left"; }
-            EBullet { text: "text-center"; }
-            EBullet { text: "text-top"; }
-            EBullet { text: "text-bottom"; }
-            EBullet { text: "text-middle"; }
+  EBullet { text: "text-right"; }
+  EBullet { text: "text-left"; }
+  EBullet { text: "text-center"; }
+  EBullet { text: "text-top"; }
+  EBullet { text: "text-bottom"; }
+  EBullet { text: "text-middle"; }
 
-            AttributeExampleTextAlignment{}
-            ECodeExample { source: "AttributeExampleTextAlignment"; }
+  AttributeExampleTextAlignment{}
+  ECodeButton { source: "AttributeExampleTextAlignment"; }
 
-            SHLine {}
+  SHLine {}
 
-            ESubSectionTitle { text: "Text Weight"; }
-            EBullet { text: "text-bold"; }
-            EBullet { text: "text-light"; }
-            EBullet { text: "text-demi-bold"; }
-            EBullet { text: "text-extra-bold"; }
-            EBullet { text: "text-extra-light"; }
-            SRow {
-                SText { span: 4; style: "text-bold"; text: "Text Bold"; }
-                SText { span: 4; style: "text-light"; text: "Text Light"; }
-                SText { span: 4; style: "text-demi-bold"; text: "Text Demi Bold"; }
-                SText { span: 4; style: "text-extra-bold"; text: "Text Extra Bold"; }
-                SText { span: 4; style: "text-extra-ligh"; text: "Text Extra Light"; }
-                SText { span: 4; text: "Text"; }
-            }
+  ESubSectionTitle { text: "Text Weight"; }
+  EBullet { text: "text-bold"; }
+  EBullet { text: "text-light"; }
+  EBullet { text: "text-demi-bold"; }
+  EBullet { text: "text-extra-bold"; }
+  EBullet { text: "text-extra-light"; }
+  SRow {
+    SText { span: 4; style: "text-bold"; text: "Text Bold"; }
+    SText { span: 4; style: "text-light"; text: "Text Light"; }
+    SText { span: 4; style: "text-demi-bold"; text: "Text Demi Bold"; }
+    SText { span: 4; style: "text-extra-bold"; text: "Text Extra Bold"; }
+    SText { span: 4; style: "text-extra-ligh"; text: "Text Extra Light"; }
+    SText { span: 4; text: "Text"; }
+  }
 
-            SHLine {}
+  SHLine {}
 
-            ESubSectionTitle { text: "Text Color"; }
-            EBullet { text: "text-on-primary: color when on primary"; }
-            EBullet { text: "text-on-secondary: color when on secondary"; }
-            EBullet { text: "text-on-info: color when on info"; }
-            EBullet { text: "text-on-warning: color when on warning"; }
-            EBullet { text: "text-on-danger: color when on danger"; }
-            EBullet { text: "text-on-success: color when on success"; }
-            EBullet { text: "text-primary: set text color to primary"; }
-            EBullet { text: "text-secondary: set text color to secondary"; }
-            EBullet { text: "text-info: set text color to info"; }
-            EBullet { text: "text-warning: set text color to warning"; }
-            EBullet { text: "text-danger: set text color to danger"; }
-            EBullet { text: "text-success: set text color to success"; }
+  ESubSectionTitle { text: "Text Color"; }
+  EBullet { text: "text-on-primary"; }
+  EBullet { text: "text-on-secondary"; }
+  EBullet { text: "text-on-info"; }
+  EBullet { text: "text-on-warning"; }
+  EBullet { text: "text-on-danger"; }
+  EBullet { text: "text-on-success"; }
+  EBullet { text: "text-primary"; }
+  EBullet { text: "text-secondary"; }
+  EBullet { text: "text-info"; }
+  EBullet { text: "text-warning"; }
+  EBullet { text: "text-danger"; }
+  EBullet { text: "text-success"; }
 
 
-            SHLine {}
+  SHLine {}
 
-            ESubSectionTitle { text: "Color Schemes"; }
-            SText { style: "left text-sm"; text: "Change font, object, and border colors"; }
-            EBullet { text: "primary"; }
-            EBullet { text: "secondary"; }
-            EBullet { text: "info"; }
-            EBullet { text: "warning"; }
-            EBullet { text: "danger"; }
-            EBullet { text: "success"; }
-        }
-    }
+  ESubSectionTitle { text: "Color Schemes"; }
+  SText { style: "left text-sm"; text: "Change font, object, and border colors"; }
+  EBullet { text: "primary"; }
+  EBullet { text: "secondary"; }
+  EBullet { text: "info"; }
+  EBullet { text: "warning"; }
+  EBullet { text: "danger"; }
+  EBullet { text: "success"; }
 
-    SText { style: "block"; text: '\
+  EParagraph { text: '\
 Each S{Object} may add additional styling options. For example \
 SButton uses "btn-outline-primary" for setting the color.';
-    }
+  }
 
 
-    ESectionTitle { text: "Further Customization"; }
+  ESectionTitle { text: "Further Customization"; }
 
-    SText { style: "block"; text: '\
+  EParagraph { text: '\
 If the styling options above don\'t meet your needs, \
 you can directly access an item\'s attributes using the \
 "attr" property. This is useful if you want to bind to \
 specific attributes. The following example binds the icon "spin" \
 attribute to a variable.';
-    }
+  }
 
-    AttributeExampleCustomAttributes{}
-    ECodeExample { source: "AttributeExampleCustomAttributes"; }
+  AttributeExampleCustomAttributes{}
+  ECodeButton { source: "AttributeExampleCustomAttributes"; }
 }
 
 

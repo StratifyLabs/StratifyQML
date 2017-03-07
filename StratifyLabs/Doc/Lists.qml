@@ -2,24 +2,25 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 EPane {
-    name: "Lists";
-    EHeading {
-        title: "Buttons";
-        inherits: "QtQuick.Controls 2.0 Button";
-        stratifyName: "SButton";
-        specialAttibutes: "icon";
-    }
+  name: "Lists";
+  EHeading {
+    title: "Buttons";
+    inherits: "ListView";
+    stratifyName: "SList";
+    specialAttibutes: "icon";
+  }
 
-    ESectionTitle { text: "Description"; }
+  ESectionTitle { text: "Description"; }
+  EParagraph { text: 'An <i>SList</i> is a \
+QML <i>ListView</i> object with SL.UI styling.'; }
+  SHLine{}
 
-    SHLine{}
+  ESectionTitle { text: "Example"; }
+  ListExample{}
+  ECodeButton { source: "ListExample"; }
 
-    ESectionTitle { text: "Example"; }
-    ListExample{}
-    ECodeExample { source: "ListExample"; }
-
-    ESectionTitle { text: "ListGroup"; }
-    ListExampleListGroup{}
-    ECodeExample { source: "ListExampleListGroup"; }
+  ESectionTitle { text: "ListGroup"; }
+  ListExampleListGroup{}
+  ECodeButton { source: "ListExampleListGroup"; }
 
 }

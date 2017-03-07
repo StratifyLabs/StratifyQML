@@ -1,9 +1,9 @@
 import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
-SColumn {
-
-    property string loremIpsum: "Lorem ipsum dolor sit amet, \
+SRow {
+  property real boxHeight: 150;
+  property string loremIpsum: "Lorem ipsum dolor sit amet, \
 consectetur adipiscing elit, sed do eiusmod \
 tempor incididunt ut labore et dolore magna \
 aliqua. Ut enim ad minim veniam, quis nostrud \
@@ -14,43 +14,47 @@ dolore eu fugiat nulla pariatur. Excepteur \
 sint occaecat cupidatat non proident, sunt in \
 culpa qui officia deserunt mollit anim id est laborum."
 
-    SText {
-        style: "left text-h1";
-        text: "Default";
-    }
+  SText {
+    span: 4;
+    style: "left text-h1 top";
+    text: "Default";
+  }
 
-    STextBox {
-        implicitHeight: 100;
-        style: "block";
-        text: loremIpsum;
-    }
+  STextBox {
+    span: 8;
+    implicitHeight: boxHeight;
+    style: "block";
+    text: loremIpsum;
+  }
 
-    SHLine {}
+  SHLine {}
 
-    SText {
-        style: "left text-h1";
-        text: "Center";
-    }
+  SText {
+    span: 4;
+    style: "left text-h1 top";
+    text: "Center";
+  }
 
-    STextBox {
-        implicitHeight: 100;
-        style: "block text-center";
-        text: loremIpsum;
-    }
+  STextBox {
+    span: 8;
+    implicitHeight: boxHeight;
+    style: "block text-center";
+    text: loremIpsum;
+  }
 
-    SHLine {}
+  SHLine {}
 
-    SText {
-        style: "left text-h1";
-        text: "Right";
-    }
+  SText {
+    span: 4;
+    style: "left text-h1 top";
+    text: "Right";
+  }
 
-    STextBox {
-        implicitHeight: 100;
-        style: "block text-right";
-        text: loremIpsum;
-    }
+  STextBox {
+    span: 8;
+    implicitHeight: boxHeight;
+    style: "block text-right";
+    text: loremIpsum;
+  }
 
 }
-
-

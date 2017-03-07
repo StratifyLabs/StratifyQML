@@ -2,22 +2,28 @@ import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
 EPane {
-    name: "ProgressCircles";
-    EHeading {
-        title: "Progress Circles";
-        inherits: "Item";
-        stratifyName: "SProgressCircle";
-    }
+  name: "ProgressCircles";
+  EHeading {
+    title: "Progress Circles";
+    inherits: "Item";
+    stratifyName: "SProgressCircle";
+  }
 
-    ESectionTitle { text: "Description"; }
+  ESectionTitle { text: "Description"; }
+  EParagraph { text: 'An <i>SProgressCircle</i> show linear \
+progress but with a greater prominance to the user than an <i>SProgressBar</i>.'; }
 
-    SHLine{}
+  EReadMore {
+    tags: "ProgressBars:SProgressBar";
+  }
 
-    ESectionTitle { text: "Colors"; }
-    ProgressCircleExampleColors{}
-    ECodeExample { source: "ProgressCircleExampleColors"; }
+  SHLine{}
 
-    ESectionTitle { text: "With an Icon"; }
-    ProgressCircleExample{}
-    ECodeExample { source: "ProgressCircleExample"; }
+  ESectionTitle { text: "Colors"; }
+  ProgressCircleExampleColors{}
+  ECodeButton { source: "ProgressCircleExampleColors"; }
+
+  ESectionTitle { text: "With an Icon"; }
+  ProgressCircleExample{}
+  ECodeButton { source: "ProgressCircleExample"; }
 }
