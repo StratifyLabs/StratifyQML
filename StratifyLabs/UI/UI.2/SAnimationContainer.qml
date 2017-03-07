@@ -29,6 +29,12 @@ Item {
     property string screen;
     property var current;
 
+    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
+
+    //implicitWidth: contents.implicitWidth + attr.paddingHorizontal*2;
+    //implicitHeight: contents.implicitHeight + attr.paddingVertical*2;
+
     property var animation: SAnimationFade {
         parent: root;
     }
@@ -37,7 +43,7 @@ Item {
         animation.parent = root;
     }
 
-    SAttributes {
+    SSizeAttributes {
         id: attr;
         type: "animationcontainer";
         fillWidth: true;

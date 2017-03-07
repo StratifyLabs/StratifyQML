@@ -24,6 +24,7 @@ Rectangle {
     property alias style: attr.style;
     property alias span: attr.span;
     property alias text: text.text;
+    property alias textArea: text;
 
     implicitWidth: text.width;
     implicitHeight: text.height;

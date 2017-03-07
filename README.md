@@ -8,12 +8,15 @@ StratifyLabs UI is released under the ASL 2.0.  If you are willing to release co
 
 # Version 2.0 is Almost Ready
 
-Version 1.0 got the ball rolling but version 2.0 is
+Version 1.0 got the ball rolling but version 2.0 is a huge improvement. Much of the API is the same, but under the hood big changes have been made to make customizing and stying objects easier and more intuitive.
+
+## Porting to 2.0
 
 # Documentation
 
 To view the documentation, you have a couple of options:
 
-- Coming Soon: Buy the StratifyLabs UI Docs app from your favorite app store ($5)
-- Download the source code and launch the StratifyLabs UI Docs app from Qt Creator
+- Download the SL.UI app for Mac or Windows
+- Coming Soon: Get the SL.UI Doc app from your favorite app store for Android/iOS
+- Download the source code and launch the StratifyLabs UI Doc qmlproject from Qt Creator
 

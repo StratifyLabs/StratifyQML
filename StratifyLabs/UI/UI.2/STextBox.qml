@@ -28,6 +28,8 @@ Rectangle {
     property alias textArea: textArea;
     property alias textBox: control.textArea;
     property alias flickable: flickable;
+    property alias verticalScroll: verticalScrollBar;
+    property alias horizontalScroll: horizontalScrollBar;
 
     SAttributes {
         id: attr;
@@ -67,6 +69,13 @@ Rectangle {
             selectionColor: attr.backgroundColorFontSelection;
         }
 
-        ScrollBar.vertical: ScrollBar { }
+        ScrollBar.vertical: ScrollBar {
+          id: verticalScrollBar;
+        }
+
+        ScrollBar.horizontal: ScrollBar {
+          id: horizontalScrollBar;
+          visible: false;
+        }
     }
 }
