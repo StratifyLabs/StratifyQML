@@ -2,7 +2,7 @@
 
 StratifyLabs UI (SL.UI for short) is a QML UI framework inspired by Twitter Bootstrap.  The goal is to provide easy-to-use, customizable QML building blocks that follow the Twitter Bootstrap look and feel including responsive elements that look great on any screen.
 
-![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/development/img/sl.ui-buttons.png)
+![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/master/img/sl.ui-buttons.png)
 
 # Contributors Welcome
 
@@ -26,9 +26,9 @@ To view the documentation, you have a couple of options:
 
 # Screen Shots
 
-![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/development/img/sl.ui-code.png)
-![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/development/img/sl.ui-menu.png)
-![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/development/img/sl.ui-modal.png)
-![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/development/img/sl.ui-sliders.png)
+![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/master/img/sl.ui-code.png)
+![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/master/img/sl.ui-menu.png)
+![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/master/img/sl.ui-modal.png)
+![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/master/img/sl.ui-sliders.png)
 
 
