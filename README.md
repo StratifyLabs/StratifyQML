@@ -2,6 +2,8 @@
 
 StratifyLabs UI (SL.UI for short) is a QML UI framework inspired by Twitter Bootstrap.  The goal is to provide easy-to-use, customizable QML building blocks that follow the Twitter Bootstrap look and feel including responsive elements that look great on any screen.
 
+A full demo and documentation app is available in the [releases section](https://github.com/StratifyLabs/StratifyQML/releases).
+
 ![Sl.UI Buttons](https://github.com/StratifyLabs/StratifyQML/blob/master/img/sl.ui-buttons.png)
 
 # Contributors Welcome
@@ -20,7 +22,7 @@ If you have built some apps using the 1.0 release, I highly recommend porting to
 
 To view the documentation, you have a couple of options:
 
-- Download the SL.UI app for Mac or Windows
+- Download the SL.UI app for Mac or Windows from the [releases section](https://github.com/StratifyLabs/StratifyQML/releases)
 - Coming Soon: Get the SL.UI Doc app from your favorite app store for Android/iOS
 - Download the source code and launch the StratifyLabs UI Doc qmlproject from Qt Creator
 
