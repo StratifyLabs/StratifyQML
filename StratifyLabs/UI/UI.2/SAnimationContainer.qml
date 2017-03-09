@@ -29,11 +29,12 @@ Item {
     property string screen;
     property var current;
 
-    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
-    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
+    //Setting the width and height causes problems, inside a layout the object is OK Issue 25
+    //width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    //height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
-    //implicitWidth: contents.implicitWidth + attr.paddingHorizontal*2;
-    //implicitHeight: contents.implicitHeight + attr.paddingVertical*2;
+    //implicitWidth: current.implicitWidth;
+    //implicitHeight: current.implicitHeight;
 
     property var animation: SAnimationFade {
         parent: root;

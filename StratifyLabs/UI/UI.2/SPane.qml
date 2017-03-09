@@ -30,8 +30,8 @@ Flickable {
     }
 
     clip: true;
-    width: parent !== undefined ? (attr.fillWidth ? parent.width : undefined) : undefined;
-    height: parent !== undefined ? (attr.fillHeight ? parent.height : undefined) : undefined;
+    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
     //if child has "fillWidth" set, width will bind
     //if child has "fillHeight" set, height will bind
