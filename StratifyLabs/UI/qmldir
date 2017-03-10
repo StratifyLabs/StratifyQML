@@ -70,9 +70,9 @@ SAnimator 2.0 UI.2/SAnimationContainer.qml
 SAnimationFade 2.0 UI.2/SAnimationFade.qml
 SAnimationHPush 2.0 UI.2/SAnimationHPush.qml
 SBadge 2.0 UI.2/SBadge.qml
-SBreadcrumb 2.0 UI.2/SBreadcrumb.qml
+
 SButton 2.0 UI.2/SButton.qml
-SCarousel 2.0 UI.2/SCarousel.qml
+
 SCheckbox 2.0 UI.2/SCheckbox.qml
 SCheckBox 2.0 UI.2/SCheckbox.qml
 SColumn 2.0 UI.2/SColumn.qml
@@ -95,7 +95,7 @@ SListGroup 2.0 UI.2/SListgroup.qml
 SListgroup 2.0 UI.2/SListgroup.qml
 SLoader 2.0 UI.2/SLoader.qml
 SModal 2.0 UI.2/SModal.qml
-SNavbar 2.0 UI.2/SNavbar.qml
+
 SPane 2.0 UI.2/SPane.qml
 SPanel 2.0 UI.2/SPanel.qml
 SPassword 2.0 UI.2/SPassword.qml
@@ -118,7 +118,6 @@ STreeColumn 2.0 UI.2/STreeColumn.qml
 SWell 2.0 UI.2/SWell.qml
 STooltip 2.0 UI.2/STooltip.qml
 SToolTip 2.0 UI.2/STooltip.qml
-SPopover 2.0 UI.2/SPopover.qml
 SRadioButton 2.0 UI.2/SRadioButton.qml
 Fa 2.0 assets/Fa-4.7.0.js
 
