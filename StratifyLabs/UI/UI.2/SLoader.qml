@@ -17,18 +17,5 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
-SItem {
-    id: loader;
-    type: "loader";
-    property alias source: loaderObject.source;
-
-    Loader {
-        anchors.fill: parent;
-        id: loaderObject;
-        source: "";
-
-        onItemChanged: item.parent = loaderObject;
-    }
-
-}
+Item {}
 
