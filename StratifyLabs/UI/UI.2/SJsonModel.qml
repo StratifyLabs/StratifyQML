@@ -55,7 +55,7 @@ ListModel {
     }
 
     function parseJSONString(jsonString, jsonPathQuery) {
-        console.log("JSON:" + jsonString);
+        //console.log("JSON:" + jsonString);
         var objectArray = JSON.parse(jsonString);
         if ( jsonPathQuery !== "" ){
             objectArray = JSONPath.jsonPath(objectArray, jsonPathQuery);

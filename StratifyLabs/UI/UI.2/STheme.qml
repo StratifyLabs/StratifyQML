@@ -15,7 +15,8 @@ Copyright 2016 Tyler Gilbert
 */
 
 pragma Singleton
-import QtQuick 2.6
+import QtQuick 2.7
+import QtQuick.Controls 2.1
 
 QtObject {
 
@@ -442,6 +443,12 @@ QtObject {
     property real popover_delay: 500;
     property real popover_opacity: 1;
 
+    property bool isTouch: {
+      (Qt.platform.os === "android" ||
+      Qt.platform.os === "ios" ||
+      Qt.platform.os === "blackberry" ||
+      Qt.platform.os === "wince") ? true : false;
+    }
 
     //QML Screen size adjustments
     property bool isScreenSm: false;
