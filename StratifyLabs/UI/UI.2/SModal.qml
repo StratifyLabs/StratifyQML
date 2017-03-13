@@ -31,7 +31,7 @@ Item {
   property real standardButtons: Dialog.Ok | Dialog.Cancel;
 
   //keep it on top
-  z: modalVisible ? 100 : -1;
+  z: 100;
   default property alias data: dialogContents.data;
 
   signal accepted();
@@ -103,7 +103,7 @@ Item {
     anchors.fill: parent;
     color: attr.backgroundColor;
     opacity: STheme.modal_backdrop_opacity;
-    z:-1;
+    z:1;
     MouseArea {
       anchors.fill: parent;
       enabled: modalVisible;
@@ -117,6 +117,7 @@ Item {
     //anchors.centerIn: parent;
     anchors.horizontalCenter: parent.horizontalCenter;
 
+    z: 2;
     width: STheme.screen_md < modal.width*3/4 ? STheme.screen_md : modal.width*3/4;
     implicitHeight: childrenRect.height;
 
