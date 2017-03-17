@@ -10,9 +10,9 @@ A full demo and documentation app is available in the [releases section](https:/
 
 StratifyLabs UI is released under the ASL 2.0.  If you are willing to release contributions under this license and would like to contribute, please let me know.
 
-# Version 2.0 is Almost Ready
+# Version 2.0 is Here!
 
-Version 1.0 got the ball rolling but version 2.0 is a huge improvement. Much of the API is the same, but under the hood big changes have been made to make customizing and stying objects easier and more intuitive.
+Version 1.0 got the ball rolling but version 2.0 is a huge improvement. Many of the API's are the same, but under the hood big changes have been made to make customizing and stying objects easier and more intuitive.
 
 ## Porting to 2.0
 
