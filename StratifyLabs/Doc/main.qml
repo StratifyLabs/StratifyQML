@@ -8,7 +8,7 @@ ApplicationWindow {
   id: window;
   visible: true;
   minimumWidth: 400;
-  minimumHeight: 640;
+  minimumHeight: 400;
   title: "SL.UI";
 
   property string version: "SL.UI 1.0 based on StratifyLabs.UI 2.0"
@@ -116,41 +116,6 @@ ApplicationWindow {
   }
 
 
-  SModal {
-    id: aboutModal;
-    title: "StratifyLabs UI";
-    standardButtons: 0;
-    SColumn {
-      SLabel {
-        style: "left padding-zero";
-        text: "Version";
-      }
-
-      SText {
-        style: "block";
-        text: version;
-      }
-
-      SLabel {
-        style: "left padding-zero";
-        text: "About";
-      }
-
-      SText {
-        style: "block";
-        text: "StratifyLabs UI 2.0 is a QML framework that works, looks, and feels much like the twitter bootstrap HTML framework";
-      }
-
-      SButton {
-        style: "btn-outline-info";
-        icon: Fa.Icon.github;
-        text: "Fork on Github";
-        onClicked: Qt.openUrlExternally("https://github.com/StratifyLabs/StratifyQML");
-      }
-    }
-  }
-
-
   SColumn {
     style: "block fill";
     attr.paddingVertical: 0;
@@ -184,12 +149,10 @@ ApplicationWindow {
       id: animationContainer;
       style: "block fill";
 
+      screen: "Introduction";
+
       onScreenChanged: {
         drawer.setActiveItem(screen);
-      }
-
-      Component.onCompleted: {
-        showScreen(current);
       }
 
       resources: [
@@ -274,6 +237,41 @@ ApplicationWindow {
             }
           }
         }
+      }
+    }
+  }
+
+  SModal {
+    id: aboutModal;
+    title: "StratifyLabs UI";
+    standardButtons: 0;
+    //z: 100;
+    SColumn {
+      SLabel {
+        style: "left padding-zero";
+        text: "Version";
+      }
+
+      SText {
+        style: "block";
+        text: version;
+      }
+
+      SLabel {
+        style: "left padding-zero";
+        text: "About";
+      }
+
+      SText {
+        style: "block";
+        text: "StratifyLabs UI 2.0 is a QML framework that works, looks, and feels much like the twitter bootstrap HTML framework";
+      }
+
+      SButton {
+        style: "btn-outline-info";
+        icon: Fa.Icon.github;
+        text: "Fork on Github";
+        onClicked: Qt.openUrlExternally("https://github.com/StratifyLabs/StratifyQML");
       }
     }
   }
