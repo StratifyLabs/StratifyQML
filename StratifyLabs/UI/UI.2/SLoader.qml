@@ -17,5 +17,21 @@ Copyright 2016 Tyler Gilbert
 import QtQuick 2.6
 import StratifyLabs.UI 2.0
 
-Item {}
+Loader {
+
+  id: control;
+  property alias style: attr.style;
+  property alias span: attr.span;
+  property alias attr: attr;
+  property string name;
+
+  width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+  height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
+
+  SSizeAttributes {
+    id: attr;
+    fillWidth: true;
+  }
+
+}
 

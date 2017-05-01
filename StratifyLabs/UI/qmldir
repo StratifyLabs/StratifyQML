@@ -93,6 +93,7 @@ SLabel 2.0 UI.2/SLabel.qml
 SList 2.0 UI.2/SList.qml
 SListGroup 2.0 UI.2/SListgroup.qml
 SListgroup 2.0 UI.2/SListgroup.qml
+SLoader 2.0 UI.2/SLoader.qml
 
 SModal 2.0 UI.2/SModal.qml
 

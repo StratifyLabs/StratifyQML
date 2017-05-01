@@ -37,6 +37,8 @@ ComboBox {
         id: attr;
         blockWidth: true;
 
+        property real numberVisible: 4;
+
         fontColorSelected: STheme.dropdown_active_color;
         fontColorHovered: STheme.dropdown_hover_color;
         color: STheme.dropdown_active_bg;
@@ -137,7 +139,7 @@ ComboBox {
     popup: Popup {
         y: control.height - (control.visualFocus ? 0 : 1) + attr.paddingVertical;
         width: control.width;
-        implicitHeight: ((count < 4 ? (contentItem.implicitHeight*(count ? count : 1) + attr.paddingVertical*2) : contentItem.implicitHeight*4)) + attr.paddingVertical*2;
+        implicitHeight: ((count < attr.numberVisible ? (contentItem.implicitHeight*(count ? count : 1) + attr.paddingVertical*2) : contentItem.implicitHeight*attr.numberVisible)) + attr.paddingVertical*2;
         topMargin: attr.paddingVertical;
         bottomMargin: attr.paddingVertical
 
