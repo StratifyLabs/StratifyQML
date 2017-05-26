@@ -52,7 +52,7 @@ CheckBox {
         text: control.checked ? control.iconChecked: control.icon;
         font.italic: attr.fontItalic;
         font.family: attr.fontIcon;
-        font.pixelSize: attr.fontSize*1.4;
+        font.pointSize: attr.fontSize*1.4;
         font.weight: attr.fontWeight;
         color: attr.fontColor;
         opacity: enabled ? 1 : 0.3
@@ -64,7 +64,7 @@ CheckBox {
 
         text: control.text;
         font.family: attr.fontText;
-        font.pixelSize: attr.fontSize;
+        font.pointSize: attr.fontSize;
         font.weight: attr.fontWeight;
         color: attr.fontColor;
         visible: true;

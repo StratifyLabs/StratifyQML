@@ -27,7 +27,7 @@ Slider {
 
     font.family: attr.fontText;
     font.weight: attr.fontWeight;
-    font.pixelSize: attr.fontSize;
+    font.pointSize: attr.fontSize;
     //color: attr.textColor;
 
     leftPadding: attr.paddingHorizontal;

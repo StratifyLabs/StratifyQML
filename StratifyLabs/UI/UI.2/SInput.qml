@@ -30,7 +30,7 @@ TextField {
     implicitHeight: attr.fontContainerHeight;
 
     font.family: attr.fontText;
-    font.pixelSize: attr.fontSize;
+    font.pointSize: attr.fontSize;
     font.weight: attr.fontWeight;
     color: enabled ? attr.fontColor : attr.fontColorMuted;
     selectByMouse: true;
@@ -50,7 +50,7 @@ TextField {
             anchors.verticalCenter: parent.verticalCenter;
             visible: control.text;
             font.family: attr.fontIcon;
-            font.pixelSize: attr.fontSize * 1.2;
+            font.pointSize: attr.fontSize * 1.2;
             color: attr.fontColorMuted;
             text: Fa.Icon.times;
             rightPadding: attr.paddingHorizontal;

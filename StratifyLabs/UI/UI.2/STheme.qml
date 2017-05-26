@@ -17,10 +17,14 @@ Copyright 2016 Tyler Gilbert
 pragma Singleton
 import QtQuick 2.7
 import QtQuick.Controls 2.1
+import QtQuick.Window 2.2
 
 QtObject {
 
     id: stratifyUI;
+
+
+    property real pixelPointRatio: 1;
 
     property var fontFontAwesome: FontLoader { id: fontFontAwesomeInternal; source: "../assets/fontawesome-4.7.0-webfont.ttf"; }
     property var fontOpenSans: FontLoader { id: fontOpenSansInternal; source: "../assets/OpenSans-Regular.ttf"; }
@@ -74,26 +78,26 @@ QtObject {
     property real headings_line_height: 1.1;
     property string headings_color: "inherit";
     property string icon_font_path: "assets/fonts/";
-    property real padding_base_vertical: 8;
-    property real padding_base_horizontal: 12;
-    property real padding_large_vertical: 10;
-    property real padding_large_horizontal: 16;
-    property real padding_small_vertical: 5;
-    property real padding_small_horizontal: 10;
-    property real padding_xs_vertical: 1;
-    property real padding_xs_horizontal: 5;
-    property real line_height_large: 1.3333333;
-    property real line_height_small: 1.5;
-    property real border_radius_base: 4;
-    property real border_radius_large: 6;
-    property real border_radius_small: 3;
-    property real border_width: 1;
+    property real padding_base_vertical: 8*pixelPointRatio;
+    property real padding_base_horizontal: 12*pixelPointRatio;
+    property real padding_large_vertical: 10*pixelPointRatio;
+    property real padding_large_horizontal: 16*pixelPointRatio;
+    property real padding_small_vertical: 5*pixelPointRatio;
+    property real padding_small_horizontal: 10*pixelPointRatio;
+    property real padding_xs_vertical: 1*pixelPointRatio;
+    property real padding_xs_horizontal: 5*pixelPointRatio;
+    property real line_height_large: 1.3333333*pixelPointRatio;
+    property real line_height_small: 1.5*pixelPointRatio;
+    property real border_radius_base: 4*pixelPointRatio;
+    property real border_radius_large: 6*pixelPointRatio;
+    property real border_radius_small: 3*pixelPointRatio;
+    property real border_width: 1*pixelPointRatio;
     property color component_active_color: "#fff";
     property color component_active_bg: brand_primary;
-    property real caret_width_base: 4;
-    property real caret_width_large: 5;
-    property real table_cell_padding: 8;
-    property real table_condensed_cell_padding: 5;
+    property real caret_width_base: 4*pixelPointRatio;
+    property real caret_width_large: 5*pixelPointRatio;
+    property real table_cell_padding: 8*pixelPointRatio;
+    property real table_condensed_cell_padding: 5*pixelPointRatio;
     property color table_bg: "transparent";
     property color table_bg_accent: "#f9f9f9";
     property color table_bg_hover: "#f5f5f5";
@@ -139,7 +143,7 @@ QtObject {
     property real input_height_base: (line_height_computed + (padding_base_vertical * 2) + 2);
     property real input_height_large: (Math.ceil(font_size_large * line_height_large) + (padding_large_vertical * 2) + 2);
     property real input_height_small: (Math.floor(font_size_small * line_height_small) + (padding_small_vertical * 2) + 2);
-    property real form_group_margin_bottom: 15;
+    property real form_group_margin_bottom: 15*pixelPointRatio;
     property color legend_color: gray_dark;
     property color legend_border_color: "#e5e5e5";
     property color input_group_addon_bg: gray_lighter;
@@ -188,7 +192,7 @@ QtObject {
     property real container_md: container_desktop;
     property real container_large_desktop: (1140 + grid_gutter_width);
     property real container_lg: container_large_desktop;
-    property real navbar_height: 50;
+    property real navbar_height: 50*pixelPointRatio;
     property real navbar_margin_bottom: line_height_computed;
     property real navbar_border_radius: border_radius_base;
     property real navbar_padding_horizontal: Math.floor((grid_gutter_width / 2));
@@ -226,7 +230,7 @@ QtObject {
     property color navbar_inverse_toggle_hover_bg: "#333";
     property color navbar_inverse_toggle_icon_bar_bg: "#fff";
     property color navbar_inverse_toggle_border_color: "#333";
-    property real nav_link_padding: 15;
+    property real nav_link_padding: 15*pixelPointRatio;
     property color nav_link_hover_bg: gray_lighter;
     property color nav_disabled_link_color: gray_light;
     property color nav_disabled_link_hover_color: gray_light;
@@ -254,12 +258,12 @@ QtObject {
     property color pagination_disabled_border: "#ddd";
     property color pager_bg: pagination_bg;
     property color pager_border: pagination_border;
-    property real pager_border_radius: 15;
+    property real pager_border_radius: 15*pixelPointRatio;
     property color pager_hover_bg: pagination_hover_bg;
     property color pager_active_bg: pagination_active_bg;
     property color pager_active_color: pagination_active_color;
     property color pager_disabled_color: pagination_disabled_color;
-    property real jumbotron_padding: 30;
+    property real jumbotron_padding: 30*pixelPointRatio;
     property string jumbotron_color: "inherit";
     property color jumbotron_bg: gray_lighter;
     property string jumbotron_heading_color: "inherit";
@@ -277,18 +281,18 @@ QtObject {
     property color state_danger_text: "#a94442";
     property color state_danger_bg: "#f2dede";
     property color state_danger_border: darken(state_danger_bg, 15);
-    property real tooltip_max_width: 200;
+    property real tooltip_max_width: 200*pixelPointRatio;
     property color tooltip_color: "#fff";
     property color tooltip_bg: "#000";
     property real tooltip_opacity: .9;
-    property real tooltip_arrow_width: 5;
+    property real tooltip_arrow_width: 5*pixelPointRatio;
     property color tooltip_arrow_color: tooltip_bg;
     property color popover_bg: "#fff";
-    property real popover_max_width: 276;
+    property real popover_max_width: 276*pixelPointRatio;
     property color popover_border_color: Qt.rgba(0,0,0,.2);
     property color popover_fallback_border_color: "#ccc";
     property color popover_title_bg: darken(popover_bg, 3);
-    property real popover_arrow_width: 10;
+    property real popover_arrow_width: 10*pixelPointRatio;
     property color popover_arrow_color: popover_bg;
     property real popover_arrow_outer_width: (popover_arrow_width + 1);
     //property string popover_arrow_outer_color: fadein(popover_border_color, 5);
@@ -302,8 +306,8 @@ QtObject {
     property color label_danger_bg: brand_danger;
     property color label_color: "#fff";
     property color label_link_hover_color: "#fff";
-    property real modal_inner_padding: 15;
-    property real modal_title_padding: 15;
+    property real modal_inner_padding: 15*pixelPointRatio;
+    property real modal_title_padding: 15*pixelPointRatio;
     property real modal_title_line_height: line_height_base;
     property color modal_content_bg: "#fff";
     property color modal_content_border_color: Qt.rgba(0,0,0,.2);
@@ -357,9 +361,9 @@ QtObject {
     property color list_group_link_hover_color: list_group_link_color;
     property color list_group_link_heading_color: "#333";
     property color panel_bg: "#fff";
-    property real panel_body_padding: 15;
-    property real panel_heading_padding: 15;
-    property real panel_footer_padding: 15;
+    property real panel_body_padding: 15*pixelPointRatio;
+    property real panel_heading_padding: 15*pixelPointRatio;
+    property real panel_footer_padding: 15*pixelPointRatio;
     property real panel_border_radius: border_radius_base;
     property real panel_border_width: border_width;
     property color panel_inner_border: "#ddd";
@@ -385,12 +389,12 @@ QtObject {
     property color panel_danger_text: state_danger_text;
     property color panel_danger_border: state_danger_border;
     property color panel_danger_heading_bg: state_danger_bg;
-    property real thumbnail_padding: 4;
+    property real thumbnail_padding: 4*pixelPointRatio;
     property color thumbnail_bg: body_bg;
     property color thumbnail_border: "#ddd";
     property real thumbnail_border_radius: border_radius_base;
     property color thumbnail_caption_color: text_color;
-    property real thumbnail_caption_padding: 9;
+    property real thumbnail_caption_padding: 9*pixelPointRatio;
     property color well_bg: "#f5f5f5";
     property color well_border: darken(well_bg, 7);
     property color badge_color: "#fff";
@@ -400,7 +404,7 @@ QtObject {
     property string badge_active_bg: "#fff";
     property string badge_font_weight: "bold";
     property real badge_line_height: 1;
-    property real badge_border_radius: 10;
+    property real badge_border_radius: 10*pixelPointRatio;
     property real badge_border_width: border_width;
     property real breadcrumb_padding_vertical: 8;
     property real breadcrumb_padding_horizontal: 15;

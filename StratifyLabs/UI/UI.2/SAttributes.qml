@@ -10,7 +10,7 @@ SSizeAttributes {
     property string fontText: STheme.font_family_base.name;
     property string fontIcon: STheme.font_family_icon.name;
     property real fontSize: STheme.font_size_base;
-    property real fontContainerHeight: (fontSize + paddingVertical*3);
+    property real fontContainerHeight: (fontSize*STheme.pixelPointRatio + paddingVertical*3);
     property color fontColor: STheme.text_color;
     property color fontColorHovered: fontColor;
     property color fontColorPressed: fontColor;

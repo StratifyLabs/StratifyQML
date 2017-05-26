@@ -53,7 +53,7 @@ ComboBox {
     baselineOffset: contentItem.y + contentItem.baselineOffset;
 
     font.family: attr.fontText;
-    font.pixelSize: attr.fontSize;
+    font.pointSize: attr.fontSize;
     font.weight: attr.fontWeight;
 
     spacing: attr.paddingVertical;
@@ -99,7 +99,7 @@ ComboBox {
         y: control.topPadding + (control.availableHeight - height) / 2
         text: Fa.Icon.caret_down;
         font.family: attr.fontIcon;
-        font.pixelSize: STheme.font_size_base;
+        font.pointSize: STheme.font_size_base;
         color: STheme.dropdown_caret_color;
         opacity: enabled ? 1 : 0.3
     }

@@ -52,7 +52,7 @@ Rectangle {
         width: parent.width;
         color: attr.fontColor;
         font.family: attr.fontText;
-        font.pixelSize: attr.fontSize;
+        font.pointSize: attr.fontSize;
         font.weight: attr.fontWeight;
         wrapMode: Text.Wrap;
         horizontalAlignment: attr.fontHorizontalAlignment;

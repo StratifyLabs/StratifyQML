@@ -46,7 +46,7 @@ RadioButton {
         y: control.topPadding + (control.availableHeight - height) / 2
         text: control.checked ? control.iconChecked : control.icon;
         font.family: attr.fontIcon;
-        font.pixelSize: attr.fontSize*1.5;
+        font.pointSize: attr.fontSize*1.5;
         color: attr.fontColor;
         opacity: enabled ? 1 : 0.3
     }
@@ -57,7 +57,7 @@ RadioButton {
 
         text: control.text
         font.family: attr.fontText;
-        font.pixelSize: attr.fontSize;
+        font.pointSize: attr.fontSize;
         color: attr.fontColor;
         visible: control.text
         horizontalAlignment: Text.AlignLeft

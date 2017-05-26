@@ -58,7 +58,7 @@ Rectangle {
             id: textArea;
             wrapMode: TextArea.Wrap;
             color: attr.fontColor;
-            font.pixelSize: attr.fontSize;
+            font.pointSize: attr.fontSize;
             font.family: attr.fontText;
             font.weight: attr.fontWeight;
             horizontalAlignment: attr.fontHorizontalAlignment;
