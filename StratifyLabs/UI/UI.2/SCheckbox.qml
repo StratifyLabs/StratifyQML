@@ -59,8 +59,8 @@ CheckBox {
     }
 
     contentItem: Text {
-        leftPadding: control.indicator && !control.mirrored ? attr.fontSize + control.spacing : 0
-        rightPadding: control.indicator && control.mirrored ? attr.fontSize + control.spacing : 0
+        leftPadding: control.indicator && !control.mirrored ? attr.fontSize*STheme.pixelPointRatio + control.spacing : 0
+        rightPadding: control.indicator && control.mirrored ? attr.fontSize*STheme.pixelPointRatio + control.spacing : 0
 
         text: control.text;
         font.family: attr.fontText;
