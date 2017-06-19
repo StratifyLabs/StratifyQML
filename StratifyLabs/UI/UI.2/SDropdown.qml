@@ -37,7 +37,7 @@ ComboBox {
         id: attr;
         blockWidth: true;
 
-        property real numberVisible: 4;
+        property real numberVisible: 6;
 
         fontColorSelected: STheme.dropdown_active_color;
         fontColorHovered: STheme.dropdown_hover_color;
