@@ -44,6 +44,7 @@ Button {
     property real nakedOpacity: 1.0;
     property real hoveredOpacity: 1.0;
     property real pressedOpacity: 1.0;
+    property real focusOpacity: 1.0;
 
     contentItem:  SIcon {
         id: contentIcon;
@@ -84,6 +85,10 @@ Button {
                 return control.hoveredOpacity;
             }
 
+            if( control.focus ){
+                return control.focusOpacity;
+            }
+
             return control.nakedOpacity;
         }
     }
@@ -100,6 +105,7 @@ Button {
 
         onStyleChanged: {
             var items = parseStyle();
+            control.focusOpacity = 1.0;
             control.pressedOpacity = 1.0;
             control.hoveredOpacity = 1.0;
             control.opacity = 1.0;
@@ -179,6 +185,7 @@ Button {
                 } else if( (items[i] === "btn-naked") ){
                     control.pressedOpacity = 0.25;
                     control.hoveredOpacity = 0.1;
+                    control.focusOpacity = 0.1;
                     control.nakedOpacity = 0.0;
                     attr.color = "#000";
                     attr.fontColor = Qt.binding(function(){ return STheme.text_color; });
