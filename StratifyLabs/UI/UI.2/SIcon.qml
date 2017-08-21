@@ -31,6 +31,10 @@ Item {
     property real verticalAlignment: attr.fontHorizontalAlignment;
     property real horizontalAlignment: attr.fontVerticalAlignment;
 
+    function resetSpin() {
+        icon.rotation = 0
+    }
+
     implicitWidth: icon.implicitWidth + (label.implicitWidth*label.visible) + row.spacing;
     implicitHeight: Math.max(icon.implicitHeight, label.implicitHeight);
 
