@@ -16,7 +16,9 @@ DISTFILES2 = $$files(UI.2/*.qml)
 
 DISTFILES = qmldir \
     STestListText.js \
-	StratifyLabsUI.qmltypes
+	StratifyLabsUI.qmltypes \
+    UI.2/SChart.qml \
+    UI.2/SBarSeries.qml
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir

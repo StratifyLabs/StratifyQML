@@ -443,6 +443,35 @@ QtObject {
     property real dl_horizontal_breakpoint: grid_float_breakpoint;
     property color hr_border: gray_lighter;
 
+    property real chart_body_padding: 15*pixelPointRatio;
+    property real chart_heading_padding: 15*pixelPointRatio;
+    property real chart_footer_padding: 15*pixelPointRatio;
+    property real chart_border_radius: border_radius_base;
+    property real chart_border_width: border_width;
+    property color chart_inner_border: "#ddd";
+    property color chart_footer_bg: "#f5f5f5";
+    property color chart_default_text: gray_dark;
+    property color chart_default_border: "#ddd";
+    property color chart_default_heading_bg: "#f5f5f5";
+    property color chart_primary_text: "#fff";
+    property color chart_primary_border: brand_primary;
+    property color chart_primary_heading_bg: brand_primary;
+    property color chart_secondary_border: brand_secondary;
+    property color chart_secondary_heading_bg: brand_secondary;
+    property color chart_secondary_text: "#fff";
+    property color chart_success_text: state_success_text;
+    property color chart_success_border: state_success_border;
+    property color chart_success_heading_bg: state_success_bg;
+    property color chart_info_text: state_info_text;
+    property color chart_info_border: state_info_border;
+    property color chart_info_heading_bg: state_info_bg;
+    property color chart_warning_text: state_warning_text;
+    property color chart_warning_border: state_warning_border;
+    property color chart_warning_heading_bg: state_warning_bg;
+    property color chart_danger_text: state_danger_text;
+    property color chart_danger_border: state_danger_border;
+    property color chart_danger_heading_bg: state_danger_bg;
+
     property real tooltip_delay: 500;
     property real popover_delay: 500;
     property real popover_opacity: 1;
