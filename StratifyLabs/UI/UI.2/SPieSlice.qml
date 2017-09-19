@@ -6,6 +6,9 @@ PieSlice {
   id: control;
 
   property string style;
+  property real idx;
+  property real count;
+  property bool isGradient: true;
 
   property var attr: SAttributes {
     style: control.style;
@@ -14,7 +17,7 @@ PieSlice {
   }
 
   //borderColor: control.attr.borderColor;
-  color: Qt.darker(attr.color, (startAngle % 90 + 57) / 90.0);
+  color: isGradient ? Qt.darker(attr.color, 0.6 + idx * 1.0 / count) : attr.color;
   borderWidth: control.attr.borderWidth;
   labelColor: control.attr.fontColor;
   labelFont.family: attr.fontText;

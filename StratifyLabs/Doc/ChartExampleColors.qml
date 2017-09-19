@@ -7,7 +7,6 @@ SRow {
     span: 4;
     style: "text-h1 hide-legend";
     title: "Primary";
-    theme: ChartView.ChartThemeLight;
     SPieSeries {
       id: pieSeries;
       style: "primary";
@@ -48,7 +47,6 @@ SRow {
       SPieSlice {
         label: "10"; value: 10;
       }
-      holeSize: 0.3;
     }
   }
 
@@ -65,7 +63,7 @@ SRow {
     span: 4;
     title: "Info";
     style: "text-h1 hide-legend";
-    ChartPie {  //this object is the same as id: pieSeries
+    ChartPie {
       style: "info";
     }
   }
@@ -74,7 +72,7 @@ SRow {
     span: 4;
     title: "Success";
     style: "text-h1 hide-legend";
-    ChartPie {  //this object is the same as id: pieSeries
+    ChartPie {
       style: "success";
     }
   }
@@ -84,7 +82,7 @@ SRow {
     title: "Warning";
 
     style: "text-h1 hide-legend";
-    ChartPie {  //this object is the same as id: pieSeries
+    ChartPie {
       style: "warning";
     }
   }
@@ -92,9 +90,8 @@ SRow {
   SChart {
     span: 4;
     title: "Danger";
-
     style: "text-h1 hide-legend";
-    ChartPie {  //this object is the same as id: pieSeries
+    ChartPie {
       style: "danger";
     }
   }
@@ -103,53 +100,41 @@ SRow {
     span: 4;
     title: "Primary";
     style: "text-h1 hide-legend primary";
-    ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
-    }
+    ChartPie {}
   }
 
   SChart {
     span: 4;
     title: "Secondary";
     style: "text-h1 hide-legend secondary";
-    ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
-    }
+    ChartPie {}
   }
 
   SChart {
     span: 4;
     title: "Info";
     style: "text-h1 hide-legend info";
-    ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
-    }
+    ChartPie {}
   }
 
   SChart {
     span: 4;
     title: "Success";
     style: "text-h1 hide-legend success";
-    ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
-    }
+    ChartPie {}
   }
 
   SChart {
     span: 4;
     title: "Warning";
     style: "text-h1 hide-legend warning";
-    ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
-    }
+    ChartPie {}
   }
 
   SChart {
     span: 4;
     title: "Danger";
     style: "text-h1 hide-legend danger";
-    ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
-    }
+    ChartPie {}
   }
 }

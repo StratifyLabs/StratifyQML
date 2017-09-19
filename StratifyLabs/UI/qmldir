@@ -124,8 +124,10 @@ SRadioButton 2.0 UI.2/SRadioButton.qml
 SChart 2.1 UI.2/SChart.qml
 SPieSeries 2.1 UI.2/SPieSeries.qml
 SPieSlice 2.1 UI.2/SPieSlice.qml
-SLineSeries 2.1 UI.2/SLineSeries.qml
 SXYSeries 2.1 UI.2/SXYSeries.qml
+SLineSeries 2.1 UI.2/SLineSeries.qml
+SSplineSeries 2.1 UI.2/SSplineSeries.qml
+
 Fa 2.0 assets/Fa-4.7.0.js
 
 typeinfo StratifyLabsUI.qmltypes

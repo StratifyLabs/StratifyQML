@@ -41,5 +41,4 @@ SPieSeries {
   SPieSlice {
     label: "10"; value: 10;
   }
-  holeSize: 0.3;
 }

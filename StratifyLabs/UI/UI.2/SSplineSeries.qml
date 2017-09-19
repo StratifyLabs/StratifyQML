@@ -2,7 +2,7 @@ import QtQuick 2.8
 import StratifyLabs.UI 2.1
 import QtCharts 2.2
 
-LineSeries {
+SplineSeries {
   id: control;
 
   property string chartStyle;

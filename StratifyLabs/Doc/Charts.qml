@@ -18,6 +18,10 @@ An <i>SChart</i> is for drawing charts and graphs.';
   ChartExampleColors{}
   ECodeButton { source: "ChartExampleColors"; }
 
+  ESectionTitle { text: "Chart Types"; }
+  ChartExampleTypes{}
+  ECodeButton { source: "ChartExampleTypes"; }
+
 
 }
 

@@ -6,7 +6,6 @@ SRow {
   SChart {
     style: "text-h1 hide-legend";
     title: "Primary";
-    theme: ChartView.ChartThemeLight;
     SPieSeries {
       id: pieSeries;
       style: "primary";
