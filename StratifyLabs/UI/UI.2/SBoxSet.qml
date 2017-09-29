@@ -2,7 +2,7 @@ import QtQuick 2.8
 import StratifyLabs.UI 2.1
 import QtCharts 2.2
 
-LineSeries {
+BoxSet {
   id: control;
 
   property string chartStyle;
@@ -13,19 +13,23 @@ LineSeries {
 
   property SJsonModel model;
 
-  SXYSeries { id: series; }
 
-  onModelChanged: {
-    //import the changes from the model to the Series
-    series.importModel(control, control.model);
+  function importModel(){
+    control.clear();
+    for(var i = 0; i < control.model.count; i++){
+      var object = model.get(i);
+      control.append(object.x, object.y);
+    }
   }
 
   onChartStyleChanged: {
-    series.updateStyle(control, chartStyle);
+
+
   }
 
-  width: 3;
-  //pointLabelsFont.family: STheme.font_family_base.fam;
+  //color: control.attr.color;
+  //width: control.attr.borderWidth;
+  //pointLabelsFont.family: control.attr.fontText;
   //pointLabelsFont.pointSize: control.attr.fontSize;
 
 

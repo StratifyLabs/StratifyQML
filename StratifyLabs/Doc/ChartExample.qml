@@ -54,7 +54,7 @@ SRow {
     title: "Secondary";
     style: "text-h1 hide-legend";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "secondary";
+      chartStyle: "secondary";
     }
   }
 
@@ -62,7 +62,7 @@ SRow {
     title: "Info";
     style: "text-h1 hide-legend";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "info";
+      chartStyle: "info";
     }
   }
 
@@ -70,7 +70,7 @@ SRow {
     title: "Success";
     style: "text-h1 hide-legend";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "success";
+      chartStyle: "success";
     }
   }
 
@@ -79,7 +79,7 @@ SRow {
 
     style: "text-h1 hide-legend";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "warning";
+      chartStyle: "warning";
     }
   }
 
@@ -88,7 +88,7 @@ SRow {
 
     style: "text-h1 hide-legend";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "danger";
+      chartStyle: "danger";
     }
   }
 
@@ -96,7 +96,7 @@ SRow {
     title: "Primary";
     style: "text-h1 hide-legend primary";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
+      chartStyle: "primary";
     }
   }
 
@@ -104,7 +104,7 @@ SRow {
     title: "Secondary";
     style: "text-h1 hide-legend secondary";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
+      chartStyle: "primary";
     }
   }
 
@@ -112,7 +112,7 @@ SRow {
     title: "Info";
     style: "text-h1 hide-legend info";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
+      chartStyle: "primary";
     }
   }
 
@@ -120,7 +120,7 @@ SRow {
     title: "Success";
     style: "text-h1 hide-legend success";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
+      chartStyle: "primary";
     }
   }
 
@@ -128,7 +128,7 @@ SRow {
     title: "Warning";
     style: "text-h1 hide-legend warning";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
+      chartStyle: "primary";
     }
   }
 
@@ -136,7 +136,7 @@ SRow {
     title: "Danger";
     style: "text-h1 hide-legend danger";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "primary";
+      chartStyle: "primary";
     }
   }
 
@@ -162,7 +162,7 @@ SRow {
     }
 
     SLineSeries {
-      style: "success line-dash-dot cap-flat";
+      chartStyle: "success line-dash-dot cap-flat";
       name: "LineSeries";
       model: seriesData.model;
     }

@@ -5,59 +5,72 @@ import QtCharts 2.2
 BarSeries {
   id: control;
 
-  property string sChartStyle;
+  property string chartStyle;
+  property color themeColor: STheme.brand_primary;
 
   property SJsonModel model;
 
-  onModelChanged: {
-    //import the changes from the model to the Series
-
-    control.removePoints(0, control.count);
-    for(var i = 0; i < model.count; i++){
-      var object = model.get(i);
-      control.append(object.x, object.y);
+  BarCategoryAxis {
+    id: categoryAxis;
+    onCategoriesChanged: {
+      console.log("Categories are " + categories);
     }
   }
 
-  function exportJson(){
-    //export data in JSON format
+  onModelChanged: {
+    control.clear();
+    var object = JSON.parse(control.model.json);
+    var i;
+    categoryAxis.clear();
+    categoryAxis.categories = object.categories;
+    for(i=0; i < object.sets.length; i++){
+      control.append(object.sets[i].label, object.sets[i].values);
+    }
   }
 
-  property var attr: SAttributes {
-    style: sChartStyle;
-    color: STheme.brand_primary;
-    borderColor: STheme.btn_primary_border;
+  function selectColor(idx){
+    var i = idx % 6;
+    switch(i){
+    case 0: return STheme.brand_primary;
+    case 1: return STheme.brand_success;
+    case 2: return STheme.brand_secondary;
+    case 3: return STheme.brand_danger;
+    case 4: return STheme.brand_info;
+    case 5: return STheme.brand_warning;
+    }
+    return STheme.gray_darker;
+  }
 
-    onStyleChanged: {
-      var items = parseStyle();
-      for(var i = 0; i < items.length; i++){
-        if( (items[i] === "line-dot") ){
-          control.style = Qt.DotLine;
-        } else if( (items[i] === "line-dash") ){
-          control.style = Qt.DashLine;
-        } else if( (items[i] === "line-solid") ){
-          control.style = Qt.SolidLine;
-        } else if( (items[i] === "line-none") ){
-          control.style = Qt.NoPen;
-        } else if( (items[i] === "line-dash-dot") ){
-          control.style = Qt.DashDotLine;
-        } else if( (items[i] === "line-dash-dot-dot") ){
-          control.style = Qt.DashDotDotLine;
-        } else if( (items[i] === "cap-flat") ){
-          control.capStyle = Qt.FlatCap;
-        } else if( (items[i] === "cap-square") ){
-          control.capStyle = Qt.SquareCap;
-        } else if( (items[i] === "cap-round") ){
-          control.capStyle = Qt.RoundCap;
-        }
+  function updateStyle(){
+    var i;
+    var items = chartStyle.split(" ");
+    for(i=0; i < items.length; i++){
+      if( items[i] === "primary" ){
+        themeColor = Qt.binding(function(){ return STheme.brand_primary; });
+      } else if( items[i] === "secondary" ){
+        themeColor = Qt.binding(function(){ return STheme.brand_secondary; });
+      } else if( items[i] === "info" ){
+        themeColor = Qt.binding(function(){ return STheme.brand_info; });
+      } else if( items[i] === "success" ){
+        themeColor = Qt.binding(function(){ return STheme.brand_success; });
+      } else if( items[i] === "danger" ){
+        themeColor = Qt.binding(function(){ return STheme.brand_danger; });
+      } else if( items[i] === "warning" ){
+        themeColor = Qt.binding(function(){ return STheme.brand_warning; });
       }
     }
+
+
+    for(i=0; i < count; i++){
+      if( (control.chartStyle === "") || (control.chartStyle === "default") ){
+        at(i).color = selectColor(i);
+      } else {
+        at(i).color = Qt.darker(themeColor, 0.6 + idx * 1.0 / count);
+      }
+
+    }
   }
 
-  color: control.attr.color;
-  width: control.attr.borderWidth;
-  pointLabelsFont.family: control.attr.fontText;
-  pointLabelsFont.pointSize: control.attr.fontSize;
-
-
+  onChartStyleChanged: updateStyle();
+  onCountChanged: updateStyle();
 }

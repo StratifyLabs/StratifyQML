@@ -5,13 +5,13 @@ import QtCharts 2.2
 PieSlice {
   id: control;
 
-  property string style;
+  property string chartStyle;
   property real idx;
   property real count;
   property bool isGradient: true;
 
   property var attr: SAttributes {
-    style: control.style;
+    style: control.chartStyle;
     color: STheme.btn_primary_bg;
     borderColor: STheme.btn_primary_border;
   }

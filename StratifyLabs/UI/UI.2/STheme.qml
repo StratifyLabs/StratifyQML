@@ -472,6 +472,11 @@ QtObject {
     property color chart_danger_border: state_danger_border;
     property color chart_danger_heading_bg: state_danger_bg;
 
+    property real chart_series_width: 3;
+    property real chart_series_width_xs: 1;
+    property real chart_series_width_sm: 2;
+    property real chart_series_width_lg: 5;
+
     property real tooltip_delay: 500;
     property real popover_delay: 500;
     property real popover_opacity: 1;

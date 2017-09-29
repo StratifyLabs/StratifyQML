@@ -9,7 +9,7 @@ SRow {
     title: "Primary";
     SPieSeries {
       id: pieSeries;
-      style: "primary";
+      chartStyle: "primary";
       SPieSlice {
         label: "1"; value: 10;
       }
@@ -55,7 +55,7 @@ SRow {
     title: "Secondary";
     style: "text-h1 hide-legend";
     ChartPie {  //this object is the same as id: pieSeries
-      style: "secondary";
+      chartStyle: "secondary";
     }
   }
 
@@ -64,7 +64,7 @@ SRow {
     title: "Info";
     style: "text-h1 hide-legend";
     ChartPie {
-      style: "info";
+      chartStyle: "info";
     }
   }
 
@@ -73,7 +73,7 @@ SRow {
     title: "Success";
     style: "text-h1 hide-legend";
     ChartPie {
-      style: "success";
+      chartStyle: "success";
     }
   }
 
@@ -83,7 +83,7 @@ SRow {
 
     style: "text-h1 hide-legend";
     ChartPie {
-      style: "warning";
+      chartStyle: "warning";
     }
   }
 
@@ -92,7 +92,7 @@ SRow {
     title: "Danger";
     style: "text-h1 hide-legend";
     ChartPie {
-      style: "danger";
+      chartStyle: "danger";
     }
   }
 

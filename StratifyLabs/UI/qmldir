@@ -127,6 +127,7 @@ SPieSlice 2.1 UI.2/SPieSlice.qml
 SXYSeries 2.1 UI.2/SXYSeries.qml
 SLineSeries 2.1 UI.2/SLineSeries.qml
 SSplineSeries 2.1 UI.2/SSplineSeries.qml
+SBarSeries 2.1 UI.2/SBarSeries.qml
 
 Fa 2.0 assets/Fa-4.7.0.js
 

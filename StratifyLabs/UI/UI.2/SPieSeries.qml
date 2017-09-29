@@ -5,7 +5,7 @@ import QtCharts 2.2
 PieSeries {
   id: control;
 
-  property string style;
+  property string chartStyle;
 
   function selectStyle(idx){
     var i = idx % 6;
@@ -25,11 +25,11 @@ PieSeries {
     for(i=0; i < count; i++){
       at(i).idx = i;
       at(i).count = count;
-      at(i).style = control.style;
+      at(i).chartStyle = control.chartStyle;
 
-      if( (control.style === "") || (control.style === "default") ){
+      if( (control.chartStyle === "") || (control.chartStyle === "default") ){
         at(i).isGradient = false;
-        at(i).style = selectStyle(i);
+        at(i).chartStyle = selectStyle(i);
       } else {
         at(i).isGradient = true;
       }
@@ -37,7 +37,7 @@ PieSeries {
     }
   }
 
-  onStyleChanged: updateStyle();
+  onChartStyleChanged: updateStyle();
   onCountChanged: updateStyle();
 
 }
