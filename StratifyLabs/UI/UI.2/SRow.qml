@@ -19,114 +19,110 @@ import QtQuick.Layouts 1.3
 import StratifyLabs.UI 2.0
 
 GridLayout {
-    id: control;
+  id: control;
 
-    property alias attr: attr;
-    property alias style: attr.style;
+  property alias attr: attr;
+  property alias style: attr.style;
 
-    width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
-    height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
+  width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+  height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
 
-    SSizeAttributes {
-        id: attr;
-        type: "row";
-        fillWidth: true;
-        span: STheme.grid_columns;
-    }
+  SSizeAttributes {
+    id: attr;
+    type: "row";
+    fillWidth: true;
+    span: STheme.grid_columns;
+  }
 
-    rowSpacing: attr.paddingVertical;
-    columnSpacing: attr.paddingHorizontal;
-    columns: attr.span;
+  rowSpacing: attr.paddingVertical;
+  columnSpacing: attr.paddingHorizontal;
+  columns: attr.span;
 
-    function alignChildren(){
-        for(var i = 0; i < children.length; i++){
+  function alignChildren(){
+    for(var i = 0; i < children.length; i++){
 
-            if( children[i].attr !== undefined ){
+      if( children[i].attr !== undefined ){
 
-                if( children[i].attr.blockWidth === true ){
-                    children[i].Layout.fillWidth = true;
-                    children[i].Layout.minimumWidth = children[i].implicitWidth;
-                } else {
-                    children[i].Layout.fillWidth = false;
-                }
-
-                if( children[i].attr.fillHeight === true ){
-                    children[i].Layout.fillHeight = true;
-                    children[i].Layout.minimumHeight = children[i].implicitHeight;
-                } else {
-                    children[i].Layout.fillHeight = false;
-                }
-
-                var span = children[i].attr.span;
-                if( (span > columns) || (span < 0) ){
-                    span = columns;
-                }
-
-                children[i].Layout.columnSpan = span;
-                children[i].Layout.alignment = children[i].attr.alignment;
-
-            } else {
-                children[i].Layout.fillWidth = true;
-            }
+        if( children[i].attr.blockWidth === true ){
+          children[i].Layout.fillWidth = true;
+          children[i].Layout.minimumWidth = children[i].implicitWidth;
+        } else {
+          children[i].Layout.fillWidth = false;
         }
-    }
 
-    function adjustWidth(){
-        for(var i = 0; i < children.length; i++){
-            var w;
-            var spacingInRow;
-            var span;
-
-            if( children[i].attr !== undefined ){
-                if( children[i].attr.span < 0 ){
-                    span = columns;
-                } else {
-                    span = children[i].attr.span;
-                }
-
-                spacingInRow = 0;
-                if( span >= columns ){
-                    span = columns;
-                }
-
-                children[i].Layout.columnSpan = span;
-
-                if( children[i].attr.fillWidth === true ){
-                    w = (width - spacingInRow) * span / columns;
-                    children[i].Layout.maximumWidth = w;
-                }
-            }
+        if( children[i].attr.fillHeight === true ){
+          children[i].Layout.fillHeight = true;
+          children[i].Layout.minimumHeight = children[i].implicitHeight;
+        } else {
+          children[i].Layout.fillHeight = false;
         }
-    }
 
-    Connections {
-        target: STheme;
-        onIsScreenSmChanged: {
-            if( control.attr.type == "row" ){
-                if( STheme.isScreenSm === true ){
-                    columns = STheme.grid_columns_sm;
-                    adjustWidth();
-                } else {
-                    columns = STheme.grid_columns;
-                    adjustWidth();
-                }
-            }
+        children[i].Layout.alignment = children[i].attr.alignment;
+
+      } else {
+        children[i].Layout.fillWidth = true;
+      }
+    }
+  }
+
+  function adjustWidth(){
+    for(var i = 0; i < children.length; i++){
+      var w;
+      var spacingInRow;
+      var span;
+
+      if( children[i].attr !== undefined ){
+
+
+        if( children[i].attr.span < 0 ){
+          span = columns;
+        } else {
+          span = children[i].attr.span;
         }
-    }
 
-    onVisibleChanged: {
-      adjustWidth();
-    }
+        spacingInRow = 0;
+        if( span >= columns ){
+          span = columns;
+        }
 
-    onWidthChanged: {
-        adjustWidth();
+        children[i].Layout.columnSpan = span;
+        if( children[i].attr.fillWidth === true ){
+          w = (width - spacingInRow) * span / columns;
+          children[i].Layout.maximumWidth = w;
+        }
+      }
     }
+  }
+
+  Connections {
+    target: STheme;
+    onIsScreenSmChanged: {
+      if( control.attr.type == "row" ){
+        if( STheme.isScreenSm === true ){
+          columns = STheme.grid_columns_sm;
+          adjustWidth();
+        } else {
+          columns = STheme.grid_columns;
+          adjustWidth();
+        }
+      }
+    }
+  }
+
+  onVisibleChanged: {
+    adjustWidth();
+  }
+
+  onWidthChanged: {
+    alignChildren();
+    adjustWidth();
+  }
 
 
-    Component.onCompleted: {
-        alignChildren();
-        adjustWidth();
-    }
+  Component.onCompleted: {
+    alignChildren();
+    adjustWidth();
+  }
 
 }
 

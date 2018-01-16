@@ -38,6 +38,7 @@ Slider {
 
     SAttributes {
         id: attr;
+        type: "slider";
         fillWidth: true;
         color: STheme.gray_light;
         borderColor: STheme.gray_light;

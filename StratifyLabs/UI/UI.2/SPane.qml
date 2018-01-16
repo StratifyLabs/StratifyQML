@@ -25,6 +25,7 @@ Flickable {
 
     SSizeAttributes {
         id: attr;
+        type: "pane";
         fillWidth: true;
         fillHeight: true;
     }
@@ -39,6 +40,8 @@ Flickable {
         contentHeight = ((contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillHeight === true)) ? control.height : contentItem.childrenRect.height;
         contentWidth = ((contentItem.children[0].attr !== undefined) && (contentItem.children[0].attr.fillWidth === true)) ? control.width : contentItem.childrenRect.width;
     }
+
+    onChildrenChanged: updateContentRect();
 
     //This approach is used as opposed to direct binding in order to avoid binding loops
     onVisibleChanged: {

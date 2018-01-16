@@ -30,6 +30,7 @@ Item {
 
     SAttributes {
         id: attr;
+        type: "panel";
         borderWidth: STheme.panel_border_width;
         blockWidth: true;
         borderColor: STheme.panel_default_border;

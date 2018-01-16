@@ -13,6 +13,7 @@ Drawer {
 
     SAttributes {
         id: attr;
+        type: "drawer";
         color: STheme.body_bg;
         fillHeight: true;
 

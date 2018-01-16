@@ -28,5 +28,6 @@ Image {
 
     SSizeAttributes {
         id: attr;
+        type: "image";
     }
 }

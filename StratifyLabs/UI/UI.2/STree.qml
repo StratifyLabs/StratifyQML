@@ -26,6 +26,7 @@ STreePrivate {
 
     attr.style: root.style;
     attr.span: span;
+    attr.type: "tree";
 
 }
 

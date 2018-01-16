@@ -12,6 +12,7 @@ ChartView {
   SAttributes {
     id: attr;
     blockWidth: true;
+    type: "chart";
 
     property real legendFontSize: STheme.font_size_base;
     property real legendFontWeight: Font.Normal;

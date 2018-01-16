@@ -19,4 +19,5 @@ import StratifyLabs.UI 2.0
 
 SDropdown {
     icon: Fa.Icon.caret_up;
+    attr.type: "dropup";
 }

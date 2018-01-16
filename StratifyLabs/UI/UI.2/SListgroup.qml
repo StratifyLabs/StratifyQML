@@ -20,7 +20,6 @@ import StratifyLabs.UI 2.0
 
 SList {
     id: control;
-    attr.type: "listgroup";
     delegate: listDelegate;
 
     implicitHeight: count * (attr.fontContainerHeight);
@@ -29,6 +28,7 @@ SList {
     attr.colorHovered: STheme.list_group_hover_bg;
     attr.color: STheme.list_group_bg;
     attr.borderColor: STheme.list_group_border;
+    attr.type: "listgroup";
 
     property real active;
 

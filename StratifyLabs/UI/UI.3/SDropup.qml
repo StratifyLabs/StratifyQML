@@ -14,19 +14,11 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.6
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import StratifyLabs.UI 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import StratifyLabs.UI 3.0
 
-STablePrivate {
-    id: root;
-    property string style;
-    property real span: STheme.grid_columns;
-
-    attr.style: style;
-    attr.span: span;
-    attr.type: "table";
+SDropdown {
+    symbol: Fa.Icon.caret_up;
+    attr.type: "dropup";
 }
-
-

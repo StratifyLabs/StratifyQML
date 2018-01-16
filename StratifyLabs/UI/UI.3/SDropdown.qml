@@ -14,14 +14,14 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.6
-import QtQuick.Controls 2.1
-import StratifyLabs.UI 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import StratifyLabs.UI 3.0
 
 ComboBox {
     id: control;
 
-    property alias icon: indicator.text;
+    property alias symbol: indicator.text;
     property alias attr: attr;
     property alias style: attr.style;
     property alias span: attr.span;

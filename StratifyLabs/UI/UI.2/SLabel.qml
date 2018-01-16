@@ -49,6 +49,7 @@ Label {
 
     SAttributes {
         id: attr;
+        type: "label";
         fontWeight: Font.Bold;
 
         onStyleChanged: {

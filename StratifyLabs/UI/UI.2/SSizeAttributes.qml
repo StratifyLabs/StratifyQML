@@ -15,6 +15,7 @@ QtObject {
     property real alignment: Qt.AlignHCenter | Qt.AlignVCenter;
 
     property bool hideSm: false;
+    property bool viewable: true;
 
     //legacy 1.0 names
     property alias blockWidth: object.fillWidth;

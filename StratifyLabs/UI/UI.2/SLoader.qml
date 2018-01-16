@@ -31,6 +31,7 @@ Loader {
   SSizeAttributes {
     id: attr;
     fillWidth: true;
+    type: "loader";
   }
 
 }

@@ -14,9 +14,9 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.6
-import QtQuick.Controls 2.1
-import StratifyLabs.UI 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import StratifyLabs.UI 3.0
 
 RadioButton {
     id: control;
@@ -25,8 +25,8 @@ RadioButton {
     property alias style: attr.style;
     property alias span: attr.span;
 
-    property string iconChecked: Fa.Icon.circle;
-    property string icon: Fa.Icon.circle_o;
+    property string symbolChecked: Fa.Icon.circle;
+    property string symbol: Fa.Icon.circle_o;
 
     SAttributes {
         id: attr;
@@ -45,7 +45,7 @@ RadioButton {
     indicator: Text {
         x: text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
-        text: control.checked ? control.iconChecked : control.icon;
+        text: control.checked ? control.symbolChecked : control.symbol;
         font.family: attr.fontIcon;
         font.pointSize: attr.fontSize*1.5;
         color: attr.fontColor;

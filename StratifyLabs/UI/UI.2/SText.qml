@@ -28,6 +28,7 @@ Text {
 
     SAttributes {
         id: attr;
+        type: "text";
         fontHorizontalAlignment: Text.AlignLeft;
     }
 

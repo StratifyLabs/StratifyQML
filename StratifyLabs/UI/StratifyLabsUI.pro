@@ -13,13 +13,11 @@ ASSETFILES = $$files(assets/*.js) $$files(assets/*.ttf)
 
 DISTFILES1 = $$files(UI.1/*.qml)
 DISTFILES2 = $$files(UI.2/*.qml)
+DISTFILES3 = $$files(UI.3/*.qml)
 
 DISTFILES = qmldir \
     STestListText.js \
-	StratifyLabsUI.qmltypes \
-    UI.2/SChart.qml \
-    UI.2/SBarSeries.qml \
-    UI.2/SSplineSeries.qml
+		StratifyLabsUI.qmltypes
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir
@@ -33,6 +31,7 @@ qmldir.files = $$DISTFILES
 
 ui1.files = $$DISTFILES1
 ui2.files = $$DISTFILES2
+ui3.files = $$DISTFILES3
 assets.files = $$ASSETFILES
 
 installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
@@ -40,9 +39,10 @@ target.path = $$installPath
 qmldir.path = $$installPath
 ui1.path = $$installPath/UI.1
 ui2.path = $$installPath/UI.2
+ui3.path = $$installPath/UI.3
 assets.path = $$installPath/assets
 
-INSTALLS += target qmldir ui1 ui2 assets
+INSTALLS += target qmldir ui1 ui2 ui3 assets
 
 HEADERS += \
     UI.h

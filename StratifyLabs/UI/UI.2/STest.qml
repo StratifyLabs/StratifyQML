@@ -40,18 +40,18 @@ Item {
             SColumn {
                 SText { style: "left text-primary"; text: "Menu"; }
                 SHLine{ attr.paddingVertical: 0; }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Alerts"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Panels"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Wells"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Alerts"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Panels"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Wells"; onPressed: { tests.screen = text; drawer.close(); } }
                 SHLine{ attr.paddingVertical: 0; }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Buttons"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Labels"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Input"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Buttons"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Labels"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Input"; onPressed: { tests.screen = text; drawer.close(); } }
                 SHLine{ attr.paddingVertical: 0; }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
-                SRadioButton { icon: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Progress"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Lists"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Tables"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "ToolTips"; onPressed: { tests.screen = text; drawer.close(); } }
+                SRadioButton { symbol: Fa.Icon.chevron_right; style: "left lg text-primary"; text: "Progress"; onPressed: { tests.screen = text; drawer.close(); } }
             }
         }
     }
@@ -80,13 +80,13 @@ Item {
                 SButton {
                     span: 1;
                     style: "left";
-                    icon: Fa.Icon.bars;
+                    symbol: Fa.Icon.bars;
                     onClicked: drawer.open();
                 }
                 SButton {
                     span: 1;
                     style: "right";
-                    icon: Fa.Icon.info_circle;
+                    symbol: Fa.Icon.info_circle;
                     onClicked: aboutModal.open();
                 }
             }
@@ -160,17 +160,17 @@ Item {
                             SLabel { style: "left"; text: "Button Icons:"; }
 
                             SRow {
-                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center icon-spin"; icon: Fa.Icon.refresh; text: "Refresh"; }
-                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center icon-spin"; icon: Fa.Icon.cog; text: "Working"; }
-                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center icon-pulse"; icon: Fa.Icon.refresh; text: "Pulse"; }
+                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center icon-spin"; symbol: Fa.Icon.refresh; text: "Refresh"; }
+                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center icon-spin"; symbol: Fa.Icon.cog; text: "Working"; }
+                                SButton{ span: 4; style: "btn-block btn-primary btn-lg center icon-pulse"; symbol: Fa.Icon.refresh; text: "Pulse"; }
 
-                                SButton{ span: 4; style: "btn-primary btn-lg center icon-spin"; icon: Fa.Icon.spinner; text: "Refresh"; }
-                                SButton{ span: 4; style: "btn-primary btn-lg center icon-spin"; icon: Fa.Icon.circle_o_notch; text: "Working"; }
-                                SButton{ span: 4; style: "btn-primary btn-lg center icon-pulse"; icon: Fa.Icon.spinner; text: "Pulse";  }
+                                SButton{ span: 4; style: "btn-primary btn-lg center icon-spin"; symbol: Fa.Icon.spinner; text: "Refresh"; }
+                                SButton{ span: 4; style: "btn-primary btn-lg center icon-spin"; symbol: Fa.Icon.circle_o_notch; text: "Working"; }
+                                SButton{ span: 4; style: "btn-primary btn-lg center icon-pulse"; symbol: Fa.Icon.spinner; text: "Pulse";  }
 
-                                SButton{ span: 4; style: "btn-lg center icon-spin"; icon: Fa.Icon.location_arrow; text: "Naked"; }
-                                SButton{ span: 4; style: "btn-lg center icon-pulse"; icon: Fa.Icon.repeat; text: "Naked"; }
-                                SButton{ span: 4; style: "btn-lg center icon-spin"; icon: Fa.Icon.safari; text: "Naked"; }
+                                SButton{ span: 4; style: "btn-lg center icon-spin"; symbol: Fa.Icon.location_arrow; text: "Naked"; }
+                                SButton{ span: 4; style: "btn-lg center icon-pulse"; symbol: Fa.Icon.repeat; text: "Naked"; }
+                                SButton{ span: 4; style: "btn-lg center icon-spin"; symbol: Fa.Icon.safari; text: "Naked"; }
                             }
 
 
@@ -516,7 +516,7 @@ Item {
                                 style: "fill";
                                 SIcon {
                                     style: "h3";
-                                    icon: Fa.Icon.cloud;
+                                    symbol: Fa.Icon.cloud;
                                 }
                             }
                         }

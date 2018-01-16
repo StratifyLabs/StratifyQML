@@ -24,6 +24,7 @@ ListView {
 
     SAttributes {
         id: attr;
+        type: "list";
     }
 
     implicitWidth: contentItem.childrenRect.width;

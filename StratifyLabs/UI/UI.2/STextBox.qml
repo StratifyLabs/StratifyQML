@@ -33,6 +33,7 @@ Rectangle {
 
     SAttributes {
         id: attr;
+        type: "textbox";
         borderColor: STheme.gray_light;
         fillWidth: true;
         fontHorizontalAlignment: Text.AlignLeft;

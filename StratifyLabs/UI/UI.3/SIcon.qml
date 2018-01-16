@@ -15,13 +15,14 @@ Copyright 2016 Tyler Gilbert
 */
 
 
-import QtQuick 2.6
-import StratifyLabs.UI 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import StratifyLabs.UI 3.0
 
 Item {
     id: control;
 
-    property alias icon: icon.text;
+    property alias symbol: icon.text;
     property alias label: label.text;
 
     property alias attr: attr;

@@ -29,6 +29,7 @@ ProgressBar {
 
     SAttributes {
         id: attr;
+        type: "progressbar";
         blockWidth: true;
         backgroundColor: STheme.gray_lighter;
         color: STheme.progress_bar_color;

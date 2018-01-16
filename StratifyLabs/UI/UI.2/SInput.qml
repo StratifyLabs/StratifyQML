@@ -64,6 +64,7 @@ TextField {
 
     SAttributes {
         id: attr;
+        type: "input";
         borderColor: STheme.gray_light;
         fontHorizontalAlignment: Text.AlignLeft;
         blockWidth: true;

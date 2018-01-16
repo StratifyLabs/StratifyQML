@@ -32,6 +32,7 @@ Item {
 
     SAttributes {
         id: attr;
+        type: "progresscircle";
         backgroundColor: STheme.gray_lighter;
         color: STheme.progress_bar_bg;
         borderColor: STheme.progress_bar_bg;

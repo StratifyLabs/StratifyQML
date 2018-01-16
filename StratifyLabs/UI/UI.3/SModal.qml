@@ -14,9 +14,9 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.6
-import QtQuick.Controls 2.1
-import StratifyLabs.UI 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import StratifyLabs.UI 3.0
 
 Item {
 
@@ -26,25 +26,13 @@ Item {
   property alias span: attr.span;
   property alias attr: attr;
   property bool modalVisible: false;
-  property bool closeOnAccept: true;
-  property bool closeOnReject: true;
   property real duration: 300;
   property string title;
-  property alias acceptText: acceptButtonId.text;
-  property alias rejectText: rejectButtonId.text;
-  property alias acceptIcon: acceptButtonId.icon;
-  property alias rejectIcon: rejectButtonId.icon;
   property bool closeButtonVisible: true;
   property real standardButtons: Dialog.Ok | Dialog.Cancel;
   property color headerColor: attr.fontColor;
   property color headerBackgroundColor: "transparent";
   property color footerBackgroundColor: "transparent";
-
-  property alias acceptButton: acceptButtonId;
-  property alias rejectButton: rejectButtonId;
-
-  property alias acceptButtonStyle: acceptButtonId.style;
-  property alias rejectButtonStyle: rejectButtonId.style;
 
   //keep it on top
   z: 100;
@@ -57,16 +45,12 @@ Item {
   enabled: modalVisible;
 
   function accept(){
-    if( closeOnAccept ){
-      close();
-    }
+    modalVisible = false;
     modal.accepted();
   }
 
   function reject(){
-    if( closeOnReject ){
-      close();
-    }
+    modalVisible = false;
     modal.rejected();
   }
 
@@ -169,7 +153,7 @@ Item {
             span: 1;
             visible: modal.closeButtonVisible;
             style: "right btn-naked";
-            icon: Fa.Icon.times;
+            symbol: Fa.Icon.times;
             onClicked: modal.reject();
             enabled: modalVisible;
           }
@@ -195,17 +179,15 @@ Item {
           SGroup {
             style: "right"; span: 12;
             SButton {
-              id: rejectButtonId;
               style: "block btn-danger";
-              icon: Fa.Icon.times;
+              symbol: Fa.Icon.times;
               onClicked: modal.reject();
               visible: modalVisible && (modal.standardButtons & Dialog.Cancel);
               enabled: modalVisible;
             }
             SButton {
-              id: acceptButtonId;
               style: "block btn-success";
-              icon: Fa.Icon.check;
+              symbol: Fa.Icon.check;
               onClicked: {
                 modal.accept();
               }

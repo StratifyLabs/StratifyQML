@@ -15,18 +15,10 @@ Copyright 2016 Tyler Gilbert
 */
 
 import QtQuick 2.6
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import StratifyLabs.UI 2.0
 
-STablePrivate {
-    id: root;
-    property string style;
-    property real span: STheme.grid_columns;
-
-    attr.style: style;
-    attr.span: span;
-    attr.type: "table";
+Repeater {
+  property var attr: SSizeAttributes {
+    viewable: false;
+    type: "repeater";
+  }
 }
-
-

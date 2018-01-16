@@ -32,6 +32,7 @@ ToolTip {
 
     SAttributes {
         id: attr;
+        type: "tooltip";
         fontSize: STheme.font_size_small;
         fontColor: STheme.tooltip_color;
         color: STheme.tooltip_bg;

@@ -11,6 +11,7 @@ PieSlice {
   property bool isGradient: true;
 
   property var attr: SAttributes {
+    type: "pieslice";
     style: control.chartStyle;
     color: STheme.btn_primary_bg;
     borderColor: STheme.btn_primary_border;

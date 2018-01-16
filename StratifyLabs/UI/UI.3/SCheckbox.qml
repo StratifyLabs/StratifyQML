@@ -14,57 +14,66 @@ Copyright 2016 Tyler Gilbert
    limitations under the License.
 */
 
-import QtQuick 2.6
-import QtQuick.Controls 2.1
-import StratifyLabs.UI 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import StratifyLabs.UI 3.0
 
-RadioButton {
+CheckBox {
     id: control;
-
     property alias attr: attr;
-    property alias style: attr.style;
     property alias span: attr.span;
+    property alias style: attr.style;
 
-    property string iconChecked: Fa.Icon.circle;
-    property string icon: Fa.Icon.circle_o;
+    property string symbolChecked: Fa.Icon.check_square_o;
+    property string symbol: Fa.Icon.square_o;
 
     SAttributes {
         id: attr;
-        type: "radiobutton";
-        //color: STheme.body_bg;
-        //borderColor: STheme.body_bg;
+        type: "checkbox";
         fontHorizontalAlignment: Text.AlignLeft;
     }
 
+
     implicitWidth: Math.max(background ? background.implicitWidth : 0,
-                            contentItem.implicitWidth + leftPadding*2 + rightPadding*2);
+                            contentItem.implicitWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(background ? background.implicitHeight : 0,
                              Math.max(contentItem.implicitHeight,
-                                      indicator ? indicator.implicitHeight : 0) + topPadding + bottomPadding);
+                                      indicator ? indicator.implicitHeight : 0) + topPadding + bottomPadding)
+    baselineOffset: contentItem.y + contentItem.baselineOffset
+
+    topPadding: attr.paddingVertical;
+    bottomPadding: attr.paddingVertical;
+    leftPadding: attr.paddingHorizontal;
+    rightPadding: attr.paddingHorizontal;
+    spacing: attr.paddingHorizontal/2;
 
     indicator: Text {
         x: text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
-        text: control.checked ? control.iconChecked : control.icon;
+        text: control.checked ? control.symbolChecked: control.symbol;
+        font.italic: attr.fontItalic;
         font.family: attr.fontIcon;
-        font.pointSize: attr.fontSize*1.5;
+        font.pointSize: attr.fontSize*1.4;
+        font.weight: attr.fontWeight;
         color: attr.fontColor;
         opacity: enabled ? 1 : 0.3
     }
 
     contentItem: Text {
-        leftPadding: control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
-        rightPadding: control.indicator && control.mirrored ? control.indicator.width + control.spacing : 0
+        leftPadding: control.indicator && !control.mirrored ? attr.fontSize*STheme.pixelPointRatio + control.spacing : 0
+        rightPadding: control.indicator && control.mirrored ? attr.fontSize*STheme.pixelPointRatio + control.spacing : 0
 
-        text: control.text
+        text: control.text;
         font.family: attr.fontText;
         font.pointSize: attr.fontSize;
+        font.weight: attr.fontWeight;
         color: attr.fontColor;
-        visible: control.text
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
+        visible: true;
+        horizontalAlignment: attr.fontHorizontalAlignment;
+        verticalAlignment: attr.fontVerticalAlignment;
         opacity: enabled ? 1 : 0.3
     }
+
 
     background: Rectangle {
         color: attr.color;

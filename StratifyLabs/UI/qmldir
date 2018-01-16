@@ -129,6 +129,75 @@ SLineSeries 2.1 UI.2/SLineSeries.qml
 SSplineSeries 2.1 UI.2/SSplineSeries.qml
 SBarSeries 2.1 UI.2/SBarSeries.qml
 
+SRepeater 2.2 UI.2/SRepeater.qml
+
 Fa 2.0 assets/Fa-4.7.0.js
+
+singleton STheme 3.0 UI.2/STheme.qml
+Fa 3.0 assets/Fa-4.7.0.js
+
+SAlert 3.0 UI.2/SAlert.qml
+SAnimationContainer 3.0 UI.2/SAnimationContainer.qml
+SAnimator 3.0 UI.2/SAnimationContainer.qml
+SAnimationFade 3.0 UI.2/SAnimationFade.qml
+SAnimationHPush 3.0 UI.2/SAnimationHPush.qml
+SColumn 3.0 UI.2/SColumn.qml
+SContainer 3.0 UI.2/SContainer.qml
+SDrawer 3.0 UI.2/SDrawer.qml
+
+SGroup 3.0 UI.2/SGroup.qml
+SHline 3.0 UI.2/SHline.qml
+SHLine 3.0 UI.2/SHLine.qml
+SIconAttributes 3.0 UI.2/SIconAttributes.qml
+SImage 3.0 UI.2/SImage.qml
+SInput 3.0 UI.2/SInput.qml
+SJsonListModel 3.0 UI.2/SJsonModel.qml
+SJsonModel 3.0 UI.2/SJsonModel.qml
+SLabel 3.0 UI.2/SLabel.qml
+SList 3.0 UI.2/SList.qml
+SListGroup 3.0 UI.2/SListgroup.qml
+SListgroup 3.0 UI.2/SListgroup.qml
+SLoader 3.0 UI.2/SLoader.qml
+SPane 3.0 UI.2/SPane.qml
+SPanel 3.0 UI.2/SPanel.qml
+SPassword 3.0 UI.2/SPassword.qml
+SProgressbar 3.0 UI.2/SProgressbar.qml
+SProgressBar 3.0 UI.2/SProgressbar.qml
+SProgresscircle 3.0 UI.2/SProgresscircle.qml
+SProgressCircle 3.0 UI.2/SProgresscircle.qml
+SAttributes 3.0 UI.2/SAttributes.qml
+SRoundedRectangle 3.0 UI.1/SRoundedRectangle.qml
+SRow 3.0 UI.2/SRow.qml
+SSizeAttributes 3.0 UI.2/SSizeAttributes.qml
+SSlider 3.0 UI.2/SSlider.qml
+STable 3.0 UI.2/STable.qml
+STableColumn 3.0 UI.2/STableColumn.qml
+STest 3.0 UI.2/STest.qml
+SText 3.0 UI.2/SText.qml
+STextBox 3.0 UI.2/STextBox.qml
+STree 3.0 UI.2/STree.qml
+STreeColumn 3.0 UI.2/STreeColumn.qml
+SWell 3.0 UI.2/SWell.qml
+STooltip 3.0 UI.2/STooltip.qml
+SToolTip 3.0 UI.2/STooltip.qml
+SChart 3.0 UI.2/SChart.qml
+SPieSeries 3.0 UI.2/SPieSeries.qml
+SPieSlice 3.0 UI.2/SPieSlice.qml
+SXYSeries 3.0 UI.2/SXYSeries.qml
+SLineSeries 3.0 UI.2/SLineSeries.qml
+SSplineSeries 3.0 UI.2/SSplineSeries.qml
+SBarSeries 3.0 UI.2/SBarSeries.qml
+SRepeater 3.0 UI.2/SRepeater.qml
+
+SBadge 3.0 UI.3/SBadge.qml
+SButton 3.0 UI.3/SButton.qml
+SCheckbox 3.0 UI.3/SCheckbox.qml
+SCheckBox 3.0 UI.3/SCheckbox.qml
+SDropdown 3.0 UI.3/SDropdown.qml
+SDropup 3.0 UI.3/SDropup.qml
+SIcon 3.0 UI.3/SIcon.qml
+SModal 3.0 UI.3/SModal.qml
+SRadioButton 3.0 UI.3/SRadioButton.qml
+
 
 typeinfo StratifyLabsUI.qmltypes
