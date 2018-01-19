@@ -19,64 +19,74 @@ import QtQuick.Controls 2.1
 import StratifyLabs.UI 2.0
 
 Rectangle {
-    id: control;
-    property alias style: attr.style;
-    property alias span: attr.span;
-    property alias attr: attr;
-    property alias text: textArea.text;
-    property alias placeholder: textArea.placeholderText;
-    property alias textArea: textArea;
-    property alias textBox: control.textArea;
-    property alias flickable: flickable;
-    property alias verticalScroll: verticalScrollBar;
-    property alias horizontalScroll: horizontalScrollBar;
+  id: control;
+  property alias style: attr.style;
+  property alias span: attr.span;
+  property alias attr: attr;
+  property alias text: textArea.text;
+  property alias placeholder: textArea.placeholderText;
+  property alias textArea: textArea;
+  property alias textBox: control.textArea;
+  property alias flickable: flickable;
+  property alias verticalScroll: verticalScrollBar;
+  property alias horizontalScroll: horizontalScrollBar;
 
-    SAttributes {
-        id: attr;
-        type: "textbox";
-        borderColor: STheme.gray_light;
-        fillWidth: true;
-        fontHorizontalAlignment: Text.AlignLeft;
-        fontVerticalAlignment: Text.AlignTop;
+  SAttributes {
+    id: attr;
+    type: "textbox";
+    borderColor: STheme.gray_light;
+    fillWidth: true;
+    fontHorizontalAlignment: Text.AlignLeft;
+    fontVerticalAlignment: Text.AlignTop;
+
+    onStyleChanged: {
+      var items = parseStyle();
+      for(var i=0; i < items.length; i++){
+        if( items[i] === "read-only" ){
+          control.textArea.readOnly = true;
+        } else if( items[i] === "read-write" ){
+          control.textArea.readOnly = false;
+        }
+      }
+    }
+  }
+
+  width: parent ? (attr.fillWidth ? parent.width : undefined) : undefined;
+  height: parent ? (attr.fillHeight ? parent.height : undefined) : undefined;
+  border.width: attr.borderWidth;
+  radius: attr.borderRadius;
+  border.color: attr.borderColor;
+  color: attr.backgroundColor;
+
+  Flickable {
+    id: flickable;
+    clip: true;
+    anchors.fill: parent;
+    flickableDirection: Flickable.AutoFlickIfNeeded;
+
+
+    TextArea.flickable: TextArea {
+      id: textArea;
+      wrapMode: TextArea.Wrap;
+      color: attr.fontColor;
+      font.pointSize: attr.fontSize;
+      font.family: attr.fontText;
+      font.weight: attr.fontWeight;
+      horizontalAlignment: attr.fontHorizontalAlignment;
+      verticalAlignment: attr.fontVerticalAlignment;
+      selectedTextColor: attr.fontColorSelected;
+      selectByMouse: true;
+      selectByKeyboard: true;
+      selectionColor: attr.backgroundColorFontSelection;
     }
 
-    implicitWidth: attr.blockWidth ? (parent.width) : 0;
-    implicitHeight: attr.fillHeight ? (parent.height) : 0;
-
-    border.width: attr.borderWidth;
-    radius: attr.borderRadius;
-    border.color: attr.borderColor;
-    color: attr.backgroundColor;
-
-    Flickable {
-        id: flickable;
-        clip: true;
-        anchors.fill: parent;
-        flickableDirection: Flickable.AutoFlickIfNeeded;
-
-
-        TextArea.flickable: TextArea {
-            id: textArea;
-            wrapMode: TextArea.Wrap;
-            color: attr.fontColor;
-            font.pointSize: attr.fontSize;
-            font.family: attr.fontText;
-            font.weight: attr.fontWeight;
-            horizontalAlignment: attr.fontHorizontalAlignment;
-            verticalAlignment: attr.fontVerticalAlignment;
-            selectedTextColor: attr.fontColorSelected;
-            selectByMouse: true;
-            selectByKeyboard: true;
-            selectionColor: attr.backgroundColorFontSelection;
-        }
-
-        ScrollBar.vertical: ScrollBar {
-          id: verticalScrollBar;
-        }
-
-        ScrollBar.horizontal: ScrollBar {
-          id: horizontalScrollBar;
-          visible: false;
-        }
+    ScrollBar.vertical: ScrollBar {
+      id: verticalScrollBar;
     }
+
+    ScrollBar.horizontal: ScrollBar {
+      id: horizontalScrollBar;
+      visible: false;
+    }
+  }
 }

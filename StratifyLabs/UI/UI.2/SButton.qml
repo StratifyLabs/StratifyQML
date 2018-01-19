@@ -102,6 +102,7 @@ Button {
         borderColor: STheme.btn_primary_border;
         fontColor: STheme.btn_primary_color;
         radius: STheme.btn_border_radius_base;
+        fontWeight: Font.DemiBold;
 
         onStyleChanged: {
             var items = parseStyle();

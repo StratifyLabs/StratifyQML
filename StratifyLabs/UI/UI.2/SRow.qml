@@ -45,14 +45,13 @@ GridLayout {
 
         if( children[i].attr.blockWidth === true ){
           children[i].Layout.fillWidth = true;
-          children[i].Layout.minimumWidth = children[i].implicitWidth;
+          //children[i].Layout.minimumWidth = children[i].implicitWidth;
         } else {
           children[i].Layout.fillWidth = false;
         }
 
         if( children[i].attr.fillHeight === true ){
           children[i].Layout.fillHeight = true;
-          children[i].Layout.minimumHeight = children[i].implicitHeight;
         } else {
           children[i].Layout.fillHeight = false;
         }
