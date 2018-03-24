@@ -39,8 +39,6 @@ Button {
     leftPadding: attr.paddingHorizontal;
     rightPadding: attr.paddingHorizontal;
 
-
-
     property real nakedOpacity: 1.0;
     property real hoveredOpacity: 1.0;
     property real pressedOpacity: 1.0;
